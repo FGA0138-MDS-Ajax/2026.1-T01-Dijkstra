@@ -3,7 +3,7 @@ site_name: Documentação
 nav:
   - Instruções mkdocs: "index.md"
   - Atas de Reunião:
-    - Ata 1: "atas-reuniao/ata-reuniao-1.md"
+    - Ata 20/04 - Elaboração do Documento de Visão: "atas-reuniao/a-ata-reuniao-20-04.md"
 
 theme:
   name: material
