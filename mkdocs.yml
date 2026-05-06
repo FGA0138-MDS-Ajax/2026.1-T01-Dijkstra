@@ -4,6 +4,8 @@ nav:
   - Instruções mkdocs: "index.md"
   - Atas de Reunião:
     - Ata 20/04 - Elaboração do Documento de Visão: "atas-reuniao/a-ata-reuniao-20-04.md"
+  - Documento de Visão:
+    - Documento de Visão: "documentos/Documento de Visão/Documento_de_Visao.md"
 
 theme:
   name: material

@@ -1,0 +1,49 @@
+@startuml
+!define DARKBLUE #102e4a
+!define GREEN #1b7a43
+!define WHITE #FFFFFF
+
+skinparam component {
+    BackgroundColor DARKBLUE
+    BorderColor GREEN
+    FontColor WHITE
+}
+skinparam databaseBackgroundColor GREEN
+skinparam databaseFontColor WHITE
+skinparam databaseBorderColor DARKBLUE
+skinparam packageBackgroundColor transparent
+skinparam packageBorderColor GREEN
+
+node "Cliente (Browser do Usuário)" as Client {
+    [Interface Web (HTML/CSS)] as UI
+}
+
+node "Servidor Web (PythonAnywhere)" as Server {
+    [URL Dispatcher\n(urls.py)] as URLs
+    
+    package "Camada de Apresentação" {
+        [Templates\n(Arquivos .html)] as Template
+    }
+    
+    package "Camada de Lógica de Negócio" {
+        [Views\n(views.py)] as View
+    }
+    
+    package "Camada de Dados (Mapeamento)" {
+        [Models\n(models.py)] as Model
+        [Django ORM] as ORM
+    }
+}
+
+database "Armazenamento Físico" as DB {
+    [SQLite3]
+}
+
+UI <..> URLs : "1. Requisição HTTP / 6. Resposta HTTP"
+URLs --> View : "2. Roteamento (Match de URL)"
+View <--> Model : "3. Regras de Negócio / Solicita Dados"
+Model <--> ORM : "Tradução Objeto-Relacional"
+ORM <--> DB : "4. Consultas SQL (CRUD)"
+View <--> Template : "5. Envia Contexto / Recebe HTML"
+
+@enduml

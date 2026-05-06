@@ -1,0 +1,93 @@
+@startuml
+!define DARKBLUE #102e4a
+!define GREEN #1b7a43
+!define WHITE #FFFFFF
+
+skinparam sequence {
+    ArrowColor GREEN
+    ActorBorderColor GREEN
+    LifeLineBorderColor DARKBLUE
+    LifeLineBackgroundColor GREEN
+    
+    ParticipantBorderColor GREEN
+    ParticipantBackgroundColor DARKBLUE
+    ParticipantFontColor WHITE
+    
+    ActorBackgroundColor DARKBLUE
+    ActorFontColor DARKBLUE
+}
+
+skinparam note {
+    BackgroundColor GREEN
+    BorderColor DARKBLUE
+    FontColor WHITE
+}
+
+autonumber
+
+actor "Organizador" as org
+box "SIGEsporte" #F0F8FF
+    participant "Interface (View)" as view
+    participant "EspacoFisico" as espaco
+    participant "Evento" as evento
+    participant "ReservaEspaco" as reserva
+end box
+actor "Gestor" as gestor
+
+== FASE 1: Inclusão do Evento e Solicitação de Espaço ==
+
+org -> view : Preenche formulário (dados do evento, espaço e datas)
+activate view
+
+view -> espaco : check_disponibilidade(inicio, fim)
+activate espaco
+
+alt Espaço Indisponível
+    espaco --> view : Retorna False
+    view --> org : Exibe erro ("Espaço ocupado nestas datas")
+else Espaço Disponível
+    espaco --> view : Retorna True
+    deactivate espaco
+
+    view -> evento : create(titulo, descricao, organizador, ...)
+    activate evento
+    evento --> view : evento_id
+    deactivate evento
+
+    view -> reserva : create(espaco, evento, datas, status='PENDENTE')
+    activate reserva
+    reserva --> view : reserva_id
+    deactivate reserva
+    
+    view --> org : Sucesso ("Evento criado. Reserva aguardando aprovação")
+end
+deactivate view
+
+== FASE 2: Avaliação e Aprovação (Gestor) ==
+
+gestor -> view : Acessa painel de gestão
+activate view
+
+view -> reserva : filter(status='PENDENTE')
+activate reserva
+reserva --> view : QuerySet[Reservas Pendentes]
+deactivate reserva
+
+view --> gestor : Exibe lista de solicitações
+
+gestor -> view : Clica em "Aprovar Reserva" (reserva_id)
+view -> reserva : aprovar(gestor_id)
+activate reserva
+
+note right of reserva
+    Atualiza status para 'APROVADA'
+    Registra o Gestor como 'avaliador'
+end note
+
+reserva --> view : Atualização confirmada
+deactivate reserva
+
+view --> gestor : Mensagem de Sucesso ("Reserva aprovada")
+deactivate view
+
+@enduml
