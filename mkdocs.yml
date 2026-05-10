@@ -1,11 +1,23 @@
-site_name: Documentação
+site_name: Documentação - SIGEsporte
 
 nav:
   - Instruções mkdocs: "index.md"
   - Atas de Reunião:
     - Ata 20/04 - Elaboração do Documento de Visão: "atas-reuniao/a-ata-reuniao-20-04.md"
+    - Ata 06/05 - Elaboração do Documento de Arquitetura: "atas-reuniao/ata-reuniao-06-05.md"
   - Documento de Visão:
-    - Documento de Visão: "documentos/Documento de Visão/Documento_de_Visao.md"
+    - Documento de Visão: "documentos/Documento de Visão/Documento_de_Visao.md"    
+  - Documento de Arquitetura:
+    - Documento de Arquitetura: "documentos/Documento de Arquitetura/Documento de arquitetura.md"
+    - Diagramas:
+        - Diagrama de Classes: "documentos/Documento de Arquitetura/Diagramas/SIGESPORTE - DIAGRAMA DE CLASSES .png"
+        - Diagrama de Entidade-Relacionamento: "documentos/Documento de Arquitetura/Diagramas/SIGESPORTE - MODELAGEM DE DADOS.png"
+        - Diagrama de Arquitetura: "documentos/Documento de Arquitetura/Diagramas/SIGESPORTE - DIAGRAMA DE ARQUITETURA.png"
+        - Caso de Uso - Criação de Evento: "documentos/Documento de Arquitetura/Diagramas/SIGESPORTE - DIAGRAMA DE SEQUENCIA - CRIACAO DE EVENTO.png"
+        - Caso de Uso - Inscrição em Evento: "documentos/Documento de Arquitetura/Diagramas/SIGESPORTE - DIAGRAMA DE SEQUENCIA - INSCRIÇÃO EM EVENTO.png"
+        - Diagrama MVC: "documentos/Documento de Arquitetura/Diagramas/DIAGRAMA MVC.png"
+        - Diagrama de Deploy: "documentos/Documento de Arquitetura/Diagramas/DIAGRAMA DE DEPLOY.png"
+            
 
 theme:
   name: material

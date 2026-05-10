@@ -3,6 +3,7 @@
 !define GREEN #1b7a43
 !define WHITE #FFFFFF
 
+' Manter o estilo original
 skinparam component {
     BackgroundColor DARKBLUE
     BorderColor GREEN
@@ -13,25 +14,35 @@ skinparam databaseFontColor WHITE
 skinparam databaseBorderColor DARKBLUE
 skinparam packageBackgroundColor transparent
 skinparam packageBorderColor GREEN
+skinparam nodeBackgroundColor WHITE
+skinparam nodeBorderColor DARKBLUE
 
 node "Cliente (Browser do Usuário)" as Client {
     [Interface Web (HTML/CSS)] as UI
 }
 
-node "Servidor Web (PythonAnywhere)" as Server {
-    [URL Dispatcher\n(urls.py)] as URLs
+' Alteração do Nó de PythonAnywhere para VPS
+node "Virtual Private Server (VPS) Linux (ex: Ubuntu)" as VPS {
     
-    package "Camada de Apresentação" {
-        [Templates\n(Arquivos .html)] as Template
-    }
-    
-    package "Camada de Lógica de Negócio" {
-        [Views\n(views.py)] as View
-    }
-    
-    package "Camada de Dados (Mapeamento)" {
-        [Models\n(models.py)] as Model
-        [Django ORM] as ORM
+    ' Novos componentes de infraestrutura necessários na VPS
+    [Nginx\n(Web Server & Proxy Reverso)] as Nginx
+    [WSGI App Server] as Gunicorn
+
+    package "Aplicação Django" as DjangoApp {
+        [URL Dispatcher\n(urls.py)] as URLs
+        
+        package "Camada de Apresentação" {
+            [Templates\n(Arquivos .html)] as Template
+        }
+        
+        package "Camada de Lógica de Negócio" {
+            [Views\n(views.py)] as View
+        }
+        
+        package "Camada de Dados (Mapeamento)" {
+            [Models\n(models.py)] as Model
+            [Django ORM] as ORM
+        }
     }
 }
 
@@ -39,7 +50,18 @@ database "Armazenamento Físico" as DB {
     [SQLite3]
 }
 
-UI <..> URLs : "1. Requisição HTTP / 6. Resposta HTTP"
+' -- Fluxo de Comunicação Atualizado --
+
+' 1 e 6: Cliente fala com o Nginx (porta 80/443)
+UI <..> Nginx : "1. Requisição HTTP / 6. Resposta HTTP"
+
+' Nginx passa para o Gunicorn (via Unix Socket ou porta interna)
+Nginx ==> Gunicorn : "Passa requisição (proxy_pass)"
+
+' Gunicorn chama a aplicação Django
+Gunicorn --> URLs : "Invoca WSGI handler"
+
+' Mantendo o fluxo interno do Django original
 URLs --> View : "2. Roteamento (Match de URL)"
 View <--> Model : "3. Regras de Negócio / Solicita Dados"
 Model <--> ORM : "Tradução Objeto-Relacional"
