@@ -1,17 +1,18 @@
 ![Logo](/docs/documentos/Documento%20de%20Visão/Diagrama/LOGO%20-%20SIGESPORTE.png)
 
 Tabela 1 - Integrantes do Grupo:
+
 | Matrícula | Nome | Função | Pontos de participação na elaboração |
-|---|---|---|---|
-| 222007059 | Nicolas Coqueiro Almeida de Freitas | Scrum Master | 11,11% |
-| 242015666 | Marcos Vinicius Monteiro | Git Master | 11,11% |
-| 241012196 | Davi Gualberto Rocha | Desenvolvedor | 11,11% |
-| 251033162 | Igor B. S. Salles | Desenvolvedor | 11,11% |
-| 241010880 | Ana Paula Jardim Rezende Vilela | Desenvolvedor | 11,11% |
-| 241012409 | Welder Rodrigues de Medeiros | Product Owner | 11,11% |
-| 2110162938 | Gustavo Lima Menezes | Desenvolvedor | 11,11% |
-| 222006777 | Guilherme Oliveira Monteiro | Garantia de Qualidade (QA) | 11,11% |
-| 241012300 | Lucas Menezes Folha Brito | Desenvolvedor | 11,11% |
+|------------|-------------------------------------|----------------------------|--------|
+| 222007059  | Nicolas Coqueiro Almeida de Freitas | Scrum Master               | 11,11% |
+| 242015666  | Marcos Vinicius Monteiro            | Git Master                 | 11,11% |
+| 241012196  | Davi Gualberto Rocha                | Desenvolvedor              | 11,11% |
+| 251033162  | Igor B. S. Salles                   | Desenvolvedor              | 11,11% |
+| 241010880  | Ana Paula Jardim Rezende Vilela     | Desenvolvedor              | 11,11% |
+| 241012409  | Welder Rodrigues de Medeiros        | Product Owner              | 11,11% |
+| 2110162938 | Gustavo Lima Menezes                | Desenvolvedor              | 11,11% |
+| 222006777  | Guilherme Oliveira Monteiro         | Garantia de Qualidade (QA) | 11,11% |
+| 241012300  | Lucas Menezes Folha Brito           | Desenvolvedor              | 11,11% |
 
 Histórico de Revisões
 
