@@ -1,0 +1,117 @@
+@startuml
+!define DARKBLUE #102e4a
+!define GREEN #1b7a43
+!define WHITE #FFFFFF
+
+' Oculta o ícone de classe e usa linhas ortogonais
+hide circle
+skinparam linetype ortho
+
+skinparam entity {
+    BackgroundColor DARKBLUE
+    BorderColor GREEN
+    FontColor WHITE
+    HeaderBackgroundColor GREEN
+}
+
+skinparam note {
+    BackgroundColor GREEN
+    BorderColor DARKBLUE
+    FontColor WHITE
+}
+
+skinparam backgroundcolor transparent
+
+' --- Tabelas Físicas (Entities) ---
+
+entity "Usuario" as usuario {
+    * id : UUIDField <<PK>>
+    --
+    * email : EmailField <<UNIQUE>>
+    * nome_completo : CharField
+    matricula : CharField [Null]
+    foto : ImageField [Null]
+    * tipo : CharField
+    * is_active : BooleanField
+}
+
+entity "Organizacao" as organizacao {
+    * id : UUIDField <<PK>>
+    --
+    * nome : CharField
+    descricao : TextField
+    foto : ImageField [Null]
+}
+
+entity "Usuario_Organizacao" as usuario_organizacao {
+    * usuario_id : UUIDField <<FK>>
+    * organizacao_id : UUIDField <<FK>>
+    --
+    << Tabela Associativa (ManyToMany) >>
+}
+
+entity "EspacoFisico" as espaco {
+    * id : UUIDField <<PK>>
+    --
+    * nome : CharField
+    foto : ImageField [Null]
+}
+
+entity "ReservaEspaco" as reserva {
+    * id : UUIDField <<PK>>
+    --
+    * espaco_id : UUIDField <<FK>>
+    * solicitante_id : UUIDField <<FK>>
+    avaliador_id : UUIDField <<FK>> [Null]
+    * status : CharField
+    * data_inicio : DateTimeField
+    * data_fim : DateTimeField
+    motivo_reprovacao : TextField [Null]
+    * criado_em : DateTimeField
+}
+
+entity "Evento" as evento {
+    * id : UUIDField <<PK>>
+    --
+    * organizador_id : UUIDField <<FK>>
+    * organizacao_id : UUIDField <<FK>>
+    reserva_vinculada_id : UUIDField <<FK>> <<UNIQUE>> [Null]
+    * titulo : CharField
+    descricao : TextField
+    foto : ImageField [Null]
+    * data_realizacao : DateTimeField
+    * criado_em : DateTimeField
+}
+
+entity "Inscricao" as inscricao {
+    * id : UUIDField <<PK>>
+    --
+    * participante_id : UUIDField <<FK>>
+    * evento_id : UUIDField <<FK>>
+    * criado_em : DateTimeField
+    * status : CharField
+}
+
+' --- Relacionamentos de Banco de Dados (Crow's Foot) ---
+
+' ManyToMany: Usuario <-> Organizacao
+usuario ||--o{ usuario_organizacao
+organizacao ||--o{ usuario_organizacao
+
+' ForeignKeys de ReservaEspaco
+espaco ||--o{ reserva : "referencia >"
+usuario ||--o{ reserva : "solicita >"
+usuario |o--o{ reserva : "avalia >"
+
+' ForeignKeys de Evento
+usuario ||--o{ evento : "organiza >"
+organizacao ||--o{ evento : "sedia >"
+
+' OneToOneField: Evento <-> ReservaEspaco (Reserva pode existir sem evento, mas Evento tem max 1 reserva)
+reserva |o--o| evento : "OneToOne >"
+
+' ForeignKeys de Inscricao
+usuario ||--o{ inscricao : "realiza >"
+evento ||--o{ inscricao : "recebe >"
+
+@enduml
