@@ -1,4 +1,4 @@
-<img src="C:\Users\welde\OneDrive\Documentos\GitHub\2026.1-T01-Dijkstra\docs\documentos\Documento de Arquitetura\Diagramas\LOGO - SIGESPORTE.png" alt="LOGO - SIGESPORTE" style="zoom:25%;" />
+<img src="/Imagens/LOGO.png" alt="LOGO - SIGESPORTE" style="zoom:25%;" />
 
 # SigEsporte
 
@@ -98,7 +98,7 @@ O SIGEsporte adota o padrão arquitetural MVC (Model-View-Controller), implement
 
 A figura a seguir representa esquematicamente as camadas da arquitetura, seus componentes principais e os conectores entre eles:
 
-![DIAGRAMA MVC](C:\Users\welde\OneDrive\Documentos\GitHub\2026.1-T01-Dijkstra\docs\documentos\Documento de Arquitetura\Diagramas\DIAGRAMA MVC.png)
+![DIAGRAMA MVC](/Imagens/Diagramas/DIAGRAMA MVC.png)
 
 ### Instanciação dos elementos arquiteturais para o SIGEsporte
 
@@ -186,7 +186,7 @@ Os principais perfis de usuário são: Aluno, Organizador, Gestor e Administrado
 
 **Visão de uso da criação de evento**
 
-![SIGESPORTE - DIAGRAMA DE SEQUENCIA - CRIACAO DE EVENTO](C:\Users\welde\OneDrive\Documentos\GitHub\2026.1-T01-Dijkstra\docs\documentos\Documento de Arquitetura\Diagramas\SIGESPORTE - DIAGRAMA DE SEQUENCIA - CRIACAO DE EVENTO.png)
+![SIGESPORTE - DIAGRAMA DE SEQUENCIA - CRIACAO DE EVENTO](/Imagens/Diagramas/SIGESPORTE - DIAGRAMA DE SEQUENCIA - CRIACAO DE EVENTO.png)
 
 A funcionalidade de criação de evento é realizada pelo perfil Organizador. O organizador preenche os dados do evento, informa o espaço físico desejado e define as datas de realização. Antes da criação da reserva, o sistema verifica a disponibilidade do espaço físico para o período informado.
 
@@ -213,7 +213,7 @@ Esse fluxo demonstra o controle de participação nos eventos e garante que a in
 
 A visão de organização lógica apresenta a estrutura arquitetural do SIGEsporte, evidenciando a divisão do sistema em camadas e módulos responsáveis pelo processamento das requisições, aplicação das regras de negócio, manipulação dos dados e apresentação das informações ao usuário.
 
-![SIGESPORTE - DIAGRAMA DE ARQUITETURA](C:\Users\welde\OneDrive\Documentos\GitHub\2026.1-T01-Dijkstra\docs\documentos\Documento de Arquitetura\Diagramas\SIGESPORTE - DIAGRAMA DE ARQUITETURA.png)
+![SIGESPORTE - DIAGRAMA DE ARQUITETURA](/Imagens/Diagramas/SIGESPORTE - DIAGRAMA DE ARQUITETURA.png)
 
 
 A arquitetura adotada segue o padrão MVC (Model-View-Controller), promovendo separação de responsabilidades, reutilização de código, facilidade de manutenção e organização lógica da aplicação.
@@ -268,7 +268,7 @@ O sistema é estruturado em torno das entidades principais Usuário, Organizaç�
 
 #### Diagrama de classes
 
-![SIGESPORTE - DIAGRAMA DE CLASSES ](C:\Users\welde\OneDrive\Documentos\GitHub\2026.1-T01-Dijkstra\docs\documentos\Documento de Arquitetura\Diagramas\SIGESPORTE - DIAGRAMA DE CLASSES .png)
+![SIGESPORTE - DIAGRAMA DE CLASSES ](/Imagens/Diagramas/SIGESPORTE - DIAGRAMA DE CLASSES .png)
 
 
 O diagrama de classes representa os principais elementos do domínio do sistema e seus relacionamentos.
@@ -305,7 +305,7 @@ Seu objetivo principal é facilitar a compreensão da organização dos dados e 
 
 A seguir, apresentamos o diagrama ERD do SIGEsporte:
 
-![SIGESPORTE - MODELAGEM DE DADOS](C:\Users\welde\OneDrive\Documentos\GitHub\2026.1-T01-Dijkstra\docs\documentos\Documento de Arquitetura\Diagramas\SIGESPORTE - MODELAGEM DE DADOS.png)
+![SIGESPORTE - MODELAGEM DE DADOS](/Imagens/Diagramas/SIGESPORTE - MODELAGEM DE DADOS.png)
 
 
 O esquema de banco de dados é composto por sete entidades principais destinadas a gerenciar usuários, organizações, espaços físicos, reservas e eventos. A entidade central é Usuario, que armazena informações individuais como e-mail único, nome completo, matrícula opcional, foto, tipo de usuário e status ativo, utilizando um UUID como chave primária. Para gerenciar a relação entre usuários e organizações, existe a entidade Organizacao, que contém nome, descrição e foto. O relacionamento entre estas duas entidades são de muitos-para-muitos, implementado através da tabela associativa Usuario_Organizacao, que vincula chaves estrangeiras de ambos os lados.
@@ -355,7 +355,7 @@ Ato contínuo, o comprometimento para o implementador, hoje, diminuiu muito haja
 
 Tentar-se-á um modelo dinâmico com o uso dessas ferramentas, mas ainda, buscando sempre, o melhor desempenho e qualidade de serviço ao cliente.
 
-![DIAGRAMA DE DEPLOY](C:\Users\welde\OneDrive\Documentos\GitHub\2026.1-T01-Dijkstra\docs\documentos\Documento de Arquitetura\Diagramas\DIAGRAMA DE DEPLOY.png)
+![DIAGRAMA DE DEPLOY](/Imagens/Diagramas/DIAGRAMA DE DEPLOY.png)
 
 
 De forma apresentado pela figura X a implementação terá 3 níveis de segurança básica por default, triple NAT e resolução de endereçamentos não trivial.
