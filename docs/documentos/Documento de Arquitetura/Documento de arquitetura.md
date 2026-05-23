@@ -10,7 +10,6 @@ Versão 1.0.2
 
 | Matrícula  | Nome                                | Função (responsabilidade)  | Pontos de participação na elaboração |
 | ---------- | ----------------------------------- | -------------------------- | ------------------------------------ |
-| 222007059  | Nicolas Coqueiro Almeida de Freitas | Trancou a disciplina                        | 11.11%                               |
 | 242015666  | Marcos Vinicius Monteiro            | Git Master                 | 11.11%                               |
 | 241012196  | Davi Gualberto Rocha                | Desenvolvedor              | 11.11%                               |
 | 251033162  | Igor B. S. Salles                   | Desenvolvedor              | 11.11%                               |
