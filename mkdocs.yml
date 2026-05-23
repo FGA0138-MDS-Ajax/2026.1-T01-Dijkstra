@@ -1,4 +1,5 @@
 site_name: Documentação - SIGEsporte
+site_url: https://fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra/
 
 nav:
   - Instruções mkdocs: "index.md"
