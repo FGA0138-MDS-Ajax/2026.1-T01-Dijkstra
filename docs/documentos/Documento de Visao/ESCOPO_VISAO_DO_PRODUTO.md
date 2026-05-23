@@ -1,5 +1,20 @@
+<img src="/Imagens/LOGO.png" alt="Logo" style="zoom:25%;" />
 
 
+
+Tabela 1 - Integrantes do Grupo:
+
+| Matrícula | Nome | Função | Pontos de participação na elaboração |
+|------------|-------------------------------------|----------------------------|--------|
+| 222007059  | Nicolas Coqueiro Almeida de Freitas | Scrum Master               | 11,11% |
+| 242015666  | Marcos Vinicius Monteiro            | Git Master                 | 11,11% |
+| 241012196  | Davi Gualberto Rocha                | Desenvolvedor              | 11,11% |
+| 251033162  | Igor B. S. Salles                   | Desenvolvedor              | 11,11% |
+| 241010880  | Ana Paula Jardim Rezende Vilela     | Desenvolvedor              | 11,11% |
+| 241012409  | Welder Rodrigues de Medeiros        | Product Owner              | 11,11% |
+| 2110162938 | Gustavo Lima Menezes                | Desenvolvedor              | 11,11% |
+| 222006777  | Guilherme Oliveira Monteiro         | Garantia de Qualidade (QA) | 11,11% |
+| 241012300  | Lucas Menezes Folha Brito           | Desenvolvedor              | 11,11% |
 
 Histórico de Revisões
 
@@ -69,7 +84,7 @@ o Diagrama de Ishikawa (Espinha de Peixe). Esta técnica permite visualizar as c
 secundárias que alimentam o problema principal.
 
 Figura 1: Diagrama de Ishikawa
-![Diagrama de ishikawa](./Diagrama/Diagrama%20de%20Ishikawa.png)
+![Diagrama de ishikawa](/Imagens/Diagramas/Diagrama%20de%20Ishikawa.png)
 
 O diagrama acima segmenta as falhas em quatro categorias principais que justificam a
 necessidade do SIGEsporte:
@@ -262,7 +277,7 @@ SIGEsporte seja entregue com qualidade técnica superior.
 2.1 Ciclo de vida do projeto de desenvolvimento de software
 
 Figura 2: Ciclo de vida
-![Ciclo de vida](./Diagrama/CICLO%20DE%20VIDA.png)
+![Ciclo de vida](/Imagens/Diagramas/CICLO%20DE%20VIDA.png)
 
 
 2.2 Organização do Projeto
@@ -335,9 +350,8 @@ inicialmente.
 
 ## 3 PROCESSO DE DESENVOLVIMENTO DE SOFTWARE
 
-
 Figura 3: Processo de desenvolvimento
-![Processo de Desenvolvimento](./Diagrama/PROCESSO%20DE%20DESENVOLVIMENTO.png)
+![Processo de Desenvolvimento](/Imagens/Diagramas/PROCESSO%20DE%20DESENVOLVIMENTO.png)
 
 
 Para o SIGEsporte, a equipe decidiu por uma abordagem híbrida. O Scrum organizará nosso
