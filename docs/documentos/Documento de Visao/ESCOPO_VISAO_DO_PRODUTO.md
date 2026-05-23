@@ -1,17 +1,18 @@
-<img src="/Imagens/LOGO.png" alt="Logo" style="zoom:25%;" />
-
+<div align="center"> 
+    <img src="/docs/Imagens/LOGO.png" alt="Logo" style="zoom:25%;" />
+</div>
 
 
 Tabela 1 - Integrantes do Grupo:
 
 | Matrícula | Nome | Função | Pontos de participação na elaboração |
 |------------|-------------------------------------|----------------------------|--------|
-| 222007059  | Nicolas Coqueiro Almeida de Freitas | Scrum Master               | 11,11% |
+| 222007059  | Nicolas Coqueiro Almeida de Freitas | Trancou a disiplina        | 11,11% |
 | 242015666  | Marcos Vinicius Monteiro            | Git Master                 | 11,11% |
 | 241012196  | Davi Gualberto Rocha                | Desenvolvedor              | 11,11% |
 | 251033162  | Igor B. S. Salles                   | Desenvolvedor              | 11,11% |
 | 241010880  | Ana Paula Jardim Rezende Vilela     | Desenvolvedor              | 11,11% |
-| 241012409  | Welder Rodrigues de Medeiros        | Product Owner              | 11,11% |
+| 241012409  | Welder Rodrigues de Medeiros        |Product Owner e Scrum Master| 11,11% |
 | 2110162938 | Gustavo Lima Menezes                | Desenvolvedor              | 11,11% |
 | 222006777  | Guilherme Oliveira Monteiro         | Garantia de Qualidade (QA) | 11,11% |
 | 241012300  | Lucas Menezes Folha Brito           | Desenvolvedor              | 11,11% |
@@ -84,7 +85,7 @@ o Diagrama de Ishikawa (Espinha de Peixe). Esta técnica permite visualizar as c
 secundárias que alimentam o problema principal.
 
 Figura 1: Diagrama de Ishikawa
-![Diagrama de ishikawa](/Imagens/Diagramas/Diagrama%20de%20Ishikawa.png)
+![Diagrama de ishikawa](/docs/Imagens/Diagramas/Diagrama%20de%20Ishikawa.png)
 
 O diagrama acima segmenta as falhas em quatro categorias principais que justificam a
 necessidade do SIGEsporte:
@@ -147,52 +148,52 @@ de horários.
 
 1.4 Usuários-Alvo:
 
-- Alunos da FCTE: Estudantes que buscam praticar esportes e precisam de
-transparência para reservar horários sem burocracia excessiva.
-- Atléticas e CAs: Entidades que organizam torneios e necessitam de uma ferramenta
-para registrar o progresso das competições.
-- Gestores da FCTE (Clientes): Responsáveis pela infraestrutura do campus que
-precisam de relatórios de uso para justificar manutenções ou novos investimentos nos
-espaços esportivos.
+## Tabela 1 — Público-alvo do SIGEsporte
 
-Tabela 2: Declaração de posição para alunos da FCTE
-Para: Alunos da FCTE (Participantes)
-Necessidade: Encontrar eventos esportivos de forma rápida, visualizar horários
-livres da quadra para lazer e realizar inscrições sem burocracia.
-O SIGEsporte é:  Uma aplicação WEB
-Que: Oferece uma vitrine única de eventos e um calendário de
-disponibilidade em tempo real.
-Ao contrário de: Grupos de WhatsApp e comunicados em murais físicos, que possuem
-um alcance limitado.
-Nosso produto: Permite que o aluno visualize apenas o que é relevante: "O que tem
-hoje?", "Onde me inscrevo?".
+| Público | Descrição | Necessidade Principal |
+|---|---|---|
+| Alunos da FCTE | Estudantes que buscam praticar esportes e precisam de transparência para reservar horários sem burocracia excessiva. | Encontrar eventos esportivos, visualizar horários disponíveis e realizar inscrições rapidamente. |
+| Atléticas e CAs | Entidades que organizam torneios e necessitam de uma ferramenta para registrar o progresso das competições. | Divulgar campeonatos, gerenciar inscrições e organizar reservas de espaços esportivos. |
+| Gestores da FCTE (Clientes) | Responsáveis pela infraestrutura do campus que precisam de relatórios de uso para justificar manutenções ou novos investimentos nos espaços esportivos. | Controlar o uso das instalações, evitar conflitos de agenda e obter dados estatísticos de utilização. |
 
-Tabela 3: Declaração de posição para organizadores
-Para:   Atléticas e CAs (Organizadores)
-Necessidade:   Divulgar campeonatos para todo o campus, gerenciar a lista de
-inscritos e reservar espaços oficiais para treinos e jogos.
-O SIGEsporte é:  Uma aplicação WEB
-Que:   Automatiza a coleta de dados dos participantes e formaliza o pedido
-de reserva de espaço, gerando um histórico organizado.
-Ao contrário de:   Google Forms e planilhas de Excel compartilhadas que fazem
-apenas coleta dados isolados.
-Nosso produto:   Vincula a inscrição ao evento e o evento ao espaço físico, criando
-uma jornada completa de organização em um só lugar.
+---
 
-Tabela 4: Declaração de posição para gestores
-Para: Gestores da FCTE (Administração)
-Necessidade: Controle sobre o uso das instalações físicas, mitigação de conflitos
-de agenda e dados estatísticos sobre a adesão esportiva no campus.
-O SIGEsporte é:  Uma aplicação WEB
-Que: Fornece um painel de controle para aprovação de reservas e
-relatórios de ocupação dos espaços (subaproveitamento vs.
-superpopulação).
-Ao contrário de: Agendamento manual (e-mail ou contato direto com a prefeitura do
-campus).
-Nosso produto: Transforma uma gestão baseada em "quem pediu primeiro no
-privado" em uma gestão transparente e baseada em dados,
-permitindo decisões melhores sobre a manutenção e ampliação dos
-espaços esportivos.
+## Tabela 2 — Declaração de posição para alunos da FCTE
+
+| Elemento | Descrição |
+|---|---|
+| Para | Alunos da FCTE (Participantes) |
+| Necessidade | Encontrar eventos esportivos de forma rápida, visualizar horários livres da quadra para lazer e realizar inscrições sem burocracia. |
+| O SIGEsporte é | Uma aplicação WEB |
+| Que | Oferece uma vitrine única de eventos e um calendário de disponibilidade em tempo real. |
+| Ao contrário de | Grupos de WhatsApp e comunicados em murais físicos, que possuem um alcance limitado. |
+| Nosso produto | Permite que o aluno visualize apenas o que é relevante: “O que tem hoje?” e “Onde me inscrevo?”. |
+
+---
+
+## Tabela 3 — Declaração de posição para organizadores
+
+| Elemento | Descrição |
+|---|---|
+| Para | Atléticas e CAs (Organizadores) |
+| Necessidade | Divulgar campeonatos para todo o campus, gerenciar a lista de inscritos e reservar espaços oficiais para treinos e jogos. |
+| O SIGEsporte é | Uma aplicação WEB |
+| Que | Automatiza a coleta de dados dos participantes e formaliza o pedido de reserva de espaço, gerando um histórico organizado. |
+| Ao contrário de | Google Forms e planilhas de Excel compartilhadas que fazem apenas coleta de dados isolados. |
+| Nosso produto | Vincula a inscrição ao evento e o evento ao espaço físico, criando uma jornada completa de organização em um só lugar. |
+
+---
+
+## Tabela 4 — Declaração de posição para gestores
+
+| Elemento | Descrição |
+|---|---|
+| Para | Gestores da FCTE (Administração) |
+| Necessidade | Controle sobre o uso das instalações físicas, mitigação de conflitos de agenda e dados estatísticos sobre a adesão esportiva no campus. |
+| O SIGEsporte é | Uma aplicação WEB |
+| Que | Fornece um painel de controle para aprovação de reservas e relatórios de ocupação dos espaços (subaproveitamento vs. superpopulação). |
+| Ao contrário de | Agendamento manual (e-mail ou contato direto com a prefeitura do campus). |
+| Nosso produto | Transforma uma gestão baseada em “quem pediu primeiro no privado” em uma gestão transparente e baseada em dados, permitindo decisões melhores sobre a manutenção e ampliação dos espaços esportivos. |
 
 1.5 Objetivos do Produto
 
@@ -277,7 +278,7 @@ SIGEsporte seja entregue com qualidade técnica superior.
 2.1 Ciclo de vida do projeto de desenvolvimento de software
 
 Figura 2: Ciclo de vida
-![Ciclo de vida](/Imagens/Diagramas/CICLO%20DE%20VIDA.png)
+![Ciclo de vida](/docs/Imagens/Diagramas/CICLO%20DE%20VIDA.png)
 
 
 2.2 Organização do Projeto
@@ -285,9 +286,9 @@ Figura 2: Ciclo de vida
 Tabela 5: Organização do Projeto
 | Papel | Atribuições | Responsável | Participantes |
 |---|---|---|---|
-| Scrum Master | Facilita as cerimônias (Dailies, Plannings), remove impedimentos técnicos ou de comunicação e garante que o grupo siga a metodologia ágil. | Nicolas Coqueiro Almeida de Freitas | Nicolas Coqueiro Almeida de Freitas |
+| Scrum Master | Facilita as cerimônias (Dailies, Plannings), remove impedimentos técnicos ou de comunicação e garante que o grupo siga a metodologia ágil. | Welder Rodrigues de Medeiros | Welder Rodrigues de Medeiros |
 | Product Owner (PO) | Representa o interesse dos usuários (Alunos/FCTE). Define as prioridades do Backlog, escreve as User Stories e valida se a entrega atende ao Problema de Negócio. | Welder Rodrigues de Medeiros | Welder Rodrigues de Medeiros |
-| Desenvolvedor | Implementa as funcionalidades tanto no Back-end quanto no Front-end, garantindo que as regras de negócio funcionem. | Igor B. S. Salles | Igor B. S. Salles, Ana Paula Jardim Rezende Vilela, Lucas Menezes Folha Brito, Gustavo Lima Menezes, Davi Gualberto Rocha, Marcos Vinicius Monteiro, Welder Rodrigues de Medeiros, Nicolas Coqueiro Almeida de Freitas |
+| Desenvolvedor | Implementa as funcionalidades tanto no Back-end quanto no Front-end, garantindo que as regras de negócio funcionem. | Igor B. S. Salles | Igor B. S. Salles, Ana Paula Jardim Rezende Vilela, Lucas Menezes Folha Brito, Gustavo Lima Menezes, Davi Gualberto Rocha, Marcos Vinicius Monteiro, Welder Rodrigues de Medeiros |
 | Garantia de Qualidade (QA) | Garante a qualidade do código. Responsável por incentivar a criação de testes unitários e validar se o sistema não apresenta bugs críticos antes do deploy. | Guilherme Oliveira Monteiro | Guilherme Oliveira Monteiro |
 | Git Master | Responsável pela configuração do repositório no GitHub (proteção de branches) e pelo gerenciamento e manutenção do deploy. | Marcos Vinicius Monteiro | Marcos Vinicius Monteiro |
 
@@ -351,7 +352,7 @@ inicialmente.
 ## 3 PROCESSO DE DESENVOLVIMENTO DE SOFTWARE
 
 Figura 3: Processo de desenvolvimento
-![Processo de Desenvolvimento](/Imagens/Diagramas/PROCESSO%20DE%20DESENVOLVIMENTO.png)
+![Processo de Desenvolvimento](/docs/Imagens/Diagramas/PROCESSO%20DE%20DESENVOLVIMENTO.png)
 
 
 Para o SIGEsporte, a equipe decidiu por uma abordagem híbrida. O Scrum organizará nosso
