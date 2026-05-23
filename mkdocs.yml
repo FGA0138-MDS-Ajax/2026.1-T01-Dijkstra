@@ -19,7 +19,7 @@ nav:
     - Diagrama MVC: "Imagens/Diagramas/DIAGRAMA MVC.png"
     - Diagrama de Deploy: "Imagens/Diagramas/DIAGRAMA DE DEPLOY.png"
   - Protótipos:
-    - Protótipo de Baixa Fidelidade: prototipos/baixa fidelidade (wireframe)/prototipo_baixa_fidelidade.md
+    - Protótipo de Baixa Fidelidade: prototipos/baixa_fidelidade/prototipo_baixa_fidelidade.md
 
 
 theme:
