@@ -1,8 +1,3 @@
-<div align="center"> 
-    <img src="../../Imagens/LOGO.png" alt="Logo" style="zoom:25%;" />
-</div>
-
-
 Tabela 1 - Integrantes do Grupo:
 
 | Matrícula | Nome | Função | Pontos de participação na elaboração |
