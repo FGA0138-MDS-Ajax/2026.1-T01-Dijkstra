@@ -1,7 +1,3 @@
-<div align="center"> 
-    <img src="../../Imagens/LOGO.png" alt="LOGO - SIGESPORTE" style="zoom:25%;" />
-</div>
-
 **Documento de Arquitetura**
 
 Versão 1.0.2
