@@ -7,7 +7,7 @@ Este documento reúne as telas do protótipo de baixa fidelidade do projeto, org
 ## 🌐 Geral
 
 ### Página Inicial
-![Página Inicial](/docs/prototipos/baixa_fidelidade/01_pagina_inicial.png)
+![Página Inicial](01_pagina_inicial.png)
 
 ### Detalhes do Evento
 ![Detalhes do Evento](/docs/prototipos/baixa_fidelidade/02_detalhes_evento.png)
