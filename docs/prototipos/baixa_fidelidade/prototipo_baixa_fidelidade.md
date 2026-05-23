@@ -2,6 +2,10 @@
 
 Este documento reúne as telas do protótipo de baixa fidelidade do projeto, organizadas por módulos do sistema.
 
+
+
+![wireframe](wireframe.png)
+
 ---
 
 ## 🌐 Geral
