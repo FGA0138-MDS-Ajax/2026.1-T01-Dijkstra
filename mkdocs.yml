@@ -21,34 +21,34 @@ nav:
   - Protótipos:
     - Baixa Fidelidade (Wireframes):
       - Geral:
-        - Página Inicial: prototipos/baixa fidelidade (wireframe)/01_pagina_inicial.md
-        - Detalhes do Evento: prototipos/baixa fidelidade (wireframe)/02_detalhes_evento.md
+        - Página Inicial: prototipos/baixa fidelidade (wireframe)/01_pagina_inicial.png
+        - Detalhes do Evento: prototipos/baixa fidelidade (wireframe)/02_detalhes_evento.png
       - Autenticação:
-        - Login: prototipos/baixa fidelidade (wireframe)/03_autenticacao_login.md
-        - Cadastro: prototipos/baixa fidelidade (wireframe)/04_autenticacao_cadastro.md
-        - Esqueci a Senha: prototipos/baixa fidelidade (wireframe)/05_autenticacao_esqueci_senha.md
+        - Login: prototipos/baixa fidelidade (wireframe)/03_autenticacao_login.png
+        - Cadastro: prototipos/baixa fidelidade (wireframe)/04_autenticacao_cadastro.png
+        - Esqueci a Senha: prototipos/baixa fidelidade (wireframe)/05_autenticacao_esqueci_senha.png
       - Aluno:
-        - Perfil: prototipos/baixa fidelidade (wireframe)/06_aluno_perfil.md
-        - Eventos Inscritos: prototipos/baixa fidelidade (wireframe)/07_aluno_eventos_inscritos.md
-        - Editar Dados: prototipos/baixa fidelidade (wireframe)/08_aluno_editar_dados.md
+        - Perfil: prototipos/baixa fidelidade (wireframe)/06_aluno_perfil.png
+        - Eventos Inscritos: prototipos/baixa fidelidade (wireframe)/07_aluno_eventos_inscritos.png
+        - Editar Dados: prototipos/baixa fidelidade (wireframe)/08_aluno_editar_dados.png
       - Organizador (Org):
-        - Perfil: prototipos/baixa fidelidade (wireframe)/09_org_perfil.md
-        - Editar Dados: prototipos/baixa fidelidade (wireframe)/10_org_editar_dados.md
-        - Eventos Criados: prototipos/baixa fidelidade (wireframe)/11_org_eventos_criados.md
-        - Detalhe do Evento: prototipos/baixa fidelidade (wireframe)/12_org_evento_detalhe.md
-        - Novo / Editar Evento: prototipos/baixa fidelidade (wireframe)/13_org_evento_novo_editar.md
-        - Reservas de Espaço: prototipos/baixa fidelidade (wireframe)/14_org_reservas_espaco.md
-        - Nova Reserva: prototipos/baixa fidelidade (wireframe)/15_org_reserva_nova.md
-        - Gerenciar Inscritos: prototipos/baixa fidelidade (wireframe)/16_org_gerenciar_inscritos.md
-        - Organizações Vinculadas: prototipos/baixa fidelidade (wireframe)/17_org_organizacoes_vinculadas.md
-        - Editar Organização: prototipos/baixa fidelidade (wireframe)/18_org_organizacao_editar.md
+        - Perfil: prototipos/baixa fidelidade (wireframe)/09_org_perfil.png
+        - Editar Dados: prototipos/baixa fidelidade (wireframe)/10_org_editar_dados.png
+        - Eventos Criados: prototipos/baixa fidelidade (wireframe)/11_org_eventos_criados.png
+        - Detalhe do Evento: prototipos/baixa fidelidade (wireframe)/12_org_evento_detalhe.png
+        - Novo / Editar Evento: prototipos/baixa fidelidade (wireframe)/13_org_evento_novo_editar.png
+        - Reservas de Espaço: prototipos/baixa fidelidade (wireframe)/14_org_reservas_espaco.png
+        - Nova Reserva: prototipos/baixa fidelidade (wireframe)/15_org_reserva_nova.png
+        - Gerenciar Inscritos: prototipos/baixa fidelidade (wireframe)/16_org_gerenciar_inscritos.png
+        - Organizações Vinculadas: prototipos/baixa fidelidade (wireframe)/17_org_organizacoes_vinculadas.png
+        - Editar Organização: prototipos/baixa fidelidade (wireframe)/18_org_organizacao_editar.png
       - Gestor:
-        - Perfil: prototipos/baixa fidelidade (wireframe)/19_gestor_perfil.md
-        - Editar Dados: prototipos/baixa fidelidade (wireframe)/20_gestor_editar_dados.md
-        - Espaços Esportivos: prototipos/baixa fidelidade (wireframe)/21_gestor_espacos_esportivos.md
-        - Novo / Editar Espaço: prototipos/baixa fidelidade (wireframe)/22_gestor_espaco_novo_editar.md
-        - Reservas: prototipos/baixa fidelidade (wireframe)/23_gestor_reservas.md
-        - Usuários Admin: prototipos/baixa fidelidade (wireframe)/24_gestor_usuarios_admin.md     
+        - Perfil: prototipos/baixa fidelidade (wireframe)/19_gestor_perfil.png
+        - Editar Dados: prototipos/baixa fidelidade (wireframe)/20_gestor_editar_dados.png
+        - Espaços Esportivos: prototipos/baixa fidelidade (wireframe)/21_gestor_espacos_esportivos.png
+        - Novo / Editar Espaço: prototipos/baixa fidelidade (wireframe)/22_gestor_espaco_novo_editar.png
+        - Reservas: prototipos/baixa fidelidade (wireframe)/23_gestor_reservas.png
+        - Usuários Admin: prototipos/baixa fidelidade (wireframe)/24_gestor_usuarios_admin.png
 
 theme:
   name: material
