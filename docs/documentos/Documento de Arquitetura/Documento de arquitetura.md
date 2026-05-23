@@ -1,5 +1,5 @@
 <div align="center"> 
-    <img src="/docs/Imagens/LOGO.png" alt="LOGO - SIGESPORTE" style="zoom:25%;" />
+    <img src="../../Imagens/LOGO.png" alt="LOGO - SIGESPORTE" style="zoom:25%;" />
 </div>
 
 **Documento de Arquitetura**
@@ -98,7 +98,7 @@ O SIGEsporte adota o padrão arquitetural MVC (Model-View-Controller), implement
 
 A figura a seguir representa esquematicamente as camadas da arquitetura, seus componentes principais e os conectores entre eles:
 
-![DIAGRAMA MVC](/docs/Imagens/Diagramas/DIAGRAMA%20MVC.png)
+![DIAGRAMA MVC](../../Imagens/Diagramas/DIAGRAMA%20MVC.png)
 
 ### Instanciação dos elementos arquiteturais para o SIGEsporte
 
@@ -186,7 +186,7 @@ Os principais perfis de usuário são: Aluno, Organizador, Gestor e Administrado
 
 **Visão de uso da criação de evento**
 
-![SIGESPORTE - DIAGRAMA DE SEQUENCIA - CRIACAO DE EVENTO](/docs/Imagens/Diagramas/SIGESPORTE%20-%20DIAGRAMA%20DE%20SEQUENCIA%20-%20CRIACAO%20DE%20EVENTO.png)
+![SIGESPORTE - DIAGRAMA DE SEQUENCIA - CRIACAO DE EVENTO](../../Imagens/Diagramas/SIGESPORTE%20-%20DIAGRAMA%20DE%20SEQUENCIA%20-%20CRIACAO%20DE%20EVENTO.png)
 
 A funcionalidade de criação de evento é realizada pelo perfil Organizador. O organizador preenche os dados do evento, informa o espaço físico desejado e define as datas de realização. Antes da criação da reserva, o sistema verifica a disponibilidade do espaço físico para o período informado.
 
@@ -198,7 +198,7 @@ Esse fluxo evidencia a separação de responsabilidades entre os perfis do siste
 
 **Visão de uso da inscrição nos eventos evento**
 
-![SIGESPORTE - DIAGRAMA DE SEQUENCIA - INSCRIÇÃO EM EVENTO](/docs/Imagens/Diagramas/SIGESPORTE%20-%20DIAGRAMA%20DE%20SEQUENCIA%20-%20INSCRIÇÃO%20EM%20EVENTO.png)
+![SIGESPORTE - DIAGRAMA DE SEQUENCIA - INSCRIÇÃO EM EVENTO](../../Imagens/Diagramas/SIGESPORTE%20-%20DIAGRAMA%20DE%20SEQUENCIA%20-%20INSCRIÇÃO%20EM%20EVENTO.png)
 
 
 A funcionalidade de inscrição em eventos é realizada pelo perfil Aluno. O aluno acessa o portal de eventos, visualiza a lista de eventos disponíveis e consulta os detalhes de um evento específico.
@@ -213,7 +213,7 @@ Esse fluxo demonstra o controle de participação nos eventos e garante que a in
 
 A visão de organização lógica apresenta a estrutura arquitetural do SIGEsporte, evidenciando a divisão do sistema em camadas e módulos responsáveis pelo processamento das requisições, aplicação das regras de negócio, manipulação dos dados e apresentação das informações ao usuário.
 
-![SIGESPORTE - DIAGRAMA DE ARQUITETURA](/docs/Imagens/Diagramas/SIGESPORTE%20-%20DIAGRAMA%20DE%20ARQUITETURA.png)
+![SIGESPORTE - DIAGRAMA DE ARQUITETURA](../../Imagens/Diagramas/SIGESPORTE%20-%20DIAGRAMA%20DE%20ARQUITETURA.png)
 
 
 A arquitetura adotada segue o padrão MVC (Model-View-Controller), promovendo separação de responsabilidades, reutilização de código, facilidade de manutenção e organização lógica da aplicação.
@@ -268,7 +268,7 @@ O sistema é estruturado em torno das entidades principais Usuário, Organizaç�
 
 #### Diagrama de classes
 
-![SIGESPORTE - DIAGRAMA DE CLASSES ](/docs/Imagens/Diagramas/SIGESPORTE%20-%20DIAGRAMA%20DE%20CLASSES%20.png)
+![SIGESPORTE - DIAGRAMA DE CLASSES ](../../Imagens/Diagramas/SIGESPORTE%20-%20DIAGRAMA%20DE%20CLASSES%20.png)
 
 
 O diagrama de classes representa os principais elementos do domínio do sistema e seus relacionamentos.
@@ -305,7 +305,7 @@ Seu objetivo principal é facilitar a compreensão da organização dos dados e 
 
 A seguir, apresentamos o diagrama ERD do SIGEsporte:
 
-![SIGESPORTE - MODELAGEM DE DADOS](/docs/Imagens/Diagramas/SIGESPORTE%20-%20MODELAGEM%20DE%20DADOS.png)
+![SIGESPORTE - MODELAGEM DE DADOS](../../Imagens/Diagramas/SIGESPORTE%20-%20MODELAGEM%20DE%20DADOS.png)
 
 
 O esquema de banco de dados é composto por sete entidades principais destinadas a gerenciar usuários, organizações, espaços físicos, reservas e eventos. A entidade central é Usuario, que armazena informações individuais como e-mail único, nome completo, matrícula opcional, foto, tipo de usuário e status ativo, utilizando um UUID como chave primária. Para gerenciar a relação entre usuários e organizações, existe a entidade Organizacao, que contém nome, descrição e foto. O relacionamento entre estas duas entidades são de muitos-para-muitos, implementado através da tabela associativa Usuario_Organizacao, que vincula chaves estrangeiras de ambos os lados.
@@ -355,7 +355,7 @@ Ato contínuo, o comprometimento para o implementador, hoje, diminuiu muito haja
 
 Tentar-se-á um modelo dinâmico com o uso dessas ferramentas, mas ainda, buscando sempre, o melhor desempenho e qualidade de serviço ao cliente.
 
-![DIAGRAMA DE DEPLOY](/docs/Imagens/Diagramas/DIAGRAMA%20DE%20DEPLOY.png)
+![DIAGRAMA DE DEPLOY](../../Imagens/Diagramas/DIAGRAMA%20DE%20DEPLOY.png)
 
 
 De forma apresentado pela figura X a implementação terá 3 níveis de segurança básica por default, triple NAT e resolução de endereçamentos não trivial.
