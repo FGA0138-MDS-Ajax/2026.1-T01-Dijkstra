@@ -1,5 +1,6 @@
 <img src="/Imagens/LOGO.png" alt="LOGO - SIGESPORTE" style="zoom:25%;" />
 
+
 # SigEsporte
 
 **Documento de Arquitetura**
@@ -10,7 +11,6 @@ Versão 1.0.2
 
 | Matrícula  | Nome                                | Função (responsabilidade)  | Pontos de participação na elaboração |
 | ---------- | ----------------------------------- | -------------------------- | ------------------------------------ |
-| 222007059  | Nicolas Coqueiro Almeida de Freitas | Scrum Master               | 11.11%                               |
 | 242015666  | Marcos Vinicius Monteiro            | Git Master                 | 11.11%                               |
 | 241012196  | Davi Gualberto Rocha                | Desenvolvedor              | 11.11%                               |
 | 251033162  | Igor B. S. Salles                   | Desenvolvedor              | 11.11%                               |
@@ -98,7 +98,10 @@ O SIGEsporte adota o padrão arquitetural MVC (Model-View-Controller), implement
 
 A figura a seguir representa esquematicamente as camadas da arquitetura, seus componentes principais e os conectores entre eles:
 
-![DIAGRAMA MVC](/Imagens/Diagramas/DIAGRAMA MVC.png)
+<div align="center">
+![DIAGRAMA MVC](./Diagramas/DIAGRAMA%20MVC.png)
+</div>
+
 
 ### Instanciação dos elementos arquiteturais para o SIGEsporte
 
@@ -198,7 +201,7 @@ Esse fluxo evidencia a separação de responsabilidades entre os perfis do siste
 
 **Visão de uso da inscrição nos eventos evento**
 
-![SIGESPORTE - DIAGRAMA DE SEQUENCIA - INSCRIÇÃO EM EVENTO](C:\Users\welde\OneDrive\Documentos\GitHub\2026.1-T01-Dijkstra\docs\documentos\Documento de Arquitetura\Diagramas\SIGESPORTE - DIAGRAMA DE SEQUENCIA - INSCRIÇÃO EM EVENTO.png)
+![SIGESPORTE - DIAGRAMA DE SEQUENCIA - INSCRIÇÃO EM EVENTO](./Diagramas/SIGESPORTE%20-%20DIAGRAMA%20DE%20SEQUENCIA%20-%20INSCRIÇÃO%20EM%20EVENTO.png)
 
 
 A funcionalidade de inscrição em eventos é realizada pelo perfil Aluno. O aluno acessa o portal de eventos, visualiza a lista de eventos disponíveis e consulta os detalhes de um evento específico.
