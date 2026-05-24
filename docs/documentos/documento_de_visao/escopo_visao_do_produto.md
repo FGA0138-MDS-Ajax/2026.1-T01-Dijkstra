@@ -80,7 +80,7 @@ o Diagrama de Ishikawa (Espinha de Peixe). Esta técnica permite visualizar as c
 secundárias que alimentam o problema principal.
 
 Figura 1: Diagrama de Ishikawa
-![Diagrama de ishikawa](../../Imagens/Diagramas/Diagrama%20de%20Ishikawa.png)
+![diagrama_de_ishikawa](../../imagens/diagramas/diagrama_de_ishikawa.png)
 
 O diagrama acima segmenta as falhas em quatro categorias principais que justificam a
 necessidade do SIGEsporte:
@@ -273,7 +273,7 @@ SIGEsporte seja entregue com qualidade técnica superior.
 2.1 Ciclo de vida do projeto de desenvolvimento de software
 
 Figura 2: Ciclo de vida
-![Ciclo de vida](../../Imagens/Diagramas/CICLO%20DE%20VIDA.png)
+![ciclo_de_vida](../../imagens/diagramas/ciclo_de_vida.png)
 
 
 2.2 Organização do Projeto
@@ -347,7 +347,7 @@ inicialmente.
 ## 3 PROCESSO DE DESENVOLVIMENTO DE SOFTWARE
 
 Figura 3: Processo de desenvolvimento
-![Processo de Desenvolvimento](../../Imagens/Diagramas/PROCESSO%20DE%20DESENVOLVIMENTO.png)
+![processo_de_desenvolvimento](../../imagens/diagramas/processo_de_desenvolvimento.png)
 
 
 Para o SIGEsporte, a equipe decidiu por uma abordagem híbrida. O Scrum organizará nosso
