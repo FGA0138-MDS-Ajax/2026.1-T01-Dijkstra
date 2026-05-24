@@ -9,7 +9,3 @@ pytest-cov
 # dev
 django 
 django-environ 
-
-# utilitarios
-pyyaml
-psutil
