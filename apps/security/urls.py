@@ -1,3 +1,5 @@
-from django.urls import path
+"""Mapeamento de URLs do app."""
+
+# from django.urls import path
 
 urlpatterns = []
