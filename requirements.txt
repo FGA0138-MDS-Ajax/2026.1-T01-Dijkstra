@@ -1,0 +1,15 @@
+# lint para o python
+pylint
+pylint-django
+
+# testes unitarios
+pytest
+pytest-cov
+
+# dev
+django 
+django-environ 
+
+# utilitarios
+pyyaml
+psutil
