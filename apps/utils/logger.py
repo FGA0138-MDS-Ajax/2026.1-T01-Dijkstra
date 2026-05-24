@@ -8,7 +8,7 @@ Características
 - Um logger por módulo (__name__)
 - Formatação ANSI colorida no terminal
 - Persistência em arquivos rotativos (RotatingFileHandler)
-- Configuração via config.yaml com fallback para DEFAULT_CONFIG
+- Configuração via config.yml com fallback para DEFAULT_CONFIG
 
 Exemplos
 --------
@@ -23,7 +23,7 @@ Componentes Principais
 ----------------------
 - :func:`get_logger`: retorna logger configurado com saída para terminal e arquivo.
 - :class:`ColoredFormatter`: formatter ANSI colorido com alinhamento de nível.
-- :func:`load_config`: carrega configuração de logging do config.yaml.
+- :func:`load_config`: carrega configuração de logging do config.yml.
 
 Notas
 -----
@@ -66,7 +66,7 @@ _loggers: dict[str, logging.Logger] = {}
 class ColoredFormatter(logging.Formatter):
     """Formatter que aplica cores ANSI e centraliza o nível do log.
 
-    O alinhamento centralizado requer que o config.yaml defina o formato com
+    O alinhamento centralizado requer que o config.yml defina o formato com
     o campo ``%(levelname)s`` de largura fixa, por exemplo::
 
         format: "[%(levelname)-8s] - %(name)s - %(asctime)s - %(message)s"
@@ -95,7 +95,7 @@ class ColoredFormatter(logging.Formatter):
         orig_levelname = record.levelname
 
         # centraliza o nível (ex: "  INFO  ") para manter o grid do log
-        # o config.yaml tem que estar configurado adequadamente com
+        # o config.yml tem que estar configurado adequadamente com
         # format: "[%(levelname)-8s] - %(name)s - %(asctime)s - %(message)s"
         padded_level = f"{orig_levelname:^8}"
 
@@ -110,15 +110,15 @@ class ColoredFormatter(logging.Formatter):
 
 
 def load_config() -> dict:
-    """Carrega a configuração de logging do config.yaml na raiz do projeto.
+    """Carrega a configuração de logging do config.yml na raiz do projeto.
 
-    Procura pela chave ``logging`` no arquivo config.yaml localizado três
+    Procura pela chave ``logging`` no arquivo config.yml localizado três
     níveis acima do módulo atual. Em caso de ausência do arquivo, yaml
     inválido ou chave ausente, retorna :data:`DEFAULT_CONFIG`.
 
     :returns: Dicionário de configuração de logging.
     """
-    config_path = Path(__file__).parent.parent.parent / "config.yaml"
+    config_path = Path(__file__).parent.parent.parent / "config.yml"
 
     if config_path.exists():
         try:
@@ -127,7 +127,7 @@ def load_config() -> dict:
                 if data and "logging" in data:
                     return data["logging"]
         except (yaml.YAMLError, OSError) as e:
-            print(f"\x1b[31m[Erro Logger] Falha ao carregar config.yaml: {e}\x1b[0m")
+            print(f"\x1b[31m[Erro Logger] Falha ao carregar config.yml: {e}\x1b[0m")
     return DEFAULT_CONFIG
 
 
@@ -139,7 +139,7 @@ def get_logger(name: str = "", level: str | None = None) -> logging.Logger:
 
     :param name: Nome do logger, tipicamente ``__name__`` do módulo chamador.
     :param level: Nível de log explícito (``'DEBUG'``, ``'INFO'``, etc.).
-        Se omitido, usa o valor definido em config.yaml ou ``'INFO'``.
+        Se omitido, usa o valor definido em config.yml ou ``'INFO'``.
     :returns: Instância de :class:`logging.Logger` configurada.
     """
     if name in _loggers:

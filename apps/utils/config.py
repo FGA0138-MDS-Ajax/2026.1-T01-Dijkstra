@@ -9,10 +9,10 @@ from pathlib import Path
 import yaml
 
 __version__ = "0.0.1"
-__lisence__ = "AGPLV3"
+__license__ = "AGPLV3"
 
 
-def carregar_config(path: str | Path = "config.yaml") -> dict | list | None:
+def carregar_config(path: str | Path = "config.yml") -> dict | list | None:
     """Lê e retorna o conteúdo de um arquivo YAML.
 
     :param path: Caminho para o arquivo de configuração.

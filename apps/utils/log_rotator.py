@@ -41,7 +41,7 @@ from apps.utils.logger import get_logger
 logger = get_logger(__name__)
 
 __version__ = "0.0.1"
-__lisence__ = "AGPLV3"
+__license__ = "AGPLV3"
 
 
 def comprimir_logs(

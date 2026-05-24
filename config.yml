@@ -1,4 +1,4 @@
-config.yaml 
+config.yml 
 app:
   name: "SIGEsporte"
   version: "0.0.1"
