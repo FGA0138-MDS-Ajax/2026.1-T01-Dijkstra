@@ -46,8 +46,5 @@ lint:
 clear:
 	find . -type d -name __pycache__ -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete
-	rm -rf .pytest_cache
-	rm -rf .coverage
-	rm -rf logs/
 	deactivate 2>/dev/null || true
 	rm -rf .venv
