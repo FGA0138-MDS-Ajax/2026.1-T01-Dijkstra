@@ -1,8 +1,8 @@
-# template-repository - Branch DOCS
+# template-repository - Branch Developer
 
 Template de Repositório para a matéria de Métodos de Desenvolvimento de Software lecionado pelo professor Ricardo Ajax.
 
-Essa Branch de desenvolvimento "docs" deve ser mantida somente para fins de documentação, onde já se encontra uma estrutura inicial montada com MKDocs.
+Essa Branch deve ser usada exclusivamente para a versão de desenvolvimento do software antes de ir para produção.
 
 ## Especificações Técnicas do Repositório
 
