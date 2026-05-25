@@ -2,7 +2,7 @@ site_name: Documentação - SIGEsporte
 site_url: https://fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra/
 
 nav:
-  - Instruções mkdocs: "index.md"
+  - Início: "index.md"
   - Atas de Reunião:
     - Ata 20/04 - Elaboração do Documento de Visão: "atas_reuniao/ata_reuniao_20_04.md"
     - Ata 06/05 - Elaboração do Documento de Arquitetura: "atas_reuniao/ata_reuniao_06_05.md"
@@ -11,17 +11,32 @@ nav:
     - Documento de Visão: "documentos/documento_de_visao/escopo_visao_do_produto.md"
   - Documento de Arquitetura:
     - Documento de Arquitetura: "documentos/documento_de_arquitetura/documento_de_arquitetura.md"
-  - Diagramas:
-    - Diagrama de Classes: "imagens/diagramas/sigesporte_diagrama_de_classes.png"
-    - Diagrama de Entidade-Relacionamento: "imagens/diagramas/sigesporte_modelagem_de_dados.png"
-    - Diagrama de Arquitetura: "imagens/diagramas/sigesporte_diagrama_de_arquitetura.png"
-    - Caso de Uso - Criação de Evento: "imagens/diagramas/sigesporte_diagrama_de_sequencia_criacao_de_evento.png"
-    - Caso de Uso - Inscrição em Evento: "imagens/diagramas/sigesporte_diagrama_de_sequencia_inscricao_em_evento.png"
-    - Diagrama MVC: "imagens/diagramas/diagrama_mvc.png"
-    - Diagrama de Deploy: "imagens/diagramas/diagrama_de_deploy.png"
   - Protótipos:
     - Protótipo de Baixa Fidelidade: "prototipos/baixa_fidelidade/prototipo_baixa_fidelidade.md"
 
 
 theme:
   name: material
+  logo: Imagens/logo.png
+  favicon: Imagens/favicon.png
+  font:
+    text: Roboto
+    code: Roboto Mono
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+  features:
+    - navigation.tabs
+    - navigation.top
+    - search.highlight
+    - search.suggest
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/FGA0138-MDS-Ajax/2026.1-T01-Dijkstra
+      name: SIGEsporte no GitHub
