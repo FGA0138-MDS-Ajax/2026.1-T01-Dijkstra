@@ -1,5 +1,5 @@
 ---
-name: issue template
+name: Dijkstra - Template de Issue
 about: Padronzar a criação de issues
 title: ''
 labels: ''
