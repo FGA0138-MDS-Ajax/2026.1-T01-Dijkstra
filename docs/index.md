@@ -37,6 +37,63 @@ O sistema atende três tipos de usuários:
 
 ---
 
+## Equipe — Grupo Dijkstra
+
+<div style="display:flex; flex-wrap:wrap; gap:24px; margin-top:12px;">
+
+  <div style="text-align:center; width:120px;">
+    <a href="https://github.com/MontMarcos" target="_blank">
+      <img src="https://github.com/MontMarcos.png?size=100" style="border-radius:50%; width:80px; height:80px; object-fit:cover;" alt="Marcos Vinicius Monteiro"/>
+      <br/><strong>Marcos Vinicius</strong><br/><small>Monteiro</small>
+    </a>
+  </div>
+
+  <div style="text-align:center; width:120px;">
+    <a href="https://github.com/Saresu" target="_blank">
+      <img src="https://github.com/Saresu.png?size=100" style="border-radius:50%; width:80px; height:80px; object-fit:cover;" alt="Igor B. S. Salles"/>
+      <br/><strong>Igor B. S.</strong><br/><small>Salles</small>
+    </a>
+  </div>
+
+  <div style="text-align:center; width:120px;">
+    <a href="https://github.com/welder60" target="_blank">
+      <img src="https://github.com/welder60.png?size=100" style="border-radius:50%; width:80px; height:80px; object-fit:cover;" alt="Welder Rodrigues de Medeiros"/>
+      <br/><strong>Welder Rodrigues</strong><br/><small>de Medeiros</small>
+    </a>
+  </div>
+
+  <div style="text-align:center; width:120px;">
+    <a href="https://github.com/DaviiGualbertoo" target="_blank">
+      <img src="https://github.com/DaviiGualbertoo.png?size=100" style="border-radius:50%; width:80px; height:80px; object-fit:cover;" alt="Davi Gualberto Rocha"/>
+      <br/><strong>Davi Gualberto</strong><br/><small>Rocha</small>
+    </a>
+  </div>
+
+  <div style="text-align:center; width:120px;">
+    <a href="https://github.com/gustavolima973" target="_blank">
+      <img src="https://github.com/gustavolima973.png?size=100" style="border-radius:50%; width:80px; height:80px; object-fit:cover;" alt="Gustavo Lima Menezes"/>
+      <br/><strong>Gustavo Lima</strong><br/><small>Menezes</small>
+    </a>
+  </div>
+
+  <div style="text-align:center; width:120px;">
+    <a href="https://github.com/beibeharry" target="_blank">
+      <img src="https://github.com/beibeharry.png?size=100" style="border-radius:50%; width:80px; height:80px; object-fit:cover;" alt="Ana Paula Jardim Rezende Vilela"/>
+      <br/><strong>Ana Paula</strong><br/><small>Jardim R. Vilela</small>
+    </a>
+  </div>
+
+  <div style="text-align:center; width:120px;">
+    <a href="https://github.com/Lucasmfb418" target="_blank">
+      <img src="https://github.com/Lucasmfb418.png?size=100" style="border-radius:50%; width:80px; height:80px; object-fit:cover;" alt="Lucas Menezes Folha Brito"/>
+      <br/><strong>Lucas Menezes</strong><br/><small>Folha Brito</small>
+    </a>
+  </div>
+
+</div>
+
+---
+
 ## Navegação
 
 Use o menu lateral ou superior para acessar:
