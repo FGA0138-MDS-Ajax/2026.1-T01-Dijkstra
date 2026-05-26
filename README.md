@@ -1,23 +1,141 @@
-# template-repository - Branch Developer
+# SIGEsporte
 
-Template de Repositório para a matéria de Métodos de Desenvolvimento de Software lecionado pelo professor Ricardo Ajax.
+Sistema de Gerenciamento Esportivo desenvolvido como projeto da disciplina de **Métodos de Desenvolvimento de Software**, ministrada pelo professor Ricardo Ajax na Universidade de Brasília (UnB).
 
-Essa Branch deve ser usada exclusivamente para a versão de desenvolvimento do software antes de ir para produção.
+---
 
-## Especificações Técnicas do Repositório
+## Tecnologias
 
-Este repositório é planejado e estruturado para que seja realizado documentações de software. Caso haja outra necessidades, deve-se consultar a professora.
+- **Python 3** + **Django 6.0.5**
+- **SQLite** (banco de dados local para desenvolvimento)
+- **pytest** + **pytest-cov** (testes e cobertura)
+- **pylint** (análise estática de código)
+- **django-environ** (gerenciamento de variáveis de ambiente)
 
-Atualmente se usa a ferramenta MkDocs para gerar sua documentação baseado nos seus arquivos markdowns, vocês podem achar mais instruções sobre o MkDocs através do link da documentação da ferramenta: [https://www.mkdocs.org/](https://www.mkdocs.org/).
+---
 
-Também é usado uma "sub-ferramenta" do MkDocs para sua estilização, o Material Theme, que pode ser consultado através do link: [https://squidfunk.github.io/mkdocs-material/](https://squidfunk.github.io/mkdocs-material/).
+## Arquitetura
 
-Este repositório também conta com uma pipeline de automatização de deploy do seu conteúdo MkDocs, para que a cada commit feito na main, a pipeline gere uma versão atualizada da sua documentação em minutos. Vale ressaltar que é importante realizar uma configuração para que tudo funcione da forma correta, as instruções são as seguintes:
+O projeto adota uma arquitetura modular baseada em Django, com separação clara de responsabilidades:
 
-* Acesse as configurações do repositório;
-* Procure a aba de "Pages"
-* Em "Source" escolha a opção "Deploy from a branch";
-* Em "Branch" escolha "gh-pages";
-* Clique em salvar e pronto;
+```
+2026.1-T01-Dijkstra/
+├── apps/
+│   ├── core/               # Aplicação principal do sistema
+│   │   ├── controllers/    # Camada de controle (views)
+│   │   ├── models/         # Modelos de dados
+│   │   ├── repositories/   # Acesso ao banco de dados
+│   │   └── services/       # Regras de negócio
+│   ├── security/           # Autenticação e regras de segurança
+│   │   ├── controllers/
+│   │   ├── models/
+│   │   ├── repositories/
+│   │   └── services/
+│   └── utils/              # Utilitários globais (logs, config, telemetria)
+├── config/                 # Configurações globais do Django
+│   ├── settings.py
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+├── tests/                  # Testes automatizados
+├── .env.example            # Exemplo de variáveis de ambiente
+├── Makefile                # Atalhos de desenvolvimento
+├── manage.py
+└── requirements.txt
+```
 
-Após essas etapas de configuração, o seu GitPages deve funcionar normalmente.
+---
+
+## Primeiros Passos
+
+### Pré-requisitos
+
+- Python 3.10+
+- `pip`
+
+### Instalação
+
+```bash
+# 1. Clone o repositório
+git clone https://github.com/fga-eps-mds/2026.1-T01-Dijkstra.git
+cd 2026.1-T01-Dijkstra
+
+# 2. Crie e ative o ambiente virtual
+make venv
+source .venv/bin/activate   # Linux/macOS
+
+# 3. Instale as dependências
+make install
+
+# 4. Configure as variáveis de ambiente
+cp .env.example .env
+# Edite o arquivo .env com seus valores
+
+# 5. Aplique as migrações
+make migrate
+
+# 6. Inicie o servidor de desenvolvimento
+make run
+```
+
+O servidor estará disponível em **http://127.0.0.1:8000/**.
+
+---
+
+## Comandos disponíveis (`Makefile`)
+
+| Comando | Descrição |
+| :--- | :--- |
+| `make help` | Lista todos os comandos disponíveis |
+| `make venv` | Cria o ambiente virtual em `.venv` |
+| `make install` | Instala as dependências do `requirements.txt` |
+| `make run` | Inicia o servidor de desenvolvimento |
+| `make check` | Valida a configuração do Django |
+| `make migrations` | Gera arquivos de migração |
+| `make migrate` | Aplica as migrações no banco de dados |
+| `make shell` | Abre o shell interativo do Django |
+| `make test` | Executa os testes com pytest |
+| `make lint` | Analisa o código com pylint |
+| `make clear` | Remove caches, arquivos compilados e o `.venv` |
+
+---
+
+## Testes
+
+```bash
+make test
+```
+
+Para visualizar o relatório de cobertura:
+
+```bash
+pytest --cov=apps --cov-report=term-missing
+```
+
+---
+
+## Variáveis de Ambiente
+
+Copie `.env.example` para `.env` e preencha os valores:
+
+| Variável | Descrição |
+| :--- | :--- |
+| `SECRET_KEY` | Chave secreta do Django (use uma chave forte em produção) |
+| `DEBUG` | `True` em desenvolvimento, `False` em produção |
+
+---
+
+## Contribuindo
+
+Antes de abrir uma *Issue* ou submeter um *Pull Request*, consulte os templates disponíveis na branch `docs` e siga o fluxo abaixo:
+
+1. Crie uma branch a partir de `developer` com um nome descritivo
+2. Implemente as alterações
+3. Rode `make lint` e `make test` antes de commitar
+4. Abra um Pull Request com descrição clara do que foi feito
+
+---
+
+## Licença
+
+Este projeto está sob a licença descrita no arquivo [LICENSE](LICENSE).
