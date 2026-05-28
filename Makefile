@@ -41,8 +41,8 @@ test:
 	pytest
 
 lint:
-	pylint apps/ config/
-
+	DJANGO_SETTINGS_MODULE=config.settings pylint --load-plugins pylint_django apps/ config/
+	
 clear:
 	find . -type d -name __pycache__ -exec rm -rf {} +
 	find . -type f -name "*.pyc" -delete
