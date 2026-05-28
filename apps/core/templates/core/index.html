@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGEsporte</title>
+  <style>
+    main {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
+    .card {
+      border: 2px solid #000;
+      overflow: hidden;
+    }
+    .card-img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      background: #e0e0e0;
+    }
+    .card-body {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .card-body h3 {
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>SIGEsporte</h1>
+  <p>Sistema de Gerenciamento de Eventos Esportivos</p>
+</header>
+
+<main>
+  <h2>Eventos cadastrados</h2>
+
+  {% if eventos %}
+  <div class="grid">
+    {% for evento in eventos %}
+    <div class="card">
+      {% if evento.imagem %}
+        <img class="card-img" src="{{ evento.imagem.url }}" alt="{{ evento.nome }}">
+      {% else %}
+        <div class="card-img"></div>
+      {% endif %}
+      <div class="card-body">
+        <h3>{{ evento.nome }}</h3>
+        <span>Data: {{ evento.data|date:"d/m/Y" }} às {{ evento.horario|time:"H:i" }}</span>
+        <span>Organizador: {{ evento.organizador }}</span>
+        <span>Capacidade: {{ evento.capacidade }} pessoas</span>
+        {% if evento.descricao %}
+          <p>{{ evento.descricao }}</p>
+        {% endif %}
+        <span>Gestor: {{ evento.gestor }}</span>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p>Nenhum evento cadastrado.</p>
+  {% endif %}
+</main>
+
+</body>
+</html>
