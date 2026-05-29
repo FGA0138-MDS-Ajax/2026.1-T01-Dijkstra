@@ -1,34 +1,78 @@
+"""Migration inicial do app core - cria todos os models de negocio."""
+
+import uuid
+from django.conf import settings
 from django.db import migrations, models
+import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
+        ("security", "0001_initial"),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Evento',
+            name="Organizacao",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nome', models.CharField(max_length=100, verbose_name='Nome do Evento')),
-                ('data', models.DateField(verbose_name='Data do Evento')),
-                ('horario', models.TimeField(verbose_name='Horario do Evento')),
-                ('local', models.CharField(max_length=150, verbose_name='Local')),
-                ('organizador', models.CharField(max_length=100, verbose_name='Organizador')),
-                ('gestor', models.CharField(max_length=100, verbose_name='Gestor')),
-                ('descricao', models.TextField(blank=True, null=True, verbose_name='Descricao')),
-                ('capacidade', models.PositiveIntegerField(verbose_name='Capacidade de Pessoas')),
-                ('imagem', models.ImageField(blank=True, null=True, upload_to='eventos/', verbose_name='Imagem do Evento')),
-                ('criado_em', models.DateTimeField(auto_now_add=True, verbose_name='Criado em')),
-                ('atualizado_em', models.DateTimeField(auto_now=True, verbose_name='Atualizado em')),
+                ("id", models.UUIDField(
+                    primary_key=True, default=uuid.uuid4, editable=False, serialize=False
+                )),
+                ("nome", models.CharField(max_length=255, verbose_name="Nome")),
+                ("descricao", models.TextField(verbose_name="Descricao")),
+                ("foto", models.ImageField(
+                    blank=True, null=True, upload_to="organizacoes/fotos/", verbose_name="Foto"
+                )),
+                ("membros", models.ManyToManyField(
+                    blank=True,
+                    related_name="organizacoes",
+                    to=settings.AUTH_USER_MODEL,
+                    verbose_name="Membros",
+                )),
             ],
             options={
-                'verbose_name': 'Evento',
-                'verbose_name_plural': 'Eventos',
-                'ordering': ['-data', '-horario'],
+                "verbose_name": "Organizacao",
+                "verbose_name_plural": "Organizacoes",
+                "ordering": ["nome"],
             },
         ),
+        
+        migrations.CreateModel(
+            name="Evento",
+            fields=[
+                ("id", models.UUIDField(
+                    primary_key=True, default=uuid.uuid4, editable=False, serialize=False
+                )),
+                ("titulo", models.CharField(max_length=255, verbose_name="Titulo")),
+                ("descricao", models.TextField(verbose_name="Descricao")),
+                ("foto", models.ImageField(
+                    blank=True, null=True, upload_to="eventos/fotos/", verbose_name="Foto"
+                )),
+                ("data_realizacao", models.DateTimeField(verbose_name="Data de Realizacao")),
+                ("criado_em", models.DateTimeField(auto_now_add=True, verbose_name="Criado em")),
+                ("organizador", models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name="eventos_criados",
+                    to=settings.AUTH_USER_MODEL,
+                    verbose_name="Organizador",
+                )),
+                ("organizacao", models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE,
+                    related_name="eventos",
+                    to="core.organizacao",
+                    verbose_name="Organizacao",
+                )),
+            ],
+            options={
+                "verbose_name": "Evento",
+                "verbose_name_plural": "Eventos",
+                "ordering": ["-data_realizacao"],
+            },
+        ),
+        
+        
+        
     ]

@@ -5,74 +5,366 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIGEsporte</title>
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: #102e4a;
+      color: #fff;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgba(0,0,0,.3);
+    }
+    .navbar .brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      color: #fff;
+      text-decoration: none;
+      margin-right: auto;
+    }
+    .navbar a.btn-nav {
+      padding: .4rem 1.1rem;
+      border-radius: 4px;
+      font-size: .9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .btn-entrar {
+      border: 2px solid #1b7a43;
+      color: #fff;
+      background: transparent;
+    }
+    .btn-entrar:hover { background: #1b7a43; }
+    .btn-cadastrar {
+      background: #1b7a43;
+      color: #fff;
+      border: 2px solid #1b7a43;
+    }
+    .btn-cadastrar:hover { background: #155e34; }
+
+    /* ── MAIN ── */
     main {
       max-width: 1100px;
+      width: 100%;
       margin: 2rem auto;
-      padding: 0 1rem;
+      padding: 0 1.5rem;
+      flex: 1;
     }
+
+    /* ── BUSCA E FILTRO ── */
+    .search-section {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
+    }
+    .search-row {
+      display: flex;
+      gap: .75rem;
+      align-items: center;
+    }
+    .search-row input[type="text"] {
+      flex: 1;
+      padding: .55rem .9rem;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      font-size: .95rem;
+    }
+    .filter-row {
+      display: flex;
+      gap: .75rem;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: .9rem;
+    }
+    .filter-row label { color: #555; font-weight: 500; }
+    .filter-row input[type="date"] {
+      padding: .45rem .7rem;
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      font-size: .9rem;
+    }
+    .btn {
+      padding: .5rem 1.2rem;
+      border: none;
+      border-radius: 4px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-primary { background: #102e4a; color: #fff; }
+    .btn-primary:hover { background: #1a4a6e; }
+    .btn-secondary { background: #1b7a43; color: #fff; }
+    .btn-secondary:hover { background: #155e34; }
+
+    /* ── SECAO EVENTOS ── */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #102e4a;
+      border-bottom: 2px solid #1b7a43;
+      padding-bottom: .4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── GRID ── */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 1.75rem;
     }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── CARD ── */
     .card {
-      border: 2px solid #000;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .15s;
     }
+    .card:hover { box-shadow: 0 4px 14px rgba(0,0,0,.12); }
+
     .card-img {
       width: 100%;
       height: 160px;
       object-fit: cover;
       display: block;
-      background: #e0e0e0;
+      background: #d0dce8;
+      position: relative;
     }
+    .card-img-placeholder {
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(135deg, #d0dce8 0%, #bfcfdf 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7a93a8;
+      font-size: .85rem;
+      font-weight: 500;
+      letter-spacing: .5px;
+    }
+
     .card-body {
       padding: 1rem;
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: .35rem;
+      flex: 1;
     }
-    .card-body h3 {
-      margin: 0;
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #102e4a;
+      line-height: 1.3;
+    }
+    .card-meta {
+      font-size: .83rem;
+      color: #555;
+    }
+    .card-status {
+      margin-top: .2rem;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #1b7a43;
+      background: #e8f5ee;
+      border-radius: 3px;
+      padding: .15rem .5rem;
+      display: inline-block;
+      width: fit-content;
+    }
+    .card-footer {
+      padding: .75rem 1rem;
+      border-top: 1px solid #eee;
+    }
+    .btn-detalhes {
+      display: block;
+      text-align: center;
+      padding: .45rem;
+      background: #102e4a;
+      color: #fff;
+      border-radius: 4px;
+      font-size: .85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .15s;
+    }
+    .btn-detalhes:hover { background: #1a4a6e; }
+
+    /* ── EMPTY STATE ── */
+    .empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #777;
+      font-size: .95rem;
+      grid-column: 1 / -1;
+    }
+
+    /* ── PAGINACAO ── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid #ddd;
+    }
+    .pagination a.btn, .pagination span.btn {
+      text-decoration: none;
+      font-size: .88rem;
+    }
+    .btn-page { background: #102e4a; color: #fff; }
+    .btn-page:hover { background: #1a4a6e; }
+    .btn-page-disabled {
+      background: #ccc;
+      color: #888;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .pagination .page-info {
+      font-size: .9rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #102e4a;
+      color: #a0b8cc;
+      text-align: center;
+      padding: 1rem;
+      font-size: .85rem;
+      margin-top: auto;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>SIGEsporte</h1>
-  <p>Sistema de Gerenciamento de Eventos Esportivos</p>
-</header>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="/" class="brand">SIGEsporte</a>
+  <a href="/security/login/" class="btn-nav btn-entrar">Entrar</a>
+  <a href="/security/cadastro/" class="btn-nav btn-cadastrar">Cadastrar-se</a>
+</nav>
 
+<!-- MAIN -->
 <main>
-  <h2>Eventos cadastrados</h2>
 
-  {% if eventos %}
-  <div class="grid">
-    {% for evento in eventos %}
-    <div class="card">
-      {% if evento.imagem %}
-        <img class="card-img" src="{{ evento.imagem.url }}" alt="{{ evento.nome }}">
-      {% else %}
-        <div class="card-img"></div>
-      {% endif %}
-      <div class="card-body">
-        <h3>{{ evento.nome }}</h3>
-        <span>Data: {{ evento.data|date:"d/m/Y" }} às {{ evento.horario|time:"H:i" }}</span>
-        <span>Organizador: {{ evento.organizador }}</span>
-        <span>Capacidade: {{ evento.capacidade }} pessoas</span>
-        {% if evento.descricao %}
-          <p>{{ evento.descricao }}</p>
-        {% endif %}
-        <span>Gestor: {{ evento.gestor }}</span>
+  <!-- BUSCA E FILTRO -->
+  <section class="search-section">
+    <form method="get" action="/">
+      <div class="search-row">
+        <input
+          type="text"
+          name="q"
+          value="{{ q }}"
+          placeholder="  Pesquisar eventos..."
+        >
+        <button type="submit" class="btn btn-primary">Buscar</button>
       </div>
+      <div class="filter-row" style="margin-top:.6rem;">
+        <label for="data_inicio">Data inicio:</label>
+        <input type="date" id="data_inicio" name="data_inicio" value="{{ data_inicio }}">
+        <label for="data_fim">Data fim:</label>
+        <input type="date" id="data_fim" name="data_fim" value="{{ data_fim }}">
+        <button type="submit" class="btn btn-secondary">Filtrar</button>
+        {% if q or data_inicio or data_fim %}
+          <a href="/" class="btn" style="background:#777;color:#fff;">Limpar</a>
+        {% endif %}
+      </div>
+    </form>
+  </section>
+
+  <!-- GRID DE EVENTOS -->
+  <p class="section-title">Eventos Disponíveis</p>
+
+  <div class="grid">
+    {% for evento in page_obj %}
+    <article class="card">
+      {% if evento.foto %}
+        <img class="card-img" src="{{ evento.foto.url }}" alt="{{ evento.titulo }}">
+      {% else %}
+        <div class="card-img-placeholder">[ Imagem ]</div>
+      {% endif %}
+
+      <div class="card-body">
+        <p class="card-title">{{ evento.titulo }}</p>
+        <p class="card-meta">Data: {{ evento.data_realizacao|date:"d/m/Y" }}</p>
+        <p class="card-meta">Organizacao: {{ evento.organizacao.nome }}</p>
+        <span class="card-status">Inscricoes abertas</span>
+      </div>
+
+      <div class="card-footer">
+        <a href="/eventos/{{ evento.id }}/" class="btn-detalhes">Ver Detalhes</a>
+      </div>
+    </article>
+    {% empty %}
+    <div class="empty">
+      Nenhum evento encontrado{% if q %} para "<strong>{{ q }}</strong>"{% endif %}.
     </div>
     {% endfor %}
   </div>
-  {% else %}
-  <p>Nenhum evento cadastrado.</p>
+
+  <!-- PAGINACAO -->
+  {% if page_obj.paginator.num_pages > 1 %}
+  <nav class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}&q={{ q }}&data_inicio={{ data_inicio }}&data_fim={{ data_fim }}"
+         class="btn btn-page">&lt;&lt; Anterior</a>
+    {% else %}
+      <span class="btn btn-page-disabled">&lt;&lt; Anterior</span>
+    {% endif %}
+
+    <span class="page-info">
+      Pagina {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}&q={{ q }}&data_inicio={{ data_inicio }}&data_fim={{ data_fim }}"
+         class="btn btn-page">Proxima &gt;&gt;</a>
+    {% else %}
+      <span class="btn btn-page-disabled">Proxima &gt;&gt;</span>
+    {% endif %}
+  </nav>
   {% endif %}
+
 </main>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 SIGEsporte
+</footer>
 
 </body>
 </html>
