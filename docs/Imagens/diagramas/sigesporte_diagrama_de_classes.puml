@@ -115,7 +115,6 @@ class Evento <<Model>> {
     -- Chaves Estrangeiras (FK) --
     + organizador: ForeignKey(Usuario, related_name='eventos_criados')
     + organizacao: ForeignKey(Organizacao, on_delete=CASCADE)
-    + reserva_vinculada: OneToOneField(ReservaEspaco, null=True, blank=True)
 }
 
 class Inscricao <<Model>> {
@@ -146,7 +145,7 @@ EspacoFisico "1" -- "0..*" ReservaEspaco : FK espaco
 Usuario "1" -- "0..*" ReservaEspaco : FK solicitante/avaliador
 Usuario "1" -- "0..*" Evento : FK organizador
 Organizacao "1" -- "0..*" Evento : FK organizacao
-Evento "1" -- "0..1" ReservaEspaco : OneToOne reserva_vinculada
+Evento "1" -- "0..*" ReservaEspaco : FK evento
 Usuario "1" -- "0..*" Inscricao : FK participante
 Evento "1" -- "0..*" Inscricao : FK evento
 

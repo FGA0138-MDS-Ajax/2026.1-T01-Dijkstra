@@ -75,7 +75,6 @@ entity "Evento" as evento {
     --
     * organizador_id : UUIDField <<FK>>
     * organizacao_id : UUIDField <<FK>>
-    reserva_vinculada_id : UUIDField <<FK>> <<UNIQUE>> [Null]
     * titulo : CharField
     descricao : TextField
     foto : ImageField [Null]
@@ -107,8 +106,8 @@ usuario |o--o{ reserva : "avalia >"
 usuario ||--o{ evento : "organiza >"
 organizacao ||--o{ evento : "sedia >"
 
-' OneToOneField: Evento <-> ReservaEspaco (Reserva pode existir sem evento, mas Evento tem max 1 reserva)
-reserva |o--o| evento : "OneToOne >"
+' ForeignKeys de ReservaEspaco 
+evento ||--o{ reserva 
 
 ' ForeignKeys de Inscricao
 usuario ||--o{ inscricao : "realiza >"

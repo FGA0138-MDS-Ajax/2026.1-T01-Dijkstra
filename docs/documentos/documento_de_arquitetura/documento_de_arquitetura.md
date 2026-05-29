@@ -1,6 +1,6 @@
 **Documento de Arquitetura**
 
-Versão 1.0.2
+Versão 1.0.3
 
 **Tabela - Integrantes do Grupo**
 
@@ -17,12 +17,12 @@ Versão 1.0.2
 
 **Histórico de Revisões**
 
-| **Data**   | **Versão** | **Descrição**                                                                          | **Autor(es)**                  |
-| ---------- | ---------- | -------------------------------------------------------------------------------------- | ------------------------------ |
-| 05/05/2026 | 1.0        | Detalhamento da arquitetura do projeto.                                                | Presentes na reunião gravada.  |
+| **Data**   | **Versão** | **Descrição**                                                | **Autor(es)**                  |
+| ---------- | ---------- | ------------------------------------------------------------ | ------------------------------ |
+| 05/05/2026 | 1.0        | Detalhamento da arquitetura do projeto.                      | Presentes na reunião gravada.  |
 | 08/05/2026 | 1.0.1      | Adicionado escopo, implementações e restrições. Adicionada bibliografia e referencias. | Igor Salles e Ana Paula Jardim |
-| 09/05/2026 | 1.0.2      | Adicionado o Diagrama Entidade-Relacionamento                                          | Welder Rodrigues de Medeiros   |
-|            |            |                                                                                        |                                |
+| 09/05/2026 | 1.0.2      | Adicionado o Diagrama Entidade-Relacionamento                | Welder Rodrigues de Medeiros   |
+| 29/05/2026 | 1.0.3      | Altera relação Evento-Reserva nos diagramas                  | Welder Rodrigues de Medeiros   |
 
 **Sumário**
 
