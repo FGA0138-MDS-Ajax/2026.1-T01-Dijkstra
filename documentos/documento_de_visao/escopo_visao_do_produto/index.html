@@ -1,0 +1,3335 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra/documentos/documento_de_visao/escopo_visao_do_produto/">
+      
+      
+        <link rel="prev" href="../../../atas_reuniao/ata_reuniao_23_05/">
+      
+      
+        <link rel="next" href="../../documento_de_arquitetura/documento_de_arquitetura/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../Imagens/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Documento de Visão - Documentação - SIGEsporte</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sumario" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Documentação - SIGEsporte" class="md-header__button md-logo" aria-label="Documentação - SIGEsporte" data-md-component="logo">
+      
+  <img src="../../../Imagens/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentação - SIGEsporte
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Documento de Visão
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../atas_reuniao/ata_reuniao_20_04/" class="md-tabs__link">
+          
+  
+  
+  Atas de Reunião
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Documento de Visão
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../documento_de_arquitetura/documento_de_arquitetura/" class="md-tabs__link">
+          
+  
+  
+  Documento de Arquitetura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../prototipos/baixa_fidelidade/prototipo_baixa_fidelidade/" class="md-tabs__link">
+          
+  
+  
+  Protótipos
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Documentação - SIGEsporte" class="md-nav__button md-logo" aria-label="Documentação - SIGEsporte" data-md-component="logo">
+      
+  <img src="../../../Imagens/logo.png" alt="logo">
+
+    </a>
+    Documentação - SIGEsporte
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atas de Reunião
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atas de Reunião
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../atas_reuniao/ata_reuniao_20_04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ata 20/04 - Elaboração do Documento de Visão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../atas_reuniao/ata_reuniao_06_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ata 06/05 - Elaboração do Documento de Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../atas_reuniao/ata_reuniao_23_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ata 23/05 - Sprint 1 e padronização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Visão
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documento de Visão
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Visão
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Visão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sumario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sumário
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visao-do-produto-e-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VISÃO DO PRODUTO E PROJETO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-visao-geral-do-produto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 VISÃO GERAL DO PRODUTO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Problema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabela-1-publico-alvo-do-sigesporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 1 — Público-alvo do SIGEsporte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabela-2-declaracao-de-posicao-para-alunos-da-fcte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 2 — Declaração de posição para alunos da FCTE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabela-3-declaracao-de-posicao-para-organizadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 3 — Declaração de posição para organizadores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabela-4-declaracao-de-posicao-para-gestores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 4 — Declaração de posição para gestores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#151-objetivo-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.1 Objetivo Principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152-objetivos-secundarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.2 Objetivos Secundários
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-visao-geral-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 VISÃO GERAL DO PROJETO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-matriz-de-comunicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Matriz de Comunicação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-processo-de-desenvolvimento-de-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 PROCESSO DE DESENVOLVIMENTO DE SOFTWARE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extreme-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extreme Programming:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-declaracao-de-escopo-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 DECLARAÇÃO DE ESCOPO DO PROJETO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-backlog-do-produto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Backlog do produto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Backlog do produto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-aluno-da-fcte-participanteconsumidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1 Aluno da FCTE (Participante/Consumidor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-organizador-atleticas-cas-alunos-lideres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2 Organizador (Atléticas / CAs / Alunos Líderes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-gestor-da-fcte-administracaoprefeitura-do-campus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3 Gestor da FCTE (Administração/Prefeitura do Campus)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-perfis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Perfis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-cenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Cenários
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-tabela-de-backlog-do-produto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Tabela de Backlog do produto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-metricas-e-medicoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 MÉTRICAS E MEDIÇÕES
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 MÉTRICAS E MEDIÇÕES">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-gqm-de-medicoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 GQM de medições
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questao-01-qual-e-a-quantidade-de-debito-tecnico-acumulado-ao-final-de-cada-ciclo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questão 01: Qual é a quantidade de débito técnico acumulado ao final de cada ciclo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forma-de-calculo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forma de cálculo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escala-de-unidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escala de unidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valores-esperados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores esperados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formas-de-analises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formas de análises
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-02-qual-e-o-nivel-de-qualidade-do-software-entregue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questão 02: Qual é o nível de qualidade do software entregue?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Questão 02: Qual é o nível de qualidade do software entregue?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definicao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forma-de-calculo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forma de cálculo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escala-de-unidade_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escala de unidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valores-esperados_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores esperados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formas-de-analises_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formas de análises
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-de-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TESTES DE SOFTWARE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TESTES DE SOFTWARE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#52-estrategia-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Estratégia de testes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 Estratégia de testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#niveis-de-testes-abordados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Níveis de testes abordados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-testes-abordados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de testes abordados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de testes abordados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes Funcionais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-nao-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes Não Funcionais
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ambientes-de-testes-usados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ambientes de testes usados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-roteiro-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Roteiro de teste
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#precondicoes-dos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Precondições dos Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencias-bibliograficas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REFERÊNCIAS BIBLIOGRÁFICAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documento de Arquitetura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documento_de_arquitetura/documento_de_arquitetura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protótipos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Protótipos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../prototipos/baixa_fidelidade/prototipo_baixa_fidelidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protótipo de Baixa Fidelidade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sumario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sumário
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visao-do-produto-e-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        VISÃO DO PRODUTO E PROJETO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-visao-geral-do-produto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1 VISÃO GERAL DO PRODUTO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-problema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Problema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabela-1-publico-alvo-do-sigesporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 1 — Público-alvo do SIGEsporte
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabela-2-declaracao-de-posicao-para-alunos-da-fcte" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 2 — Declaração de posição para alunos da FCTE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabela-3-declaracao-de-posicao-para-organizadores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 3 — Declaração de posição para organizadores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabela-4-declaracao-de-posicao-para-gestores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela 4 — Declaração de posição para gestores
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#151-objetivo-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.1 Objetivo Principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#152-objetivos-secundarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.5.2 Objetivos Secundários
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-visao-geral-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2 VISÃO GERAL DO PROJETO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-matriz-de-comunicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 Matriz de Comunicação
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-processo-de-desenvolvimento-de-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3 PROCESSO DE DESENVOLVIMENTO DE SOFTWARE
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#extreme-programming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Extreme Programming:
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-declaracao-de-escopo-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4 DECLARAÇÃO DE ESCOPO DO PROJETO
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#41-backlog-do-produto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Backlog do produto
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4.1 Backlog do produto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#411-aluno-da-fcte-participanteconsumidor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.1 Aluno da FCTE (Participante/Consumidor)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#412-organizador-atleticas-cas-alunos-lideres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.2 Organizador (Atléticas / CAs / Alunos Líderes)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#413-gestor-da-fcte-administracaoprefeitura-do-campus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1.3 Gestor da FCTE (Administração/Prefeitura do Campus)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42-perfis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Perfis
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#43-cenarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Cenários
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#44-tabela-de-backlog-do-produto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Tabela de Backlog do produto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-metricas-e-medicoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5 MÉTRICAS E MEDIÇÕES
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 MÉTRICAS E MEDIÇÕES">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-gqm-de-medicoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 GQM de medições
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#questao-01-qual-e-a-quantidade-de-debito-tecnico-acumulado-ao-final-de-cada-ciclo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questão 01: Qual é a quantidade de débito técnico acumulado ao final de cada ciclo?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definicao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forma-de-calculo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forma de cálculo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escala-de-unidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escala de unidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valores-esperados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores esperados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formas-de-analises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formas de análises
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questao-02-qual-e-o-nivel-de-qualidade-do-software-entregue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Questão 02: Qual é o nível de qualidade do software entregue?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Questão 02: Qual é o nível de qualidade do software entregue?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definicao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Definição
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#forma-de-calculo_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forma de cálculo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#escala-de-unidade_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escala de unidade
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valores-esperados_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valores esperados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formas-de-analises_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Formas de análises
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-de-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TESTES DE SOFTWARE
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TESTES DE SOFTWARE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#52-estrategia-de-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Estratégia de testes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 Estratégia de testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#niveis-de-testes-abordados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Níveis de testes abordados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tipos-de-testes-abordados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tipos de testes abordados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tipos de testes abordados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes Funcionais
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-nao-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Testes Não Funcionais
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ambientes-de-testes-usados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ambientes de testes usados
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-roteiro-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 Roteiro de teste
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#precondicoes-dos-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Precondições dos Testes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencias-bibliograficas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        REFERÊNCIAS BIBLIOGRÁFICAS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p>Tabela 1 - Integrantes do Grupo:</p>
+<table>
+<thead>
+<tr>
+<th>Matrícula</th>
+<th>Nome</th>
+<th>Função</th>
+<th>Pontos de participação na elaboração</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>222007059</td>
+<td>Nicolas Coqueiro Almeida de Freitas</td>
+<td>Trancou a disiplina</td>
+<td>11,11%</td>
+</tr>
+<tr>
+<td>242015666</td>
+<td>Marcos Vinicius Monteiro</td>
+<td>Git Master</td>
+<td>11,11%</td>
+</tr>
+<tr>
+<td>241012196</td>
+<td>Davi Gualberto Rocha</td>
+<td>Desenvolvedor</td>
+<td>11,11%</td>
+</tr>
+<tr>
+<td>251033162</td>
+<td>Igor B. S. Salles</td>
+<td>Desenvolvedor</td>
+<td>11,11%</td>
+</tr>
+<tr>
+<td>241010880</td>
+<td>Ana Paula Jardim Rezende Vilela</td>
+<td>Desenvolvedor</td>
+<td>11,11%</td>
+</tr>
+<tr>
+<td>241012409</td>
+<td>Welder Rodrigues de Medeiros</td>
+<td>Product Owner e Scrum Master</td>
+<td>11,11%</td>
+</tr>
+<tr>
+<td>2110162938</td>
+<td>Gustavo Lima Menezes</td>
+<td>Desenvolvedor</td>
+<td>11,11%</td>
+</tr>
+<tr>
+<td>222006777</td>
+<td>Guilherme Oliveira Monteiro</td>
+<td>Garantia de Qualidade (QA)</td>
+<td>11,11%</td>
+</tr>
+<tr>
+<td>241012300</td>
+<td>Lucas Menezes Folha Brito</td>
+<td>Desenvolvedor</td>
+<td>11,11%</td>
+</tr>
+</tbody>
+</table>
+<p>Histórico de Revisões</p>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Versão</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>20/04/2026</td>
+<td>1.0</td>
+<td>Primeira reunião do grupo Dijkstra.</td>
+<td>Nicolas Coqueiro Almeida de Freitas</td>
+</tr>
+<tr>
+<td>21/04/2026</td>
+<td>1.1</td>
+<td>Inclusão de diagramas.</td>
+<td>Welder Rodrigues de Medeiros</td>
+</tr>
+<tr>
+<td>01/05/2026</td>
+<td>1.2</td>
+<td>Inclusão dos roteiros de testes.</td>
+<td>Nicolas Coqueiro Almeida de Freitas</td>
+</tr>
+</tbody>
+</table>
+<p>Visão de Produto e Projeto</p>
+<h2 id="sumario">Sumário</h2>
+<p>1 VISÃO GERAL DO PRODUTO ........................................................................................................ 3
+1.1 Problema ................................................................................................................... 3
+1.2 Declaração de Posição do Produto ......................................................................... 3
+1.3 Objetivos do Produto ............................................................................................... 4
+1.4 Tecnologias a Serem Utilizadas .............................................................................. 4
+2 VISÃO GERAL DO PROJETO ......................................................................................................... 4
+2.1 Ciclo de vida do projeto de desenvolvimento de software.................................... 4
+2.2 Organização do Projeto ........................................................................................... 4
+2.3 Planejamento das Fases e/ou Iterações do Projeto ............................................... 5
+2.4 Matriz de Comunicação .......................................................................................... 5
+2.5 Gerenciamento de Riscos ........................................................................................ 5
+2.6 Critérios de Replanejamento .................................................................................. 6
+3 PROCESSO DE DESENVOLVIMENTO DE SOFTWARE ................................................................ 6
+4 DECLARAÇÃO DE ESCOPO DO PROJETO.................................................................................... 7
+4.1 Backlog do produto .................................................................................................. 7
+4.2 Perfis.......................................................................................................................... 7
+4.3 Cenários .................................................................................................................... 7
+4.4 Tabela de Backlog do produto ................................................................................ 8
+5 MÉTRICAS E MEDIÇÕES ............................................................................................................... 9
+5.1 GQM de medições .................................................................................................... 9
+6 TESTES DE SOFTWARE ................................................................................................................. 9
+6.1 Estratégia de testes contendo: ................................................................................. 9
+6.2 Roteiro de teste:........................................................................................................ 9
+7 REFERÊNCIAS BIBLIOGRÁFICAS.............................................................................................. 10</p>
+<h2 id="visao-do-produto-e-projeto">VISÃO DO PRODUTO E PROJETO</h2>
+<h2 id="1-visao-geral-do-produto">1 VISÃO GERAL DO PRODUTO</h2>
+<h2 id="11-problema">1.1 Problema</h2>
+<p>O cenário atual da Faculdade de Ciências e Tecnologias em Engenharia (FCTE)
+revela uma desconexão entre a infraestrutura disponível e o engajamento da comunidade
+acadêmica em atividades esportivas. O problema reside na fragmentação e informalidade da
+gestão.
+Atualmente, o campus da FCTE dispõe de um espaço poliesportivo destinados a
+diversas modalidades, como futsal, basquete e vôlei.
+No entanto, ao contrário do Campus Darcy Ribeiro que conta com a Coordenação de
+Esporte e Lazer (CEL) e sistemas formalizados para reserva de espaços como o Centro
+Olímpico e a Quadra Santander, a FCTE carece de uma plataforma centralizada e acessível
+para a gestão de suas instalações.
+Na FCTE, o uso da quadra e a organização de campeonatos dependem de fluxos de
+comunicação descentralizados, majoritariamente via WhatsApp. Essa prática gera opacidade:
+o aluno não sabe quando a quadra está livre, o organizador não tem um canal oficial para
+atrair participantes e a administração do campus perde o controle sobre o aproveitamento real
+dos espaços.
+A oportunidade de software aqui é a criação de um Ecossistema Digital Esportivo,
+que substitua a "gestão por mensagens" por um fluxo de dados estruturado, garantindo que a
+oferta de eventos encontre a demanda dos alunos de forma eficiente e transparente.</p>
+<p>1.2 Análise de Causa Raiz: Diagrama de Ishikawa</p>
+<p>Para compreender a fundo porque o subaproveitamento esportivo ocorre na FCTE, utilizamos
+o Diagrama de Ishikawa (Espinha de Peixe). Esta técnica permite visualizar as causas
+secundárias que alimentam o problema principal.</p>
+<p>Figura 1: Diagrama de Ishikawa
+<img alt="diagrama_de_ishikawa" src="../../../imagens/diagramas/diagrama_de_ishikawa.png" /></p>
+<p>O diagrama acima segmenta as falhas em quatro categorias principais que justificam a
+necessidade do SIGEsporte:</p>
+<ul>
+<li>Métodos (Processos): A dependência do WhatsApp como ferramenta de gestão é o
+maior gargalo. Sem um protocolo de agendamento fixo e auditável, ocorrem conflitos
+de horários e "reservas fantasmas", resultando em espaços vazios enquanto há alunos
+querendo jogar.</li>
+<li>Comunicação (Divulgação): A inexistência de um portal centralizado cria um
+"vácuo de informação". O aluno interessado muitas vezes só descobre que um evento
+ocorreu após o seu encerramento, o que desencoraja a participação futura.</li>
+<li>Mão de Obra (Organizadores): Os organizadores de eventos (sejam ligas ou alunos
+independentes) enfrentam uma carga burocrática alta. Sem uma ferramenta de
+cadastro de participantes, o controle manual torna a organização exaustiva e suscetível
+a erros.</li>
+<li>Engajamento (Participantes): A dificuldade de inscrição atua como uma barreira de
+entrada. Processos complicados afastam o público-alvo, reduzindo o número de
+eventos realizados devido à baixa adesão percebida.
+A solução consiste no desenvolvimento de uma plataforma web centralizada para a
+gestão de reservas e acompanhamento de eventos esportivos na FCTE. O sistema funcionará
+como um portal único onde a comunidade acadêmica poderá visualizar a disponibilidade das</li>
+</ul>
+<p>quadras, realizar solicitações de reserva baseadas em regras de negócio pré-definidas e
+acompanhar o calendário de torneios e resultados das atléticas.
+Justificativa e Contribuição Esperada:
+A solução proposta ataca diretamente as causas de falha identificadas no diagrama de
+Ishikawa através de três pilares:</p>
+<ul>
+<li>Padronização e Transparência (Método): Ao digitalizar o fluxo de reserva, o
+software elimina a informalidade e as "regras ocultas". Espera-se que todos os
+usuários tenham clareza sobre suas cotas de uso (ex: 2 vezes ao mês) e prazos de
+antecedência, garantindo uma divisão justa do espaço público.</li>
+<li>Centralização da Informação (Tecnologia): A plataforma substitui as planilhas
+manuais e os grupos de mensagens por um banco de dados em tempo real. Isso
+elimina conflitos de horários e a subutilização da quadra, pois qualquer aluno poderá
+verificar janelas de horário livre instantaneamente via navegador.</li>
+<li>Eficiência Administrativa (Pessoas): O sistema automatiza o envio de confirmações
+e a geração de documentos de autorização (conforme o modelo da UnB). Espera-se
+reduzir drasticamente a carga de trabalho manual dos organizadores e das entidades
+(Atléticas e CAs), permitindo que o foco mude da "burocracia do agendamento" para
+o fomento das atividades esportivas e integração no campus.</li>
+</ul>
+<p>1.3 Declaração de Posição do Produto
+O grupo desenvolverá uma plataforma web voltada para o gerenciamento de espaços
+esportivos e acompanhamento de competições no campus FCTE/UnB. O sistema permitirá a
+reserva de quadras, controle de cotas de uso, registro de resultados de torneios e visualização
+de uma agenda centralizada.
+Embora existam soluções globais de agendamento, o diferencial deste produto reside
+na especificidade e integração com a UnB:
+- Regras Customizadas: Ao contrário de agendas genéricas, o software implementa as
+regras específicas de reserva do campus (como a antecedência mínima e limites
+mensais).
+- Histórico de Atletas Locais: Foca no acompanhamento das atléticas e eventos
+próprios da FCTE, criando um senso de comunidade que plataformas comerciais não
+possuem.
+- Consequência da Não Existência: Atualmente, a alternativa é a gestão manual via
+grupos de mensagens ou planilhas, o que resulta em perda de informações e conflitos
+de horários.
+- Inventário de Itens: Para responsabilidade de quem está utilizando do meio.</p>
+<p>1.4 Usuários-Alvo:</p>
+<h2 id="tabela-1-publico-alvo-do-sigesporte">Tabela 1 — Público-alvo do SIGEsporte</h2>
+<table>
+<thead>
+<tr>
+<th>Público</th>
+<th>Descrição</th>
+<th>Necessidade Principal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alunos da FCTE</td>
+<td>Estudantes que buscam praticar esportes e precisam de transparência para reservar horários sem burocracia excessiva.</td>
+<td>Encontrar eventos esportivos, visualizar horários disponíveis e realizar inscrições rapidamente.</td>
+</tr>
+<tr>
+<td>Atléticas e CAs</td>
+<td>Entidades que organizam torneios e necessitam de uma ferramenta para registrar o progresso das competições.</td>
+<td>Divulgar campeonatos, gerenciar inscrições e organizar reservas de espaços esportivos.</td>
+</tr>
+<tr>
+<td>Gestores da FCTE (Clientes)</td>
+<td>Responsáveis pela infraestrutura do campus que precisam de relatórios de uso para justificar manutenções ou novos investimentos nos espaços esportivos.</td>
+<td>Controlar o uso das instalações, evitar conflitos de agenda e obter dados estatísticos de utilização.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tabela-2-declaracao-de-posicao-para-alunos-da-fcte">Tabela 2 — Declaração de posição para alunos da FCTE</h2>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Para</td>
+<td>Alunos da FCTE (Participantes)</td>
+</tr>
+<tr>
+<td>Necessidade</td>
+<td>Encontrar eventos esportivos de forma rápida, visualizar horários livres da quadra para lazer e realizar inscrições sem burocracia.</td>
+</tr>
+<tr>
+<td>O SIGEsporte é</td>
+<td>Uma aplicação WEB</td>
+</tr>
+<tr>
+<td>Que</td>
+<td>Oferece uma vitrine única de eventos e um calendário de disponibilidade em tempo real.</td>
+</tr>
+<tr>
+<td>Ao contrário de</td>
+<td>Grupos de WhatsApp e comunicados em murais físicos, que possuem um alcance limitado.</td>
+</tr>
+<tr>
+<td>Nosso produto</td>
+<td>Permite que o aluno visualize apenas o que é relevante: “O que tem hoje?” e “Onde me inscrevo?”.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tabela-3-declaracao-de-posicao-para-organizadores">Tabela 3 — Declaração de posição para organizadores</h2>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Para</td>
+<td>Atléticas e CAs (Organizadores)</td>
+</tr>
+<tr>
+<td>Necessidade</td>
+<td>Divulgar campeonatos para todo o campus, gerenciar a lista de inscritos e reservar espaços oficiais para treinos e jogos.</td>
+</tr>
+<tr>
+<td>O SIGEsporte é</td>
+<td>Uma aplicação WEB</td>
+</tr>
+<tr>
+<td>Que</td>
+<td>Automatiza a coleta de dados dos participantes e formaliza o pedido de reserva de espaço, gerando um histórico organizado.</td>
+</tr>
+<tr>
+<td>Ao contrário de</td>
+<td>Google Forms e planilhas de Excel compartilhadas que fazem apenas coleta de dados isolados.</td>
+</tr>
+<tr>
+<td>Nosso produto</td>
+<td>Vincula a inscrição ao evento e o evento ao espaço físico, criando uma jornada completa de organização em um só lugar.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="tabela-4-declaracao-de-posicao-para-gestores">Tabela 4 — Declaração de posição para gestores</h2>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Para</td>
+<td>Gestores da FCTE (Administração)</td>
+</tr>
+<tr>
+<td>Necessidade</td>
+<td>Controle sobre o uso das instalações físicas, mitigação de conflitos de agenda e dados estatísticos sobre a adesão esportiva no campus.</td>
+</tr>
+<tr>
+<td>O SIGEsporte é</td>
+<td>Uma aplicação WEB</td>
+</tr>
+<tr>
+<td>Que</td>
+<td>Fornece um painel de controle para aprovação de reservas e relatórios de ocupação dos espaços (subaproveitamento vs. superpopulação).</td>
+</tr>
+<tr>
+<td>Ao contrário de</td>
+<td>Agendamento manual (e-mail ou contato direto com a prefeitura do campus).</td>
+</tr>
+<tr>
+<td>Nosso produto</td>
+<td>Transforma uma gestão baseada em “quem pediu primeiro no privado” em uma gestão transparente e baseada em dados, permitindo decisões melhores sobre a manutenção e ampliação dos espaços esportivos.</td>
+</tr>
+</tbody>
+</table>
+<p>1.5 Objetivos do Produto</p>
+<p>O SIGEsporte tem o propósito de transformar a cultura esportiva da FCTE através da
+tecnologia, substituindo processos informais por uma plataforma de governança e
+engajamento.</p>
+<h2 id="151-objetivo-principal">1.5.1 Objetivo Principal</h2>
+<p>Desenvolver e implementar um sistema web integrado para a gestão centralizada de
+eventos e espaços esportivos da Faculdade de Ciências e Tecnologias em Engenharia
+(FCTE/UnB), visando otimizar a ocupação das instalações e facilitar a participação da
+comunidade acadêmica em atividades físicas e competitivas.</p>
+<h2 id="152-objetivos-secundarios">1.5.2 Objetivos Secundários</h2>
+<p>Para alcançar o objetivo principal, o projeto desdobra-se nas seguintes metas
+específicas:
+- Automatizar o Agendamento: Substituir o fluxo de reservas via WhatsApp por um
+sistema de calendário dinâmico, eliminando conflitos de horários e reservas
+duplicadas.
+- Centralizar a Comunicação: Criar um portal único de divulgação onde qualquer
+aluno possa visualizar o cronograma completo de eventos esportivos do campus em
+tempo real.
+- Facilitar a Gestão de Organizadores: Prover ferramentas para que Atléticas e CAs
+possam cadastrar eventos e gerenciar listas de participantes de forma estruturada, sem
+a necessidade de múltiplas planilhas externas.
+- Mapear o Aproveitamento de Espaços: Gerar dados que permitam à administração
+da FCTE identificar horários de subaproveitamento e picos de demanda na quadra e
+demais áreas esportivas.
+- Fomentar a Inclusão Esportiva: Reduzir a barreira de entrada para alunos não
+federados ou não pertencentes a atléticas, permitindo que encontrem atividades de
+lazer de forma intuitiva.
+- Promover a Transparência: Estabelecer um fluxo de aprovação de reservas que seja
+visível para todos os interessados, garantindo a equidade no uso dos bens públicos da
+universidade.
+1.6 Tecnologias a Serem Utilizadas
+A stack tecnológica do SIGEsporte foi selecionada para garantir um desenvolvimento
+ágil, focado em entregas incrementais e facilidade de manutenção.</p>
+<p>Linguagem e Framework (Back-end/Full-stack):</p>
+<ul>
+<li>Python: Escolhido pela sua sintaxe clara e vasta biblioteca padrão, o que acelera o
+desenvolvimento em um ambiente acadêmico.</li>
+<li>Django: Framework web de "alto nível" que segue o padrão MVT (Model-View-Template).</li>
+</ul>
+<p>Persistência de Dados:</p>
+<ul>
+<li>SQLite: Banco de dados relacional leve que não requer um servidor separado. É a
+escolha ideal para a fase de desenvolvimento e prototipagem em MDS, permitindo
+que a equipe foque na lógica de negócio antes de escalar para sistemas como
+PostgreSQL.</li>
+</ul>
+<p>Ambiente e Infraestrutura:</p>
+<ul>
+<li>VS Code: Ambiente de Desenvolvimento Integrado (IDE) principal, utilizado por sua
+extensibilidade e integração nativa com o Git e Python.</li>
+<li>GitHub: Plataforma de hospedagem de código e controle de versão. Será o coração
+da colaboração da equipe Dijkstra, utilizando Pull Requests e Issues para gestão do
+código.</li>
+<li>PythonAnywhere: Serviço de hospedagem em nuvem otimizado para aplicações
+Python/Django. Será utilizado para o deploy da aplicação, permitindo que o professor
+e os usuários da FCTE acessem o sistema via web.</li>
+</ul>
+<p>Processo de Desenvolvimento (Metodologias):</p>
+<p>O grupo adotará uma abordagem híbrida de métodos ágeis, focando em produtividade e
+qualidade técnica:</p>
+<ul>
+<li>Scrum: Utilizado para a gestão do projeto. O trabalho será dividido em Sprints, com
+cerimônias de Daily para alinhamento, Sprint Planning para definir o backlog e Sprint
+Review/Retrospective para melhoria contínua.</li>
+<li>Extreme Programming (XP): Focado na excelência da engenharia. Práticas como
+Programação em Par (Pair Programming) para redução de bugs, Refatoração
+constante do código e Integração Contínua serão fundamentais para garantir que o
+SIGEsporte seja entregue com qualidade técnica superior.</li>
+</ul>
+<h2 id="2-visao-geral-do-projeto">2 VISÃO GERAL DO PROJETO</h2>
+<p>2.1 Ciclo de vida do projeto de desenvolvimento de software</p>
+<p>Figura 2: Ciclo de vida
+<img alt="ciclo_de_vida" src="../../../imagens/diagramas/ciclo_de_vida.png" /></p>
+<p>2.2 Organização do Projeto</p>
+<p>Tabela 5: Organização do Projeto
+| Papel | Atribuições | Responsável | Participantes |
+|---|---|---|---|
+| Scrum Master | Facilita as cerimônias (Dailies, Plannings), remove impedimentos técnicos ou de comunicação e garante que o grupo siga a metodologia ágil. | Welder Rodrigues de Medeiros | Welder Rodrigues de Medeiros |
+| Product Owner (PO) | Representa o interesse dos usuários (Alunos/FCTE). Define as prioridades do Backlog, escreve as User Stories e valida se a entrega atende ao Problema de Negócio. | Welder Rodrigues de Medeiros | Welder Rodrigues de Medeiros |
+| Desenvolvedor | Implementa as funcionalidades tanto no Back-end quanto no Front-end, garantindo que as regras de negócio funcionem. | Igor B. S. Salles | Igor B. S. Salles, Ana Paula Jardim Rezende Vilela, Lucas Menezes Folha Brito, Gustavo Lima Menezes, Davi Gualberto Rocha, Marcos Vinicius Monteiro, Welder Rodrigues de Medeiros |
+| Garantia de Qualidade (QA) | Garante a qualidade do código. Responsável por incentivar a criação de testes unitários e validar se o sistema não apresenta bugs críticos antes do deploy. | Guilherme Oliveira Monteiro | Guilherme Oliveira Monteiro |
+| Git Master | Responsável pela configuração do repositório no GitHub (proteção de branches) e pelo gerenciamento e manutenção do deploy. | Marcos Vinicius Monteiro | Marcos Vinicius Monteiro |</p>
+<p>2.3 Planejamento das Fases e/ou Iterações do Projeto</p>
+<p>Tabela 6: Planejamento das Sprints
+| Sprint | Produto (Entrega) | Data Início | Data Fim | Entregável(eis) | Responsáveis | % conclusão |
+|---|---|---|---|---|---|---|
+| Sprint 1 | Concepção e Setup |  |  | Ambiente configurado em todas as máquinas. | Scrum Master, Git Master e Desenvolvedores |  |
+| Sprint 2 | Base de Usuários e Perfis |  |  | Modelagem do Banco de Dados; Sistema de Cadastro/Login para Alunos e Organizadores; Deploy inicial. | Desenvolvedores e Git Master |  |
+| Sprint 3 | Gestão de Espaços (Core) |  |  | Módulo de inventário de espaços; Funcionalidade de solicitação de reserva de horários pelos organizadores. | Desenvolvedores e Git Master |  |
+| Sprint 4 | Portal de Eventos |  |  | Mural centralizado de eventos; Cadastro de novos eventos esportivos; Interface de visualização para o Aluno. | Desenvolvedores e Git Master |  |
+| Sprint 5 | Validação e Ajustes |  |  | Painel administrativo para Gestores; Testes unitários de fluxo; Refatoração de código. | QA, Desenvolvedores, Git Master e Scrum Master |  |
+| Sprint 6 | Encerramento e Entrega |  |  | Documentação de Arquitetura; Guia do Usuário; Apresentação final. | Todos os cargos |  |</p>
+<h2 id="24-matriz-de-comunicacao">2.4 Matriz de Comunicação</h2>
+<table>
+<thead>
+<tr>
+<th>Descrição</th>
+<th>Área</th>
+<th>Envolvidos</th>
+<th>Periodicidade</th>
+<th>Produtos Gerados</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reunião de Alinhamento Técnico</td>
+<td>Desenvolvimento</td>
+<td>Sub-times (Front/Back)</td>
+<td>Semanal</td>
+<td>Definição de tarefas técnicas e resolução de impedimentos de código.</td>
+</tr>
+<tr>
+<td>Reunião Geral de Sprint (Review &amp; Planning)</td>
+<td>Gestão e Técnico</td>
+<td>Time Todo</td>
+<td>Quinzenal</td>
+<td>Relatório de status da Sprint e Backlog da próxima Sprint atualizado.</td>
+</tr>
+<tr>
+<td>Monitoramento de Tarefas</td>
+<td>Gestão / Ops</td>
+<td>Scrum Master e Desenvolvedores</td>
+<td>Contínua (Diária)</td>
+<td>Atualização de Status no GitHub Issues (To Do, Doing, Done).</td>
+</tr>
+<tr>
+<td>Sincronização de Gestão e Prazos</td>
+<td>Administrativa</td>
+<td>Scrum Master, PO e Professor</td>
+<td>Semanal (Teams)</td>
+<td>Relatório de progresso semanal e atualização do cronograma.</td>
+</tr>
+<tr>
+<td>Validação de Documentação</td>
+<td>Qualidade</td>
+<td>Gestor de Doc. e Arquiteto</td>
+<td>Quinzenal</td>
+<td>Documento de Visão e Arquitetura atualizados no repositório.</td>
+</tr>
+</tbody>
+</table>
+<p>2.5 Gerenciamento de Riscos
+A gestão de riscos do projeto SIGEsporte é um processo contínuo que visa minimizar
+impactos negativos no cronograma, na qualidade e no moral da equipe.
+Abaixo, listamos os principais riscos identificados para o contexto da FCTE e da
+disciplina de MDS:</p>
+<p>Tabela 8: Gerenciamento de Riscos
+| Risco | Categoria | Probabilidade | Impacto | Plano de Mitigação (Evitar) | Plano de Contingência (Ocorreu) |
+|---|---|---|---|---|---|
+| Incompatibilidade de Horários | Humano | Alta | Médio | Definir horários fixos de reuniões no Teams. | Gravar reuniões e utilizar o GitHub Issues para comunicação assíncrona. |
+| Curva de Aprendizado (Django/Python) | Técnico | Média | Alto | Realizar sessões de Pair Programming e workshops internos. | Reduzir o escopo da Sprint e focar em funcionalidades críticas (MVP). |
+| Abandono de Membros (Evasão) | Humano | Baixa | Muito Alto | Manter um clima organizacional saudável e divisão equitativa de tarefas. | Redistribuição do Backlog e renegociação de prazos com o Prof. Ajax. |
+| Falha no Deploy | Técnico | Média | Médio | Realizar deploys incrementais. | Utilizar ambiente local para a demonstração e buscar suporte técnico imediato. |
+| Mudança de Requisitos | Escopo | Média | Médio | Manter o PO alinhado com o professor e stakeholders da FCTE. | Readequar o Documento de Visão e priorizar o "essencial" sobre o "desejável". |</p>
+<p>2.6 Critérios de Replanejamento
+O replanejamento será disparado com base em gatilhos específicos, geralmente
+derivados da materialização de riscos ou de feedbacks coletados durante as revisões de ciclo.
+Identificamos os riscos da seção anterior que, se confirmados, exigem obrigatoriamente
+um replanejamento:
+- Atraso Crítico no Cronograma (Risco de Escopo): Se ao final de uma Sprint o time
+entregar menos de 70% do planejado, o Backlog das Sprints subsequentes deve ser
+reavaliado.
+- Evasão de Membros (Risco Humano): A perda de 2 ou mais integrantes da equipe
+exige a redistribuição imediata de papéis e a possível redução do escopo do MVP.
+- Inviabilidade Técnica (Risco de Tecnologia): Caso a stack (Django/SQLite)
+apresente uma limitação técnica impeditiva para uma funcionalidade essencial (ex:
+conflitos insolúveis no agendamento de quadras).
+- Mudança de Prioridade Governamental/Acadêmica: Caso o professor ou a gestão
+da FCTE identifiquem uma necessidade urgente que não estava mapeada
+inicialmente.</p>
+<h2 id="3-processo-de-desenvolvimento-de-software">3 PROCESSO DE DESENVOLVIMENTO DE SOFTWARE</h2>
+<p>Figura 3: Processo de desenvolvimento
+<img alt="processo_de_desenvolvimento" src="../../../imagens/diagramas/processo_de_desenvolvimento.png" /></p>
+<p>Para o SIGEsporte, a equipe decidiu por uma abordagem híbrida. O Scrum organizará nosso
+tempo e entregas, enquanto o XP ditará a qualidade do código produzido.
+O projeto será fatiado em ciclos de feedback curto para garantir que o software evolua
+conforme as necessidades dos alunos e gestores.
+- Sprints: Ciclos semanais de desenvolvimento. Cada semana deve terminar com um
+incremento de código testado e integrado.
+- Sprint Planning: Reunião no início da semana para selecionar as User Stories do
+Backlog que serão transformadas em código.
+- Daily Sync: Alinhamento rápido (via Teams ou assíncrono no GitHub) para
+identificar bloqueios.
+- Sprint Review &amp; Retrospective: Reunião quinzenal com o time todo para
+demonstrar o que foi feito e ajustar o processo de trabalho do grupo.
+Para evitar o acúmulo de dívida técnica em um grupo de 10 pessoas, adotaremos práticas do</p>
+<h2 id="extreme-programming">Extreme Programming:</h2>
+<ul>
+<li>Pair Programming: O desenvolvimento de funcionalidades críticas no Django será
+feito em dupla. Isso acelera o aprendizado de quem tem menos facilidade com Python
+e reduz drasticamente a incidência de bugs.</li>
+<li>Refatoração: O time tem liberdade e dever de melhorar o código existente, visando
+clareza e manutenibilidade, desde que os testes continuem passando.</li>
+<li>Integração Contínua (CI): Todo código deve ser integrado ao ramo principal (main)
+do GitHub somente via Pull Requests, garantindo que a aplicação esteja sempre em
+estado "executável".</li>
+<li>Propriedade Coletiva: Todos os membros são responsáveis pela integridade do
+código. Ninguém é "dono" de uma funcionalidade isolada; todos devem ser capazes
+de navegar no repositório.</li>
+</ul>
+<h2 id="4-declaracao-de-escopo-do-projeto">4 DECLARAÇÃO DE ESCOPO DO PROJETO</h2>
+<h2 id="41-backlog-do-produto">4.1 Backlog do produto</h2>
+<h3 id="411-aluno-da-fcte-participanteconsumidor">4.1.1 Aluno da FCTE (Participante/Consumidor)</h3>
+<p>Tabela 9: Requisitos do Aluno</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requisito</th>
+<th>Cenário</th>
+<th>Prioridade</th>
+<th>Técnica de Elicitação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RF01</td>
+<td>Visualizar mural de eventos esportivos</td>
+<td>Buscar campeonatos ou treinos abertos no campus.</td>
+<td>MUST</td>
+<td>Brainstorming</td>
+</tr>
+<tr>
+<td>RF02</td>
+<td>Realizar inscrição em evento</td>
+<td>Garantir participação em um campeonato divulgado.</td>
+<td>MUST</td>
+<td>Brainstorming</td>
+</tr>
+<tr>
+<td>RF03</td>
+<td>Filtrar eventos por modalidade</td>
+<td>Facilitar a busca por esportes específicos (Ex: Futsal).</td>
+<td>SHOULD</td>
+<td>Brainstorming</td>
+</tr>
+<tr>
+<td>RF04</td>
+<td>Receber notificação de novos eventos</td>
+<td>Ser avisado proativamente sobre novas oportunidades.</td>
+<td>COULD</td>
+<td>Brainstorming</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="412-organizador-atleticas-cas-alunos-lideres">4.1.2 Organizador (Atléticas / CAs / Alunos Líderes)</h3>
+<p>Tabela 10: Requisitos do Organizador</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requisito</th>
+<th>Cenário</th>
+<th>Prioridade</th>
+<th>Técnica de Elicitação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RF05</td>
+<td>Solicitar reserva de espaço esportivo</td>
+<td>Formalizar o pedido de uso da quadra para treino/jogo.</td>
+<td>MUST</td>
+<td>Brainstorming</td>
+</tr>
+<tr>
+<td>RF06</td>
+<td>Criar e editar evento esportivo</td>
+<td>Divulgar informações de um campeonato próprio.</td>
+<td>MUST</td>
+<td>Brainstorming</td>
+</tr>
+<tr>
+<td>RF07</td>
+<td>Gerenciar lista de inscritos</td>
+<td>Acessar dados dos alunos que se inscreveram no evento.</td>
+<td>MUST</td>
+<td>Brainstorming</td>
+</tr>
+<tr>
+<td>RF08</td>
+<td>Cancelar reserva ou evento</td>
+<td>Notificar o sistema sobre a liberação de um horário.</td>
+<td>SHOULD</td>
+<td>Brainstorming</td>
+</tr>
+<tr>
+<td>RF09</td>
+<td>Gerar relatório de inscritos (CSV/PDF)</td>
+<td>Exportar dados para organização externa.</td>
+<td>COULD</td>
+<td>Brainstorming</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="413-gestor-da-fcte-administracaoprefeitura-do-campus">4.1.3 Gestor da FCTE (Administração/Prefeitura do Campus)</h3>
+<p>Tabela 11: Requisitos do Gestor</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Requisito</th>
+<th>Cenário</th>
+<th>Prioridade</th>
+<th>Técnica de Elicitação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RF10</td>
+<td>Aprovar ou reprovar solicitações de reserva</td>
+<td>Validar o uso do patrimônio público por terceiros.</td>
+<td>MUST</td>
+<td>Brainstorming</td>
+</tr>
+<tr>
+<td>RF11</td>
+<td>Cadastrar e gerenciar espaços (quadras/campos)</td>
+<td>Manter o inventário de locais disponíveis atualizado.</td>
+<td>MUST</td>
+<td>Brainstorming</td>
+</tr>
+<tr>
+<td>RF12</td>
+<td>Dashboard de ocupação mensal</td>
+<td>Analisar estatísticas de uso para fins administrativos.</td>
+<td>SHOULD</td>
+<td>Brainstorming</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="42-perfis">4.2 Perfis</h2>
+<p>A seguinte hierarquia garante que o sistema seja seguro e que cada usuário tenha acesso apenas às funcionalidades pertinentes à sua realidade na FCTE.</p>
+<p>Tabela 12: Perfis de acesso</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Nome do perfil</th>
+<th>Características do perfil</th>
+<th>Permissões de acesso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Aluno</td>
+<td>Estudante da FCTE/UnB interessado em participar de atividades esportivas ou lazer.</td>
+<td><strong>Leitura:</strong> Calendário de quadras e mural de eventos. <br><br> <strong>Escrita:</strong> Realizar inscrição em eventos e editar o próprio perfil.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Organizador (Atlética/CA)</td>
+<td>Representante de entidade estudantil ou grupo independente que promove eventos.</td>
+<td><strong>Leitura:</strong> Tudo que o aluno acessa. <br><br> <strong>Escrita:</strong> Criar eventos, solicitar reserva de quadra, gerenciar inscritos (ver lista) e cancelar próprios eventos.</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Gestor (Administração)</td>
+<td>Servidor ou responsável técnico pela gestão da infraestrutura da FCTE.</td>
+<td><strong>Leitura:</strong> Visão completa do sistema e relatórios. <br><br> <strong>Escrita:</strong> Aprovar/Reprovar reservas de espaço, cadastrar novos locais e bloquear horários para manutenção.</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Admin (Equipe Dijkstra)</td>
+<td>Membro do grupo de desenvolvimento (Superusuário do Django).</td>
+<td><strong>Total:</strong> Acesso ao painel administrativo (/admin) para suporte técnico, correção de dados e gestão de permissões de alto nível.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="43-cenarios">4.3 Cenários</h2>
+<p>Tabela 13: Cenários funcionais</p>
+<p><strong>Sistema:</strong> SIGEsporte – Cenários funcionais</p>
+<table>
+<thead>
+<tr>
+<th>Numeração do cenário</th>
+<th>Nome do cenário</th>
+<th>Sprints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>Autenticação e Gestão de Perfil de Usuário</td>
+<td></td>
+</tr>
+<tr>
+<td>02</td>
+<td>Consulta de Disponibilidade de Espaços Físicos</td>
+<td></td>
+</tr>
+<tr>
+<td>03</td>
+<td>Solicitação de Reserva de Quadra/Campo</td>
+<td></td>
+</tr>
+<tr>
+<td>04</td>
+<td>Aprovação e Conflito de Reservas (Painel do Gestor)</td>
+<td></td>
+</tr>
+<tr>
+<td>05</td>
+<td>Publicação e Divulgação de Evento Esportivo</td>
+<td></td>
+</tr>
+<tr>
+<td>06</td>
+<td>Inscrição de Aluno em Evento/Campeonato</td>
+<td></td>
+</tr>
+<tr>
+<td>07</td>
+<td>Gestão de Participantes e Listas de Presença</td>
+<td></td>
+</tr>
+<tr>
+<td>08</td>
+<td>Cancelamento de Eventos e Liberação Automática de Horários</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="44-tabela-de-backlog-do-produto">4.4 Tabela de Backlog do produto</h2>
+<p>Tabela 14: Backlog do produto</p>
+<p><strong>Sistema:</strong> SIGEsporte – Backlog do produto</p>
+<table>
+<thead>
+<tr>
+<th>Numeração (Cenário / requisito)</th>
+<th>Sprint</th>
+<th>Nome do requisito</th>
+<th>Tipo de requisito (Funcional / não funcional)</th>
+<th>Priorização do requisito</th>
+<th>Descrição sucinta do requisito</th>
+<th>User histories (U.S.) associadas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RF01</td>
+<td></td>
+<td>Autenticação de Usuário</td>
+<td>Funcional</td>
+<td>MUST</td>
+<td>Permitir login/cadastro de alunos e organizadores.</td>
+<td>US01: Como usuário, quero acessar o sistema com e-mail e senha.</td>
+</tr>
+<tr>
+<td>RF02</td>
+<td></td>
+<td>Perfil de Usuário</td>
+<td>Funcional</td>
+<td>SHOULD</td>
+<td>Diferenciar permissões entre Aluno, Organizador e Gestor.</td>
+<td>US02: Como gestor, quero permissões especiais para administrar a quadra.</td>
+</tr>
+<tr>
+<td>RF04</td>
+<td></td>
+<td>Reserva de Espaço</td>
+<td>Funcional</td>
+<td>MUST</td>
+<td>Permitir que organizadores solicitem o uso da quadra/campo.</td>
+<td>US04: Como organizador, quero reservar a quadra para um treino da atlética.</td>
+</tr>
+<tr>
+<td>RF05</td>
+<td></td>
+<td>Mural de Eventos</td>
+<td>Funcional</td>
+<td>MUST</td>
+<td>Listagem pública de todos os eventos esportivos confirmados.</td>
+<td>US05: Como aluno, quero ver quais campeonatos estão acontecendo na FCTE.</td>
+</tr>
+<tr>
+<td>RF06</td>
+<td></td>
+<td>Inscrição em Eventos</td>
+<td>Funcional</td>
+<td>MUST</td>
+<td>Fluxo para o aluno confirmar participação em um evento.</td>
+<td>US06: Como aluno, quero me inscrever em um torneio através do portal.</td>
+</tr>
+<tr>
+<td>RF07</td>
+<td></td>
+<td>Aprovação de Reservas</td>
+<td>Funcional</td>
+<td>MUST</td>
+<td>Interface para o Gestor validar ou negar pedidos de reserva.</td>
+<td>US07: Como gestor, quero aprovar pedidos de reserva para evitar conflitos.</td>
+</tr>
+<tr>
+<td>RF08</td>
+<td></td>
+<td>Gestão de Inscritos</td>
+<td>Funcional</td>
+<td>SHOULD</td>
+<td>Lista de participantes acessível para o organizador do evento.</td>
+<td>US08: Como organizador, quero saber quem se inscreveu no meu campeonato.</td>
+</tr>
+<tr>
+<td>RNF01</td>
+<td></td>
+<td>Disponibilidade Web</td>
+<td>Não Funcional</td>
+<td>MUST</td>
+<td>A aplicação deve estar acessível via navegador.</td>
+<td>US09: Como usuário, quero acessar o SIGEsporte de qualquer lugar pela web.</td>
+</tr>
+<tr>
+<td>RNF02</td>
+<td></td>
+<td>Concorrência de Agenda</td>
+<td>Não Funcional</td>
+<td>MUST</td>
+<td>O sistema não deve permitir duas reservas no mesmo local e horário.</td>
+<td>US10: Como gestor, quero que o sistema impeça reservas duplicadas automaticamente.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-metricas-e-medicoes">5 MÉTRICAS E MEDIÇÕES</h2>
+<h3 id="51-gqm-de-medicoes">5.1 GQM de medições</h3>
+<p>Tabela 15: Quadro de objetivos e medições</p>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Objeto de Medição</td>
+<td>Processo de desenvolvimento e produto de software (Plataforma Web SIGEsporte).</td>
+</tr>
+<tr>
+<td>Propósito</td>
+<td>Avaliar o acompanhamento do projeto e a qualidade técnica do código durante as Sprints.</td>
+</tr>
+<tr>
+<td>Questão</td>
+<td>Qual é a taxa de defeitos e o nível de débito técnico gerado no ciclo de vida da aplicação?</td>
+</tr>
+<tr>
+<td>Ponto de Vista</td>
+<td>Equipe de desenvolvimento e gerência do projeto.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="questao-01-qual-e-a-quantidade-de-debito-tecnico-acumulado-ao-final-de-cada-ciclo">Questão 01: Qual é a quantidade de débito técnico acumulado ao final de cada ciclo?</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Métrica</td>
+<td>Volume de Débito Técnico</td>
+</tr>
+<tr>
+<td>Who (Quem)</td>
+<td>Equipe de Desenvolvimento</td>
+</tr>
+<tr>
+<td>What (O que)</td>
+<td>Tarefas de refatoração pendentes e complexidade acumulada</td>
+</tr>
+<tr>
+<td>When (Quando)</td>
+<td>Ao término de cada Sprint</td>
+</tr>
+<tr>
+<td>Where (Onde)</td>
+<td>Repositório do projeto e painel de controle (GitHub)</td>
+</tr>
+<tr>
+<td>Why (Por que)</td>
+<td>Evitar o acúmulo de complexidade e instabilidade no sistema</td>
+</tr>
+<tr>
+<td>How (Como)</td>
+<td>Contagem de issues abertas relacionadas à dívida técnica</td>
+</tr>
+</tbody>
+</table>
+<h3 id="definicao">Definição</h3>
+<p>Quantidade de pendências técnicas não resolvidas.</p>
+<h3 id="forma-de-calculo">Forma de cálculo</h3>
+<h3 id="escala-de-unidade">Escala de unidade</h3>
+<p>Porcentagem (%).</p>
+<p>[
+\left( \frac{\text{Número de issues de débito técnico}}{\text{Total de tarefas concluídas}} \right) \cdot 100
+]</p>
+<h3 id="valores-esperados">Valores esperados</h3>
+<p>Menor ou igual a 10% do total de tarefas da Sprint.</p>
+<h3 id="formas-de-analises">Formas de análises</h3>
+<p>Comparação evolutiva entre Sprints para verificar o controle e a mitigação da dívida técnica.</p>
+<hr />
+<h2 id="questao-02-qual-e-o-nivel-de-qualidade-do-software-entregue">Questão 02: Qual é o nível de qualidade do software entregue?</h2>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Métrica</td>
+<td>Defeitos Identificados por Ciclo</td>
+</tr>
+<tr>
+<td>Who (Quem)</td>
+<td>Analista de Qualidade e Desenvolvedores</td>
+</tr>
+<tr>
+<td>What (O que)</td>
+<td>Quantidade de falhas e bugs encontrados nos testes de integração</td>
+</tr>
+<tr>
+<td>When (Quando)</td>
+<td>Durante a execução da Sprint</td>
+</tr>
+<tr>
+<td>Where (Onde)</td>
+<td>Roteiro de testes de software</td>
+</tr>
+<tr>
+<td>Why (Por que)</td>
+<td>Garantir a estabilidade e o funcionamento das regras de negócio</td>
+</tr>
+<tr>
+<td>How (Como)</td>
+<td>Contagem de falhas registradas (Previsto vs. Realizado)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="definicao_1">Definição</h3>
+<p>Número de erros encontrados durante a verificação do sistema.</p>
+<h3 id="forma-de-calculo_1">Forma de cálculo</h3>
+<p>Quantidade absoluta de falhas encontradas e corrigidas.</p>
+<h3 id="escala-de-unidade_1">Escala de unidade</h3>
+<p>Número inteiro (Contagem).</p>
+<h3 id="valores-esperados_1">Valores esperados</h3>
+<p>Máximo de 2 defeitos não críticos por Sprint; Zero defeitos críticos.</p>
+<h3 id="formas-de-analises_1">Formas de análises</h3>
+<p>Avaliação da densidade de defeitos por ciclo para identificar módulos com maior incidência de problemas.</p>
+<hr />
+<h1 id="testes-de-software">TESTES DE SOFTWARE</h1>
+<h2 id="52-estrategia-de-testes">5.2 Estratégia de testes</h2>
+<h3 id="niveis-de-testes-abordados">Níveis de testes abordados</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo de Teste</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testes Unitários</td>
+<td>Validação isolada de funções e regras de negócio (ex: validação de conflito de horários, autenticação).</td>
+</tr>
+<tr>
+<td>Testes de Integração</td>
+<td>Verificação da comunicação entre módulos (ex: reserva + aprovação pelo gestor).</td>
+</tr>
+<tr>
+<td>Testes de Sistema</td>
+<td>Avaliação do sistema completo do ponto de vista do usuário final.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="tipos-de-testes-abordados">Tipos de testes abordados</h3>
+<h4 id="testes-funcionais">Testes Funcionais</h4>
+<ul>
+<li>Login e autenticação</li>
+<li>Reserva de quadra</li>
+<li>Inscrição em eventos</li>
+<li>Aprovação de reservas</li>
+</ul>
+<h4 id="testes-nao-funcionais">Testes Não Funcionais</h4>
+<ul>
+<li>Usabilidade: facilidade de navegação</li>
+<li>Desempenho: tempo de resposta do sistema</li>
+<li>Confiabilidade: prevenção de reservas duplicadas</li>
+</ul>
+<hr />
+<h3 id="ambientes-de-testes-usados">Ambientes de testes usados</h3>
+<p>Os testes são realizados conforme a política de branches:</p>
+<table>
+<thead>
+<tr>
+<th>Ambiente</th>
+<th>Objetivo</th>
+<th>Branch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ambiente Local (Dev)</td>
+<td>Testes unitários e iniciais</td>
+<td><code>develop</code></td>
+</tr>
+<tr>
+<td>Ambiente de Integração</td>
+<td>Testes integrados via Pull Requests</td>
+<td><code>develop -&gt; main</code></td>
+</tr>
+<tr>
+<td>Ambiente de Produção</td>
+<td>Testes de sistema e validação final</td>
+<td><code>main</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="53-roteiro-de-teste">5.3 Roteiro de teste</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Objetivo</th>
+<th>Nível/Tipo</th>
+<th>Resultado Previsto</th>
+<th>Resultado Realizado</th>
+<th>Observações</th>
+<th>Ciclos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T01</td>
+<td>Login válido</td>
+<td>Validar autenticação com credenciais corretas</td>
+<td>Unitário – Funcional</td>
+<td>Usuário consegue acessar o sistema</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T02</td>
+<td>Login inválido</td>
+<td>Impedir acesso com credenciais incorretas</td>
+<td>Unitário – Funcional</td>
+<td>Sistema exibe mensagem de erro</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T03</td>
+<td>Cadastro de usuário</td>
+<td>Criar novo usuário no sistema</td>
+<td>Sistema – Funcional</td>
+<td>Usuário salvo no banco de dados</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T04</td>
+<td>Permissões de perfil</td>
+<td>Validar controle de acesso por perfil</td>
+<td>Sistema – Funcional</td>
+<td>Cada perfil acessa apenas suas funcionalidades</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T05</td>
+<td>Solicitação de reserva</td>
+<td>Permitir criação de reserva de quadra</td>
+<td>Integração – Funcional</td>
+<td>Reserva criada com status pendente</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T06</td>
+<td>Conflito de reserva</td>
+<td>Evitar reservas duplicadas</td>
+<td>Unitário – Não funcional (Confiabilidade)</td>
+<td>Sistema bloqueia reserva em horário ocupado</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T07</td>
+<td>Aprovação de reserva</td>
+<td>Validar aprovação pelo gestor</td>
+<td>Integração – Funcional</td>
+<td>Status da reserva alterado para aprovado</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T08</td>
+<td>Cancelamento de reserva</td>
+<td>Liberar horário reservado</td>
+<td>Sistema – Funcional</td>
+<td>Horário volta a ficar disponível</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T09</td>
+<td>Criação de evento</td>
+<td>Permitir cadastro de evento</td>
+<td>Sistema – Funcional</td>
+<td>Evento aparece no sistema</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T10</td>
+<td>Inscrição em evento</td>
+<td>Permitir inscrição de aluno</td>
+<td>Sistema – Funcional</td>
+<td>Inscrição registrada</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T11</td>
+<td>Inscrição duplicada</td>
+<td>Evitar múltiplas inscrições</td>
+<td>Unitário – Funcional</td>
+<td>Sistema bloqueia duplicidade</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T12</td>
+<td>Listagem de eventos</td>
+<td>Exibir eventos no sistema</td>
+<td>Sistema – Funcional</td>
+<td>Eventos exibidos corretamente</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T13</td>
+<td>Desempenho</td>
+<td>Avaliar tempo de resposta</td>
+<td>Sistema – Não funcional (Desempenho)</td>
+<td>Resposta menor que 2 segundos</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T14</td>
+<td>Usabilidade</td>
+<td>Avaliar facilidade de uso</td>
+<td>Sistema – Não funcional (Usabilidade)</td>
+<td>Navegação intuitiva</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T15</td>
+<td>Segurança</td>
+<td>Proteger rotas restritas</td>
+<td>Sistema – Não funcional (Segurança)</td>
+<td>Acesso negado a usuários não autorizados</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="precondicoes-dos-testes">Precondições dos Testes</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Precondição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T01</td>
+<td>Usuário previamente cadastrado no sistema e sistema disponível e acessível.</td>
+</tr>
+<tr>
+<td>T02</td>
+<td>Usuário cadastrado no sistema, sistema disponível e credenciais incorretas inseridas.</td>
+</tr>
+<tr>
+<td>T03</td>
+<td>Sistema disponível, banco de dados ativo e usuário não cadastrado previamente com o mesmo e-mail.</td>
+</tr>
+<tr>
+<td>T04</td>
+<td>Usuários cadastrados com diferentes perfis (Aluno, Organizador, Gestor), sistema com controle de acesso implementado e usuário autenticado.</td>
+</tr>
+<tr>
+<td>T05</td>
+<td>Usuário com perfil de Organizador autenticado, existência de pelo menos um espaço esportivo cadastrado e sistema disponível.</td>
+</tr>
+<tr>
+<td>T06</td>
+<td>Existência de uma reserva já cadastrada em determinado horário, usuário autenticado tentando criar reserva no mesmo horário e regra de verificação de conflito implementada.</td>
+</tr>
+<tr>
+<td>T07</td>
+<td>Reserva previamente criada com status pendente, usuário com perfil de Gestor autenticado e sistema disponível.</td>
+</tr>
+<tr>
+<td>T08</td>
+<td>Existência de uma reserva previamente cadastrada, usuário autorizado (organizador ou gestor) autenticado e sistema disponível.</td>
+</tr>
+<tr>
+<td>T09</td>
+<td>Usuário com perfil de Organizador autenticado, sistema disponível e dados obrigatórios do evento preenchidos.</td>
+</tr>
+<tr>
+<td>T10</td>
+<td>Evento previamente criado e disponível para inscrição, usuário com perfil de aluno autenticado e sistema disponível.</td>
+</tr>
+<tr>
+<td>T11</td>
+<td>Usuário já inscrito no evento, evento ainda ativo e sistema disponível.</td>
+</tr>
+<tr>
+<td>T12</td>
+<td>Existência de eventos cadastrados no sistema, sistema disponível e usuário autenticado (ou acesso público permitido).</td>
+</tr>
+<tr>
+<td>T13</td>
+<td>Sistema em execução, ambiente com múltiplos acessos simultâneos simulados e infraestrutura mínima disponível (servidor ativo).</td>
+</tr>
+<tr>
+<td>T14</td>
+<td>Interface do sistema implementada, usuário com acesso ao sistema e funcionalidades principais disponíveis.</td>
+</tr>
+<tr>
+<td>T15</td>
+<td>Existência de rotas restritas no sistema, usuário não autenticado ou sem permissão adequada e sistema com controle de autenticação implementado.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="referencias-bibliograficas">REFERÊNCIAS BIBLIOGRÁFICAS</h2>
+<ul>
+<li>SCHWABER, Ken; SUTHERLAND, Jeff. O Guia do Scrum: o guia definitivo para
+o Scrum, as regras do jogo. Scrum.org, 2020. Disponível em: https://scrumguides.
+org. Acesso em: 21 abr. 2026.</li>
+<li>BECK,    Kent    et    al.    Manifesto    para    Desenvolvimento    Ágil    de    Software.
+AgileManifesto.org, 2001. Disponível em: https://agilemanifesto.org/iso/ptbr/
+manifesto.html. Acesso em: 21 abr. 2026.</li>
+<li>PRESSMAN,  Roger  S.;  MAXIM,  Bruce  R.  Engenharia  de  Software:  uma  abordagem
+profissional. 8. ed. Porto Alegre: AMGH, 2016.</li>
+<li>SOMMERVILLE, Ian. Engenharia de Software. 10. ed. São Paulo: Pearson, 2019.</li>
+<li>DJANGO SOFTWARE FOUNDATION. Django Documentation. Versão 5.x. Disponível
+em: https://docs.djangoproject.com. Acesso em: 21 abr. 2026.</li>
+<li>BASILI, Victor R.; CALDIERA, Gianluigi; ROMBACH, H. Dieter. Goal Question
+Metric   approach.   In:   MARCINIAK,   John   J.   (ed.).   Encyclopedia   of   Software
+Engineering. New York: Wiley, 1994. p. 528–532.</li>
+<li>UNIVERSIDADE DE BRASÍLIA. Coordenação de Esporte e Lazer – CEL. Disponível
+em: https://www.cel.unb.br. Acesso em: 21 abr. 2026.</li>
+<li>GITHUB INC. GitHub Actions Documentation. Disponível em: https://docs.
+github.com/en/actions. Acesso em: 21 abr. 2026.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/FGA0138-MDS-Ajax/2026.1-T01-Dijkstra" target="_blank" rel="noopener" title="SIGEsporte no GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

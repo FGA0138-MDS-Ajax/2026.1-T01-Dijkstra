@@ -1,0 +1,1461 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra/documentos/documento_de_arquitetura/documento_de_arquitetura/">
+      
+      
+        <link rel="prev" href="../../documento_de_visao/escopo_visao_do_produto/">
+      
+      
+        <link rel="next" href="../../../prototipos/baixa_fidelidade/prototipo_baixa_fidelidade/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../Imagens/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Documento de Arquitetura - Documentação - SIGEsporte</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introducao" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Documentação - SIGEsporte" class="md-header__button md-logo" aria-label="Documentação - SIGEsporte" data-md-component="logo">
+      
+  <img src="../../../Imagens/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentação - SIGEsporte
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Documento de Arquitetura
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../atas_reuniao/ata_reuniao_20_04/" class="md-tabs__link">
+          
+  
+  
+  Atas de Reunião
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../documento_de_visao/escopo_visao_do_produto/" class="md-tabs__link">
+          
+  
+  
+  Documento de Visão
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Documento de Arquitetura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../prototipos/baixa_fidelidade/prototipo_baixa_fidelidade/" class="md-tabs__link">
+          
+  
+  
+  Protótipos
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Documentação - SIGEsporte" class="md-nav__button md-logo" aria-label="Documentação - SIGEsporte" data-md-component="logo">
+      
+  <img src="../../../Imagens/logo.png" alt="logo">
+
+    </a>
+    Documentação - SIGEsporte
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atas de Reunião
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atas de Reunião
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../atas_reuniao/ata_reuniao_20_04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ata 20/04 - Elaboração do Documento de Visão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../atas_reuniao/ata_reuniao_06_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ata 06/05 - Elaboração do Documento de Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../atas_reuniao/ata_reuniao_23_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ata 23/05 - Sprint 1 e padronização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Visão
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documento de Visão
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documento_de_visao/escopo_visao_do_produto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Visão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documento de Arquitetura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#proposito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propósito
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escopo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protótipos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Protótipos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../prototipos/baixa_fidelidade/prototipo_baixa_fidelidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protótipo de Baixa Fidelidade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#proposito" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Propósito
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#escopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Escopo
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<p><strong>Documento de Arquitetura</strong></p>
+<p>Versão 1.0.3</p>
+<p><strong>Tabela - Integrantes do Grupo</strong></p>
+<table>
+<thead>
+<tr>
+<th>Matrícula</th>
+<th>Nome</th>
+<th>Função (responsabilidade)</th>
+<th>Pontos de participação na elaboração</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>242015666</td>
+<td>Marcos Vinicius Monteiro</td>
+<td>Git Master</td>
+<td>11.11%</td>
+</tr>
+<tr>
+<td>241012196</td>
+<td>Davi Gualberto Rocha</td>
+<td>Desenvolvedor</td>
+<td>11.11%</td>
+</tr>
+<tr>
+<td>251033162</td>
+<td>Igor B. S. Salles</td>
+<td>Desenvolvedor</td>
+<td>11.11%</td>
+</tr>
+<tr>
+<td>241010880</td>
+<td>Ana Paula Jardim Rezende Vilela</td>
+<td>Desenvolvedor</td>
+<td>11.11%</td>
+</tr>
+<tr>
+<td>241012409</td>
+<td>Welder Rodrigues de Medeiros</td>
+<td>Product Owner e Scrum Master</td>
+<td>11.11%</td>
+</tr>
+<tr>
+<td>2110162938</td>
+<td>Gustavo Lima Menezes</td>
+<td>Desenvolvedor</td>
+<td>11.11%</td>
+</tr>
+<tr>
+<td>222006777</td>
+<td>Guilherme Oliveira Monteiro</td>
+<td>Garantia de Qualidade (QA)</td>
+<td>11.11%</td>
+</tr>
+<tr>
+<td>241012300</td>
+<td>Lucas Menezes Folha Brito</td>
+<td>Desenvolvedor</td>
+<td>11.11%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Histórico de Revisões</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Data</strong></th>
+<th><strong>Versão</strong></th>
+<th><strong>Descrição</strong></th>
+<th><strong>Autor(es)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>05/05/2026</td>
+<td>1.0</td>
+<td>Detalhamento da arquitetura do projeto.</td>
+<td>Presentes na reunião gravada.</td>
+</tr>
+<tr>
+<td>08/05/2026</td>
+<td>1.0.1</td>
+<td>Adicionado escopo, implementações e restrições. Adicionada bibliografia e referencias.</td>
+<td>Igor Salles e Ana Paula Jardim</td>
+</tr>
+<tr>
+<td>09/05/2026</td>
+<td>1.0.2</td>
+<td>Adicionado o Diagrama Entidade-Relacionamento</td>
+<td>Welder Rodrigues de Medeiros</td>
+</tr>
+<tr>
+<td>29/05/2026</td>
+<td>1.0.3</td>
+<td>Altera relação Evento-Reserva nos diagramas</td>
+<td>Welder Rodrigues de Medeiros</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sumário</strong></p>
+<p><a href="#_Toc142901451">1 Introdução 3</a></p>
+<p><a href="#_Toc1859162944">1.1 Propósito 4</a></p>
+<p><a href="#_Toc210191089">1.2 Escopo 4</a></p>
+<p><a href="#_Toc1329091992">2 Representação Arquitetural 4</a></p>
+<p><a href="#_Toc2134223911">2.1 Definições 4</a></p>
+<p><a href="#_Toc298738214">2.2 Justifique sua escolha. 5</a></p>
+<p><a href="#_Toc2031465496">2.3 Detalhamento 5</a></p>
+<p><a href="#_Toc1721520723">2.4 Metas e restrições arquiteturais 8</a></p>
+<p><a href="#_Toc603126135">2.5 Visões 9</a></p>
+<p><a href="#_Toc624318803">2.6 Restrições adicionais 20</a></p>
+<p><a href="#_Toc1773596676">3 Bibliografia 22</a></p>
+<h1 id="introducao">Introdução</h1>
+<h2 id="proposito">Propósito</h2>
+<p><em>Este documento descreve a arquitetura do sistema sendo desenvolvido pelo grupo, na disciplina de MDS - Métodos de Desenvolvimento de Software - edição do primeiro semestre de 2026, para o sistema SIGEsporte, a fim de fornecer uma visão abrangente do sistema para desenvolvedores, testadores e demais interessados em aspectos relacionados às tecnologias a serem usadas no desenvolvimento.</em></p>
+<h2 id="escopo">Escopo</h2>
+<p>O detalhamento completo do escopo encontra-se no documento Visão do Produto do Projeto SIGEsporte (Versão 1.2), elaborado pelo grupo Dijkstra, disponível no repositório do projeto no GitHub.</p>
+<p>Em linhas gerais, o escopo do produto compreende o desenvolvimento de uma aplicação web para gestão de espaços físicos e organização de eventos esportivos na Faculdade de Ciências e Tecnologias em Engenharia (FCTE/UnB), substituindo a comunicação informal - predominantemente via WhatsApp - por canais oficiais e centralizados.</p>
+<p>A plataforma atenderá quatro perfis de usuário com permissões distintas:</p>
+<ul>
+<li>Aluno: poderá visualizar o mural de eventos, consultar a disponibilidade de espaços e realizar inscrições em eventos esportivos.</li>
+<li>Organizador (Atléticas/CAs): poderá criar e divulgar eventos, solicitar reserva de espaços físicos e gerenciar a lista de inscritos.</li>
+<li>Gestor (Administração FCTE): poderá aprovar ou reprovar solicitações de reserva, cadastrar espaços físicos e acompanhar o aproveitamento das instalações.</li>
+<li>Administrador (Equipe Dijkstra): terá acesso total ao painel administrativo do Django para suporte técnico e gestão de permissões.</li>
+</ul>
+<p>O sistema contempla os seguintes requisitos funcionais prioritários (classificação MoSCoW): autenticação e controle de acesso por perfil (MUST), reserva de espaços com verificação de conflito de horários (MUST), mural de eventos esportivos (MUST), inscrição em eventos com validação de duplicidade (MUST), aprovação de reservas pelo gestor (MUST) e gestão da lista de inscritos pelo organizador (SHOULD).</p>
+<p>O sistema NÃO contempla: pagamento ou cobrança de inscrições; aplicativo mobile nativo (apenas web responsiva); integração com sistemas de outros campi da Universidade de Brasília; nem geração automática de documentos de autorização externos ao sistema.</p>
+<h1 id="representacao-arquitetural">Representação Arquitetural</h1>
+<h2 id="definicoes">Definições</h2>
+<p>O sistema seguirá uma arquitetura padrão MVC (Model-View-Controller), um padrão amplamente consolidado no desenvolvimento web, com clara separação de responsabilidades e amplo suporte nas principais linguagens e frameworks do mercado. Como decisão arquitetural da proposta de solução, a equipe optou por uma aplicação web monolítica em camadas, organizada segundo o padrão MVC. Isso significa que os módulos do sistema serão desenvolvidos e implantados em uma única aplicação web, mantendo separação lógica entre apresentação, regras de negócio e persistência de dados.</p>
+<h2 id="justifique-sua-escolha">Justifique sua escolha</h2>
+<p>É uma arquitetura simples e adequada para projetos de até médio-porte, com velocidade de desenvolvimento maior e atribuições bem definidas entre camadas. Devido ao prazo, optou-se por uma abordagem monolítica.</p>
+<p>O sistema precisa atender funcionalidades como gerenciamento de eventos esportivos, inscrição de participantes, reserva de espaços físicos, aprovação de solicitações e controle de diferentes perfis de acesso. Dessa forma, o Django foi escolhido por oferecer recursos nativos de autenticação, controle de permissões, gerenciamento de sessões e ORM, reduzindo a complexidade de desenvolvimento.</p>
+<p>O padrão MVC permite separar as responsabilidades da aplicação em três partes principais: Models, responsáveis pela estrutura e persistência dos dados; Controllers, responsáveis pelo processamento das requisições e aplicação das regras de negócio; e Views, responsáveis pela apresentação das informações ao usuário.</p>
+<p>A abordagem monolítica foi adotada devido ao prazo disponível, ao porte acadêmico do projeto e à ausência de necessidade de APIs externas ou microsserviços. Essa escolha simplifica o desenvolvimento, os testes, a implantação e a manutenção inicial da aplicação.</p>
+<h2 id="detalhamento">Detalhamento</h2>
+<p>O SIGEsporte adota o padrão arquitetural MVC (Model-View-Controller), implementado sobre o framework Django.</p>
+<p>A figura a seguir representa esquematicamente as camadas da arquitetura, seus componentes principais e os conectores entre eles:</p>
+<p><img alt="diagrama_mvc" src="../../../imagens/diagramas/diagrama_mvc.png" /></p>
+<h3 id="instanciacao-dos-elementos-arquiteturais-para-o-sigesporte">Instanciação dos elementos arquiteturais para o SIGEsporte</h3>
+<h4 id="model-camada-de-dados">Model - Camada de dados</h4>
+<p>Responsável pela definição das entidades do domínio e pela persistência dos dados. Implementado no pacote models.py de cada aplicação Django do projeto, utilizando o Django ORM para mapeamento objeto-relacional. No SIGEsporte, os Models instanciados são:</p>
+<ul>
+<li>Usuario: entidade central do sistema, com campos de e-mail único, nome completo, foto de perfil, tipo de usuário (Aluno, Organizador, Gestor ou Administrador) e status ativo. Utiliza UUID (sk_) como chave primária.</li>
+<li>Organizacao: representa atléticas e centros acadêmicos vinculados ao sistema. Possui relacionamento muitos-para-muitos com Usuario, implementado pela tabela associativa Usuario_Organizacao.</li>
+<li>EspacoFisico: representa os espaços físicos disponíveis para eventos, como quadra, áreas de lazer etc. Armazena nome e foto opcional do espaço.</li>
+<li>Evento: entidade que descreve os eventos esportivos cadastrados. Vinculado obrigatoriamente a um Usuario organizador e a uma Organizacao. Contém título, descrição, foto, data de realização e data de criação.</li>
+<li>ReservaEspaco: controla a solicitação de uso de um espaço físico para um evento. Armazena status (pendente, aprovada, reprovada), datas e horários de início e fim, motivo de reprovação quando aplicável, e referências ao espaço, ao usuário solicitante e ao gestor avaliador.</li>
+<li>Inscricao: tabela associativa entre Usuario (participante) e Evento. Registra a data de criação e o status da inscrição (pendente, aprovada, reprovada).</li>
+</ul>
+<p>O Django ORM abstrai o acesso direto ao banco de dados, permitindo que todas as operações sejam expressas em Python independentemente do SGBD subjacente.</p>
+<p>Essa característica garante escalabilidade na camada de dados: caso o volume de informações ou a demanda de concorrência exijam no futuro uma migração do SQLite para um SGBD mais robusto - como PostgreSQL ou MySQL - a transição pode ser realizada com alterações mínimas de configuração, sem necessidade de reescrita das regras de negócio ou das queries da aplicação.</p>
+<h4 id="controller-camada-de-logica">Controller - Camada de lógica</h4>
+<p>Responsável por receber as requisições HTTP vindas do URL Dispatcher, aplicar as regras de negócio, interagir com os Models quando necessário e selecionar a View que será renderizada como resposta.</p>
+<p>Implementado no pacote views.py de cada aplicação Django do projeto.</p>
+<p>Os Controllers do SIGEsporte são organizados nos seguintes pacotes funcionais:</p>
+<ul>
+<li>Pacote de autenticação: gerencia login, logout, expiração de sessão e autenticação única por sessão, utilizando o pacote django.contrib.auth.</li>
+<li>Pacote de eventos: controla a criação, listagem, visualização e cancelamento de eventos pelo Organizador. Verifica disponibilidade de espaço antes de registrar uma reserva.</li>
+<li>Pacote de reservas: processa solicitações de reserva de espaço e expõe ao Gestor o painel de aprovação e reprovação.</li>
+<li>Pacote de inscrições: permite que o Aluno? solicite inscrição em um evento, verificando duplicidade. Expõe ao Organizador o painel de gestão de inscritos.</li>
+<li>Pacote de perfil: permite que o usuário visualize e edite seu próprio perfil.</li>
+</ul>
+<p>O controle de acesso por perfil é implementado via decoradores do pacote django.contrib.auth (login_required, permission_required), garantindo que apenas usuários autorizados acessem cada Controller.</p>
+<h4 id="view-camada-de-apresentacao">View - Camada de apresentação</h4>
+<p>Responsável pela renderização da interface visual entregue ao usuário. Recebe o contexto de dados preparado pelo Controller e gera o HTML final enviado ao navegador.</p>
+<p>Implementada no pacote templates de cada aplicação Django do projeto. O SIGEsporte suporta dois motores de template:</p>
+<ul>
+<li>DTL (Django Template Language): motor nativo do Django, utilizado por padrão.</li>
+<li>Jinja2: motor de alta performance utilizado como alternativa para módulos que exijam maior flexibilidade de renderização.</li>
+</ul>
+<p>Os templates herdam de um template base (base.html), garantindo consistência visual e reutilização do layout em todas as páginas.</p>
+<h4 id="url-dispatcher-conector-de-entrada">URL Dispatcher - Conector de entrada</h4>
+<p>Componente de roteamento responsável por mapear as URLs das requisições HTTP aos Controllers correspondentes. É o ponto de entrada do sistema após o recebimento da requisição pelo Gunicorn.</p>
+<p>Implementado no pacote urls.py de cada aplicação Django, incluído no roteador principal do projeto.</p>
+<h3 id="responsabilidades-interfaces-e-regras-de-uso">Responsabilidades, interfaces e regras de uso</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Elemento</strong></th>
+<th><strong>Responsabilidade</strong></th>
+<th><strong>Entrada</strong></th>
+<th><strong>Saída</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>urls.py</td>
+<td>Rotear requisições HTTP ao Controller correto</td>
+<td>Requisição HTTP (método + URL)</td>
+<td>Chamada ao Controller</td>
+</tr>
+<tr>
+<td>views.py</td>
+<td>Aplicar regras de negócio e controlar o fluxo</td>
+<td>HttpRequest do Django</td>
+<td>HttpResponse ou redirecionamento</td>
+</tr>
+<tr>
+<td>models.py</td>
+<td>Persistir e recuperar dados do banco</td>
+<td>Chamadas Python via ORM</td>
+<td>Objetos Python (QuerySets)</td>
+</tr>
+<tr>
+<td>templates/</td>
+<td>Renderizar a interface HTML com dados do contexto</td>
+<td>Dicionário de contexto</td>
+<td>Página HTML renderizada</td>
+</tr>
+<tr>
+<td>SQLite / ORM</td>
+<td>Armazenar dados; abstrair troca de SGBD futura</td>
+<td>SQL gerado pelo ORM</td>
+<td>Registros lidos/escritos no .db</td>
+</tr>
+</tbody>
+</table>
+<h2 id="metas-e-restricoes-arquiteturais">Metas e restrições arquiteturais</h2>
+<p>O sistema possui as seguintes metas e restrições arquiteturais:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Meta ou restrição</strong></th>
+<th><strong>Descrição</strong></th>
+<th><strong>Justificativa</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sistema exclusivamente web</td>
+<td>O sistema será acessado por navegador</td>
+<td>Facilita o acesso sem instalação local</td>
+</tr>
+<tr>
+<td>Interface responsiva</td>
+<td>A aplicação deve se adaptar a diferentes tamanhos de tela</td>
+<td>Permite uso em computadores, tablets e celulares</td>
+</tr>
+<tr>
+<td>Ausência de APIs externas</td>
+<td>O sistema não dependerá de serviços externos</td>
+<td>Reduz complexidade e riscos de integração</td>
+</tr>
+<tr>
+<td>Ausência de microsserviços</td>
+<td>O sistema será desenvolvido como aplicação monolítica</td>
+<td>Adequado ao prazo, escopo e tamanho da equipe</td>
+</tr>
+<tr>
+<td>Padrão MVC</td>
+<td>A aplicação seguirá o padrão Model-View-Controller</td>
+<td>Padrão amplamente consolidado, clara separação de responsabilidades.</td>
+</tr>
+<tr>
+<td>Padrão PEP-8</td>
+<td>O código Python deve seguir o padrão PEP-8</td>
+<td>Melhora legibilidade e padronização</td>
+</tr>
+<tr>
+<td>Verificação com Pylint</td>
+<td>O código será analisado com Pylint</td>
+<td>Auxilia na identificação de problemas de qualidade</td>
+</tr>
+<tr>
+<td>Controle de acesso</td>
+<td>Usuários terão permissões conforme perfil</td>
+<td>Necessário para segurança e separação de responsabilidades</td>
+</tr>
+<tr>
+<td>Autenticação obrigatória</td>
+<td>Funcionalidades restritas exigirão login</td>
+<td>Garante acesso controlado ao sistema</td>
+</tr>
+</tbody>
+</table>
+<h2 id="visoes">Visões</h2>
+<h3 id="visao-uso">Visão uso</h3>
+<p>A visão de uso apresenta o escopo funcional do SIGEsporte a partir da interação entre os usuários e o sistema. O sistema permite que usuários autenticados acessem funcionalidades conforme seu perfil de acesso, como criação de eventos, solicitação de reserva de espaços físicos, inscrição em eventos e aprovação de solicitações.</p>
+<p>Os principais perfis de usuário são: Aluno, Organizador, Gestor e Administrador. Cada perfil possui permissões específicas, garantindo que apenas usuários autorizados possam executar determinadas ações.</p>
+<p><strong>Visão de uso da criação de evento</strong></p>
+<p><img alt="sigesporte_diagrama_de_sequencia_criacao_de_evento" src="../../../imagens/diagramas/sigesporte_diagrama_de_sequencia_criacao_de_evento.png" /></p>
+<p>A funcionalidade de criação de evento é realizada pelo perfil Organizador. O organizador preenche os dados do evento, informa o espaço físico desejado e define as datas de realização. Antes da criação da reserva, o sistema verifica a disponibilidade do espaço físico para o período informado.</p>
+<p>Caso o espaço esteja indisponível, o sistema exibe uma mensagem de erro informando que o local já está ocupado nas datas solicitadas. Caso esteja disponível, o sistema cria o evento e registra uma solicitação de reserva de espaço com status pendente.</p>
+<p>Após a solicitação, o perfil Gestor acessa o painel de gestão, visualiza as reservas pendentes e pode aprovar a reserva. Quando aprovada, o sistema atualiza o status da solicitação para aprovada e registra o gestor responsável pela avaliação.</p>
+<p>Esse fluxo evidencia a separação de responsabilidades entre os perfis do sistema: o organizador solicita a criação do evento e a reserva do espaço, enquanto o gestor valida e aprova o uso do espaço físico.</p>
+<p><strong>Visão de uso da inscrição nos eventos evento</strong></p>
+<p><img alt="sigesporte_diagrama_de_sequencia_inscricao_em_evento" src="../../../imagens/diagramas/sigesporte_diagrama_de_sequencia_inscricao_em_evento.png" /></p>
+<p>A funcionalidade de inscrição em eventos é realizada pelo perfil Aluno. O aluno acessa o portal de eventos, visualiza a lista de eventos disponíveis e consulta os detalhes de um evento específico.</p>
+<p>Ao solicitar inscrição, o sistema verifica se o aluno já possui uma inscrição registrada para o mesmo evento. Caso já exista uma inscrição, o sistema exibe uma mensagem informando que o aluno já está inscrito. Caso contrário, uma nova inscrição é criada com status pendente.</p>
+<p>Posteriormente, o Organizador do evento acessa o painel de gestão, visualiza as inscrições pendentes e decide pela aprovação ou reprovação da participação. Quando aprovada, o sistema atualiza o status da inscrição para aprovada.</p>
+<p>Esse fluxo demonstra o controle de participação nos eventos e garante que a inscrição do aluno seja validada pelo responsável do evento.</p>
+<h3 id="visao-de-organizacao-logica">Visão de organização lógica</h3>
+<p>A visão de organização lógica apresenta a estrutura arquitetural do SIGEsporte, evidenciando a divisão do sistema em camadas e módulos responsáveis pelo processamento das requisições, aplicação das regras de negócio, manipulação dos dados e apresentação das informações ao usuário.</p>
+<p><img alt="sigesporte_diagrama_de_arquitetura" src="../../../imagens/diagramas/sigesporte_diagrama_de_arquitetura.png" /></p>
+<p>A arquitetura adotada segue o padrão MVC (Model-View-Controller), promovendo separação de responsabilidades, reutilização de código, facilidade de manutenção e organização lógica da aplicação.</p>
+<p>O sistema é subdividido nos seguintes módulos:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Módulo</strong></th>
+<th><strong>Responsabilidade</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Interface Web</td>
+<td>Responsável pela interação com o usuário através de páginas HTML/CSS acessadas via navegador.</td>
+</tr>
+<tr>
+<td>URL Dispatcher (urls.py)</td>
+<td>Realiza o roteamento das requisições HTTP para as views correspondentes.</td>
+</tr>
+<tr>
+<td>Views (views.py)</td>
+<td>Implementam as regras de negócio do sistema e controlam o fluxo das operações.</td>
+</tr>
+<tr>
+<td>Templates (.html)</td>
+<td>Responsáveis pela renderização da interface e apresentação dos dados ao usuário.</td>
+</tr>
+<tr>
+<td>Models (models.py)</td>
+<td>Representam as entidades do sistema e definem a estrutura dos dados persistidos.</td>
+</tr>
+<tr>
+<td>Django ORM</td>
+<td>Realiza o mapeamento objeto-relacional e abstrai o acesso ao banco de dados.</td>
+</tr>
+<tr>
+<td>SQLite</td>
+<td>Responsável pela persistência das informações do sistema.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="organizacao-das-camadas">Organização das camadas</h4>
+<p>A arquitetura lógica do sistema é organizada nas seguintes camadas:</p>
+<h4 id="camada-de-apresentacao">Camada de apresentação</h4>
+<p>Responsável pela interface visual da aplicação e pela comunicação direta com o usuário. Essa camada utiliza templates HTML/CSS para exibir informações e receber dados inseridos pelos usuários.</p>
+<h4 id="camada-de-logica-de-negocio">Camada de lógica de negócio</h4>
+<p>Implementada pelas views do Django, concentra as regras de negócio da aplicação, como criação de eventos, validação de inscrições, aprovação de reservas e controle de permissões de acesso.</p>
+<h4 id="camada-de-dados">Camada de dados</h4>
+<p>Responsável pela modelagem e persistência dos dados do sistema. Os models representam as entidades do domínio e utilizam o Django ORM para comunicação com o banco de dados SQLite.</p>
+<h4 id="comunicacao-entre-os-modulos">Comunicação entre os módulos</h4>
+<p>A comunicação entre os módulos ocorre da seguinte forma:</p>
+<ul>
+<li>O usuário acessa o sistema por meio do navegador web.</li>
+<li>Uma requisição HTTP é enviada ao servidor da aplicação.</li>
+<li>O módulo urls.py identifica a rota correspondente à funcionalidade solicitada.</li>
+<li>A view responsável processa a requisição e aplica as regras de negócio.</li>
+<li>Caso necessário, os models acessam o banco de dados através do Django ORM.</li>
+<li>Os dados processados são enviados aos templates HTML.</li>
+<li>O servidor retorna a resposta HTTP renderizada ao usuário.</li>
+</ul>
+<p>A adoção da arquitetura em camadas contribui para a modularização do sistema, reduzindo acoplamento entre componentes e facilitando manutenção, escalabilidade e evolução futura da aplicação.</p>
+<h3 id="visao-estrutural">Visão estrutural</h3>
+<p>A visão estrutural apresenta a composição interna do SIGEsporte, identificando os principais elementos do sistema, suas responsabilidades e os relacionamentos existentes entre eles. Essa visão permite compreender como as classes, entidades e componentes se organizam para atender às funcionalidades do sistema.</p>
+<p>O sistema é estruturado em torno das entidades principais Usuário, Organização, Espaço Físico, Evento, Reserva de Espaço e Inscrição. Essas entidades representam os dados centrais da aplicação e se relacionam para permitir o gerenciamento de eventos esportivos, reservas de espaços e inscrições de participantes.</p>
+<h4 id="diagrama-de-classes">Diagrama de classes</h4>
+<p><img alt="sigesporte_diagrama_de_classes" src="../../../imagens/diagramas/sigesporte_diagrama_de_classes.png" /></p>
+<p>O diagrama de classes representa os principais elementos do domínio do sistema e seus relacionamentos.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Classe</strong></th>
+<th><strong>Responsabilidade</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Usuario</td>
+<td>Representa os usuários do sistema e armazena dados de autenticação, identificação e perfil de acesso.</td>
+</tr>
+<tr>
+<td>Aluno</td>
+<td>Especialização lógica do usuário com permissão para consultar eventos e solicitar inscrições.</td>
+</tr>
+<tr>
+<td>Organizador</td>
+<td>Especialização lógica do usuário responsável por criar eventos e gerenciar inscrições.</td>
+</tr>
+<tr>
+<td>Gestor</td>
+<td>Especialização lógica do usuário responsável por cadastrar espaços físicos e aprovar ou reprovar reservas.</td>
+</tr>
+<tr>
+<td>Organizacao</td>
+<td>Representa uma organização vinculada a usuários e eventos.</td>
+</tr>
+<tr>
+<td>EspacoFisico</td>
+<td>Representa os espaços físicos disponíveis para realização dos eventos.</td>
+</tr>
+<tr>
+<td>Evento</td>
+<td>Representa os eventos cadastrados no sistema, contendo dados como título, descrição, data e organização responsável.</td>
+</tr>
+<tr>
+<td>ReservaEspaco</td>
+<td>Controla a solicitação de uso de um espaço físico para um evento, incluindo status, datas e avaliação do gestor.</td>
+</tr>
+<tr>
+<td>Inscricao</td>
+<td>Representa a inscrição de um participante em um evento, controlando status de aprovação ou reprovação.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="relacionamentos-entre-as-classes">Relacionamentos entre as classes</h4>
+<p>A classe Usuário é a base para os diferentes perfis de acesso do sistema. Os perfis Aluno, Organizador e Gestor representam papéis distintos e determinam as permissões de cada usuário.</p>
+<p>A classe Organização possui relacionamento com Usuario, permitindo que usuários estejam vinculados a uma ou mais organizações. A classe Evento também se relaciona com Organização, pois cada evento pertence a uma organização responsável.</p>
+<p>A classe Evento está associada a Inscricao, pois um evento pode possuir várias inscrições de participantes. Cada inscrição pertence a um único usuário participante e a um único evento.</p>
+<p>A classe ReservaEspaco relaciona-se com EspacoFisico, Evento e Usuario. Ela registra qual espaço está sendo solicitado, qual evento está associado à reserva, quem solicitou a reserva e, quando avaliada, qual gestor realizou a aprovação ou reprovação.</p>
+<h4 id="diagrama-de-entidade-relacionamento">Diagrama de Entidade-Relacionamento</h4>
+<p>O ERD (Diagrama Entidade-Relacionamento) é uma ferramenta visual usada para modelar a estrutura lógica de um banco de dados relacional.</p>
+<p>Ele representa as entidades (como objetos ou conceitos), seus atributos (características) e os relacionamentos entre elas através de símbolos gráficos.</p>
+<p>Seu objetivo principal é facilitar a compreensão da organização dos dados e garantir que o design do banco atenda aos requisitos do sistema.</p>
+<p>A seguir, apresentamos o diagrama ERD do SIGEsporte:</p>
+<p><img alt="sigesporte_modelagem_de_dados" src="../../../imagens/diagramas/sigesporte_modelagem_de_dados.png" /></p>
+<p>O esquema de banco de dados é composto por sete entidades principais destinadas a gerenciar usuários, organizações, espaços físicos, reservas e eventos. A entidade central é Usuario, que armazena informações individuais como e-mail único, nome completo, matrícula opcional, foto, tipo de usuário e status ativo, utilizando um UUID como chave primária. Para gerenciar a relação entre usuários e organizações, existe a entidade Organizacao, que contém nome, descrição e foto. O relacionamento entre estas duas entidades são de muitos-para-muitos, implementado através da tabela associativa Usuario_Organizacao, que vincula chaves estrangeiras de ambos os lados.</p>
+<p>Os locais físicos são representados pela entidade EspacoFisico, que registra o nome e uma foto opcional do espaço. O uso desses espaços é controlado pela entidade ReservaEspaco, que gerencia as solicitações vinculando um espaço físico a um usuário solicitante. Uma reserva também pode ter, opcionalmente, um usuário avaliador associado. Esta entidade rastreia o status da reserva, as datas e horários de início e fim, o motivo de uma eventual reprovação e a data de criação. Os relacionamentos indicam que um EspacoFisico pode ter múltiplas reservas, e um Usuario pode solicitar ou avaliar múltiplas reservas.</p>
+<p>A entidade Evento descreve as atividades planejadas no sistema. Cada evento é obrigatoriamente vinculado a um usuário organizador e a uma organização sediadora. Seus atributos incluem título, descrição, foto, data de realização e data de criação. Existe um relacionamento um-para-um opcional entre Evento e ReservaEspaco; uma reserva pode existir sem um evento, mas um evento pode, opcionalmente, estar vinculado a no máximo uma reserva específica através de uma chave estrangeira única. Por fim, a participação dos usuários nos eventos é gerenciada pela entidade Inscricao, que atua como uma tabela associativa entre Usuario (como participante) e Evento, registrando a data de criação e o status da inscrição. Um usuário pode realizar múltiplas inscrições e um evento pode receber múltiplas inscrições.</p>
+<h3 id="visao-de-implantacao">Visão de Implantação</h3>
+<p>O SIGEsporte será implantado em um servidor VPS (Virtual Private Server) com sistema operacional Linux (Ubuntu 24.04 LTS ou superior), independente de provedor, uma vez que a stack adotada é compatível com qualquer ambiente que atenda esse requisito de sistema operacional.</p>
+<h3 id="infraestrutura-e-camadas">Infraestrutura e camadas</h3>
+<p>A implantação é organizada em três camadas de isolamento:</p>
+<p>Camada 1 - VPS: servidor virtual com Linux 24.04+, responsável pelo ambiente base de execução. A escolha por um VPS genérico garante portabilidade entre provedores (Hetzner, DigitalOcean, Linode, servidores institucionais, entre outros).</p>
+<p>Camada 2 - Incus (container LXC): executa sobre o VPS e provê isolamento do ambiente em relação ao sistema operacional do host, além de permitir snapshots do estado da aplicação e rollback em caso de falha de implantação. O Docker é executado dentro deste container.</p>
+<p>Camada 3 - Docker: orquestra os serviços da aplicação em dois containers:</p>
+<ul>
+<li>Container Nginx Proxy Manager (NPM): recebe as requisições externas via HTTP/HTTPS e atua como proxy reverso, repassando-as ao container da aplicação. Centraliza o controle de domínio, certificados TLS e roteamento.</li>
+<li>Container App Django: executa a aplicação web servida pelo Gunicorn (servidor WSGI). Suporta dois motores de template conforme a necessidade de cada módulo: DTL (Django Template Language) e Jinja2.</li>
+</ul>
+<h3 id="banco-de-dados">Banco de dados</h3>
+<p>O banco de dados utilizado é o SQLite. A persistência é garantida por um arquivo .db passado como volume ao container Docker da aplicação, mantendo os dados fora do ciclo de vida do container.</p>
+<h3 id="controle-de-versao-e-pipeline-de-qualidade">Controle de versão e pipeline de qualidade</h3>
+<p>O código-fonte é hospedado no GitHub. A branch main é protegida - nenhum push direto é permitido. Toda alteração exige Pull Request com no mínimo duas revisões aprovadas antes do merge.</p>
+<p>O pipeline de CI é executado via GitHub Actions a cada Pull Request, realizando:</p>
+<ul>
+<li>Verificação de conformidade com PEP-8;</li>
+<li>Análise estática com Pylint;</li>
+<li>Execução da suíte de testes automatizados.</li>
+</ul>
+<p>O deploy no VPS é realizado manualmente. A adoção de deploy contínuo (CD) via GitHub Actions é prevista para fases futuras do projeto.</p>
+<p>Inexoravelmente, o projeto deve migrar para um deploy contínuo usando ferramentas apropriadas, no entanto, é evidente que se pode rodar infinitas versões da mesma aplacação sem nunca correr o risco de levar a erros grosseiros e quebra de funcionalidade imediata uma vez que com Incus e docker em uma stack se torna extremamente robusto quanto a single point of failure.</p>
+<p>Note que, apesar da ferramenta ter sido desenvolvida para desenvolvimento ágil e assíncrono, ela se deturpou de suas origens e hoje é usada comercialmente por grandes empresas para implementação easy ready. Com um único arquivo de compose ou mesmo uma linha de comando, entrega-se o produto ao cliente sem ele ter conhecimentos avançados sobre a tecnologia, requisitos de sistema e ainda configurações avançadas.</p>
+<p>Ato contínuo, o comprometimento para o implementador, hoje, diminuiu muito haja visto que houve um trade-off entre a velocidade de implementação e o desempenho e over-head do sistema.</p>
+<p>Tentar-se-á um modelo dinâmico com o uso dessas ferramentas, mas ainda, buscando sempre, o melhor desempenho e qualidade de serviço ao cliente.</p>
+<p><img alt="diagrama_de_deploy" src="../../../imagens/diagramas/diagrama_de_deploy.png" /></p>
+<p>De forma apresentado pela figura X a implementação terá 3 níveis de segurança básica por default, triple NAT e resolução de endereçamentos não trivial.</p>
+<p>A segurança de infraestrutura deixa os desenvolvedores com menor carga de garantir segurança para a aplicação já que grande parte da estrutura deixa bem transparente para eles o uso de boas práticas sem se preocupar com security layers (camadas extras de segurança).</p>
+<h2 id="restricoes-adicionais">Restrições adicionais</h2>
+<h3 id="acesso-e-autenticacao">Acesso e autenticação</h3>
+<p>O sistema é acessível pela internet aberta via navegador web, sem necessidade de instalação local.</p>
+<p>O acesso a qualquer funcionalidade restrita exige autenticação prévia. A autenticação é implementada com as ferramentas nativas do Django (django.contrib.auth), que proveem login, logout, controle de sessão e proteção contra-ataques comuns como CSRF (Cross-Site Request Forgery) e XSS (Cross-Site Scripting).</p>
+<p>As sessões de usuário expiram após período de inatividade, configurado via SESSION_COOKIE_AGE do Django.</p>
+<p>A política de senhas exige senhas fortes, validadas pelos validadores nativos do Django (AUTH_PASSWORD_VALIDATORS e outros), incluindo comprimento mínimo, restrição de senhas comuns e verificação de similaridade com dados pessoais do usuário.</p>
+<p>O sistema adota o princípio de autenticação única por sessão (one login), impedindo que o mesmo usuário mantenha múltiplas sessões ativas simultaneamente.</p>
+<h3 id="perfis-de-acesso-e-permissoes">Perfis de acesso e permissões</h3>
+<ul>
+<li>Aluno: acesso de leitura ao calendário de eventos e mural de espaços; acesso de escrita para realizar inscrições em eventos e editar o próprio perfil.</li>
+<li>Organizador (Atlética/CA): herda as permissões do Aluno; acesso adicional de escrita para criar eventos, solicitar reserva de espaço, gerenciar lista de inscritos e cancelar os próprios eventos.</li>
+<li>Gestor (Administração FCTE): acesso de leitura completo ao sistema e aos relatórios; acesso de escrita para aprovar ou reprovar reservas de espaço, cadastrar novos espaços físicos e bloquear horários para manutenção.</li>
+<li>Administrador (Equipe Dijkstra): acesso total ao painel administrativo do Django (/admin) para suporte técnico, correção de dados e gestão de permissões de alto nível.</li>
+</ul>
+<h3 id="concorrencia">Concorrência</h3>
+<p>O sistema é projetado para suportar até 50 usuários simultâneos, estimativa condizente com o porte acadêmico do projeto e com o público-alvo restrito à comunidade da FCTE/UnB. O servidor Gunicorn será configurado com número de workers adequado a essa carga.</p>
+<h3 id="disponibilidade">Disponibilidade</h3>
+<p>A meta de disponibilidade do sistema é de 80% a 90% do tempo, compatível com o contexto acadêmico e com a infraestrutura de VPS sem redundância. Esse índice corresponde a uma indisponibilidade aceitável de até 72 horas mensais no limite inferior da meta.</p>
+<p>É importante notar que, independentemente da métrica estipulada, o valor definido não é um número aleatório explicitado pela equipe, mas resultados de demandas de manutenção e análise de controle.</p>
+<p>O servidor dimensionado, por nosso demo test, agora está pronto para ser supervisionado e mantido com um único técnico adicionando ferramentas de controle simples, como disparo de logs, Overflow e com o uso do Terraform seria trivial a condução de uma disponibilidade de +90%.</p>
+<p>Entrementes, este não é o escopo deste projeto e a decisão dessas ações devem ser postergadas para uma reanálise futura.</p>
+<h3 id="portabilidade-e-compatibilidade">Portabilidade e compatibilidade</h3>
+<p>O sistema é exclusivamente web responsivo, sem versão mobile nativa.</p>
+<p>A interface deve funcionar corretamente nos principais navegadores modernos - Google Chrome, Mozilla Firefox e Microsoft Edge - dentro das versões suportadas por seus respectivos fabricantes, excluindo versões com falhas de segurança conhecidas e não corrigidas. Navegadores que não recebem mais atualizações de segurança (como Internet Explorer) estão fora do escopo de suporte.</p>
+<p>Veja que, isto por si só bate de confronto a um dos requisitos do usuário de ser responsivo aos dispositivos mobile, portanto, a entrega vai ser funcional em qualquer dispositivo independente do sistema operacional, podendo ser acessado por "todas as telas".</p>
+<p>Este ponto foi levantado pontualmente, uma vez que, para dispositivos derivados do iOS o webkit é o mesmo do safari independentemente do navegador que o usuário escolher abrir por definição e prática. Quanto aos dispositivos Android uma coletânea mínima vai ser fixada e a princípio somente o web-kit do Chrome e da Samsung serão atendidos.</p>
+<h3 id="qualidade-de-codigo">Qualidade de código</h3>
+<p>O código Python do projeto deve estar em conformidade com o padrão PEP-8 e ser aprovado na análise estática do Pylint. Essas verificações são executadas automaticamente a cada Pull Request via GitHub Actions, conforme descrito na Visão de Implantação, e são os mínimos requisitos.</p>
+<p>Será exigido ainda, mesmo que de forma primária, implementação de cobertura de testes unitários para que passe pelo processo de chegar ao pull request.</p>
+<p>Tais implementações rígidas se devem pela necessidade de evitar ao máximo o retrabalho, facilitar a revisão de pares de desenvolvimento, qualidade de software elevado e produto entregue funcionando de forma adequada a cada rebuild no servidor do docker deploy.</p>
+<h1 id="bibliografia">Bibliografia</h1>
+<p>DJANGO SOFTWARE FOUNDATION. Django documentation. Versão estável. Disponível em: <a href="https://docs.djangoproject.com/en/stable/">https://docs.djangoproject.com/en/stable/</a>. Acesso em: 08 mai. 2026.</p>
+<p>GITHUB INC. GitHub Actions documentation. Disponível em: <a href="https://docs.github.com/en/actions">https://docs.github.com/en/actions</a>. Acesso em: 08 mai. 2026.</p>
+<p>GUNICORN CONTRIBUTORS. Gunicorn - Python WSGI HTTP server for UNIX. Disponível em: <a href="https://docs.gunicorn.org/en/latest/">https://docs.gunicorn.org/en/latest/</a>. Acesso em: 08 mai. 2026.</p>
+<p>IEEE; ISO; IEC. ISO/IEC/IEEE 42010:2011 - Systems and software engineering: architecture description. Nova Iorque: IEEE, 2011. Disponível em: <a href="https://ieeexplore.ieee.org/document/6129467/">https://ieeexplore.ieee.org/document/6129467/</a>. Acesso em: 08 mai. 2026.</p>
+<p>LINUX CONTAINERS PROJECT. Incus documentation. Disponível em: <a href="https://linuxcontainers.org/incus/docs/main/">https://linuxcontainers.org/incus/docs/main/</a>. Acesso em: 08 mai. 2026.</p>
+<p>NGINXPROXYMANAGER CONTRIBUTORS. Nginx Proxy Manager - guide. Disponível em: <a href="https://nginxproxymanager.com/guide/">https://nginxproxymanager.com/guide/</a>. Acesso em: 08 mai. 2026.</p>
+<p>PRESSMAN, Roger S.; MAXIM, Bruce R. Engenharia de software: uma abordagem profissional. 8. ed. Porto Alegre: AMGH, 2016.</p>
+<p>PYLINT CONTRIBUTORS. Pylint documentation. Disponível em: <a href="https://pylint.readthedocs.io/en/stable/">https://pylint.readthedocs.io/en/stable/</a>. Acesso em: 08 mai. 2026.</p>
+<p>PYTHON SOFTWARE FOUNDATION. PEP 8 - style guide for Python code. Autores: Guido van Rossum, Barry Warsaw, Alyssa Coghlan. 2001. Disponível em: <a href="https://peps.python.org/pep-0008/">https://peps.python.org/pep-0008/</a>. Acesso em: 08 mai. 2026.</p>
+<p>SCHWABER, Ken; SUTHERLAND, Jeff. O guia do Scrum: o guia definitivo para o Scrum, as regras do jogo. Scrum.org, 2020. Disponível em: <a href="https://scrumguides.org/">https://scrumguides.org</a>. Acesso em: 08 mai. 2026.</p>
+<p>BECK, Kent et al. Manifesto para desenvolvimento ágil de software. AgileManifesto.org, 2001. Disponível em: <a href="https://agilemanifesto.org/iso/ptbr/manifesto.html">https://agilemanifesto.org/iso/ptbr/manifesto.html</a>. Acesso em: 08 mai. 2026.</p>
+<p>SOMMERVILLE, Ian. Engenharia de software. 10. ed. São Paulo: Pearson, 2019.</p>
+<p>SQLITE CONSORTIUM. SQLite documentation. Disponível em: <a href="https://www.sqlite.org/docs.html">https://www.sqlite.org/docs.html</a>. Acesso em: 08 mai. 2026.</p>
+<p>BASILI, Victor R.; CALDIERA, Gianluigi; ROMBACH, H. Dieter. Goal question metric approach. In: MARCINIAK, John J. (ed.). Encyclopedia of software engineering. Nova Iorque: Wiley, 1994. p. 528-532.</p>
+<p>UNIVERSIDADE DE BRASÍLIA. Coordenação de Esporte e Lazer - CEL. Disponível em: <a href="https://www.cel.unb.br/">https://www.cel.unb.br</a>. Acesso em: 08 mai. 2026.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/FGA0138-MDS-Ajax/2026.1-T01-Dijkstra" target="_blank" rel="noopener" title="SIGEsporte no GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.top", "search.highlight", "search.suggest"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
