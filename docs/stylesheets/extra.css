@@ -15,9 +15,17 @@
 }
 
 /* Logo no header com altura controlada */
-.md-header__button.md-logo img {
-  height: 40px;
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 40px; 
+  max-height: none;
   width: auto;
+  object-fit: contain;
+
+  padding: 6px;
+  background-color: #ffffff;
+  border-radius: 4px;
+
 }
 
 /* Links de navegação ativos */
