@@ -5,7 +5,7 @@ Repositório de acesso a dados para o domínio de Eventos.
 
 Componentes Principais
 ----------------------
-- :class:`EventosRepository`: encapsula as operações CRUD sobre 
+- :class:`EventosRepository`: encapsula as operações CRUD sobre
   :class:`~apps.core.models.eventos_models.Evento`.
 
 Notas
@@ -25,6 +25,7 @@ from apps.core.models.eventos_models import Evento
 __version__ = "0.0.2"
 __license__ = "AGPL V3"
 
+
 class EventosRepository:
     """Repositório para manipulação de dados de Eventos."""
 
@@ -38,7 +39,7 @@ class EventosRepository:
         :returns: Instância do evento criado.
         :rtype: Evento
         """
-        return Evento.objects.create(**data)  # expanção inplicita
+        return Evento.objects.create(**data)  # expanxão implicita
 
     @staticmethod
     def get_by_id(evento_id: int) -> Optional[Evento]:

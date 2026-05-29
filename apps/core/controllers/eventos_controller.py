@@ -48,8 +48,9 @@ class EventosController(View):
     # request causa erro por nao ser utilizado no metodo suprimido por hora para
     # passar limpo no lint
     # a fazer: Rever uso da assinatura do metodo
-    # def get(self: Self, request: HttpRequest, evento_id: int = None) -> JsonResponse:
-    def get(self: Self, evento_id: int = None) -> JsonResponse:
+    # refeito vide g
+    # def get(self: Self, evento_id: int = None) -> JsonResponse:
+    def get(self: Self, request: HttpRequest, evento_id: int = None) -> JsonResponse:
         """
         Lista todos os eventos ou retorna um evento específico.
 
@@ -123,8 +124,10 @@ class EventosController(View):
     # request causa erro por nao ser utilizado no metodo suprimido por hora para
     # passar limpo no lint
     # a fazer: Rever uso da assinatura do metodo
-    # def delete(self: Self, request: HttpRequest, evento_id: int) -> JsonResponse:
-    def delete(self: Self, evento_id: int) -> JsonResponse:
+    # def delete(self: Self, evento_id: int) -> JsonResponse:
+    # quebra o django pela assinatura, revertido para chamada original suprimindo
+    # erro anterior erra elevado pelo uso de estrutura atual de MVC.
+    def delete(self: Self, request: HttpRequest, evento_id: int) -> JsonResponse:
         """
         Deleta um evento pelo ID.
 

@@ -24,6 +24,7 @@ from django.db import models
 __version__ = "0.0.2"
 __license__ = "AGPL V3"
 
+
 class Evento(models.Model):
     """
     Representa um evento no sistema SIGEsporte.
@@ -56,8 +57,9 @@ class Evento(models.Model):
     atualizado_em = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
 
     # suprimindo too few por hora reanalisar depois
-    class Meta: # # pylint: disable=too-few-public-methods
+    class Meta:  # pylint: disable=too-few-public-methods
         """Metadados do model Evento."""
+
         verbose_name = "Evento"
         verbose_name_plural = "Eventos"
         ordering = ["-data", "-horario"]
