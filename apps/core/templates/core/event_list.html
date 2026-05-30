@@ -1,0 +1,27 @@
+<form method="GET" class="filtro-eventos">
+
+    <div class="campo-filtro">
+        <label for="data_inicio">Data início:</label>
+        <input
+            type="date"
+            id="data_inicio"
+            name="data_inicio"
+            value="{{ request.GET.data_inicio }}"
+        >
+    </div>
+
+    <div class="campo-filtro">
+        <label for="data_fim">Data fim:</label>
+        <input
+            type="date"
+            id="data_fim"
+            name="data_fim"
+            value="{{ request.GET.data_fim }}"
+        >
+    </div>
+
+    <button type="submit" class="btn-filtrar">
+        FILTRAR
+    </button>
+
+</form>
