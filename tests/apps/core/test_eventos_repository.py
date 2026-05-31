@@ -1,13 +1,17 @@
+from datetime import date, time
+
 from django.test import TestCase
+
 from apps.core.models.eventos_models import Evento
 from apps.core.repositories.eventos_repository import EventosRepository
-from datetime import date, time
 
 
 class EventosRepositoryTest(TestCase):
     """Testes para o repositório de Eventos."""
 
+    # tentando passar no teste unitario traqueando de volta ate aqui
     def setUp(self):
+        Evento.objects.all().delete()
         self.evento_data = {
             "nome": "Evento Teste",
             "data": date(2023, 10, 27),
@@ -17,6 +21,16 @@ class EventosRepositoryTest(TestCase):
             "descricao": "Descrição Teste",
             "capacidade": 100,
         }
+    # def setUp(self):
+    #     self.evento_data = {
+    #         "nome": "Evento Teste",
+    #         "data": date(2023, 10, 27),
+    #         "horario": time(14, 0),
+    #         "local": "Local Teste",
+    #         "organizador": "Organizador Teste",
+    #         "descricao": "Descrição Teste",
+    #         "capacidade": 100,
+    #     }
 
     def test_create_evento(self):
         """Testa a criação de um evento."""

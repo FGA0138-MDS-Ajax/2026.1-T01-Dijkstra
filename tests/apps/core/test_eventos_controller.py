@@ -1,8 +1,11 @@
 import json
+
+from datetime import date, time
+
 from django.test import TestCase, Client
 from django.urls import reverse
+
 from apps.core.models.eventos_models import Evento
-from datetime import date, time
 
 
 class EventosControllerTest(TestCase):
