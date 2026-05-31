@@ -28,6 +28,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 from apps.core.services.eventos_service import EventosService
+from django.shortcuts import render
+from apps.core.forms import DateFilterForm
 
 __version__ = "0.0.2"
 __license__ = "AGPL V3"
@@ -173,3 +175,28 @@ class EventosController(View):
             if evento.imagem and hasattr(evento.imagem, "url")
             else None,
         }
+
+def event_list_controller(request):
+    form = DateFilterForm(request.GET)
+
+    service = EventosService()
+
+    if form.is_valid():
+        data_inicio = form.cleaned_data.get("data_inicio")
+        data_fim = form.cleaned_data.get("data_fim")
+
+        events = service.get_filtered_events(
+            data_inicio,
+            data_fim
+        )
+    else:
+        events = service.get_filtered_events()
+
+    return render(
+        request,
+        "core/event_list.html",
+        {
+            "form": form,
+            "events": events,
+        }
+    )
