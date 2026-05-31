@@ -7,12 +7,16 @@ Componentes Principais
 ----------------------
 - :class:`EventosController`: View Django que expõe os endpoints REST de Eventos,
   delegando a lógica ao :class:`~apps.core.services.eventos_service.EventosService`.
+- :func:`event_list_controller`: view Django que renderiza a listagem de eventos
+  com suporte a filtro por intervalo de datas.
 
 Notas
 -----
 - Requer Python >= 3.12
 - Criado por `MontMarcos <https://github.com/MontMarcos>`_ em 26 maio 2026
 - Lint e testes por `Saresu <https://github.com/Saresu>`_ em 28 maio 2026
+- Revisado por `Gui-fga <https://github.com/Gui-fga>`_ em 30 maio 2026
+- Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
 """
 
 # compatibilidade
@@ -26,12 +30,13 @@ from django.http import JsonResponse, HttpRequest
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 
 from apps.core.services.eventos_service import EventosService
-from django.shortcuts import render
+
 from apps.core.forms import DateFilterForm
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 __license__ = "AGPL V3"
 
 
@@ -176,7 +181,21 @@ class EventosController(View):
             else None,
         }
 
+
+# usa-se t o d o com a faser para o pylint nao reclamar do codigo
+# a fazer: nao seria o caso de reanalisar toda a classe para integrar
+# essa funcao como um metodo?
 def event_list_controller(request):
+    """
+    Renderiza a listagem de eventos com suporte a filtro por intervalo de datas.
+
+    :param request: Objeto da requisição HTTP.
+    :type request: HttpRequest
+    :returns: Resposta HTTP com o template ``core/event_list.html``, o formulário
+              de filtro e a lista de eventos filtrados.
+    :rtype: HttpResponse
+    """
+
     form = DateFilterForm(request.GET)
 
     service = EventosService()
@@ -185,10 +204,7 @@ def event_list_controller(request):
         data_inicio = form.cleaned_data.get("data_inicio")
         data_fim = form.cleaned_data.get("data_fim")
 
-        events = service.get_filtered_events(
-            data_inicio,
-            data_fim
-        )
+        events = service.get_filtered_events(data_inicio, data_fim)
     else:
         events = service.get_filtered_events()
 
@@ -198,5 +214,5 @@ def event_list_controller(request):
         {
             "form": form,
             "events": events,
-        }
+        },
     )
