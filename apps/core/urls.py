@@ -30,6 +30,7 @@ from apps.core.controllers.eventos_controller import (
     EventosController,
     event_list_controller,
 )
+from apps.core.controllers.eventos_controller import detalhes_evento
 
 __version__ = "0.0.1"
 __license__ = "AGPL V3"
@@ -38,8 +39,6 @@ __license__ = "AGPL V3"
 urlpatterns = [
     path("", home, name="home"),
     path("eventos/", EventosController.as_view(), name="eventos-list"),
-    path(
-        "eventos/<int:evento_id>/", EventosController.as_view(), name="eventos-detail"
-    ),
+    path("evento/<int:evento_id>/", detalhes_evento,name="detalhes_evento"),
     path("eventos-filtro/", event_list_controller, name="eventos-filtro"),
 ]

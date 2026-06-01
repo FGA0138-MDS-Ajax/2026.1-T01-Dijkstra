@@ -32,3 +32,10 @@ class EventosServiceTest(TestCase):
     def test_excluir_evento(self):
         self.service.excluir_evento(1)
         self.repository_mock.delete.assert_called_once_with(1)
+
+    def test_get_filtered_events(self):
+        """Verifica se o serviço chama o repositório para filtrar eventos."""
+        self.service.get_filtered_events(data_inicio="2023-10-01", data_fim="2023-10-31")
+        # Nota: O service chama Evento.objects.all() internamente antes do repo.
+        # Mas o mock deve ser chamado.
+        self.repository_mock.filter_events.assert_called_once()
