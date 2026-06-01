@@ -111,7 +111,6 @@ EVENTOS_INICIAIS = [
         "local": "Dojo da FEF - Pavilhao de Lutas",
         "organizador": "Federacao Universitaria de Judo do DF",
         "gestor": "Paulo Yamada",
-        "imagem": "eventos/judo.jpg",
         "descricao": "Etapa universitaria do Circuito Regional de Judo."
         " Categorias por peso seguindo tabela da CBJ.",
         "capacidade": 150,
