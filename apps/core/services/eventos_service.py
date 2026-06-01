@@ -102,18 +102,16 @@ class EventosService:
 
         return self.repository.delete(evento_id)
 
-    def get_filtered_events(self: Self, data_inicio=None, data_fim=None):
+    def get_filtered_events(self: Self, query=None, data_inicio=None, data_fim=None):
         """
-        Retorna eventos filtrados por intervalo de datas.
+        Retorna eventos filtrados por texto e intervalo de datas.
 
-        :param data_inicio: Data inicial do intervalo de filtro (opcional).
-        :type data_inicio: datetime.date or None
-        :param data_fim: Data final do intervalo de filtro (opcional).
-        :type data_fim: datetime.date or None
-        :returns: Lista de eventos dentro do intervalo informado.
-        :rtype: list[Evento]
+        :param query: Termo de busca (opcional).
+        :param data_inicio: Data inicial do intervalo (opcional).
+        :param data_fim: Data final do intervalo (opcional).
+        :returns: QuerySet de eventos filtrados.
         """
 
         eventos = Evento.objects.all()
 
-        return self.repository.filter_events_by_date(eventos, data_inicio, data_fim)
+        return self.repository.filter_events(eventos, query, data_inicio, data_fim)
