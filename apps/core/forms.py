@@ -18,9 +18,34 @@ Notas
 from __future__ import annotations
 
 from django import forms
+from apps.core.models.eventos_models import Evento
 
 __version__ = "0.0.1"
 __license__ = "AGPL V3"
+
+
+class EventoForm(forms.ModelForm):
+    """
+    Formulário para criação e edição de eventos.
+    """
+
+    class Meta:
+        model = Evento
+        fields = [
+            "nome",
+            "data",
+            "horario",
+            "local",
+            "organizador",
+            "gestor",
+            "descricao",
+            "capacidade",
+            "imagem",
+        ]
+        widgets = {
+            "data": forms.DateInput(attrs={"type": "date"}),
+            "horario": forms.TimeInput(attrs={"type": "time"}),
+        }
 
 
 class DateFilterForm(forms.Form):

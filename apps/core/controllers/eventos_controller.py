@@ -19,21 +19,19 @@ Notas
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
 """
 
-# compatibilidade
 from __future__ import annotations
 
 import json
 
 from typing import Self
 
-from django.http import JsonResponse, HttpRequest
+from django.http import JsonResponse, HttpRequest, HttpResponse
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
-
+from django.core.paginator import Paginator
 from apps.core.services.eventos_service import EventosService
-
 from apps.core.forms import DateFilterForm
 
 __version__ = "0.0.3"
@@ -52,31 +50,20 @@ class EventosController(View):
         super().__init__(**kwargs)
         self.service = EventosService()
 
-    # request causa erro por nao ser utilizado no metodo suprimido por hora para
-    # passar limpo no lint
-    # a fazer: Rever uso da assinatura do metodo
-    # refeito vide g
-    # def get(self: Self, evento_id: int = None) -> JsonResponse:
-    def get(self: Self, request: HttpRequest, evento_id: int = None) -> JsonResponse:
+    def get(self: Self, request: HttpRequest) -> JsonResponse | HttpResponse:
         """
-        Lista todos os eventos ou retorna um evento específico.
+        Lista todos os eventos.
 
         :param request: Objeto da requisição HTTP.
         :type request: HttpRequest
-        :param evento_id: ID do evento (opcional). Se informado, retorna apenas esse evento.
-        :type evento_id: int or None
-        :returns: JsonResponse com um evento ou lista de eventos.
-        :rtype: JsonResponse
+        :returns: JsonResponse ou HttpResponse com a lista de eventos.
+        :rtype: JsonResponse | HttpResponse
         """
 
-        if evento_id:
-            evento = self.service.buscar_evento(evento_id)
-            if not evento:
-                return JsonResponse({"error": "Evento não encontrado"}, status=404)
-            return JsonResponse(self._serialize_evento(evento))
-
         eventos = self.service.listar_eventos()
-        return JsonResponse([self._serialize_evento(e) for e in eventos], safe=False)
+        if request.headers.get("Accept") == "application/json":
+            return JsonResponse([self._serialize_evento(e) for e in eventos], safe=False)
+        return render(request, "core/event_list.html", {"eventos": eventos})
 
     def post(self: Self, request: HttpRequest) -> JsonResponse:
         """
@@ -105,51 +92,6 @@ class EventosController(View):
         except Exception as e:  # pylint: disable=broad-exception-caught
             return JsonResponse({"error": str(e)}, status=400)
 
-    def put(self: Self, request: HttpRequest, evento_id: int) -> JsonResponse:
-        """
-        Atualiza um evento existente.
-
-        :param request: Objeto da requisição HTTP com os dados a atualizar no body.
-        :type request: HttpRequest
-        :param evento_id: ID do evento a ser atualizado.
-        :type evento_id: int
-        :returns: JsonResponse com o evento atualizado ou erro (status 400/404).
-        :rtype: JsonResponse
-        """
-        try:
-            data = json.loads(request.body)
-            evento = self.service.atualizar_evento(evento_id, data)
-            if not evento:
-                return JsonResponse({"error": "Evento não encontrado"}, status=404)
-            return JsonResponse(self._serialize_evento(evento))
-        # erro de captura geral de erro. reavaliar para capturar realmente
-        # o erro especifico e tratar de acorodo.
-        # a fazer granularizar Exception
-        except Exception as e:  # pylint: disable=broad-exception-caught
-            return JsonResponse({"error": str(e)}, status=400)
-
-    # request causa erro por nao ser utilizado no metodo suprimido por hora para
-    # passar limpo no lint
-    # a fazer: Rever uso da assinatura do metodo
-    # def delete(self: Self, evento_id: int) -> JsonResponse:
-    # quebra o django pela assinatura, revertido para chamada original suprimindo
-    # erro anterior erra elevado pelo uso de estrutura atual de MVC.
-    def delete(self: Self, request: HttpRequest, evento_id: int) -> JsonResponse:
-        """
-        Deleta um evento pelo ID.
-
-        :param request: Objeto da requisição HTTP.
-        :type request: HttpRequest
-        :param evento_id: ID do evento a ser deletado.
-        :type evento_id: int
-        :returns: JsonResponse com mensagem de sucesso (status 204) ou erro (status 404).
-        :rtype: JsonResponse
-        """
-        success = self.service.excluir_evento(evento_id)
-        if not success:
-            return JsonResponse({"error": "Evento não encontrado"}, status=404)
-        return JsonResponse({"message": "Evento deletado com sucesso"}, status=204)
-
     def _serialize_evento(self: Self, evento) -> dict:
         """
         Serializa uma instância de Evento para dicionário JSON-serializável.
@@ -174,6 +116,7 @@ class EventosController(View):
             "organizador": evento.organizador,
             "descricao": evento.descricao,
             "capacidade": evento.capacidade,
+            "gestor": evento.gestor,
             "criado_em": format_field(evento.criado_em),
             "atualizado_em": format_field(evento.atualizado_em),
             "imagem": evento.imagem.url
@@ -182,7 +125,7 @@ class EventosController(View):
         }
 
 
-# usa-se t o d o com a faser para o pylint nao reclamar do codigo
+# usa-se todo com a faser para o pylint nao reclamar do codigo
 # a fazer: nao seria o caso de reanalisar toda a classe para integrar
 # essa funcao como um metodo?
 def event_list_controller(request):
@@ -195,24 +138,44 @@ def event_list_controller(request):
               de filtro e a lista de eventos filtrados.
     :rtype: HttpResponse
     """
-
     form = DateFilterForm(request.GET)
-
     service = EventosService()
+
+    data_inicio = None
+    data_fim = None
 
     if form.is_valid():
         data_inicio = form.cleaned_data.get("data_inicio")
         data_fim = form.cleaned_data.get("data_fim")
 
-        events = service.get_filtered_events(data_inicio, data_fim)
-    else:
-        events = service.get_filtered_events()
+    events = service.get_filtered_events(data_inicio=data_inicio, data_fim=data_fim)
+
+    paginator = Paginator(events, 6)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
 
     return render(
         request,
         "core/event_list.html",
         {
             "form": form,
-            "events": events,
+            "page_obj": page_obj,
         },
+    )
+
+
+def detalhes_evento(request, evento_id):
+    """
+    Exibe os detalhes de um evento específico.
+    """
+    service = EventosService()
+
+    evento = service.buscar_evento(evento_id)
+
+    return render(
+        request,
+        "core/detalhes_evento.html",
+        {
+            "evento": evento
+        }
     )
