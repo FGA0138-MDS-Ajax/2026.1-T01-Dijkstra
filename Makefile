@@ -41,7 +41,7 @@ test:
 	pytest
 
 lint:
-	DJANGO_SETTINGS_MODULE=config.settings pylint --load-plugins pylint_django apps/ config/ --ignore=migrations
+	DJANGO_SETTINGS_MODULE=config.settings pylint --load-plugins pylint_django apps/ config/
 	
 clear:
 	find . -type d -name __pycache__ -exec rm -rf {} +

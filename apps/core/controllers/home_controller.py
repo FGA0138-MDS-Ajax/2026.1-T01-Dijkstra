@@ -18,7 +18,6 @@ Notas
 from __future__ import annotations
 
 from django.shortcuts import render
-from django.core.paginator import Paginator
 from apps.core.services.eventos_service import EventosService
 
 __version__ = "0.0.1"
@@ -27,26 +26,14 @@ __license__ = "AGPL V3"
 
 def home(request):
     """
-    Renderiza a página inicial com a listagem de todos os eventos e filtros.
+    Renderiza a página inicial com a listagem de todos os eventos.
+
+    :param request: Objeto da requisição HTTP.
+    :type request: HttpRequest
+    :returns: Resposta HTTP com o template ``core/index.html`` e a lista de eventos.
+    :rtype: HttpResponse
     """
 
     service = EventosService()
-
-    # Captura filtros da requisição
-    query = request.GET.get("q")
-    data_inicio = request.GET.get("data_inicio")
-    data_fim = request.GET.get("data_fim")
-
-    # Busca eventos filtrados via Service
-    eventos_list = service.get_filtered_events(
-        query=query,
-        data_inicio=data_inicio,
-        data_fim=data_fim
-    )
-
-    # Paginação: 6 eventos por página
-    paginator = Paginator(eventos_list, 6)
-    page_number = request.GET.get("page")
-    eventos_obj = paginator.get_page(page_number)
-
-    return render(request, "core/index.html", {"eventos": eventos_obj})
+    eventos = service.listar_eventos()
+    return render(request, "core/index.html", {"eventos": eventos})
