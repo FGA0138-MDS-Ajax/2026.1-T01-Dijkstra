@@ -1,6 +1,6 @@
 # Protótipo de Alta Fidelidade
 
-### **Web
+### **Web**
 
 <div style="position: relative; width: 100%; height: 0; padding-top: 56.2225%;
  padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
@@ -11,6 +11,6 @@
 </div>
 <a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAHKmv0mN4M&#x2F;r9uR3iSNXmSY5HYeJLfRJw&#x2F;view?utm_content=DAHKmv0mN4M&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" target="_blank" rel="noopener">SIGEsporte</a> by Beibe Harry
 
-### **PDF:**
+### **PDF**
 
  [prototipo_nao_funcional.pdf](prototipo_nao_funcional.pdf) 
