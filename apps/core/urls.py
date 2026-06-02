@@ -1,7 +1,7 @@
 """
 apps.core.urls
 ===============
-Mapeamento de rotas URL para os domínios de Eventos e Espaços Físicos.
+Mapeamento de rotas URL para os domínios de Eventos, Espaços Físicos e Organizações.
 
 Componentes Principais
 ----------------------
@@ -23,6 +23,16 @@ Componentes Principais
     :func:`~apps.core.controllers.espacos_controller.espaco_editar`.
 - Rota ``espacos/<uuid>/deletar/``: confirmação e remoção via
     :func:`~apps.core.controllers.espacos_controller.espaco_deletar`.
+- Rota ``organizacoes/``: listagem de organizações em cards via
+    :func:`~apps.core.controllers.organizacoes_controller.organizacoes_list`.
+- Rota ``organizacoes/nova/``: formulário de criação via
+    :func:`~apps.core.controllers.organizacoes_controller.organizacao_nova`.
+- Rota ``organizacoes/<uuid>/``: detalhe da organização via
+    :func:`~apps.core.controllers.organizacoes_controller.organizacao_detalhe`.
+- Rota ``organizacoes/<uuid>/editar/``: formulário de edição via
+    :func:`~apps.core.controllers.organizacoes_controller.organizacao_editar`.
+- Rota ``organizacoes/<uuid>/deletar/``: confirmação e remoção via
+    :func:`~apps.core.controllers.organizacoes_controller.organizacao_deletar`.
 
 Notas
 -----
@@ -48,6 +58,13 @@ from apps.core.controllers.espacos_controller import (
     espaco_editar,
     espaco_deletar,
 )
+from apps.core.controllers.organizacoes_controller import (
+    organizacoes_list,
+    organizacao_nova,
+    organizacao_detalhe,
+    organizacao_editar,
+    organizacao_deletar,
+)
 
 __version__ = "0.0.1"
 __license__ = "AGPL V3"
@@ -64,4 +81,10 @@ urlpatterns = [
     path("espacos/<uuid:espaco_id>/", espaco_detalhe, name="espaco-detalhe"),
     path("espacos/<uuid:espaco_id>/editar/", espaco_editar, name="espaco-editar"),
     path("espacos/<uuid:espaco_id>/deletar/", espaco_deletar, name="espaco-deletar"),
+    # Organizações Esportivas
+    path("organizacoes/", organizacoes_list, name="organizacoes-list"),
+    path("organizacoes/nova/", organizacao_nova, name="organizacao-nova"),
+    path("organizacoes/<uuid:organizacao_id>/", organizacao_detalhe, name="organizacao-detalhe"),
+    path("organizacoes/<uuid:organizacao_id>/editar/", organizacao_editar, name="organizacao-editar"),
+    path("organizacoes/<uuid:organizacao_id>/deletar/", organizacao_deletar, name="organizacao-deletar"),
 ]
