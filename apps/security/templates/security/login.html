@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - SIGEsporte</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <style>
+    /* Estilo rápido para o formulário centralizado */
+    .auth-container {
+        max-width: 400px;
+        margin: 60px auto;
+        padding: 40px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    .auth-input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0 20px;
+        border: 1px solid #96BBAF;
+        border-radius: 10px;
+        font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="logo-wrap">
+      <span class="logo-dentro">
+        <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
+      </span>
+    </div>
+    <div class="header-actions">
+        <a href="{% url 'home' %}" class="btn-header">< VOLTAR</a>
+    </div>
+</header>
+
+<main>
+    <div class="auth-container">
+        <h2 style="color: var(--azul_unb); margin-bottom: 20px;">Acesse sua conta</h2>
+        
+       <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div style="text-align: left;">
+                <label style="font-weight: 600;">Usuário</label>
+                <input type="text" name="username" class="auth-input" required>
+            </div>
+            
+            <div style="text-align: left;">
+                <label style="font-weight: 600;">Senha</label>
+                <input type="password" name="password" class="auth-input" required>
+            </div>
+            
+            <div style="text-align: right; margin-top: -10px; margin-bottom: 20px;">
+                <a href="#" style="color: var(--azul_unb); font-size: 0.9rem; font-weight: 600; text-decoration: none;">Esqueci minha senha</a>
+            </div>
+            
+            <button type="submit" class="btn-header" style="border:none; cursor:pointer; width: 100%;">ENTRAR</button>
+        </form>
+
+        <p style="margin-top: 20px; font-size: 0.9rem; color: #555;">
+            Ainda não tem conta? <a href="{% url 'cadastro' %}" style="color: var(--azul_unb); font-weight: 700; text-decoration: none;">Cadastre-se</a>
+        </p>
+    </div>
+</main>
+
+<footer>&copy; 2026 SIGEsporte</footer>
+</body>
+</html>
