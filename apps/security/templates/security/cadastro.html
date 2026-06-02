@@ -52,22 +52,11 @@
         <form method="POST" action="{% url 'cadastro' %}">
             {% csrf_token %}
             
-            <label class="auth-label">Nome Completo:</label>
+            <label class="auth-label">Nome:</label>
             <input type="text" name="nome" class="auth-input" required>
             
-            <label class="auth-label">E-mail Institucional:</label>
-            <input type="email" name="email" class="auth-input" required>
-            
-            <div style="display: flex; gap: 10px;">
-                <div style="flex: 1;">
-                    <label class="auth-label">CPF:</label>
-                    <input type="text" name="cpf" class="auth-input" required>
-                </div>
-                <div style="flex: 1;">
-                    <label class="auth-label">Matrícula (Opcional):</label>
-                    <input type="text" name="matricula" class="auth-input">
-                </div>
-            </div>
+            <label class="auth-label">Matrícula:</label>
+            <input type="text" name="matricula" class="auth-input" required>
 
             <div style="text-align: left; margin-bottom: 15px;">
                 <label class="auth-label" style="margin-bottom: 5px;">Tipo de Perfil:</label>
