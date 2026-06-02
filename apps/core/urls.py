@@ -56,7 +56,7 @@ __license__ = "AGPL V3"
 urlpatterns = [
     path("", home, name="home"),
     path("eventos/", EventosController.as_view(), name="eventos-list"),
-    path("evento/<int:evento_id>/", detalhes_evento, name="detalhes_evento"),
+    path("evento/<uuid:evento_id>/", detalhes_evento, name="detalhes_evento"),
     path("eventos-filtro/", event_list_controller, name="eventos-filtro"),
     # Espaços Físicos
     path("espacos/", espacos_list, name="espacos-list"),

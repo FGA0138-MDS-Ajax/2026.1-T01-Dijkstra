@@ -1,11 +1,13 @@
-"""
+"""Repositorio de acesso a dados para o dominio de Eventos.
+
+apps.core.repositories.eventos_repository
 apps.core.repositories.eventos_repository
 ==========================================
-Repositório de acesso a dados para o domínio de Eventos.
+Repositorio de acesso a dados para o dominio de Eventos.
 
 Componentes Principais
 ----------------------
-- :class:`EventosRepository`: encapsula as operações CRUD sobre
+- :class:`EventosRepository`: encapsula as operacoes CRUD sobre
   :class:`~apps.core.models.eventos_models.Evento`.
 
 Notas
@@ -15,39 +17,40 @@ Notas
 - Lint e testes por `Saresu <https://github.com/Saresu>`_ em 28 maio 2026
 """
 
-# compatibilidade
 from __future__ import annotations
 
-
+import uuid
 from typing import List, Optional
+
 from django.db.models import Q
+
 from apps.core.models.eventos_models import Evento
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 __license__ = "AGPL V3"
 
 
 class EventosRepository:
-    """Repositório para manipulação de dados de Eventos."""
+    """Repositorio para manipulacao de dados de Eventos."""
 
     def create(self, data: dict) -> Evento:
         """
         Cria um novo evento no banco de dados.
 
-        :param data: Dicionário com os campos do evento.
+        :param data: Dicionario com os campos do evento.
         :type data: dict
-        :returns: Instância do evento criado.
+        :returns: Instancia do evento criado.
         :rtype: Evento
         """
-        return Evento.objects.create(**data)  # expanxão implicita
+        return Evento.objects.create(**data)
 
-    def get_by_id(self, evento_id: int) -> Optional[Evento]:
+    def get_by_id(self, evento_id: uuid.UUID) -> Optional[Evento]:
         """
         Busca um evento pelo seu ID.
 
         :param evento_id: Identificador do evento.
-        :type evento_id: int
-        :returns: Instância do evento ou None se não encontrado.
+        :type evento_id: uuid.UUID
+        :returns: Instancia do evento ou None se nao encontrado.
         :rtype: Evento or None
         """
         try:
@@ -59,23 +62,24 @@ class EventosRepository:
         """
         Retorna todos os eventos cadastrados.
 
-        :returns: Lista de instâncias de Evento.
+        :returns: Lista de instancias de Evento.
         :rtype: list[Evento]
         """
         return list(Evento.objects.all())
 
-    def update(self, evento_id: int, data: dict) -> Optional[Evento]:
+    def update(
+        self, evento_id: uuid.UUID, data: dict
+    ) -> Optional[Evento]:
         """
         Atualiza os campos de um evento existente.
 
         :param evento_id: Identificador do evento a ser atualizado.
-        :type evento_id: int
-        :param data: Dicionário com os campos a atualizar.
+        :type evento_id: uuid.UUID
+        :param data: Dicionario com os campos a atualizar.
         :type data: dict
-        :returns: Instância atualizada do evento ou None se não encontrado.
+        :returns: Instancia atualizada do evento ou None se nao encontrado.
         :rtype: Evento or None
         """
-
         evento = self.get_by_id(evento_id)
         if evento:
             for key, value in data.items():
@@ -84,13 +88,13 @@ class EventosRepository:
             return evento
         return None
 
-    def delete(self, evento_id: int) -> bool:
+    def delete(self, evento_id: uuid.UUID) -> bool:
         """
         Deleta um evento pelo seu ID.
 
         :param evento_id: Identificador do evento a ser deletado.
-        :type evento_id: int
-        :returns: True se deletado com sucesso, False se não encontrado.
+        :type evento_id: uuid.UUID
+        :returns: True se deletado com sucesso, False se nao encontrado.
         :rtype: bool
         """
         evento = self.get_by_id(evento_id)
@@ -104,23 +108,22 @@ class EventosRepository:
         queryset,
         query: Optional[str] = None,
         data_inicio: Optional[str] = None,
-        data_fim: Optional[str] = None
+        data_fim: Optional[str] = None,
     ):
         """
         Filtra um queryset de eventos por texto e intervalo de datas.
 
         :param queryset: Queryset original de eventos.
-        :param query: Termo de busca para nome, descrição ou local.
+        :param query: Termo de busca para nome, descricao ou local.
         :param data_inicio: Data inicial do filtro.
         :param data_fim: Data final do filtro.
         :returns: Queryset filtrado.
         """
-
         if query:
             queryset = queryset.filter(
-                Q(nome__icontains=query) |
-                Q(descricao__icontains=query) |
-                Q(local__icontains=query)
+                Q(nome__icontains=query)
+                | Q(descricao__icontains=query)
+                | Q(local__icontains=query)
             )
 
         if data_inicio:
@@ -131,7 +134,10 @@ class EventosRepository:
         return queryset
 
     def filter_events_by_date(
-        self, queryset, data_inicio: Optional[str] = None, data_fim: Optional[str] = None
+        self,
+        queryset,
+        data_inicio: Optional[str] = None,
+        data_fim: Optional[str] = None,
     ) -> List[Evento]:
         """
         Filtra um queryset de eventos por um intervalo de datas.
