@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espaços Físicos — SIGEsporte</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+</head>
+
+<body>
+
+<!-- CABEÇALHO -->
+<header class="site-header">
+  <div class="logo-wrap">
+    <span class="logo-dentro">
+      <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
+    </span>
+  </div>
+  <div class="header-actions">
+    <a href="{% url 'home' %}" class="btn-header">INÍCIO ></a>
+    <a href="#" class="btn-header">ENTRAR ></a>
+  </div>
+</header>
+
+<!-- CONTEÚDO -->
+<main>
+
+  <div class="espacos-header">
+    <span class="section-tag">Espaços Físicos</span>
+    <a href="{% url 'espaco-novo' %}" class="btn-novo-espaco">+ Novo Espaço</a>
+  </div>
+
+  <div class="events-grid">
+
+    {% for espaco in espacos %}
+
+      <div class="event-card espaco-card">
+
+        {% if espaco.foto %}
+          <img class="event-img" src="{{ espaco.foto.url }}" alt="{{ espaco.nome }}">
+        {% else %}
+          <div class="event-img espaco-sem-foto">
+            <span>Sem foto</span>
+          </div>
+        {% endif %}
+
+        <div class="event-body">
+
+          <h3 class="event-title">{{ espaco.nome }}</h3>
+
+          <div class="event-info">
+            <p><strong>Localização:</strong> {{ espaco.localizacao }}</p>
+            <p>{{ espaco.descricao|truncatechars:80 }}</p>
+
+            <div class="event-status">
+              <span>Status:</span>
+              <span class="status-badge {{ espaco.status_css_class }}">
+                {{ espaco.status_display }}
+              </span>
+            </div>
+          </div>
+
+          <div class="espaco-acoes">
+            <a class="btn-details" href="{% url 'espaco-detalhe' espaco.id %}">
+              Ver detalhes
+            </a>
+            <a class="btn-editar" href="{% url 'espaco-editar' espaco.id %}">
+              Editar
+            </a>
+            <a class="btn-deletar" href="{% url 'espaco-deletar' espaco.id %}">
+              Excluir
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    {% empty %}
+      <p class="espaco-vazio">Nenhum espaço físico cadastrado ainda.
+        <a href="{% url 'espaco-novo' %}">Cadastrar agora</a>.
+      </p>
+    {% endfor %}
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 SIGEsporte
+</footer>
+
+</body>
+</html>

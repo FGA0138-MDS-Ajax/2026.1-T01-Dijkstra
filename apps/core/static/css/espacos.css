@@ -1,0 +1,311 @@
+/* =========================
+   ESPAÇOS FÍSICOS
+   Complementa base.css —
+   usa as mesmas variáveis CSS.
+========================= */
+
+/* ----- Cabeçalho da listagem ----- */
+.espacos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn-novo-espaco {
+  display: inline-block;
+  background: var(--verde_unb);
+  color: white;
+  text-decoration: none;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.btn-novo-espaco:hover {
+  background: var(--azul_unb);
+}
+
+/* ----- Cards de espaço ----- */
+.espaco-card {
+  position: relative;
+}
+
+.espaco-sem-foto {
+  background: #d0dfe8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--azul_unb);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* ----- Status badges específicos ----- */
+.status-disponivel {
+  background: var(--verde_unb);
+}
+
+.status-manutencao {
+  background: #d4820a;
+}
+
+.status-desativado {
+  background: #6c757d;
+}
+
+/* ----- Ações no card ----- */
+.espaco-acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-editar {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  background: var(--azul_unb);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.btn-editar:hover {
+  background: #1a4a72;
+}
+
+.btn-deletar {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  background: transparent;
+  color: #c0392b;
+  border: 2px solid #c0392b;
+  padding: 8px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-deletar:hover {
+  background: #c0392b;
+  color: white;
+}
+
+/* ----- Voltar ----- */
+.btn-back {
+  display: inline-block;
+  margin-bottom: 24px;
+  color: var(--azul_unb);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-back:hover {
+  color: var(--verde_unb);
+}
+
+/* ----- Mensagem lista vazia ----- */
+.espaco-vazio {
+  padding: 24px;
+  color: var(--azul_unb);
+}
+
+.espaco-vazio a {
+  color: var(--verde_unb);
+  font-weight: 700;
+}
+
+/* ----- Detalhe ----- */
+.espaco-detalhe-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+}
+
+.espaco-detalhe-img {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.espaco-detalhe-info p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ----- Formulário ----- */
+.espaco-form-card {
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  padding: 32px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.espaco-form-titulo {
+  font-size: 1.4rem;
+  color: var(--azul_unb);
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+
+.espaco-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--azul_unb);
+}
+
+.form-field input[type="text"],
+.form-field input[type="file"],
+.form-field textarea {
+  border: 1.5px solid #b0c4d8;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  background: #f4f8fb;
+  color: var(--azul_unb);
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.form-field input[type="text"]:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: var(--verde_unb);
+  background: #fff;
+}
+
+/* Radio group */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--azul_unb);
+}
+
+.radio-label input[type="radio"] {
+  accent-color: var(--verde_unb);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Erros */
+.form-erro {
+  color: #c0392b;
+  font-size: 0.82rem;
+}
+
+/* Ações do formulário */
+.form-acoes {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.btn-cancelar-form {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--azul_unb);
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: 2px solid var(--azul_unb);
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-cancelar-form:hover {
+  background: var(--azul_unb);
+  color: white;
+}
+
+.btn-deletar-confirm {
+  border: none;
+  background: #c0392b;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-deletar-confirm:hover {
+  background: #962d22;
+}
+
+/* Foto preview no formulário de edição */
+.foto-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (min-width: 768px) {
+  .radio-group {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .espaco-detalhe-card {
+    flex-direction: row;
+  }
+
+  .espaco-detalhe-img {
+    width: 340px;
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .espaco-detalhe-img {
+    width: 420px;
+  }
+}
