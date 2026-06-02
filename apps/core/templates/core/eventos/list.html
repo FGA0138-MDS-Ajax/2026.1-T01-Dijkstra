@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestão de Eventos — SIGEsporte</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+</head>
+
+<body>
+
+<!-- CABEÇALHO -->
+<header class="site-header">
+  <div class="logo-wrap">
+    <span class="logo-dentro">
+      <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
+    </span>
+  </div>
+  <div class="header-actions">
+    <a href="{% url 'home' %}" class="btn-header">INÍCIO ></a>
+    <a href="#" class="btn-header">ENTRAR ></a>
+  </div>
+</header>
+
+<!-- CONTEÚDO -->
+<main>
+
+  <div class="espacos-header">
+    <span class="section-tag">Gestão de Eventos</span>
+    <a href="{% url 'gestao-evento-novo' %}" class="btn-novo-espaco">+ Novo Evento</a>
+  </div>
+
+  <!-- Filtro por status -->
+  <form method="get" style="margin-bottom: 24px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+    <label for="status" style="font-weight: 600; color: var(--azul_unb); font-size: 0.9rem;">Filtrar por status:</label>
+    <select name="status" id="status" onchange="this.form.submit()"
+      style="border: 1.5px solid #b0c4d8; border-radius: 10px; padding: 8px 14px; font-size: 0.9rem; background: #f4f8fb; color: var(--azul_unb);">
+      <option value="" {% if not status_filtro %}selected{% endif %}>Todos</option>
+      <option value="rascunho" {% if status_filtro == "rascunho" %}selected{% endif %}>Rascunho</option>
+      <option value="publicado" {% if status_filtro == "publicado" %}selected{% endif %}>Publicado</option>
+    </select>
+  </form>
+
+  <div class="events-grid">
+
+    {% for evento in eventos %}
+
+      <div class="event-card espaco-card">
+
+        {% if evento.imagem %}
+          <img class="event-img" src="{{ evento.imagem.url }}" alt="{{ evento.nome }}">
+        {% else %}
+          <div class="event-img espaco-sem-foto">
+            <span>Sem imagem</span>
+          </div>
+        {% endif %}
+
+        <div class="event-body">
+
+          <h3 class="event-title">{{ evento.nome }}</h3>
+
+          <div class="event-info">
+            <p><strong>Data:</strong> {{ evento.data|date:"d/m/Y" }} às {{ evento.horario|time:"H:i" }}</p>
+            <p><strong>Local:</strong> {{ evento.local }}</p>
+
+            <div class="event-status">
+              <span>Status:</span>
+              <span class="status-badge {% if evento.status == 'publicado' %}status-disponivel{% else %}status-desativado{% endif %}">
+                {{ evento.get_status_display }}
+              </span>
+            </div>
+          </div>
+
+          <div class="espaco-acoes">
+            <a class="btn-details" href="{% url 'gestao-evento-detalhe' evento.id %}">
+              Ver detalhes
+            </a>
+            <a class="btn-editar" href="{% url 'gestao-evento-editar' evento.id %}">
+              Editar
+            </a>
+            <a class="btn-deletar" href="{% url 'gestao-evento-deletar' evento.id %}">
+              Excluir
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    {% empty %}
+      <p class="espaco-vazio">
+        Nenhum evento cadastrado ainda.
+        <a href="{% url 'gestao-evento-novo' %}">Cadastrar agora</a>.
+      </p>
+    {% endfor %}
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 SIGEsporte
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ acao }} Evento — SIGEsporte</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+</head>
+
+<body>
+
+<!-- CABEÇALHO -->
+<header class="site-header">
+  <div class="logo-wrap">
+    <span class="logo-dentro">
+      <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
+    </span>
+  </div>
+  <div class="header-actions">
+    <a href="{% url 'home' %}" class="btn-header">INÍCIO ></a>
+    <a href="#" class="btn-header">ENTRAR ></a>
+  </div>
+</header>
+
+<main>
+
+  {% if evento %}
+    <a href="{% url 'gestao-evento-detalhe' evento.id %}" class="btn-back">← Voltar para detalhes</a>
+  {% else %}
+    <a href="{% url 'gestao-eventos-list' %}" class="btn-back">← Voltar para gestão</a>
+  {% endif %}
+
+  <div class="espaco-form-card">
+
+    <h2 class="espaco-form-titulo">{{ acao }} Evento</h2>
+
+    <form method="post" enctype="multipart/form-data" class="espaco-form">
+      {% csrf_token %}
+
+      <div class="form-field">
+        <label for="{{ form.nome.id_for_label }}">Nome *</label>
+        {{ form.nome }}
+        {% if form.nome.errors %}
+          <span class="form-erro">{{ form.nome.errors.as_text }}</span>
+        {% endif %}
+      </div>
+
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <div class="form-field" style="flex: 1; min-width: 160px;">
+          <label for="{{ form.data.id_for_label }}">Data *</label>
+          {{ form.data }}
+          {% if form.data.errors %}
+            <span class="form-erro">{{ form.data.errors.as_text }}</span>
+          {% endif %}
+        </div>
+        <div class="form-field" style="flex: 1; min-width: 140px;">
+          <label for="{{ form.horario.id_for_label }}">Horário *</label>
+          {{ form.horario }}
+          {% if form.horario.errors %}
+            <span class="form-erro">{{ form.horario.errors.as_text }}</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="{{ form.local.id_for_label }}">Local *</label>
+        {{ form.local }}
+        {% if form.local.errors %}
+          <span class="form-erro">{{ form.local.errors.as_text }}</span>
+        {% endif %}
+      </div>
+
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <div class="form-field" style="flex: 1; min-width: 180px;">
+          <label for="{{ form.organizador.id_for_label }}">Organizador *</label>
+          {{ form.organizador }}
+          {% if form.organizador.errors %}
+            <span class="form-erro">{{ form.organizador.errors.as_text }}</span>
+          {% endif %}
+        </div>
+        <div class="form-field" style="flex: 1; min-width: 180px;">
+          <label for="{{ form.gestor.id_for_label }}">Gestor *</label>
+          {{ form.gestor }}
+          {% if form.gestor.errors %}
+            <span class="form-erro">{{ form.gestor.errors.as_text }}</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="{{ form.descricao.id_for_label }}">Descrição</label>
+        {{ form.descricao }}
+        {% if form.descricao.errors %}
+          <span class="form-erro">{{ form.descricao.errors.as_text }}</span>
+        {% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="{{ form.capacidade.id_for_label }}">Capacidade *</label>
+        {{ form.capacidade }}
+        {% if form.capacidade.errors %}
+          <span class="form-erro">{{ form.capacidade.errors.as_text }}</span>
+        {% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="{{ form.imagem.id_for_label }}">Imagem</label>
+        {% if evento and evento.imagem %}
+          <div class="foto-preview">
+            <img src="{{ evento.imagem.url }}" alt="Imagem atual" style="max-width:180px; border-radius:10px;">
+            <small>Imagem atual — envie uma nova para substituir.</small>
+          </div>
+        {% endif %}
+        {{ form.imagem }}
+        {% if form.imagem.errors %}
+          <span class="form-erro">{{ form.imagem.errors.as_text }}</span>
+        {% endif %}
+      </div>
+
+      <div class="form-field">
+        <label>Status *</label>
+        <div class="radio-group">
+          {% for radio in form.status %}
+            <label class="radio-label">
+              {{ radio.tag }}
+              <span>{{ radio.choice_label }}</span>
+            </label>
+          {% endfor %}
+        </div>
+        {% if form.status.errors %}
+          <span class="form-erro">{{ form.status.errors.as_text }}</span>
+        {% endif %}
+      </div>
+
+      <div class="form-acoes">
+        <button type="submit" class="btn-filter">{{ acao }} Evento</button>
+        {% if evento %}
+          <a href="{% url 'gestao-evento-detalhe' evento.id %}" class="btn-cancelar-form">Cancelar</a>
+        {% else %}
+          <a href="{% url 'gestao-eventos-list' %}" class="btn-cancelar-form">Cancelar</a>
+        {% endif %}
+      </div>
+
+    </form>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 SIGEsporte
+</footer>
+
+</body>
+</html>

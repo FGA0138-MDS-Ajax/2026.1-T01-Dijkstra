@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ evento.nome }} — SIGEsporte</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+</head>
+
+<body>
+
+<!-- CABEÇALHO -->
+<header class="site-header">
+  <div class="logo-wrap">
+    <span class="logo-dentro">
+      <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
+    </span>
+  </div>
+  <div class="header-actions">
+    <a href="{% url 'home' %}" class="btn-header">INÍCIO ></a>
+    <a href="#" class="btn-header">ENTRAR ></a>
+  </div>
+</header>
+
+<main>
+
+  <a href="{% url 'gestao-eventos-list' %}" class="btn-back">← Voltar para gestão</a>
+
+  <div class="espaco-detalhe-card">
+
+    {% if evento.imagem %}
+      <img class="espaco-detalhe-img" src="{{ evento.imagem.url }}" alt="{{ evento.nome }}">
+    {% else %}
+      <div class="espaco-detalhe-img espaco-sem-foto">
+        <span>Sem imagem</span>
+      </div>
+    {% endif %}
+
+    <div class="espaco-detalhe-info">
+
+      <h1 class="event-title">{{ evento.nome }}</h1>
+
+      <div class="event-status" style="margin-bottom: 16px;">
+        <span>Status:</span>
+        <span class="status-badge {% if evento.status == 'publicado' %}status-disponivel{% else %}status-desativado{% endif %}">
+          {{ evento.get_status_display }}
+        </span>
+      </div>
+
+      <p><strong>Data:</strong> {{ evento.data|date:"d/m/Y" }}</p>
+      <p><strong>Horário:</strong> {{ evento.horario|time:"H:i" }}</p>
+      <p><strong>Local:</strong> {{ evento.local }}</p>
+      <p><strong>Organizador:</strong> {{ evento.organizador }}</p>
+      <p><strong>Gestor:</strong> {{ evento.gestor }}</p>
+      <p><strong>Capacidade:</strong> {{ evento.capacidade }} pessoas</p>
+
+      {% if evento.descricao %}
+        <p style="margin-top: 12px;"><strong>Descrição:</strong></p>
+        <p>{{ evento.descricao }}</p>
+      {% endif %}
+
+      <div class="espaco-acoes" style="margin-top: 24px;">
+        <a class="btn-editar" href="{% url 'gestao-evento-editar' evento.id %}">Editar</a>
+        <a class="btn-deletar" href="{% url 'gestao-evento-deletar' evento.id %}">Excluir</a>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 SIGEsporte
+</footer>
+
+</body>
+</html>
