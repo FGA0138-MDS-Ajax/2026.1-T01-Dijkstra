@@ -20,9 +20,4 @@ class Migration(migrations.Migration):
             name='horario',
             field=models.TimeField(verbose_name='Horário do Evento'),
         ),
-        migrations.AlterField(
-            model_name='evento',
-            name='id',
-            field=models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
-        ),
     ]

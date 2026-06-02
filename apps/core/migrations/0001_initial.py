@@ -11,14 +11,17 @@ Notas
 - Requer Python >= 3.12
 - Criado por `Gui-fga <https://github.com/Gui-fga>`_ em 30 maio 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
+- Alterado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
 """
 
 # pylint: disable=invalid-name
 
+import uuid
+
 from django.db import migrations, models
 
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __license__ = "AGPL V3"
 
 
@@ -35,8 +38,9 @@ class Migration(migrations.Migration):
             fields=[
                 (
                     "id",
-                    models.AutoField(
-                        auto_created=True,
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
                         primary_key=True,
                         serialize=False,
                         verbose_name="ID",
