@@ -19,8 +19,22 @@
     </div>
 
     <div class="header-actions">
-        <a href="#" class="btn-header">ENTRAR ></a>
-        <a href="#" class="btn-header">CADASTRE-SE ></a>
+        {% if user.is_authenticated %}
+            <span style="color: white; align-self: center; font-weight: 600; font-size: 1.1rem;">
+                Olá, {{ user.first_name|default:user.username }}!
+            </span>
+            
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-header" style="border: none; cursor: pointer;">
+                    SAIR >
+                </button>
+            </form>
+
+        {% else %}
+            <a href="{% url 'login' %}" class="btn-header">ENTRAR ></a>
+            <a href="{% url 'cadastro' %}" class="btn-header">CADASTRE-SE ></a>
+        {% endif %}
     </div>
 </header>
 
