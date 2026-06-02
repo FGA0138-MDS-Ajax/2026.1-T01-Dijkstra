@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Excluir Espaço — SIGEsporte</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+</head>
+
+<body>
+
+<!-- CABEÇALHO -->
+<header class="site-header">
+  <div class="logo-wrap">
+    <span class="logo-dentro">
+      <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
+    </span>
+  </div>
+  <div class="header-actions">
+    <a href="{% url 'home' %}" class="btn-header">INÍCIO ></a>
+    <a href="#" class="btn-header">ENTRAR ></a>
+  </div>
+</header>
+
+<main>
+
+  <a href="{% url 'espaco-detalhe' espaco.id %}" class="btn-back">← Voltar para detalhes</a>
+
+  <div class="espaco-form-card" style="max-width: 520px; text-align: center;">
+
+    <h2 class="espaco-form-titulo" style="color: #c0392b;">Confirmar Exclusão</h2>
+
+    <p style="margin: 20px 0;">
+      Tem certeza que deseja excluir o espaço
+      <strong>{{ espaco.nome }}</strong>?
+      Esta ação não pode ser desfeita.
+    </p>
+
+    <form method="post" class="form-acoes" style="justify-content: center;">
+      {% csrf_token %}
+      <button type="submit" class="btn-deletar-confirm">Sim, excluir</button>
+      <a href="{% url 'espaco-detalhe' espaco.id %}" class="btn-cancelar-form">Cancelar</a>
+    </form>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2026 SIGEsporte
+</footer>
+
+</body>
+</html>
