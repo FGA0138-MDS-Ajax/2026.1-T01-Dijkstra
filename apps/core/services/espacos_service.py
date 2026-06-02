@@ -11,7 +11,7 @@ Componentes Principais
 Notas
 -----
 - Requer Python >= 3.12
-- Criado por `Welder60 <https://github.com/welder60>`_ em 01 abril 2026
+- Criado por `Welder60 <https://github.com/welder60>`_ em 01 junho 2026
 """
 
 # compatibilidade

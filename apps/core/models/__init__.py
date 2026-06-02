@@ -9,7 +9,7 @@ Exporta
 - EspacoFisico
 
 
-- Criado por `Welder60 <https://github.com/welder60>`_ em 01 abril 2026
+- Criado por `Welder60 <https://github.com/welder60>`_ em 01 junho 2026
 """
 
 from apps.core.models.eventos_models import Evento
