@@ -15,6 +15,12 @@ nav:
   - Protótipos:
     - Protótipo de Baixa Fidelidade: "prototipos/baixa_fidelidade/prototipo_baixa_fidelidade.md"
     - Protótipo de Alta Fidelidade: "prototipos/nao_funcional/prototipo_nao_funcional.md"
+  - Roteiros de Implantação:
+    - Visão Geral: "roteiros/main.md"
+    - "1. Escolha e Criação de VPS": "roteiros/provedor.md"
+    - "2. Bootstrap Inicial do Host": "roteiros/bootstrap.md"
+    - "3. Segurança Básica do Host": "roteiros/seguranca.md"
+    - "4. Virtualização com Incus": "roteiros/stack.md"
 
 
 theme:
