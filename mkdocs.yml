@@ -7,12 +7,20 @@ nav:
     - Ata 20/04 - Elaboração do Documento de Visão: "atas_reuniao/ata_reuniao_20_04.md"
     - Ata 06/05 - Elaboração do Documento de Arquitetura: "atas_reuniao/ata_reuniao_06_05.md"
     - Ata 23/05 - Sprint 1 e padronização: "atas_reuniao/ata_reuniao_23_05.md"
+    - Ata 30/05 - Sprint 2: "atas_reuniao/ata_reuniao_30_05.md"
   - Documento de Visão:
     - Documento de Visão: "documentos/documento_de_visao/escopo_visao_do_produto.md"
   - Documento de Arquitetura:
     - Documento de Arquitetura: "documentos/documento_de_arquitetura/documento_de_arquitetura.md"
   - Protótipos:
     - Protótipo de Baixa Fidelidade: "prototipos/baixa_fidelidade/prototipo_baixa_fidelidade.md"
+    - Protótipo de Alta Fidelidade: "prototipos/nao_funcional/prototipo_nao_funcional.md"
+  - Roteiros de Implantação:
+    - Visão Geral: "roteiros/main.md"
+    - "1. Escolha e Criação de VPS": "roteiros/provedor.md"
+    - "2. Bootstrap Inicial do Host": "roteiros/bootstrap.md"
+    - "3. Segurança Básica do Host": "roteiros/seguranca.md"
+    - "4. Virtualização com Incus": "roteiros/stack.md"
 
 
 theme:

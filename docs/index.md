@@ -89,8 +89,12 @@ O sistema atende três tipos de usuários:
       <br/><strong>Lucas Menezes</strong><br/><small>Folha Brito</small>
     </a>
   </div>
-
-</div>
+ <div style="text-align:center; width:120px;">
+    <a href="https://github.com/Gui-fga" target="_blank">
+      <img src="https://github.com/Gui-fga.png?size=100" style="border-radius:50%; width:80px; height:80px; object-fit:cover;" alt="Lucas Menezes Folha Brito"/>
+      <br/><strong>Guilherme Oliveira</strong><br/><small>Monteiro</small>
+    </a>
+  </div>
 
 ---
 
