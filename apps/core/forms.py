@@ -1,13 +1,14 @@
 """
 apps.core.forms
 ================
-Formularios Django para os dominios de Eventos e Espacos Fisicos.
+Formularios Django para os dominios de Eventos, Espacos Fisicos e Organizacoes.
 
 Componentes Principais
 ----------------------
 - :class:`EventoForm`: formulario de criacao e edicao de eventos.
 - :class:`DateFilterForm`: formulario de filtro de eventos por intervalo de datas.
 - :class:`EspacoFisicoForm`: formulario de criacao e edicao de espacos fisicos.
+- :class:`OrganizacaoForm`: formulario de criacao e edicao de organizacoes esportivas.
 
 Notas
 -----
@@ -23,6 +24,7 @@ from __future__ import annotations
 from django import forms
 from apps.core.models.eventos_models import Evento
 from apps.core.models.espacos_models import EspacoFisico
+from apps.core.models.organizacoes_models import Organizacao
 
 __version__ = "0.0.2"
 __license__ = "AGPL V3"
@@ -87,5 +89,18 @@ class EspacoFisicoForm(forms.ModelForm):
         widgets = {
             "status": forms.RadioSelect(),
             "localizacao": forms.Textarea(attrs={"rows": 2}),
+            "descricao": forms.Textarea(attrs={"rows": 4}),
+        }
+
+
+class OrganizacaoForm(forms.ModelForm):
+    """Formulario para criacao e edicao de organizacoes esportivas universitarias."""
+
+    class Meta:
+        """Metadados do formulario OrganizacaoForm."""
+
+        model = Organizacao
+        fields = ["nome", "descricao", "foto"]
+        widgets = {
             "descricao": forms.Textarea(attrs={"rows": 4}),
         }
