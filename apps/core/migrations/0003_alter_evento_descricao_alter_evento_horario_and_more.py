@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0002_dados_iniciais'),
+        ('core', '0001_initial'),
     ]
 
     operations = [
@@ -19,10 +19,5 @@ class Migration(migrations.Migration):
             model_name='evento',
             name='horario',
             field=models.TimeField(verbose_name='Horário do Evento'),
-        ),
-        migrations.AlterField(
-            model_name='evento',
-            name='id',
-            field=models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
         ),
     ]

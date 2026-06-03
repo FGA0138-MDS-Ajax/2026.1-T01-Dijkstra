@@ -15,7 +15,7 @@ Notas
 - Requer Python >= 3.12
 - Criado por `Gui-fga <https://github.com/Gui-fga>`_ em 30 maio 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
-- Alterado por `Welder60 <https://github.com/welder60>`_ em 01 junho 2026
+- Alterado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
 """
 
 # compatibilidade
@@ -47,10 +47,12 @@ class EventoForm(forms.ModelForm):
             "descricao",
             "capacidade",
             "imagem",
+            "status",
         ]
         widgets = {
             "data": forms.DateInput(attrs={"type": "date"}),
             "horario": forms.TimeInput(attrs={"type": "time"}),
+            "status": forms.RadioSelect(),
         }
 
 
