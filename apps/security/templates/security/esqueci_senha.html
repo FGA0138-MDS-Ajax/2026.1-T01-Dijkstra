@@ -58,25 +58,27 @@
         <h2 style="color: var(--azul_unb); margin-bottom: 15px;">Esqueci minha senha</h2>
 
         <p class="auth-description">
-            Informe seu e-mail cadastrado para receber as instruções de redefinição de senha.
-        </p>
+    Informe sua matrícula para receber as instruções de redefinição de senha no e-mail institucional.
+</p>
 
-        <form method="POST" action="{% url 'esqueceu_senha' %}">
-            {% csrf_token %}
+<label class="auth-label" for="matricula">Matrícula</label>
+<input
+    type="text"
+    id="matricula"
+    name="matricula"
+    class="auth-input"
+    placeholder="Digite sua matrícula"
+    pattern="[0-9]{9}"
+    maxlength="9"
+    minlength="9"
+    inputmode="numeric"
+    title="A matrícula deve conter exatamente 9 dígitos"
+    required
+>
 
-            <label class="auth-label" for="email">E-mail</label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                class="auth-input"
-                placeholder="usuario@exemplo.com"
-                required
-            >
-
-            <button type="submit" class="btn-header" style="border:none; cursor:pointer; width: 100%;">
-                ENVIAR INSTRUÇÕES
-            </button>
+ <button type="submit" class="btn-header" style="border:none; cursor:pointer; width: 100%;">
+    ENVIAR INSTRUÇÕES
+ </button>
         </form>
 
         <p style="margin-top: 25px; font-size: 0.9rem; color: #555;">
