@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGEsporte</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="logo-wrap">
+      <span class="logo-dentro">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
+        </a>
+      </span>
+    </div>
+
+    <div class="header-actions">
+        {% if user.is_authenticated %}
+            <span style="color: white; align-self: center; font-weight: 600; font-size: 1.1rem;">
+                Olá, {{ user.first_name|default:user.username }}!
+            </span>
+            
+            <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn-header" style="border: none; cursor: pointer;">
+                    SAIR >
+                </button>
+            </form>
+
+        {% else %}
+            <a href="{% url 'login' %}" class="btn-header">ENTRAR ></a>
+            <a href="{% url 'cadastro' %}" class="btn-header">CADASTRE-SE ></a>
+        {% endif %}
+    </div>
+</header>
+
+{% block content %}
+{% endblock %}
+
+<footer>
+  &copy; 2026 SIGEsporte
+</footer>
+
+</body>
+</html>

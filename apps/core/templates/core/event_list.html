@@ -1,27 +1,41 @@
-<form method="GET" class="filtro-eventos">
+{% extends 'core/base.html' %}
+{% load static %}
 
-    <div class="campo-filtro">
-        <label for="data_inicio">Data início:</label>
-        <input
-            type="date"
-            id="data_inicio"
-            name="data_inicio"
-            value="{{ request.GET.data_inicio }}"
-        >
-    </div>
+{% block extra_css %}
+  {% endblock %}
 
-    <div class="campo-filtro">
-        <label for="data_fim">Data fim:</label>
-        <input
-            type="date"
-            id="data_fim"
-            name="data_fim"
-            value="{{ request.GET.data_fim }}"
-        >
-    </div>
+{% block content %}
+<main>
+    
+    <h2>Filtro de Eventos</h2>
+    
+    <form method="GET" class="filtro-eventos">
 
-    <button type="submit" class="btn-filtrar">
-        FILTRAR
-    </button>
+        <div class="campo-filtro">
+            <label for="data_inicio">Data início:</label>
+            <input
+                type="date"
+                id="data_inicio"
+                name="data_inicio"
+                value="{{ request.GET.data_inicio }}"
+            >
+        </div>
 
-</form>
+        <div class="campo-filtro">
+            <label for="data_fim">Data fim:</label>
+            <input
+                type="date"
+                id="data_fim"
+                name="data_fim"
+                value="{{ request.GET.data_fim }}"
+            >
+        </div>
+
+        <button type="submit" class="btn-filtrar">
+            FILTRAR
+        </button>
+
+    </form>
+    
+    </main>
+{% endblock %}
