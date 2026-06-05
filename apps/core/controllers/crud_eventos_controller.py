@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import uuid
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
@@ -31,6 +32,7 @@ __license__ = "AGPL V3"
 _service = EventosService()
 
 
+@login_required
 @require_http_methods(["GET"])
 def gestao_eventos_list(request: HttpRequest) -> HttpResponse:
     """
@@ -52,6 +54,7 @@ def gestao_eventos_list(request: HttpRequest) -> HttpResponse:
     )
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def gestao_evento_novo(request: HttpRequest) -> HttpResponse:
     """
@@ -76,6 +79,7 @@ def gestao_evento_novo(request: HttpRequest) -> HttpResponse:
     )
 
 
+@login_required
 @require_http_methods(["GET"])
 def gestao_evento_detalhe(
     request: HttpRequest, evento_id: uuid.UUID
@@ -94,6 +98,7 @@ def gestao_evento_detalhe(
     return render(request, "core/eventos/detalhe.html", {"evento": evento})
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def gestao_evento_editar(
     request: HttpRequest, evento_id: uuid.UUID
@@ -123,6 +128,7 @@ def gestao_evento_editar(
     )
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def gestao_evento_deletar(
     request: HttpRequest, evento_id: uuid.UUID
