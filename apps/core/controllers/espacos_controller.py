@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import uuid
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods
@@ -36,6 +37,7 @@ __license__ = "AGPL V3"
 _service = EspacosService()
 
 
+@login_required
 @require_http_methods(["GET"])
 def espacos_list(request: HttpRequest) -> HttpResponse:
     """
@@ -50,6 +52,7 @@ def espacos_list(request: HttpRequest) -> HttpResponse:
     return render(request, "core/espacos/list.html", {"espacos": espacos})
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def espaco_novo(request: HttpRequest) -> HttpResponse:
     """
@@ -70,6 +73,7 @@ def espaco_novo(request: HttpRequest) -> HttpResponse:
     return render(request, "core/espacos/form.html", {"form": form, "acao": "Criar"})
 
 
+@login_required
 @require_http_methods(["GET"])
 def espaco_detalhe(request: HttpRequest, espaco_id: uuid.UUID) -> HttpResponse:
     """
@@ -86,6 +90,7 @@ def espaco_detalhe(request: HttpRequest, espaco_id: uuid.UUID) -> HttpResponse:
     return render(request, "core/espacos/detalhe.html", {"espaco": espaco})
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def espaco_editar(request: HttpRequest, espaco_id: uuid.UUID) -> HttpResponse:
     """
@@ -113,6 +118,7 @@ def espaco_editar(request: HttpRequest, espaco_id: uuid.UUID) -> HttpResponse:
     )
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def espaco_deletar(request: HttpRequest, espaco_id: uuid.UUID) -> HttpResponse:
     """
