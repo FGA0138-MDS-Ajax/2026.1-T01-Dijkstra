@@ -15,6 +15,7 @@ Notas
 - Criado por `MontMarcos <https://github.com/MontMarcos>`_ em 26 maio 2026
 - Lint e testes por `Saresu <https://github.com/Saresu>`_ em 28 maio 2026
 - Alerado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
+- Lint por `Saresu <https://github.com/Saresu>`_ em 05 junho 2026
 """
 
 from __future__ import annotations
@@ -24,7 +25,7 @@ from typing import Self
 
 from django.db import models
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 __license__ = "AGPL V3"
 
 
@@ -53,6 +54,7 @@ class Evento(models.Model):
         RASCUNHO = "rascunho", "Rascunho"
         PUBLICADO = "publicado", "Publicado"
 
+    # pylint: disable=duplicate-code
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -65,12 +67,8 @@ class Evento(models.Model):
     local = models.CharField(max_length=150, verbose_name="Local")
     organizador = models.CharField(max_length=100, verbose_name="Organizador")
     gestor = models.CharField(max_length=100, verbose_name="Gestor")
-    descricao = models.TextField(
-        verbose_name="Descricao", blank=True, null=True
-    )
-    capacidade = models.PositiveIntegerField(
-        verbose_name="Capacidade de Pessoas"
-    )
+    descricao = models.TextField(verbose_name="Descricao", blank=True, null=True)
+    capacidade = models.PositiveIntegerField(verbose_name="Capacidade de Pessoas")
     imagem = models.ImageField(
         upload_to="eventos/",
         verbose_name="Imagem do Evento",
@@ -83,12 +81,8 @@ class Evento(models.Model):
         default=Status.RASCUNHO,
         verbose_name="Status",
     )
-    criado_em = models.DateTimeField(
-        auto_now_add=True, verbose_name="Criado em"
-    )
-    atualizado_em = models.DateTimeField(
-        auto_now=True, verbose_name="Atualizado em"
-    )
+    criado_em = models.DateTimeField(auto_now_add=True, verbose_name="Criado em")
+    atualizado_em = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
 
     class Meta:  # pylint: disable=too-few-public-methods
         """Metadados do model Evento."""

@@ -13,6 +13,7 @@ help:
 	@echo "  make test        Executa os testes com pytest"
 	@echo "  make lint        Analisa o código com pylint"
 	@echo "  make clear       Remove __pycache__, .pyc e o .venv"
+	@echo "  make limpar      Remove __pycache__, .pyc mas preserva o .venv"
 	@echo "  make help        Exibe esta mensagem"
 	@echo "  make user        Cria um usuário administrador"
 
@@ -53,5 +54,12 @@ clear:
 	deactivate 2>/dev/null || true
 	rm -rf .venv
 
+limpar:
+	find . -type d -name __pycache__ -exec rm -rf {} +
+	find . -type f -name "*.pyc" -delete
+	rm -rf .pytest_cache
+	rm -rf .coverage
+	rm -rf logs/
+	
 user:
 	python manage.py createsuperuser
