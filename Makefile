@@ -15,6 +15,7 @@ help:
 	@echo "  make clear       Remove __pycache__, .pyc e o .venv"
 	@echo "  make limpar      Remove __pycache__, .pyc mas preserva o .venv"
 	@echo "  make help        Exibe esta mensagem"
+	@echo "  make user        Cria um usuário administrador"
 
 venv:
 	python3 -m venv .venv
@@ -60,3 +61,5 @@ limpar:
 	rm -rf .coverage
 	rm -rf logs/
 	
+user:
+	python manage.py createsuperuser

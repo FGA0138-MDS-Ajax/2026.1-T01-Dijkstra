@@ -5,6 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SIGEsporte</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   {% block extra_css %}{% endblock %}
 </head>
@@ -15,31 +20,43 @@
     <div class="logo-wrap">
       <span class="logo-dentro">
         <a href="{% url 'home' %}">
-            <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
+            <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte" class="{% if request.resolver_match.url_name in 'login cadastro esqueceu_senha' %}logo-small{% endif %}">
         </a>
       </span>
     </div>
-
+  
     <div class="header-actions">
         {% if user.is_authenticated %}
-            <span style="color: white; align-self: center; font-weight: 600; font-size: 1.1rem;">
-                Olá, {{ user.first_name|default:user.username }}!
-            </span>
-            
-            <form method="post" action="{% url 'logout' %}" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit" class="btn-header" style="border: none; cursor: pointer;">
-                    SAIR >
-                </button>
-            </form>
-
+        <span style="color: white; align-self: center; font-weight: 600; font-size: 1.1rem;">
+            Olá, {{ user.first_name|default:user.username }}!
+        </span>
+        
+        <form method="post" action="{% url 'logout' %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn-header" style="border: none; cursor: pointer;">
+                SAIR >
+            </button>
+        </form>
+        
         {% else %}
-            <a href="{% url 'login' %}" class="btn-header">ENTRAR ></a>
-            <a href="{% url 'cadastro' %}" class="btn-header">CADASTRE-SE ></a>
+        <a href="{% url 'login' %}" class="btn-header">ENTRAR ></a>
+        <a href="{% url 'cadastro' %}" class="btn-header">CADASTRE-SE ></a>
         {% endif %}
     </div>
 </header>
 
+{% if request.resolver_match.url_name not in 'login cadastro esqueceu_senha' %}
+<nav class="navbar">
+  <div class="nav-links">
+    <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'eventos-list' %}active{% endif %}">Início</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'gestao-eventos-list' %}" class="{% if 'gestao-evento' in request.resolver_match.url_name %}active{% endif %}">Gestão de Eventos</a>
+    {% endif %}
+    <a href="{% url 'espacos-list' %}" class="{% if 'espaco' in request.resolver_match.url_name %}active{% endif %}">Espaços</a>
+    <a href="{% url 'organizacoes-list' %}" class="{% if 'organizacao' in request.resolver_match.url_name %}active{% endif %}">Organizações Esportivas</a>
+  </div>
+</nav>
+{% endif %}
 {% block content %}
 {% endblock %}
 

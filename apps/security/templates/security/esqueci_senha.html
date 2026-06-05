@@ -1,12 +1,8 @@
+{% extends 'core/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recuperar senha - SIGEsporte</title>
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
-  <style>
+
+{% block extra_css %}
+<style>
     .auth-container {
         max-width: 400px;
         margin: 60px auto;
@@ -38,47 +34,38 @@
         line-height: 1.5;
         margin-bottom: 25px;
     }
-  </style>
-</head>
-<body>
+</style>
+{% endblock %}
 
-<header class="site-header">
-    <div class="logo-wrap">
-      <span class="logo-dentro">
-        <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
-      </span>
-    </div>
-    <div class="header-actions">
-        <a href="{% url 'login' %}" class="btn-header">< VOLTAR PARA LOGIN</a>
-    </div>
-</header>
-
+{% block content %}
 <main>
     <div class="auth-container">
         <h2 style="color: var(--azul_unb); margin-bottom: 15px;">Esqueci minha senha</h2>
 
         <p class="auth-description">
-    Informe sua matrícula para receber as instruções de redefinição de senha no e-mail institucional.
-</p>
+            Informe sua matrícula para receber as instruções de redefinição de senha no e-mail institucional.
+        </p>
 
-<label class="auth-label" for="matricula">Matrícula</label>
-<input
-    type="text"
-    id="matricula"
-    name="matricula"
-    class="auth-input"
-    placeholder="Digite sua matrícula"
-    pattern="[0-9]{9}"
-    maxlength="9"
-    minlength="9"
-    inputmode="numeric"
-    title="A matrícula deve conter exatamente 9 dígitos"
-    required
->
+        <form method="POST">
+            {% csrf_token %}
+            <label class="auth-label" for="matricula">Matrícula</label>
+            <input
+                type="text"
+                id="matricula"
+                name="matricula"
+                class="auth-input"
+                placeholder="Digite sua matrícula"
+                pattern="[0-9]{9}"
+                maxlength="9"
+                minlength="9"
+                inputmode="numeric"
+                title="A matrícula deve conter exatamente 9 dígitos"
+                required
+            >
 
- <button type="submit" class="btn-header" style="border:none; cursor:pointer; width: 100%;">
-    ENVIAR INSTRUÇÕES
- </button>
+            <button type="submit" class="btn-header" style="border:none; cursor:pointer; width: 100%;">
+                ENVIAR INSTRUÇÕES
+            </button>
         </form>
 
         <p style="margin-top: 25px; font-size: 0.9rem; color: #555;">
@@ -89,7 +76,4 @@
         </p>
     </div>
 </main>
-
-<footer>&copy; 2026 SIGEsporte</footer>
-</body>
-</html>
+{% endblock %}
