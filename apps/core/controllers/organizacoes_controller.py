@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import uuid
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods
@@ -36,6 +37,7 @@ __license__ = "AGPL V3"
 _service = OrganizacoesService()
 
 
+@login_required
 @require_http_methods(["GET"])
 def organizacoes_list(request: HttpRequest) -> HttpResponse:
     """
@@ -54,6 +56,7 @@ def organizacoes_list(request: HttpRequest) -> HttpResponse:
     )
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def organizacao_nova(request: HttpRequest) -> HttpResponse:
     """
@@ -78,6 +81,7 @@ def organizacao_nova(request: HttpRequest) -> HttpResponse:
     )
 
 
+@login_required
 @require_http_methods(["GET"])
 def organizacao_detalhe(request: HttpRequest, organizacao_id: uuid.UUID) -> HttpResponse:
     """
@@ -98,6 +102,7 @@ def organizacao_detalhe(request: HttpRequest, organizacao_id: uuid.UUID) -> Http
     )
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def organizacao_editar(
     request: HttpRequest, organizacao_id: uuid.UUID
@@ -127,6 +132,7 @@ def organizacao_editar(
     )
 
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def organizacao_deletar(
     request: HttpRequest, organizacao_id: uuid.UUID

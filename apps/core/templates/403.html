@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+
+  <div class="espaco-form-card" style="max-width: 520px; text-align: center; margin: 60px auto;">
+
+    <h2 class="espaco-form-titulo" style="color: #c0392b; font-size: 4rem; margin-bottom: 8px;">403</h2>
+    <h3 style="color: #333; margin-bottom: 16px;">Acesso Negado</h3>
+
+    <p style="margin: 0 0 28px;">
+      Você não tem permissão para acessar esta página.<br>
+      Faça login para continuar.
+    </p>
+
+    <div class="form-acoes" style="justify-content: center;">
+      <a href="{% url 'login' %}" class="btn-deletar-confirm" style="background-color: #2c7be5; text-decoration: none;">
+        Fazer Login
+      </a>
+      <a href="{% url 'home' %}" class="btn-cancelar-form">Voltar à Home</a>
+    </div>
+
+  </div>
+
+</main>
+{% endblock %}
