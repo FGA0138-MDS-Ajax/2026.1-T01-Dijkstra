@@ -14,6 +14,7 @@ help:
 	@echo "  make lint        Analisa o código com pylint"
 	@echo "  make clear       Remove __pycache__, .pyc e o .venv"
 	@echo "  make help        Exibe esta mensagem"
+	@echo "  make user        Cria um usuário administrador"
 
 venv:
 	python3 -m venv .venv
@@ -51,3 +52,6 @@ clear:
 	rm -rf logs/
 	deactivate 2>/dev/null || true
 	rm -rf .venv
+
+user:
+	python manage.py createsuperuser

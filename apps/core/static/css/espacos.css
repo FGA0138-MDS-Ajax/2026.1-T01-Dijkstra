@@ -288,7 +288,7 @@
    RESPONSIVIDADE
 ========================= */
 
-@media (min-width: 768px) {
+@media (min-width: 981px) {
   .radio-group {
     flex-direction: row;
     gap: 24px;

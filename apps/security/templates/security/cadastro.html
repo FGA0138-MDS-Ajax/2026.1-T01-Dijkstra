@@ -1,12 +1,8 @@
+{% extends 'core/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro - SIGEsporte</title>
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
-  <style>
+
+{% block extra_css %}
+<style>
     .auth-container {
         max-width: 500px;
         margin: 40px auto;
@@ -30,21 +26,10 @@
         text-align: left;
         font-size: 0.95rem;
     }
-  </style>
-</head>
-<body>
+</style>
+{% endblock %}
 
-<header class="site-header">
-    <div class="logo-wrap">
-      <span class="logo-dentro">
-        <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
-      </span>
-    </div>
-    <div class="header-actions">
-        <a href="{% url 'login' %}" class="btn-header">< VOLTAR PARA LOGIN</a>
-    </div>
-</header>
-
+{% block content %}
 <main>
     <div class="auth-container">
         <h2 style="color: var(--azul_unb); margin-bottom: 20px;">CADASTRAR</h2>
@@ -83,7 +68,4 @@
         </p>
     </div>
 </main>
-
-<footer>&copy; 2026 SIGEsporte</footer>
-</body>
-</html>
+{% endblock %}
