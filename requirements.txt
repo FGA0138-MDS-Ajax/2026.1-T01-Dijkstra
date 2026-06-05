@@ -19,7 +19,7 @@ pylint-plugin-utils==0.9.0
 pytest==9.0.3
 pytest-cov==7.1.0
 pytest-django==4.10.0
-Pillow==11.1.0
+Pillow==12.2.0
 PyYAML==6.0.3
 sqlparse==0.5.5
 tomlkit==0.15.0
