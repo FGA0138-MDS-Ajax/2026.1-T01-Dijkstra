@@ -2,23 +2,25 @@ from uuid import uuid4
 
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 from apps.core.models.organizacoes_models import Organizacao
 
 
 class OrganizacoesControllerTest(TestCase):
     def setUp(self):
+        User = get_user_model()
+
+        self.user = User.objects.create_user(
+            username="tester",
+            password="12345678",
+        )
+
+        self.client.force_login(self.user)
+
         self.organizacao = Organizacao.objects.create(
             nome="Atlética FGA",
             descricao="Organização esportiva universitária",
-        )
-
-    def test_organizacoes_list(self):
-        response = self.client.get(reverse("organizacoes-list"))
-
-        self.assertEqual(
-            response.status_code,
-            200,
         )
 
     def test_organizacao_nova_get(self):
@@ -140,3 +142,23 @@ class OrganizacoesControllerTest(TestCase):
         )
 
         self.assertFalse(Organizacao.objects.filter(id=self.organizacao.id).exists())
+        
+    def test_organizacoes_list(self):
+        response = self.client.get(
+            reverse("organizacoes-list")
+        )
+
+        self.assertEqual(
+            response.status_code,
+            200,
+        )
+
+        self.assertTemplateUsed(
+            response,
+            "core/organizacoes/list.html",
+        )
+
+        self.assertIn(
+            "organizacoes",
+            response.context,
+        )
