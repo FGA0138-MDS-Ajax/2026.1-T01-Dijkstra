@@ -1,30 +1,11 @@
+{% extends 'core/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestão de Eventos — SIGEsporte</title>
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+{% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
-</head>
+{% endblock %}
 
-<body>
-
-<!-- CABEÇALHO -->
-<header class="site-header">
-  <div class="logo-wrap">
-    <span class="logo-dentro">
-      <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
-    </span>
-  </div>
-  <div class="header-actions">
-    <a href="{% url 'home' %}" class="btn-header">INÍCIO ></a>
-    <a href="#" class="btn-header">ENTRAR ></a>
-  </div>
-</header>
-
-<!-- CONTEÚDO -->
+{% block content %}
 <main>
 
   <div class="espacos-header">
@@ -32,7 +13,6 @@
     <a href="{% url 'gestao-evento-novo' %}" class="btn-novo-espaco">+ Novo Evento</a>
   </div>
 
-  <!-- Filtro por status -->
   <form method="get" style="margin-bottom: 24px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
     <label for="status" style="font-weight: 600; color: var(--azul_unb); font-size: 0.9rem;">Filtrar por status:</label>
     <select name="status" id="status" onchange="this.form.submit()"
@@ -98,11 +78,4 @@
   </div>
 
 </main>
-
-<!-- FOOTER -->
-<footer>
-  &copy; 2026 SIGEsporte
-</footer>
-
-</body>
-</html>
+{% endblock %}

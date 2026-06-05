@@ -1,30 +1,11 @@
+{% extends 'core/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIGEsporte</title>
+
+{% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/detalhes_evento.css' %}">
+{% endblock %}
 
-</head>
-
-<!-- CABEÇALHO -->
-<header class="site-header">
-    <div class="logo-wrap">
-      <span class="logo-dentro">
-        <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
-      </span>
-    </div>
-
-    <div class="header-actions">
-        <a href="#" class="btn-header">ENTRAR ></a>
-        <a href="#" class="btn-header">CADASTRE-SE ></a>
-    </div>
-</header>
-
-
-
+{% block content %}
 <main>
   <a href="{% url 'home' %}" class="btn-back">Voltar para eventos</a>
     <div class="event-info">
@@ -51,23 +32,17 @@
             <p><strong>Vagas: </strong>{{ evento.vagas }}/{{ evento.capacidade }}</p>
             <p><strong>Status: </strong>Inscrições Abertas</p>
 
-            {% if inscrito %}
-            <a href="#" class="btn-ins-canc btn-cancelar">Cancelar Inscrição</a>
+            {% if user.is_authenticated %}
+                {% if inscrito %}
+                <a href="#" class="btn-ins-canc btn-cancelar">Cancelar Inscrição</a>
+                {% else %}
+                <a href="#" class="btn-ins-canc btn-inscrever">Inscrever-se</a>
+                {% endif %}
             {% else %}
-            <a href="#" class="btn-ins-canc btn-inscrever">Inscrever-se</a>
+                <a href="{% url 'login' %}?next={{ request.path }}" class="btn-ins-canc btn-inscrever">Inscrever-se</a>
             {% endif %}
-
-          </div>
-        
 
           </div>
     </div>
 </main>
-
-<!-- Footer -->
-<footer>
-  &copy; 2026 SIGEsporte
-</footer>
-
-</body>
-</html>
+{% endblock %}

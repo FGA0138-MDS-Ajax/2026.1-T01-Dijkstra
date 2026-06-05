@@ -1,29 +1,11 @@
+{% extends 'core/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Excluir Evento — SIGEsporte</title>
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+{% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
-</head>
+{% endblock %}
 
-<body>
-
-<!-- CABEÇALHO -->
-<header class="site-header">
-  <div class="logo-wrap">
-    <span class="logo-dentro">
-      <img src="{% static 'img/LOGO - SIGESPORTE.png' %}" alt="Logo SIGEsporte">
-    </span>
-  </div>
-  <div class="header-actions">
-    <a href="{% url 'home' %}" class="btn-header">INÍCIO ></a>
-    <a href="#" class="btn-header">ENTRAR ></a>
-  </div>
-</header>
-
+{% block content %}
 <main>
 
   <a href="{% url 'gestao-evento-detalhe' evento.id %}" class="btn-back">← Voltar para detalhes</a>
@@ -47,11 +29,4 @@
   </div>
 
 </main>
-
-<!-- FOOTER -->
-<footer>
-  &copy; 2026 SIGEsporte
-</footer>
-
-</body>
-</html>
+{% endblock %}
