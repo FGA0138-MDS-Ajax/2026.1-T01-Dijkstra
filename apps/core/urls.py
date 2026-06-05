@@ -49,6 +49,7 @@ Notas
 - Requer Python >= 3.12
 - Criado por `Gui-fga <https://github.com/Gui-fga>`_ em 30 maio 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
+- Alterado por `MontMarcos <https://github.com/montmarcos> e `Beibeharry <https://github.com/beibeharry`_ em 02 junho 2026
 - Alterado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
 """
 

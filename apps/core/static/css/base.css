@@ -19,6 +19,9 @@ body {
   font-family: "Barlow", sans-serif;
   background: #ffffff;
   color: var(--azul_unb);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* =========================
@@ -28,12 +31,9 @@ body {
   position: relative;
   height: 130px;
   background: var(--azul_unb);
-  border-bottom: 26px solid var(--verde_unb);
-
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-
   padding: 25px 40px;
 }
 
@@ -61,12 +61,10 @@ body {
   left: 30px;
   top: 0;
   z-index: 10;
-
   background: var(--verde_unb);
   padding: 0 15px 15px;
   border-radius: 0 0 25px 25px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,9 +81,52 @@ body {
 }
 
 .logo-wrap img {
-  width: 130px;
+  width: 160px;
   height: auto;
   display: block;
+}
+
+.logo-wrap img.logo-small {
+  width: 110px;
+}
+
+/* navbar */
+.navbar {
+  background-color: var(--verde_unb);
+  padding: 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 65px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.nav-links a.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: 700;
 }
 
 /* =========================
@@ -279,7 +320,7 @@ main {
    FOOTER
 ========================= */
 footer {
-  margin-top: 40px;
+  margin-top: auto;
   padding: 25px;
   text-align: center;
   background: var(--azul_unb);
@@ -290,8 +331,8 @@ footer {
    RESPONSIVIDADE
 ========================= */
 
-/* TABLET */
-@media (min-width: 768px) {
+/* TABLET & DESKTOP */
+@media (min-width: 981px) {
   .site-header {
     justify-content: space-between;
     align-items: center;
@@ -366,31 +407,55 @@ footer {
   }
 }
 
-/* MOBILE */
-@media (min-width: 320px) and (max-width: 700px) {
+/* MOBILE & TABLET STACKED */
+@media (max-width: 980px) {
   .site-header {
-    padding-top: 0px;
     height: auto;
-    min-height: 140px;
+    min-height: 120px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 15px 20px;
   }
 
   .logo-wrap {
     position: static;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 15px;
+  }
+
+  .logo-wrap img {
+    width: 140px; /* Reduz um pouco no mobile para caber melhor */
+  }
+  
+  .logo-wrap img.logo-small {
+    width: 90px;
   }
 
   .header-actions {
     width: 100%;
     justify-content: center;
+    gap: 10px;
   }
 
   .btn-header {
     flex: 1;
-    max-width: 140px;
-    padding: 10px 5px;
-    font-size: 11px;
+    min-width: 0;
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+  
+  .navbar {
+    padding: 1rem;
+  }
+  
+  .nav-links {
+    gap: 0.5rem;
+  }
+  
+  .nav-links a {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
   }
 }
