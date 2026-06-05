@@ -11,6 +11,7 @@ Notas
 -----
 - Requer Python >= 3.12
 - Criado por `Welder60 <https://github.com/welder60>`_ em 01 junho 2026
+- Lint por `Saresu <https://github.com/Saresu>`_ em 05 junho 2026
 """
 
 # compatibilidade
@@ -22,7 +23,7 @@ from typing import Self
 
 from django.db import models
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __license__ = "AGPL V3"
 
 
@@ -47,6 +48,7 @@ class EspacoFisico(models.Model):
         EM_MANUTENCAO = "em_manutencao", "Em Manutenção"
         DESATIVADO = "desativado", "Desativado"
 
+    # pylint: disable=duplicate-code
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,

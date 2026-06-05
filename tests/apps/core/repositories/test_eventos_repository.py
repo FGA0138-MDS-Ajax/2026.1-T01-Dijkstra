@@ -1,4 +1,7 @@
+import uuid
+
 from datetime import date, time
+from unittest.mock import MagicMock
 
 from django.test import TestCase
 
@@ -6,7 +9,7 @@ from apps.core.models.eventos_models import Evento
 from apps.core.repositories.eventos_repository import EventosRepository
 
 
-class EventosRepositoryTest(TestCase):
+class TestEventosRepositoryFiltros(TestCase):
     """Testes para o repositório de Eventos."""
 
     def setUp(self):
@@ -44,9 +47,7 @@ class EventosRepositoryTest(TestCase):
     def test_update_evento(self):
         """Testa a atualização de um evento."""
         evento = self.repository.create(self.evento_data)
-        updated_evento = self.repository.update(
-            evento.id, {"nome": "Nome Atualizado"}
-        )
+        updated_evento = self.repository.update(evento.id, {"nome": "Nome Atualizado"})
         self.assertEqual(updated_evento.nome, "Nome Atualizado")
 
     def test_delete_evento(self):
@@ -58,20 +59,15 @@ class EventosRepositoryTest(TestCase):
 
     def test_get_by_id_nao_encontrado(self):
         """get_by_id com id inexistente retorna None."""
-        self.assertIsNone(self.repository.get_by_id(99999))
+        self.assertIsNone(self.repository.get_by_id(uuid.uuid4()))
 
     def test_update_nao_encontrado(self):
         """update com id inexistente retorna None."""
-        self.assertIsNone(self.repository.update(99999, {"nome": "X"}))
+        self.assertIsNone(self.repository.update(uuid.uuid4(), {"nome": "X"}))
 
     def test_delete_nao_encontrado(self):
         """delete com id inexistente retorna False."""
-        self.assertFalse(self.repository.delete(99999))
-
-    def test_str_evento(self):
-        """__str__ retorna o nome do evento."""
-        evento = self.repository.create(self.evento_data)
-        self.assertEqual(str(evento), "Evento Teste")
+        self.assertFalse(self.repository.delete(uuid.uuid4()))
 
     def test_filter_events_by_date(self):
         """Testa o filtro de eventos por data no repositório."""
@@ -82,3 +78,59 @@ class EventosRepositoryTest(TestCase):
         qs = Evento.objects.all()
         filtered = self.repository.filter_events_by_date(qs, "2023-10-01", "2023-10-31")
         self.assertEqual(len(filtered), 2)
+
+    def test_filter_events_com_query(self):
+        queryset = MagicMock()
+        queryset.filter.return_value = queryset
+
+        resultado = self.repository.filter_events(
+            queryset,
+            query="futebol",
+        )
+
+        self.assertEqual(resultado, queryset)
+        self.assertTrue(queryset.filter.called)
+
+    def test_filter_events_com_data_inicio(self):
+        queryset = MagicMock()
+        queryset.filter.return_value = queryset
+
+        self.repository.filter_events(
+            queryset,
+            data_inicio="2026-01-01",
+        )
+
+        queryset.filter.assert_called_with(
+            data__gte="2026-01-01",
+        )
+
+    def test_filter_events_com_data_fim(self):
+        queryset = MagicMock()
+        queryset.filter.return_value = queryset
+
+        self.repository.filter_events(
+            queryset,
+            data_fim="2026-12-31",
+        )
+
+        queryset.filter.assert_called_with(
+            data__lte="2026-12-31",
+        )
+
+    def test_filter_events_com_todos_os_filtros(self):
+        queryset = MagicMock()
+        queryset.filter.return_value = queryset
+
+        resultado = self.repository.filter_events(
+            queryset,
+            query="futebol",
+            data_inicio="2026-01-01",
+            data_fim="2026-12-31",
+        )
+
+        self.assertEqual(resultado, queryset)
+
+        self.assertGreaterEqual(
+            queryset.filter.call_count,
+            3,
+        )

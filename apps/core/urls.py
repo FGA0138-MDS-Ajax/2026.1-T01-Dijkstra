@@ -50,6 +50,7 @@ Notas
 - Criado por `Gui-fga <https://github.com/Gui-fga>`_ em 30 maio 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
 - Alterado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
+- Lint por `Saresu <https://github.com/Saresu>`_ em 05 junho 2026
 """
 
 # compatibilidade
@@ -84,7 +85,7 @@ from apps.core.controllers.organizacoes_controller import (
     organizacao_deletar,
 )
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 __license__ = "AGPL V3"
 
 
@@ -96,9 +97,21 @@ urlpatterns = [
     # Gestão de Eventos (CRUD)
     path("gestao/eventos/", gestao_eventos_list, name="gestao-eventos-list"),
     path("gestao/eventos/novo/", gestao_evento_novo, name="gestao-evento-novo"),
-    path("gestao/eventos/<uuid:evento_id>/", gestao_evento_detalhe, name="gestao-evento-detalhe"),
-    path("gestao/eventos/<uuid:evento_id>/editar/", gestao_evento_editar, name="gestao-evento-editar"),
-    path("gestao/eventos/<uuid:evento_id>/deletar/", gestao_evento_deletar, name="gestao-evento-deletar"),
+    path(
+        "gestao/eventos/<uuid:evento_id>/",
+        gestao_evento_detalhe,
+        name="gestao-evento-detalhe",
+    ),
+    path(
+        "gestao/eventos/<uuid:evento_id>/editar/",
+        gestao_evento_editar,
+        name="gestao-evento-editar",
+    ),
+    path(
+        "gestao/eventos/<uuid:evento_id>/deletar/",
+        gestao_evento_deletar,
+        name="gestao-evento-deletar",
+    ),
     # Espaços Físicos
     path("espacos/", espacos_list, name="espacos-list"),
     path("espacos/novo/", espaco_novo, name="espaco-novo"),
@@ -108,7 +121,19 @@ urlpatterns = [
     # Organizações Esportivas
     path("organizacoes/", organizacoes_list, name="organizacoes-list"),
     path("organizacoes/nova/", organizacao_nova, name="organizacao-nova"),
-    path("organizacoes/<uuid:organizacao_id>/", organizacao_detalhe, name="organizacao-detalhe"),
-    path("organizacoes/<uuid:organizacao_id>/editar/", organizacao_editar, name="organizacao-editar"),
-    path("organizacoes/<uuid:organizacao_id>/deletar/", organizacao_deletar, name="organizacao-deletar"),
+    path(
+        "organizacoes/<uuid:organizacao_id>/",
+        organizacao_detalhe,
+        name="organizacao-detalhe",
+    ),
+    path(
+        "organizacoes/<uuid:organizacao_id>/editar/",
+        organizacao_editar,
+        name="organizacao-editar",
+    ),
+    path(
+        "organizacoes/<uuid:organizacao_id>/deletar/",
+        organizacao_deletar,
+        name="organizacao-deletar",
+    ),
 ]
