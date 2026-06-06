@@ -1,12 +1,5 @@
 # Débito Técnico — apps.core
 
-## DT-001 · `gestor` ausente na serialização
-**Arquivo:** `apps/core/controllers/eventos_controller.py` — `_serialize_evento`
-**Impacto:** Bug — o campo `gestor` existe no model e é persistido, mas nunca é retornado pela API.
-**Ação:** Adicionar `"gestor": evento.gestor` no dicionário retornado por `_serialize_evento`.
-
----
-
 ## DT-002 · `except Exception` expondo detalhes internos
 **Arquivo:** `apps/core/controllers/eventos_controller.py` — `post`, `put`
 **Impacto:** Segurança — `str(e)` pode vazar stack traces, nomes de tabelas e paths do servidor ao cliente.
@@ -25,13 +18,6 @@
 **Arquivo:** `apps/core/controllers/eventos_controller.py` — `post`, `put`
 **Impacto:** Integridade — dados inválidos ou campos inesperados chegam direto ao banco via `create(**data)` e `setattr`.
 **Ação:** Implementar camada de validação no service ou adotar serializers do DRF.
-
----
-
-## DT-005 · `@staticmethod` instanciado desnecessariamente
-**Arquivo:** `apps/core/services/eventos_service.py` — `__init__`
-**Impacto:** Design — `EventosRepository()` é instanciado mas todos os seus métodos são estáticos, tornando a instância inútil.
-**Ação:** Chamar os métodos diretamente pela classe (`EventosRepository.create(...)`) ou converter os métodos para instância.
 
 ---
 
