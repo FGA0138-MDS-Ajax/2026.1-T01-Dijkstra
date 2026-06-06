@@ -41,7 +41,8 @@ Aqui estão os comandos disponíveis e o que eles fazem:
 | **`make test`** | Executa a suíte de testes automatizados do sistema utilizando o **pytest**. | `pytest` |
 | **`make lint`** | Roda a análise estática de código nas pastas `apps/` e `config/` usando o **pylint** para identificar problemas de formatação/bugs. | `pylint apps/ config/` |
 | **`make clear`** | Efetua uma faxina geral no repositório: remove pastas `__pycache__`, arquivos compilados `.pyc`, caches do pytest e coverage, limpa logs e também exclui o ambiente virtual `.venv`. | Diversos comandos `rm` e `find` |
-
+| **`make limpar`** | Similar ao `make clear`, mas preserva o ambiente virtual `.venv`. | Diversos comandos `rm` e `find` |
+| **`make user`** | Cria um superusuário para acessar o painel administrativo. | `python manage.py createsuperuser` |
 ---
 
 ## 3. Fluxo de Trabalho Básico (Primeiros Passos)
@@ -67,7 +68,7 @@ Se você acabou de clonar o repositório, o passo a passo para começar a progra
     ```bash
     make run
     ```
-    O servidor estará disponível por padrão em `http://127.0.0.1:8000/`.
+    O servidor estará disponível por padrão em `http://127.0.0.1:8000/`. O software tem uma aplicação rodando no site: https://sigesporte.duat.site/
 
 ---
 
