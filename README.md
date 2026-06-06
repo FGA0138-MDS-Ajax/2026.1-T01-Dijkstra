@@ -2,6 +2,9 @@
 
 Sistema de Gerenciamento Esportivo desenvolvido como projeto da disciplina de **Métodos de Desenvolvimento de Software**, ministrada pelo professor Ricardo Ajax na Universidade de Brasília (UnB).
 
+🌐 **Site:** [https://sigesporte.duat.site/](https://sigesporte.duat.site/)
+📚 **Documentação:** [https://fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra/](https://fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra/)
+
 ---
 
 ## Tecnologias
