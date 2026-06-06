@@ -26,14 +26,10 @@ O projeto adota uma arquitetura modular baseada em Django, com separação clara
 ├── apps/
 │   ├── core/               # Aplicação principal do sistema
 │   │   ├── controllers/    # Camada de controle (views)
-│   │   ├── models/         # Modelos de dados
+│   │   ├── models/         # Modelos de dados (Eventos, Espaços, Organizações)
 │   │   ├── repositories/   # Acesso ao banco de dados
 │   │   └── services/       # Regras de negócio
 │   ├── security/           # Autenticação e regras de segurança
-│   │   ├── controllers/
-│   │   ├── models/
-│   │   ├── repositories/
-│   │   └── services/
 │   └── utils/              # Utilitários globais (logs, config, telemetria)
 ├── config/                 # Configurações globais do Django
 │   ├── settings.py
@@ -100,6 +96,8 @@ O servidor estará disponível em **http://127.0.0.1:8000/**.
 | `make test` | Executa os testes com pytest |
 | `make lint` | Analisa o código com pylint |
 | `make clear` | Remove caches, arquivos compilados e o `.venv` |
+| `make limpar` | Remove caches e arquivos compilados (mantém o `.venv`) |
+| `make user` | Cria um superusuário administrador |
 
 ---
 
