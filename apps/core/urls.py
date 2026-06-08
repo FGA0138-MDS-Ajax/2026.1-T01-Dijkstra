@@ -54,6 +54,7 @@ Notas
 - Alterado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
 - Lint por `Saresu <https://github.com/Saresu>`_ em 05 junho 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 02 junho 2026
+- Alterado por DaviiGualbertoo <https://github.com/DaviiGualbertoo>`_ em 08 junho 2026
 """
 
 # compatibilidade
@@ -87,6 +88,8 @@ from apps.core.controllers.organizacoes_controller import (
     organizacao_editar,
     organizacao_deletar,
 )
+# Importação do novo controlador de inscrições
+from apps.core.controllers import inscricoes_controller
 
 __version__ = "0.0.4"
 __license__ = "AGPL V3"
@@ -96,6 +99,13 @@ urlpatterns = [
     path("", home, name="home"),
     path("eventos/", EventosController.as_view(), name="eventos-list"),
     path("evento/<uuid:evento_id>/", detalhes_evento, name="detalhes_evento"),
+    
+    # Rota da US-007 (Inscrição)
+    path("evento/<uuid:evento_id>/inscrever/", inscricoes_controller.inscrever_evento, name="inscrever_evento"),
+    
+    # Rota da US-009 (Cancelamento)
+    path("evento/<uuid:evento_id>/cancelar/", inscricoes_controller.cancelar_inscricao, name="cancelar_inscricao"),
+    
     path("eventos-filtro/", event_list_controller, name="eventos-filtro"),
     # Gestão de Eventos (CRUD)
     path("gestao/eventos/", gestao_eventos_list, name="gestao-eventos-list"),
