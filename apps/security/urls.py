@@ -12,6 +12,7 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from apps.security.controllers.cadastro import cadastro
 
+from apps.security.controllers.cadastro_controller import cadastro
 from apps.security.controllers.area_restrita_controller import (
     area_restrita_redirect,
     perfil,
