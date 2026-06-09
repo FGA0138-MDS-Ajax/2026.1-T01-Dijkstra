@@ -1,8 +1,414 @@
 {% extends 'security/base_restrita.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+  <style>
+    /* ---- Tabela de usuários ---- */
+    .usuarios-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .usuarios-header h1 {
+      font-size: 1.6rem;
+      color: var(--azul_unb);
+      font-weight: 700;
+    }
+
+    .usuarios-count {
+      background: #e8f0f7;
+      color: var(--azul_unb);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .table-wrapper {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      overflow-x: auto;
+    }
+
+    .usuarios-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    .usuarios-table thead tr {
+      background: var(--azul_unb);
+      color: white;
+    }
+
+    .usuarios-table thead th {
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .usuarios-table tbody tr {
+      border-bottom: 1px solid #e8edf2;
+      transition: background 0.15s;
+    }
+
+    .usuarios-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .usuarios-table tbody tr:hover {
+      background: #f4f8fb;
+    }
+
+    .usuarios-table tbody tr.inativo {
+      opacity: 0.6;
+    }
+
+    .usuarios-table td {
+      padding: 12px 16px;
+      vertical-align: middle;
+    }
+
+    /* Badge de status */
+    .badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .badge-ativo {
+      background: #d4edda;
+      color: #1b7a43;
+    }
+
+    .badge-inativo {
+      background: #f8d7da;
+      color: #842029;
+    }
+
+    .badge-superuser {
+      background: #fff3cd;
+      color: #664d03;
+    }
+
+    /* Select de perfil inline */
+    .select-perfil {
+      border: 1.5px solid #b0c4d8;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.85rem;
+      background: #f4f8fb;
+      color: var(--azul_unb);
+      cursor: pointer;
+    }
+
+    .select-perfil:focus {
+      outline: none;
+      border-color: var(--verde_unb);
+    }
+
+    .btn-salvar-perfil {
+      border: none;
+      background: var(--verde_unb);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-left: 6px;
+    }
+
+    .btn-salvar-perfil:hover {
+      background: #145c32;
+    }
+
+    /* Botões de ação */
+    .acoes-cell {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    .btn-inativar {
+      border: 2px solid #d4820a;
+      background: transparent;
+      color: #d4820a;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-inativar:hover {
+      background: #d4820a;
+      color: white;
+    }
+
+    .btn-reativar {
+      border: 2px solid var(--verde_unb);
+      background: transparent;
+      color: var(--verde_unb);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-reativar:hover {
+      background: var(--verde_unb);
+      color: white;
+    }
+
+    .btn-excluir {
+      border: 2px solid #c0392b;
+      background: transparent;
+      color: #c0392b;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-excluir:hover {
+      background: #c0392b;
+      color: white;
+    }
+
+    .sem-usuarios {
+      padding: 40px;
+      text-align: center;
+      color: #6c757d;
+      font-size: 1rem;
+    }
+
+    /* Modal de confirmação de exclusão */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.aberto {
+      display: flex;
+    }
+
+    .modal-box {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+      padding: 36px 32px;
+      max-width: 440px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .modal-box h2 {
+      color: #c0392b;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+
+    .modal-box p {
+      color: var(--azul_unb);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .modal-acoes {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .nome-usuario {
+      font-weight: 600;
+    }
+
+    .eu-badge {
+      font-size: 0.72rem;
+      background: #e8f0f7;
+      color: var(--azul_unb);
+      border-radius: 10px;
+      padding: 2px 8px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+  </style>
+{% endblock %}
 
 {% block restrita_content %}
-<h1>Gestão de Usuários</h1>
-<div class="page-placeholder">
-  Esta página ainda não possui conteúdo.
+
+<div class="usuarios-header">
+  <h1>Gestão de Usuários</h1>
+  <span class="usuarios-count">{{ usuarios|length }} usuário{{ usuarios|length|pluralize:"s" }}</span>
 </div>
+
+<div class="table-wrapper">
+  {% if usuarios %}
+  <table class="usuarios-table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Usuário</th>
+        <th>E-mail</th>
+        <th>Perfil</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in usuarios %}
+      <tr class="{% if not u.is_active %}inativo{% endif %}">
+
+        {# Nome #}
+        <td>
+          {{ u.nome_completo }}
+          {% if u == request.user %}<span class="eu-badge">Você</span>{% endif %}
+        </td>
+
+        {# Username #}
+        <td>{{ u.username }}</td>
+
+        {# Email #}
+        <td>{{ u.email|default:"—" }}</td>
+
+        {# Perfil #}
+        <td>
+          {% if u.is_superuser %}
+            <span class="badge badge-superuser">Superuser</span>
+          {% elif u == request.user %}
+            <span class="badge" style="background:#e8f0f7;color:var(--azul_unb);">
+              {{ u.get_tipo_display }}
+            </span>
+          {% else %}
+            <form method="post"
+                  action="{% url 'area-restrita-alterar-perfil-usuario' u.id %}"
+                  style="display:inline-flex;align-items:center;gap:4px;">
+              {% csrf_token %}
+              <select name="tipo" class="select-perfil">
+                {% for valor, label in perfis %}
+                  <option value="{{ valor }}" {% if u.tipo == valor %}selected{% endif %}>
+                    {{ label }}
+                  </option>
+                {% endfor %}
+              </select>
+              <button type="submit" class="btn-salvar-perfil">Salvar</button>
+            </form>
+          {% endif %}
+        </td>
+
+        {# Status #}
+        <td>
+          {% if u.is_superuser %}
+            <span class="badge badge-ativo">Ativo</span>
+          {% elif u.is_active %}
+            <span class="badge badge-ativo">Ativo</span>
+          {% else %}
+            <span class="badge badge-inativo">Inativo</span>
+          {% endif %}
+        </td>
+
+        {# Ações #}
+        <td>
+          {% if u.is_superuser or u == request.user %}
+            <span style="color:#aaa;font-size:0.85rem;">—</span>
+          {% else %}
+            <div class="acoes-cell">
+              {# Inativar / Reativar #}
+              <form method="post"
+                    action="{% url 'area-restrita-inativar-usuario' u.id %}">
+                {% csrf_token %}
+                {% if u.is_active %}
+                  <button type="submit" class="btn-inativar">Inativar</button>
+                {% else %}
+                  <button type="submit" class="btn-reativar">Reativar</button>
+                {% endif %}
+              </form>
+
+              {# Excluir — abre modal de confirmação #}
+              <button type="button"
+                      class="btn-excluir"
+                      data-url="{% url 'area-restrita-excluir-usuario' u.id %}"
+                      data-nome="{{ u.nome_completo|escapejs }}"
+                      onclick="abrirModal(this)">
+                Excluir
+              </button>
+            </div>
+          {% endif %}
+        </td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="sem-usuarios">Nenhum usuário cadastrado ainda.</p>
+  {% endif %}
+</div>
+
+{# Modal de confirmação de exclusão #}
+<div class="modal-overlay" id="modal-excluir">
+  <div class="modal-box">
+    <h2>Confirmar Exclusão</h2>
+    <p>
+      Tem certeza que deseja excluir o usuário
+      <strong id="modal-nome"></strong>?
+      Esta ação não pode ser desfeita.
+    </p>
+    <div class="modal-acoes">
+      <form method="post" id="form-excluir" action="">
+        {% csrf_token %}
+        <button type="submit" class="btn-deletar-confirm">Sim, excluir</button>
+      </form>
+      <button type="button" class="btn-cancelar-form" onclick="fecharModal()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function abrirModal(btn) {
+    document.getElementById('modal-nome').textContent = btn.dataset.nome;
+    document.getElementById('form-excluir').action = btn.dataset.url;
+    document.getElementById('modal-excluir').classList.add('aberto');
+  }
+
+  function fecharModal() {
+    document.getElementById('modal-excluir').classList.remove('aberto');
+  }
+
+  // Fechar ao clicar fora do box
+  document.getElementById('modal-excluir').addEventListener('click', function(e) {
+    if (e.target === this) fecharModal();
+  });
+</script>
+
 {% endblock %}
