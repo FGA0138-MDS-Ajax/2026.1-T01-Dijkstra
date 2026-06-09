@@ -21,6 +21,9 @@ from apps.security.controllers.area_restrita_controller import (
     espacos_esportivos,
     reservas,
     gestao_usuarios,
+    alterar_perfil_usuario,
+    inativar_usuario,
+    excluir_usuario,
 )
 
 urlpatterns = [
@@ -67,5 +70,20 @@ urlpatterns = [
         "area-restrita/gestao-usuarios/",
         gestao_usuarios,
         name="area-restrita-gestao-usuarios",
+    ),
+    path(
+        "area-restrita/gestao-usuarios/<str:usuario_id>/alterar-perfil/",
+        alterar_perfil_usuario,
+        name="area-restrita-alterar-perfil-usuario",
+    ),
+    path(
+        "area-restrita/gestao-usuarios/<str:usuario_id>/inativar/",
+        inativar_usuario,
+        name="area-restrita-inativar-usuario",
+    ),
+    path(
+        "area-restrita/gestao-usuarios/<str:usuario_id>/excluir/",
+        excluir_usuario,
+        name="area-restrita-excluir-usuario",
     ),
 ]
