@@ -54,14 +54,14 @@ class EventosController(View):
 
     def get(self: Self, request: HttpRequest) -> JsonResponse | HttpResponse:
         """
-        Lista todos os eventos.
+        Lista todos os eventos publicados.
 
         :param request: Objeto da requisicao HTTP.
         :type request: HttpRequest
         :returns: JsonResponse ou HttpResponse com a lista de eventos.
         :rtype: JsonResponse | HttpResponse
         """
-        eventos = self.service.listar_eventos()
+        eventos = self.service.listar_eventos_publicados()
         if request.headers.get("Accept") == "application/json":
             return JsonResponse(
                 [self._serialize_evento(e) for e in eventos], safe=False
@@ -187,6 +187,7 @@ def detalhes_evento(request, evento_id):
     evento.vagas_ocupadas = Inscricao.objects.filter(evento=evento).exclude(
         status__in=[Inscricao.Status.CANCELADA, Inscricao.Status.REJEITADA]
     ).count()
+
 
     return render(
         request,

@@ -69,6 +69,7 @@ class Evento(models.Model):
     gestor = models.CharField(max_length=100, verbose_name="Gestor")
     descricao = models.TextField(verbose_name="Descricao", blank=True, null=True)
     capacidade = models.PositiveIntegerField(verbose_name="Capacidade de Pessoas")
+    vagas_ocupadas = models.PositiveIntegerField(default=0, verbose_name="Vagas Ocupadas")
     imagem = models.ImageField(
         upload_to="eventos/",
         verbose_name="Imagem do Evento",

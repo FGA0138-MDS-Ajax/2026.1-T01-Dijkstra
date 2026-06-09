@@ -32,6 +32,9 @@ __license__ = "AGPL V3"
 
 class EventosRepository:
     """Repositorio para manipulacao de dados de Eventos."""
+    #definindo o usuario.
+    def __init__(self):
+        self.usuario = None
 
     def create(self, data: dict) -> Evento:
         """
@@ -42,7 +45,7 @@ class EventosRepository:
         :returns: Instancia do evento criado.
         :rtype: Evento
         """
-        return Evento.objects.create(**data)
+
 
     def get_by_id(self, evento_id: uuid.UUID) -> Optional[Evento]:
         """
@@ -57,6 +60,16 @@ class EventosRepository:
             return Evento.objects.get(id=evento_id)
         except Evento.DoesNotExist:
             return None
+        
+    def get_publicados(self) -> List[Evento]:
+        """
+        Retorna todos os eventos publicados.
+
+        :returns: Lista de instancias de Evento.
+        :rtype: list[Evento]
+        """
+        return list(Evento.objects.filter(status=Evento.Status.PUBLICADO))
+
 
     def get_all(self) -> List[Evento]:
         """

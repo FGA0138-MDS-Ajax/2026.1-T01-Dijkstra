@@ -37,17 +37,27 @@
 
 {% block content %}
 <main>
-  <a href="{% url 'home' %}" class="btn-back">Voltar para eventos</a>
+    
+    <a href="{% url 'home' %}" class="btn-back">Voltar para eventos</a>
     
     {% if messages %}
     <div class="messages-container">
         {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
         {% endfor %}
     </div>
     {% endif %}
+    
+    {% if evento.vagas_ocupadas >= evento.capacidade %}
+    <div class="messages-container">
+        <div class="alert alert-error">
+        Não há mais vagas disponíveis para este evento.
+    </div>
+    </div>
+    {% endif %}
+    
 
     <div class="event-info">
         <h1 class="event-title">
@@ -73,13 +83,17 @@
             
             <p><strong>Inscritos: </strong>{{ evento.vagas_ocupadas }}/{{ evento.capacidade }}</p>
             
+            {% if evento.vagas_ocupadas >= evento.capacidade %}
+            <p><strong>Status: </strong>Inscrições Encerradas</p>
+            {% else %}
             <p><strong>Status: </strong>Inscrições Abertas</p>
+            {% endif %}
 
             {% if user.is_authenticated %}
                 {% if inscricao %}
                 
                 <p><strong>Status da Inscrição: </strong> <span style="color: #d97706; font-weight: bold;">{{ inscricao.get_status_display }}</span></p>
-                
+        
                 <form id="form-cancelamento" action="{% url 'cancelar_inscricao' evento.id %}" method="POST" style="display: inline;">
                     {% csrf_token %}
                     <button type="button" class="btn-ins-canc btn-cancelar" style="border: none; cursor: pointer; font-family: inherit;" onclick="abrirModal()">
@@ -87,7 +101,9 @@
                     </button>
                 </form>
                 
+
                 {% else %}
+                {% if evento.capacidade > evento.vagas_ocupadas %}
                 <form action="{% url 'inscrever_evento' evento.id %}" method="POST" style="display: inline;">
                     {% csrf_token %}
                     <button type="submit" class="btn-ins-canc btn-inscrever" style="border: none; cursor: pointer; font-family: inherit;">
@@ -95,11 +111,15 @@
                     </button>
                 </form>
                 {% endif %}
+                {% endif %}
                 
-            {% else %}
+                
+                {% else %}
+                {% if evento.capacidade > evento.vagas_ocupadas %}
                 <a href="{% url 'login' %}?next={{ request.path }}" class="btn-ins-canc btn-inscrever">Inscrever-se</a>
-            {% endif %}
-
+                {% endif %}
+                {% endif %}
+                
           </div>
     </div>
 </main>

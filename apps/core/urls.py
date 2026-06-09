@@ -54,7 +54,6 @@ Notas
 - Alterado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
 - Lint por `Saresu <https://github.com/Saresu>`_ em 05 junho 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 02 junho 2026
-- Alterado por DaviiGualbertoo <https://github.com/DaviiGualbertoo>`_ em 08 junho 2026
 """
 
 # compatibilidade
@@ -88,65 +87,74 @@ from apps.core.controllers.organizacoes_controller import (
     organizacao_editar,
     organizacao_deletar,
 )
+
 # Importação do novo controlador de inscrições
 from apps.core.controllers import inscricoes_controller
 
 __version__ = "0.0.4"
 __license__ = "AGPL V3"
 
+from django.core.exceptions import PermissionDenied
+
+def somente_organizacao(view_func):
+        def wrapper(request, *args, **kwargs):
+            if request.user.is_authenticated and request.user.tipo == "OR":
+                return view_func(request, *args, **kwargs)
+            raise PermissionDenied()
+        return wrapper
 
 urlpatterns = [
     path("", home, name="home"),
     path("eventos/", EventosController.as_view(), name="eventos-list"),
     path("evento/<uuid:evento_id>/", detalhes_evento, name="detalhes_evento"),
+    path("eventos-filtro/", event_list_controller, name="eventos-filtro"),
     
     # Rota da US-007 (Inscrição)
     path("evento/<uuid:evento_id>/inscrever/", inscricoes_controller.inscrever_evento, name="inscrever_evento"),
     
     # Rota da US-009 (Cancelamento)
     path("evento/<uuid:evento_id>/cancelar/", inscricoes_controller.cancelar_inscricao, name="cancelar_inscricao"),
-    
-    path("eventos-filtro/", event_list_controller, name="eventos-filtro"),
+
     # Gestão de Eventos (CRUD)
-    path("gestao/eventos/", gestao_eventos_list, name="gestao-eventos-list"),
-    path("gestao/eventos/novo/", gestao_evento_novo, name="gestao-evento-novo"),
+    path("gestao/eventos/", somente_organizacao(gestao_eventos_list), name="gestao-eventos-list"),
+    path("gestao/eventos/novo/", somente_organizacao(gestao_evento_novo), name="gestao-evento-novo"),
     path(
         "gestao/eventos/<uuid:evento_id>/",
-        gestao_evento_detalhe,
+        somente_organizacao(gestao_evento_detalhe),
         name="gestao-evento-detalhe",
     ),
     path(
         "gestao/eventos/<uuid:evento_id>/editar/",
-        gestao_evento_editar,
+        somente_organizacao(gestao_evento_editar),
         name="gestao-evento-editar",
     ),
     path(
         "gestao/eventos/<uuid:evento_id>/deletar/",
-        gestao_evento_deletar,
+        somente_organizacao(gestao_evento_deletar),
         name="gestao-evento-deletar",
     ),
     # Espaços Físicos
-    path("espacos/", espacos_list, name="espacos-list"),
-    path("espacos/novo/", espaco_novo, name="espaco-novo"),
-    path("espacos/<uuid:espaco_id>/", espaco_detalhe, name="espaco-detalhe"),
-    path("espacos/<uuid:espaco_id>/editar/", espaco_editar, name="espaco-editar"),
-    path("espacos/<uuid:espaco_id>/deletar/", espaco_deletar, name="espaco-deletar"),
+    path("espacos/", somente_organizacao(espacos_list), name="espacos-list"),
+    path("espacos/novo/", somente_organizacao(espaco_novo), name="espaco-novo"),
+    path("espacos/<uuid:espaco_id>/", somente_organizacao(espaco_detalhe), name="espaco-detalhe"),
+    path("espacos/<uuid:espaco_id>/editar/", somente_organizacao(espaco_editar), name="espaco-editar"),
+    path("espacos/<uuid:espaco_id>/deletar/", somente_organizacao(espaco_deletar), name="espaco-deletar"),
     # Organizações Esportivas
-    path("organizacoes/", organizacoes_list, name="organizacoes-list"),
-    path("organizacoes/nova/", organizacao_nova, name="organizacao-nova"),
+    path("organizacoes/", somente_organizacao(organizacoes_list), name="organizacoes-list"),
+    path("organizacoes/nova/", somente_organizacao(organizacao_nova), name="organizacao-nova"),
     path(
         "organizacoes/<uuid:organizacao_id>/",
-        organizacao_detalhe,
+        somente_organizacao(organizacao_detalhe),
         name="organizacao-detalhe",
     ),
     path(
         "organizacoes/<uuid:organizacao_id>/editar/",
-        organizacao_editar,
+        somente_organizacao(organizacao_editar),
         name="organizacao-editar",
     ),
     path(
         "organizacoes/<uuid:organizacao_id>/deletar/",
-        organizacao_deletar,
+        somente_organizacao(organizacao_deletar),
         name="organizacao-deletar",
     ),
 ]
