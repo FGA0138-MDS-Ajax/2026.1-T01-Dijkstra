@@ -20,6 +20,7 @@ Notas
 - Lint e testes por `Saresu <https://github.com/Saresu>`_ em 28 maio 2026
 - Revisado por `Gui-fga <https://github.com/Gui-fga>`_ em 30 maio 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
+- Alterado por `DaviiGualbertoo <https://github.com/DaviiGualbertoo>`_ em 08 junho 2026
 """
 
 from __future__ import annotations
@@ -36,6 +37,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from apps.core.forms import DateFilterForm
 from apps.core.services.eventos_service import EventosService
+from apps.core.models.inscricao_models import Inscricao
 
 __version__ = "0.0.4"
 __license__ = "AGPL V3"
@@ -178,8 +180,19 @@ def detalhes_evento(request, evento_id):
     service = EventosService()
     evento = service.buscar_evento(evento_id)
 
+    inscricao = None
+    if request.user.is_authenticated:
+        inscricao = Inscricao.objects.filter(aluno=request.user, evento=evento).first()
+
+    evento.vagas_ocupadas = Inscricao.objects.filter(evento=evento).exclude(
+        status__in=[Inscricao.Status.CANCELADA, Inscricao.Status.REJEITADA]
+    ).count()
+
     return render(
         request,
         "core/detalhes_evento.html",
-        {"evento": evento},
+        {
+            "evento": evento,
+            "inscricao": inscricao,
+        },
     )
