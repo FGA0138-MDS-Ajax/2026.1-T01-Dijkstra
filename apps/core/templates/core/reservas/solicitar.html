@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+
+  <a href="{% url 'reservas-do-evento' evento.id %}" class="btn-back">← Voltar para reservas do evento</a>
+
+  <div class="espaco-form-card">
+
+    <h2 class="espaco-form-titulo">Solicitar Reserva de Espaço</h2>
+
+    <p style="color: var(--azul_unb); font-size: 0.95rem; margin-bottom: 20px;">
+      Evento: <strong>{{ evento.nome }}</strong>
+    </p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div style="
+          padding: 12px 16px;
+          border-radius: 10px;
+          margin-bottom: 16px;
+          font-weight: 600;
+          font-size: 0.9rem;
+          {% if message.tags == 'error' %}
+            background: #fdecea; color: #c0392b; border: 1.5px solid #c0392b;
+          {% elif message.tags == 'success' %}
+            background: #eafaf1; color: var(--verde_unb); border: 1.5px solid var(--verde_unb);
+          {% else %}
+            background: #eaf1fb; color: var(--azul_unb); border: 1.5px solid var(--azul_unb);
+          {% endif %}
+        ">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post" class="espaco-form">
+      {% csrf_token %}
+
+      <div class="form-field">
+        <label for="{{ form.espaco.id_for_label }}">Espaço Físico *</label>
+        {{ form.espaco }}
+        {% if form.espaco.errors %}
+          <span class="form-erro">{{ form.espaco.errors.as_text }}</span>
+        {% endif %}
+        <small style="color: #6c757d; font-size: 0.82rem;">Apenas espaços disponíveis são listados.</small>
+      </div>
+
+      <div class="form-field">
+        <label for="{{ form.data_inicio.id_for_label }}">Data/Hora de Início *</label>
+        {{ form.data_inicio }}
+        {% if form.data_inicio.errors %}
+          <span class="form-erro">{{ form.data_inicio.errors.as_text }}</span>
+        {% endif %}
+      </div>
+
+      <div class="form-field">
+        <label for="{{ form.data_fim.id_for_label }}">Data/Hora de Término *</label>
+        {{ form.data_fim }}
+        {% if form.data_fim.errors %}
+          <span class="form-erro">{{ form.data_fim.errors.as_text }}</span>
+        {% endif %}
+      </div>
+
+      {% if form.non_field_errors %}
+        <span class="form-erro">{{ form.non_field_errors.as_text }}</span>
+      {% endif %}
+
+      <div class="form-acoes">
+        <button type="submit" class="btn-filter">Solicitar Reserva</button>
+        <a href="{% url 'reservas-do-evento' evento.id %}" class="btn-cancelar-form">Cancelar</a>
+      </div>
+
+    </form>
+  </div>
+
+</main>
+{% endblock %}

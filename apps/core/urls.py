@@ -116,7 +116,12 @@ urlpatterns = [
     # Rota da US-009 (Cancelamento)
     path("evento/<uuid:evento_id>/cancelar/", inscricoes_controller.cancelar_inscricao, name="cancelar_inscricao"),
 
-    # Reservas de Espaço — Organizador
+    # Reservas de Espaço — lista por evento e solicitação
+    path(
+        "evento/<uuid:evento_id>/reservas/",
+        reservas_controller.reservas_do_evento,
+        name="reservas-do-evento",
+    ),
     path(
         "evento/<uuid:evento_id>/reservar/",
         reservas_controller.solicitar_reserva,
