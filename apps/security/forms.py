@@ -18,6 +18,7 @@ from __future__ import annotations
 
 from django import forms
 from django.contrib.auth.hashers import make_password
+from django.core.validators import RegexValidator
 
 from apps.security.models.usuario_models import TipoPerfil, Usuario
 
@@ -29,10 +30,16 @@ class CadastroForm(forms.Form):
     """Formulário de registro simplificado de novo usuário."""
 
     matricula = forms.CharField(
-        max_length=20,
+        max_length=9,
         required=True,
         label="Matrícula",
-        widget=forms.TextInput(attrs={"class": "auth-input", "placeholder": "Sua matrícula institucional"}),
+        validators=[
+            RegexValidator(
+                regex=r'^\d{9}$',
+                message='A matrícula deve conter exatamente 9 dígitos numéricos (padrão UnB).'
+            )
+        ],
+        widget=forms.TextInput(attrs={"class": "auth-input", "placeholder": "Ex: 190012345"}),
     )
     password = forms.CharField(
         label="Senha",

@@ -17,6 +17,7 @@ from django.contrib import messages
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_http_methods
+from django_ratelimit.decorators import ratelimit
 
 from apps.security.forms import CadastroForm
 
@@ -24,6 +25,8 @@ __version__ = "0.0.2"
 __license__ = "AGPL V3"
 
 
+# Sintaxe robusta: Conta qualquer requisição (GET ou POST) no limite de 5 por minuto.
+@ratelimit(key="ip", rate="5/m", block=True)
 @require_http_methods(["GET", "POST"])
 def cadastro(request: HttpRequest) -> HttpResponse:
     """
@@ -32,6 +35,8 @@ def cadastro(request: HttpRequest) -> HttpResponse:
     GET  → renderiza o formulário vazio.
     POST → valida a matrícula e senhas, cria o usuário com privilégios 
            mínimos e redireciona para o login.
+
+    Possui proteção anti-bot via rate limiting (máximo de 5 tentativas por minuto por IP).
 
     :param request: Objeto da requisição HTTP.
     :rtype: HttpResponse
