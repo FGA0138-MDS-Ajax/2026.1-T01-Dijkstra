@@ -55,7 +55,9 @@
     {% endif %}
     <a href="{% url 'area-restrita' %}" class="{% if 'area-restrita' in request.resolver_match.url_name %}active{% endif %}">Minha Área</a>
     {% endif %}
+    {% if user.is_authenticated and user.tipo == "GE" %}
     <a href="{% url 'espacos-list' %}" class="{% if 'espaco' in request.resolver_match.url_name %}active{% endif %}">Espaços</a>
+    {% endif %}
     <a href="{% url 'organizacoes-list' %}" class="{% if 'organizacao' in request.resolver_match.url_name %}active{% endif %}">Organizações Esportivas</a>
   </div>
 </nav>

@@ -104,6 +104,13 @@ def somente_organizacao(view_func):
             raise PermissionDenied()
         return wrapper
 
+def somente_gestor(view_func):
+        def wrapper(request, *args, **kwargs):
+            if request.user.is_authenticated and request.user.tipo == "GE":
+                return view_func(request, *args, **kwargs)
+            raise PermissionDenied()
+        return wrapper
+
 urlpatterns = [
     path("", home, name="home"),
     path("eventos/", EventosController.as_view(), name="eventos-list"),
@@ -179,11 +186,11 @@ urlpatterns = [
         name="gestao-evento-deletar",
     ),
     # Espaços Físicos
-    path("espacos/", somente_organizacao(espacos_list), name="espacos-list"),
-    path("espacos/novo/", somente_organizacao(espaco_novo), name="espaco-novo"),
-    path("espacos/<uuid:espaco_id>/", somente_organizacao(espaco_detalhe), name="espaco-detalhe"),
-    path("espacos/<uuid:espaco_id>/editar/", somente_organizacao(espaco_editar), name="espaco-editar"),
-    path("espacos/<uuid:espaco_id>/deletar/", somente_organizacao(espaco_deletar), name="espaco-deletar"),
+    path("espacos/", somente_gestor(espacos_list), name="espacos-list"),
+    path("espacos/novo/", somente_gestor(espaco_novo), name="espaco-novo"),
+    path("espacos/<uuid:espaco_id>/", somente_gestor(espaco_detalhe), name="espaco-detalhe"),
+    path("espacos/<uuid:espaco_id>/editar/", somente_gestor(espaco_editar), name="espaco-editar"),
+    path("espacos/<uuid:espaco_id>/deletar/", somente_gestor(espaco_deletar), name="espaco-deletar"),
     # Organizações Esportivas
     path("organizacoes/", somente_organizacao(organizacoes_list), name="organizacoes-list"),
     path("organizacoes/nova/", somente_organizacao(organizacao_nova), name="organizacao-nova"),
