@@ -39,18 +39,6 @@
         margin-bottom: 4px;
         display: block;
     }
-    .tipo-group {
-        display: flex;
-        gap: 20px;
-        margin: 6px 0 4px;
-    }
-    .tipo-group label {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-weight: 500;
-        cursor: pointer;
-    }
     .alert-success {
         background: #d1fae5;
         color: #065f46;
@@ -71,6 +59,28 @@
         font-size: 0.9rem;
         text-align: left;
     }
+   
+    .termos-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 16px;
+        text-align: left;
+        background: #f4f8fb;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #e8edf2;
+    }
+    .termos-group input[type="checkbox"] {
+        margin-top: 4px;
+        cursor: pointer;
+    }
+    .termos-group label {
+        font-size: 0.85rem;
+        color: #555;
+        line-height: 1.4;
+        cursor: pointer;
+    }
 </style>
 {% endblock %}
 
@@ -88,29 +98,9 @@
         <form method="POST" action="{% url 'cadastro' %}">
             {% csrf_token %}
 
-            <label class="auth-label" for="id_nome_completo">Nome completo</label>
-            {{ form.nome_completo }}
-            {% for e in form.nome_completo.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
-
-            <label class="auth-label" for="id_username">Usuário</label>
-            {{ form.username }}
-            {% for e in form.username.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
-
-            <label class="auth-label" for="id_email">E-mail <span style="font-weight:400;color:#888;">(opcional)</span></label>
-            {{ form.email }}
-            {% for e in form.email.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
-
-            <label class="auth-label" for="id_matricula">Matrícula <span style="font-weight:400;color:#888;">(opcional)</span></label>
+            <label class="auth-label" for="id_matricula">Matrícula</label>
             {{ form.matricula }}
             {% for e in form.matricula.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
-
-            <label class="auth-label">Tipo de perfil</label>
-            <div class="tipo-group">
-                {% for radio in form.tipo %}
-                    <label>{{ radio.tag }} {{ radio.choice_label }}</label>
-                {% endfor %}
-            </div>
-            {% for e in form.tipo.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
 
             <label class="auth-label" for="id_password">Senha</label>
             {{ form.password }}
@@ -119,6 +109,14 @@
             <label class="auth-label" for="id_confirmar_senha">Confirmar senha</label>
             {{ form.confirmar_senha }}
             {% for e in form.confirmar_senha.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+            <div class="termos-group">
+                {{ form.termos_uso }}
+                <label for="{{ form.termos_uso.id_for_label }}">
+                    Declaro que li e concordo com os Termos de Uso. Compreendo que esta plataforma adota o princípio de minimização de dados e armazenará apenas a minha matrícula institucional.
+                </label>
+            </div>
+            {% for e in form.termos_uso.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
 
             {% if form.non_field_errors %}
                 <div class="alert-error" style="margin-top:10px;">
