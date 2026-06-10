@@ -23,10 +23,11 @@ from apps.security.models.usuario_models import TipoPerfil, Usuario
 __version__ = "0.0.1"
 __license__ = "AGPL V3"
 
-# Apenas perfis disponíveis para auto-cadastro
+# Perfis disponíveis para auto-cadastro
 _TIPOS_CADASTRO = [
     (TipoPerfil.ALUNO, "Aluno"),
     (TipoPerfil.ORGANIZADOR, "Organizador"),
+    (TipoPerfil.GESTOR, "Gestor"),
 ]
 
 
