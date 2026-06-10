@@ -25,8 +25,10 @@ from __future__ import annotations
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
+
+from apps.security.models.usuario_models import TipoPerfil, Usuario
 
 __version__ = "0.0.1"
 __license__ = "AGPL V3"
@@ -40,6 +42,11 @@ _GESTOR = "GE"
 def _tem_acesso(user, tipo: str) -> bool:
     """Retorna True se o usuário é superuser ou possui o tipo de perfil."""
     return user.is_superuser or getattr(user, "tipo", None) == tipo
+
+
+def _pode_gerenciar(gestor, alvo: Usuario) -> bool:
+    """Retorna True se o gestor pode gerenciar o usuário alvo."""
+    return not alvo.is_superuser and str(alvo.pk) != str(gestor.pk)
 
 
 @login_required
@@ -147,7 +154,7 @@ def reservas(request: HttpRequest) -> HttpResponse:
 @require_http_methods(["GET"])
 def gestao_usuarios(request: HttpRequest) -> HttpResponse:
     """
-    Exibe a página de Gestão de Usuários.
+    Exibe a página de Gestão de Usuários com a lista de todos os usuários.
 
     Acessível a Gestores e superusers.
 
@@ -156,4 +163,80 @@ def gestao_usuarios(request: HttpRequest) -> HttpResponse:
     """
     if not _tem_acesso(request.user, _GESTOR):
         return redirect("area-restrita-perfil")
-    return render(request, "security/area_restrita/gestao_usuarios.html")
+    usuarios = Usuario.objects.all().order_by("nome_completo")
+    return render(
+        request,
+        "security/area_restrita/gestao_usuarios.html",
+        {
+            "usuarios": usuarios,
+            "perfis": TipoPerfil.choices,
+        },
+    )
+
+
+@login_required
+@require_http_methods(["POST"])
+def alterar_perfil_usuario(request: HttpRequest, usuario_id: str) -> HttpResponse:
+    """
+    Altera o tipo de perfil de um usuário.
+
+    Acessível a Gestores e superusers.
+
+    :param request: Objeto da requisicao HTTP.
+    :param usuario_id: UUID do usuário a ser alterado.
+    :rtype: HttpResponse
+    """
+    if not _tem_acesso(request.user, _GESTOR):
+        return redirect("area-restrita-perfil")
+    alvo = get_object_or_404(Usuario, pk=usuario_id)
+    if not _pode_gerenciar(request.user, alvo):
+        return redirect("area-restrita-gestao-usuarios")
+    novo_tipo = request.POST.get("tipo", "")
+    tipos_validos = [choice[0] for choice in TipoPerfil.choices]
+    if novo_tipo in tipos_validos:
+        alvo.tipo = novo_tipo
+        alvo.save(update_fields=["tipo"])
+    return redirect("area-restrita-gestao-usuarios")
+
+
+@login_required
+@require_http_methods(["POST"])
+def inativar_usuario(request: HttpRequest, usuario_id: str) -> HttpResponse:
+    """
+    Ativa ou inativa um usuário (toggle).
+
+    Acessível a Gestores e superusers.
+
+    :param request: Objeto da requisicao HTTP.
+    :param usuario_id: UUID do usuário a ser (in)ativado.
+    :rtype: HttpResponse
+    """
+    if not _tem_acesso(request.user, _GESTOR):
+        return redirect("area-restrita-perfil")
+    alvo = get_object_or_404(Usuario, pk=usuario_id)
+    if not _pode_gerenciar(request.user, alvo):
+        return redirect("area-restrita-gestao-usuarios")
+    alvo.is_active = not alvo.is_active
+    alvo.save(update_fields=["is_active"])
+    return redirect("area-restrita-gestao-usuarios")
+
+
+@login_required
+@require_http_methods(["POST"])
+def excluir_usuario(request: HttpRequest, usuario_id: str) -> HttpResponse:
+    """
+    Exclui permanentemente um usuário.
+
+    Acessível a Gestores e superusers.
+
+    :param request: Objeto da requisicao HTTP.
+    :param usuario_id: UUID do usuário a ser excluído.
+    :rtype: HttpResponse
+    """
+    if not _tem_acesso(request.user, _GESTOR):
+        return redirect("area-restrita-perfil")
+    alvo = get_object_or_404(Usuario, pk=usuario_id)
+    if not _pode_gerenciar(request.user, alvo):
+        return redirect("area-restrita-gestao-usuarios")
+    alvo.delete()
+    return redirect("area-restrita-gestao-usuarios")
