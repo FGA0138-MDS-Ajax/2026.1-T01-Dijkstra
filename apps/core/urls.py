@@ -90,6 +90,7 @@ from apps.core.controllers.organizacoes_controller import (
 
 # Importação do novo controlador de inscrições
 from apps.core.controllers import inscricoes_controller
+from apps.core.controllers import reservas_controller
 
 __version__ = "0.0.4"
 __license__ = "AGPL V3"
@@ -114,6 +115,45 @@ urlpatterns = [
     
     # Rota da US-009 (Cancelamento)
     path("evento/<uuid:evento_id>/cancelar/", inscricoes_controller.cancelar_inscricao, name="cancelar_inscricao"),
+
+    # Reservas de Espaço — Organizador
+    path(
+        "evento/<uuid:evento_id>/reservar/",
+        reservas_controller.solicitar_reserva,
+        name="solicitar-reserva",
+    ),
+    path(
+        "reservas/minhas/",
+        reservas_controller.minhas_reservas,
+        name="minhas-reservas",
+    ),
+    path(
+        "reservas/<uuid:reserva_id>/cancelar/",
+        reservas_controller.cancelar_reserva,
+        name="cancelar-reserva",
+    ),
+
+    # Reservas de Espaço — Gestor
+    path(
+        "gestao/reservas/",
+        reservas_controller.gestao_reservas_list,
+        name="gestao-reservas-list",
+    ),
+    path(
+        "gestao/reservas/<uuid:reserva_id>/",
+        reservas_controller.gestao_reserva_detalhe,
+        name="gestao-reserva-detalhe",
+    ),
+    path(
+        "gestao/reservas/<uuid:reserva_id>/aprovar/",
+        reservas_controller.aprovar_reserva,
+        name="aprovar-reserva",
+    ),
+    path(
+        "gestao/reservas/<uuid:reserva_id>/reprovar/",
+        reservas_controller.reprovar_reserva,
+        name="reprovar-reserva",
+    ),
 
     # Gestão de Eventos (CRUD)
     path("gestao/eventos/", somente_organizacao(gestao_eventos_list), name="gestao-eventos-list"),
