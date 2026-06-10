@@ -28,6 +28,8 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
+from apps.core.models.espacos_models import EspacoFisico
+from apps.core.models.reservas_models import ReservaEspaco
 from apps.security.models.usuario_models import TipoPerfil, Usuario
 
 __version__ = "0.0.1"
@@ -138,16 +140,46 @@ def espacos_esportivos(request: HttpRequest) -> HttpResponse:
 @require_http_methods(["GET"])
 def reservas(request: HttpRequest) -> HttpResponse:
     """
-    Exibe a página de Reservas de Espaços.
+    Exibe a página de Reservas de Espaços com filtros por status e espaço.
 
     Acessível a Gestores e superusers.
+
+    Query params opcionais:
+    - ``status``: filtra pelo status da reserva (pendente, aprovada, etc.)
+    - ``espaco``: filtra pelo UUID do espaço físico
 
     :param request: Objeto da requisicao HTTP.
     :rtype: HttpResponse
     """
     if not _tem_acesso(request.user, _GESTOR):
         return redirect("area-restrita-perfil")
-    return render(request, "security/area_restrita/reservas.html")
+
+    status_filtro = request.GET.get("status", "")
+    espaco_filtro = request.GET.get("espaco", "")
+
+    qs = ReservaEspaco.objects.select_related(
+        "espaco", "evento", "solicitante", "avaliador"
+    ).order_by("-criado_em")
+
+    if status_filtro in ReservaEspaco.Status.values:
+        qs = qs.filter(status=status_filtro)
+
+    if espaco_filtro:
+        qs = qs.filter(espaco__id=espaco_filtro)
+
+    espacos = EspacoFisico.objects.order_by("nome")
+
+    return render(
+        request,
+        "security/area_restrita/reservas.html",
+        {
+            "reservas": qs,
+            "espacos": espacos,
+            "status_choices": ReservaEspaco.Status.choices,
+            "status_filtro": status_filtro,
+            "espaco_filtro": espaco_filtro,
+        },
+    )
 
 
 @login_required
