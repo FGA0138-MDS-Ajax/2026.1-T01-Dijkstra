@@ -27,6 +27,8 @@ from typing import List, Optional, Self
 
 from apps.core.models.eventos_models import Evento
 from apps.core.repositories.eventos_repository import EventosRepository
+from apps.security.models.usuario_models import Usuario
+from apps.security.repositories.usuarios_repositories import UsuarioRepository
 
 __version__ = "0.0.3"
 __license__ = "AGPL V3"
@@ -34,6 +36,9 @@ __license__ = "AGPL V3"
 
 class EventosService:
     """Servico para regras de negocio de Eventos."""
+
+    def __init__(self, usuario: Usuario = None):
+        self.usuario = usuario
 
     def __init__(self: Self, repository: EventosRepository = None):
         """
@@ -55,7 +60,8 @@ class EventosService:
         :returns: Instancia do evento criado.
         :rtype: Evento
         """
-        return self.repository.create(data)
+        if self.usuario.filter(tipo='OR'):
+            return Evento.objects.create(**data)
 
     def buscar_evento(self: Self, evento_id: uuid.UUID) -> Optional[Evento]:
         """
@@ -76,6 +82,15 @@ class EventosService:
         :rtype: list[Evento]
         """
         return self.repository.get_all()
+
+    def listar_eventos_publicados(self: Self) -> List[Evento]:
+        """
+        Retorna todos os eventos publicados.
+
+        :returns: Lista de instancias de Evento.
+        :rtype: list[Evento]
+        """
+        return self.repository.get_publicados()
 
     def atualizar_evento(
         self: Self, evento_id: uuid.UUID, data: dict
@@ -111,13 +126,14 @@ class EventosService:
     ):
         """
         Retorna eventos filtrados por texto e intervalo de datas.
+        Apenas eventos publicados sao retornados para a area publica.
 
         :param query: Termo de busca (opcional).
         :param data_inicio: Data inicial do intervalo (opcional).
         :param data_fim: Data final do intervalo (opcional).
         :returns: QuerySet de eventos filtrados.
         """
-        eventos = Evento.objects.all()
+        eventos = Evento.objects.filter(status=Evento.Status.PUBLICADO)
         return self.repository.filter_events(
             eventos, query, data_inicio, data_fim
         )

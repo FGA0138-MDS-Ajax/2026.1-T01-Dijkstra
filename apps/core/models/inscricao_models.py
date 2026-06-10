@@ -88,3 +88,5 @@ class Inscricao(models.Model):
     def __str__(self: Self) -> str:  # pylint: disable=invalid-str-returned
         """Retorna a representacao textual da inscricao."""
         return f"{self.aluno} -> {self.evento.nome} ({self.get_status_display()})"
+    
+   

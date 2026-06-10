@@ -490,7 +490,7 @@ footer {
 }
 
 /* MOBILE & TABLET STACKED */
-@media (max-width: 980px) {
+@media (max-width: 1300px) {
   .site-header {
     height: auto;
     min-height: 120px;
