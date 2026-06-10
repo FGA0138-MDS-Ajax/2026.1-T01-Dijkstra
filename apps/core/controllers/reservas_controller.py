@@ -287,7 +287,10 @@ def aprovar_reserva(request: HttpRequest, reserva_id: uuid.UUID) -> HttpResponse
     reserva.avaliador = request.user
     reserva.save(update_fields=["status", "avaliador"])
     messages.success(request, "Reserva aprovada com sucesso.")
-    return redirect("gestao-reservas-list")
+    next_url = request.POST.get("next") or "gestao-reservas-list"
+    if next_url.startswith("/"):
+        return redirect(next_url)
+    return redirect(next_url)
 
 
 @login_required
@@ -307,6 +310,7 @@ def reprovar_reserva(request: HttpRequest, reserva_id: uuid.UUID) -> HttpRespons
         messages.error(request, "Apenas reservas pendentes podem ser reprovadas.")
         return redirect("gestao-reservas-list")
 
+    next_url = request.POST.get("next") or ""
     form = ReprovacaoReservaForm(request.POST, instance=reserva)
     if form.is_valid():
         reserva = form.save(commit=False)
@@ -314,8 +318,12 @@ def reprovar_reserva(request: HttpRequest, reserva_id: uuid.UUID) -> HttpRespons
         reserva.avaliador = request.user
         reserva.save(update_fields=["status", "avaliador", "motivo_reprovacao"])
         messages.success(request, "Reserva reprovada.")
+        if next_url.startswith("/"):
+            return redirect(next_url)
         return redirect("gestao-reservas-list")
 
-    # Se o form for inválido (motivo vazio), retorna ao detalhe com erros
+    # Se o form for inválido (motivo vazio), retorna à origem com erro
     messages.error(request, "Informe o motivo da reprovação.")
+    if next_url.startswith("/"):
+        return redirect(next_url)
     return redirect("gestao-reserva-detalhe", reserva_id=reserva_id)
