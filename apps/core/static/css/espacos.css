@@ -66,6 +66,23 @@
   flex-wrap: wrap;
 }
 
+.btn-reservar {
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  background: var(--verde_unb);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+.btn-reservar:hover {
+  background: #145c32;
+}
+
 .btn-editar {
   display: inline-block;
   text-align: center;

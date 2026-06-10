@@ -14,6 +14,7 @@ Regras de negócio
 
 Componentes Principais
 ----------------------
+- :func:`reservas_do_evento`: lista as reservas de um evento com dados do evento.
 - :func:`solicitar_reserva`: organizador solicita reserva para um evento.
 - :func:`minhas_reservas`: organizador lista suas próprias reservas.
 - :func:`cancelar_reserva`: organizador cancela uma reserva pendente.
@@ -63,6 +64,39 @@ def _somente_gestor(request: HttpRequest) -> None:
 
 
 # ---------------------------------------------------------------------------
+# Lista de reservas de um evento
+# ---------------------------------------------------------------------------
+
+@login_required
+@require_http_methods(["GET"])
+def reservas_do_evento(request: HttpRequest, evento_id: uuid.UUID) -> HttpResponse:
+    """
+    Exibe as reservas de um evento específico junto com os dados do evento.
+
+    Acessível a organizadores (para gerir suas reservas) e gestores
+    (para acompanhar todas as reservas do evento).
+
+    :param request: Objeto da requisição HTTP.
+    :param evento_id: UUID do evento.
+    :returns: Página HTML com dados do evento e lista de reservas.
+    """
+    if not request.user.is_authenticated or request.user.tipo not in ("OR", "GE"):
+        raise PermissionDenied
+
+    evento = get_object_or_404(Evento, pk=evento_id)
+    reservas = (
+        ReservaEspaco.objects.filter(evento=evento)
+        .select_related("espaco", "solicitante", "avaliador")
+        .order_by("-criado_em")
+    )
+    return render(
+        request,
+        "core/reservas/reservas_do_evento.html",
+        {"evento": evento, "reservas": reservas},
+    )
+
+
+# ---------------------------------------------------------------------------
 # Visões do Organizador
 # ---------------------------------------------------------------------------
 
@@ -105,7 +139,7 @@ def solicitar_reserva(request: HttpRequest, evento_id: uuid.UUID) -> HttpRespons
                     request,
                     "Reserva solicitada com sucesso. Aguardando aprovação do gestor.",
                 )
-                return redirect("minhas-reservas")
+                return redirect("reservas-do-evento", evento_id=evento.id)
     else:
         form = ReservaEspacoForm()
 
@@ -147,6 +181,8 @@ def cancelar_reserva(request: HttpRequest, reserva_id: uuid.UUID) -> HttpRespons
     _somente_organizador(request)
     reserva = get_object_or_404(ReservaEspaco, pk=reserva_id, solicitante=request.user)
 
+    evento_id = reserva.evento_id
+
     if reserva.status != ReservaEspaco.Status.PENDENTE:
         messages.error(
             request,
@@ -157,7 +193,7 @@ def cancelar_reserva(request: HttpRequest, reserva_id: uuid.UUID) -> HttpRespons
         reserva.save(update_fields=["status"])
         messages.success(request, "Reserva cancelada com sucesso.")
 
-    return redirect("minhas-reservas")
+    return redirect("reservas-do-evento", evento_id=evento_id)
 
 
 # ---------------------------------------------------------------------------
