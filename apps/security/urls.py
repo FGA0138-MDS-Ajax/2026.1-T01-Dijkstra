@@ -10,6 +10,7 @@ from __future__ import annotations
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
+from apps.security.controllers.cadastro import cadastro
 
 urlpatterns = [
     # Rota de Login
@@ -22,10 +23,10 @@ urlpatterns = [
     path("logout/", auth_views.LogoutView.as_view(next_page="home"), name="logout"),
     # Rota temporária de Cadastro (Apenas para não dar erro no botão)
     path(
-        "cadastro/",
-        TemplateView.as_view(template_name="security/cadastro.html"),
-        name="cadastro",
-    ),
+    "cadastro/",
+    cadastro,
+    name="cadastro",
+),
     # Rota de recuperação de senha
     path(
         "esqueci-senha/",
