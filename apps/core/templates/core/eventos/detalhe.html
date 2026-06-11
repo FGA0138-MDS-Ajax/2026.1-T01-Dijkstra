@@ -44,6 +44,7 @@
       {% endif %}
 
       <div class="espaco-acoes" style="margin-top: 24px;">
+        <a class="btn-reservar" href="{% url 'reservas-do-evento' evento.id %}">Reservas de Espaço</a>
         <a class="btn-editar" href="{% url 'gestao-evento-editar' evento.id %}">Editar</a>
         <a class="btn-deletar" href="{% url 'gestao-evento-deletar' evento.id %}">Excluir</a>
       </div>

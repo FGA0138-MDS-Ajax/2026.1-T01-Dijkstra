@@ -90,6 +90,7 @@ from apps.core.controllers.organizacoes_controller import (
 
 # Importação do novo controlador de inscrições
 from apps.core.controllers import inscricoes_controller
+from apps.core.controllers import reservas_controller
 
 __version__ = "0.0.4"
 __license__ = "AGPL V3"
@@ -99,6 +100,13 @@ from django.core.exceptions import PermissionDenied
 def somente_organizacao(view_func):
         def wrapper(request, *args, **kwargs):
             if request.user.is_authenticated and request.user.tipo == "OR":
+                return view_func(request, *args, **kwargs)
+            raise PermissionDenied()
+        return wrapper
+
+def somente_gestor(view_func):
+        def wrapper(request, *args, **kwargs):
+            if request.user.is_authenticated and request.user.tipo == "GE":
                 return view_func(request, *args, **kwargs)
             raise PermissionDenied()
         return wrapper
@@ -114,6 +122,50 @@ urlpatterns = [
     
     # Rota da US-009 (Cancelamento)
     path("evento/<uuid:evento_id>/cancelar/", inscricoes_controller.cancelar_inscricao, name="cancelar_inscricao"),
+
+    # Reservas de Espaço — lista por evento e solicitação
+    path(
+        "evento/<uuid:evento_id>/reservas/",
+        reservas_controller.reservas_do_evento,
+        name="reservas-do-evento",
+    ),
+    path(
+        "evento/<uuid:evento_id>/reservar/",
+        reservas_controller.solicitar_reserva,
+        name="solicitar-reserva",
+    ),
+    path(
+        "reservas/minhas/",
+        reservas_controller.minhas_reservas,
+        name="minhas-reservas",
+    ),
+    path(
+        "reservas/<uuid:reserva_id>/cancelar/",
+        reservas_controller.cancelar_reserva,
+        name="cancelar-reserva",
+    ),
+
+    # Reservas de Espaço — Gestor
+    path(
+        "gestao/reservas/",
+        reservas_controller.gestao_reservas_list,
+        name="gestao-reservas-list",
+    ),
+    path(
+        "gestao/reservas/<uuid:reserva_id>/",
+        reservas_controller.gestao_reserva_detalhe,
+        name="gestao-reserva-detalhe",
+    ),
+    path(
+        "gestao/reservas/<uuid:reserva_id>/aprovar/",
+        reservas_controller.aprovar_reserva,
+        name="aprovar-reserva",
+    ),
+    path(
+        "gestao/reservas/<uuid:reserva_id>/reprovar/",
+        reservas_controller.reprovar_reserva,
+        name="reprovar-reserva",
+    ),
 
     # Gestão de Eventos (CRUD)
     path("gestao/eventos/", somente_organizacao(gestao_eventos_list), name="gestao-eventos-list"),
@@ -134,11 +186,11 @@ urlpatterns = [
         name="gestao-evento-deletar",
     ),
     # Espaços Físicos
-    path("espacos/", somente_organizacao(espacos_list), name="espacos-list"),
-    path("espacos/novo/", somente_organizacao(espaco_novo), name="espaco-novo"),
-    path("espacos/<uuid:espaco_id>/", somente_organizacao(espaco_detalhe), name="espaco-detalhe"),
-    path("espacos/<uuid:espaco_id>/editar/", somente_organizacao(espaco_editar), name="espaco-editar"),
-    path("espacos/<uuid:espaco_id>/deletar/", somente_organizacao(espaco_deletar), name="espaco-deletar"),
+    path("espacos/", somente_gestor(espacos_list), name="espacos-list"),
+    path("espacos/novo/", somente_gestor(espaco_novo), name="espaco-novo"),
+    path("espacos/<uuid:espaco_id>/", somente_gestor(espaco_detalhe), name="espaco-detalhe"),
+    path("espacos/<uuid:espaco_id>/editar/", somente_gestor(espaco_editar), name="espaco-editar"),
+    path("espacos/<uuid:espaco_id>/deletar/", somente_gestor(espaco_deletar), name="espaco-deletar"),
     # Organizações Esportivas
     path("organizacoes/", somente_organizacao(organizacoes_list), name="organizacoes-list"),
     path("organizacoes/nova/", somente_organizacao(organizacao_nova), name="organizacao-nova"),

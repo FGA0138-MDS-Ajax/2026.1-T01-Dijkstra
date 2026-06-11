@@ -1,8 +1,472 @@
 {% extends 'security/base_restrita.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+  <style>
+    /* ---------- cabeçalho ---------- */
+    .reservas-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .reservas-header h1 {
+      font-size: 1.6rem;
+      color: var(--azul_unb);
+      font-weight: 700;
+    }
+
+    .reservas-count {
+      background: #e8f0f7;
+      color: var(--azul_unb);
+      padding: 4px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* ---------- barra de filtros ---------- */
+    .filtros-bar {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      background: white;
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    .filtros-bar label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--azul_unb);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .filtros-bar select {
+      border: 1.5px solid #b0c4d8;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 0.88rem;
+      background: #f4f8fb;
+      color: var(--azul_unb);
+      min-width: 170px;
+    }
+
+    .btn-filtrar {
+      border: none;
+      background: var(--azul_unb);
+      color: white;
+      padding: 9px 22px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      align-self: flex-end;
+    }
+
+    .btn-filtrar:hover { background: #1a4a72; }
+
+    .btn-limpar {
+      display: inline-block;
+      text-decoration: none;
+      color: var(--azul_unb);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 20px;
+      border: 1.5px solid #b0c4d8;
+      align-self: flex-end;
+      transition: background 0.15s;
+    }
+
+    .btn-limpar:hover { background: #f0f5fa; }
+
+    /* ---------- tabela ---------- */
+    .table-wrapper {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      overflow-x: auto;
+    }
+
+    .reservas-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .reservas-table thead tr {
+      background: var(--azul_unb);
+      color: white;
+    }
+
+    .reservas-table thead th {
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .reservas-table tbody tr {
+      border-bottom: 1px solid #e8edf2;
+      transition: background 0.15s;
+    }
+
+    .reservas-table tbody tr:last-child { border-bottom: none; }
+    .reservas-table tbody tr:hover { background: #f4f8fb; }
+
+    .reservas-table td {
+      padding: 12px 16px;
+      vertical-align: middle;
+    }
+
+    /* ---------- badges de status ---------- */
+    .badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .badge-pendente   { background: #fff3cd; color: #664d03; }
+    .badge-aprovada   { background: #d4edda; color: #155724; }
+    .badge-reprovada  { background: #f8d7da; color: #721c24; }
+    .badge-cancelada  { background: #e2e3e5; color: #41464b; }
+
+    /* ---------- ações ---------- */
+    .acoes-cell {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-ver-evento {
+      display: inline-block;
+      text-decoration: none;
+      background: transparent;
+      color: var(--azul_unb);
+      border: 1.5px solid var(--azul_unb);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-ver-evento:hover {
+      background: var(--azul_unb);
+      color: white;
+    }
+
+    .btn-aprovar {
+      border: none;
+      background: var(--verde_unb);
+      color: white;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .btn-aprovar:hover { background: #145c32; }
+
+    .btn-reprovar {
+      border: 2px solid #c0392b;
+      background: transparent;
+      color: #c0392b;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .btn-reprovar:hover { background: #c0392b; color: white; }
+
+    /* ---------- modal de reprovação ---------- */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.aberto { display: flex; }
+
+    .modal-box {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+      padding: 32px 28px;
+      max-width: 480px;
+      width: 90%;
+    }
+
+    .modal-box h2 {
+      color: var(--azul_unb);
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .modal-box .modal-subtitulo {
+      color: #6c757d;
+      font-size: 0.88rem;
+      margin-bottom: 18px;
+    }
+
+    .modal-box textarea {
+      width: 100%;
+      border: 1.5px solid #b0c4d8;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      background: #f4f8fb;
+      color: var(--azul_unb);
+      resize: vertical;
+      min-height: 100px;
+      transition: border-color 0.2s;
+    }
+
+    .modal-box textarea:focus {
+      outline: none;
+      border-color: #c0392b;
+    }
+
+    .modal-acoes {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 16px;
+    }
+
+    .sem-reservas {
+      padding: 40px;
+      text-align: center;
+      color: #6c757d;
+      font-size: 1rem;
+    }
+
+    /* ---------- mensagens flash ---------- */
+    .flash-msg {
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .flash-error   { background: #fdecea; color: #c0392b; border: 1.5px solid #c0392b; }
+    .flash-success { background: #eafaf1; color: var(--verde_unb); border: 1.5px solid var(--verde_unb); }
+    .flash-other   { background: #eaf1fb; color: var(--azul_unb); border: 1.5px solid var(--azul_unb); }
+  </style>
+{% endblock %}
 
 {% block restrita_content %}
-<h1>Reservas de Espaços</h1>
-<div class="page-placeholder">
-  Esta página ainda não possui conteúdo.
+
+<div class="reservas-header">
+  <h1>Reservas de Espaços</h1>
+  <span class="reservas-count">{{ reservas|length }} reserva{{ reservas|length|pluralize:"s" }}</span>
 </div>
+
+{% if messages %}
+  {% for message in messages %}
+    <div class="flash-msg {% if message.tags == 'error' %}flash-error{% elif message.tags == 'success' %}flash-success{% else %}flash-other{% endif %}">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+<!-- Filtros -->
+<form method="get" class="filtros-bar">
+  <div>
+    <label for="filtro-status">Status</label>
+    <select name="status" id="filtro-status">
+      <option value="">Todos</option>
+      {% for value, label in status_choices %}
+        <option value="{{ value }}" {% if status_filtro == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div>
+    <label for="filtro-espaco">Espaço</label>
+    <select name="espaco" id="filtro-espaco">
+      <option value="">Todos</option>
+      {% for espaco in espacos %}
+        <option value="{{ espaco.id }}" {% if espaco_filtro == espaco.id|stringformat:"s" %}selected{% endif %}>
+          {{ espaco.nome }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit" class="btn-filtrar">Filtrar</button>
+  {% if status_filtro or espaco_filtro %}
+    <a href="{% url 'area-restrita-reservas' %}" class="btn-limpar">Limpar filtros</a>
+  {% endif %}
+</form>
+
+<!-- Tabela -->
+<div class="table-wrapper">
+  {% if reservas %}
+  <table class="reservas-table">
+    <thead>
+      <tr>
+        <th>Espaço</th>
+        <th>Evento</th>
+        <th>Solicitante</th>
+        <th>Início</th>
+        <th>Término</th>
+        <th>Solicitado em</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for reserva in reservas %}
+      <tr>
+        <td>{{ reserva.espaco.nome }}</td>
+
+        <td>
+          <a href="{% url 'reservas-do-evento' reserva.evento.id %}"
+             style="color: var(--azul_unb); font-weight: 600; text-decoration: none;">
+            {{ reserva.evento.nome }}
+          </a>
+        </td>
+
+        <td>{{ reserva.solicitante.get_full_name|default:reserva.solicitante.username }}</td>
+
+        <td style="white-space: nowrap;">{{ reserva.data_inicio|date:"d/m/Y H:i" }}</td>
+        <td style="white-space: nowrap;">{{ reserva.data_fim|date:"d/m/Y H:i" }}</td>
+        <td style="white-space: nowrap;">{{ reserva.criado_em|date:"d/m/Y H:i" }}</td>
+
+        <td>
+          <span class="badge
+            {% if reserva.status == 'pendente'  %}badge-pendente
+            {% elif reserva.status == 'aprovada'  %}badge-aprovada
+            {% elif reserva.status == 'reprovada' %}badge-reprovada
+            {% else %}badge-cancelada{% endif %}">
+            {{ reserva.get_status_display }}
+          </span>
+          {% if reserva.status == 'reprovada' and reserva.motivo_reprovacao %}
+            <span title="{{ reserva.motivo_reprovacao|escapejs }}"
+                  style="cursor:help; color:#c0392b; font-size:0.85rem;"> ⓘ</span>
+          {% endif %}
+        </td>
+
+        <td>
+          <div class="acoes-cell">
+
+            <a class="btn-ver-evento"
+               href="{% url 'reservas-do-evento' reserva.evento.id %}">
+              Ver evento
+            </a>
+
+            {% if reserva.status == 'pendente' %}
+
+              <!-- Aprovar -->
+              <form method="post" action="{% url 'aprovar-reserva' reserva.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <button type="submit" class="btn-aprovar"
+                  onclick="return confirm('Aprovar esta reserva?')">
+                  Aprovar
+                </button>
+              </form>
+
+              <!-- Reprovar — abre modal -->
+              <button type="button" class="btn-reprovar"
+                data-id="{{ reserva.id }}"
+                data-espaco="{{ reserva.espaco.nome|escapejs }}"
+                data-evento="{{ reserva.evento.nome|escapejs }}"
+                onclick="abrirModalReprova(this)">
+                Reprovar
+              </button>
+
+            {% endif %}
+
+          </div>
+        </td>
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="sem-reservas">Nenhuma reserva encontrada{% if status_filtro or espaco_filtro %} com os filtros selecionados{% endif %}.</p>
+  {% endif %}
+</div>
+
+<!-- Modal de reprovação -->
+<div class="modal-overlay" id="modal-reprova">
+  <div class="modal-box">
+    <h2>Reprovar Reserva</h2>
+    <p class="modal-subtitulo" id="modal-reprova-subtitulo"></p>
+
+    <form method="post" id="form-reprova" action="">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.get_full_path }}">
+      <label style="font-size:0.85rem; font-weight:600; color:var(--azul_unb); display:block; margin-bottom:6px;">
+        Motivo da reprovação *
+      </label>
+      <textarea name="motivo_reprovacao" id="modal-motivo"
+                placeholder="Descreva o motivo da reprovação..." required></textarea>
+
+      <div class="modal-acoes">
+        <button type="button" class="btn-cancelar-form" onclick="fecharModalReprova()">Cancelar</button>
+        <button type="submit" class="btn-deletar-confirm"
+          onclick="return document.getElementById('modal-motivo').value.trim() !== '' || (alert('Informe o motivo.'), false)">
+          Confirmar Reprovação
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function abrirModalReprova(btn) {
+    const id = btn.dataset.id;
+    const espaco = btn.dataset.espaco;
+    const evento = btn.dataset.evento;
+
+    document.getElementById('modal-reprova-subtitulo').textContent =
+      espaco + ' — ' + evento;
+    document.getElementById('form-reprova').action =
+      '/gestao/reservas/' + id + '/reprovar/';
+    document.getElementById('modal-motivo').value = '';
+    document.getElementById('modal-reprova').classList.add('aberto');
+  }
+
+  function fecharModalReprova() {
+    document.getElementById('modal-reprova').classList.remove('aberto');
+  }
+
+  document.getElementById('modal-reprova').addEventListener('click', function(e) {
+    if (e.target === this) fecharModalReprova();
+  });
+</script>
+
 {% endblock %}
