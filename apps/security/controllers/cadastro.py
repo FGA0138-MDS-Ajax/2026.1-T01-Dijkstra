@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 
 
 def cadastro(request):
-    if request.method == "POST":
+    if request.method == "POST": 
         nome = request.POST.get("nome")
         matricula = request.POST.get("matricula")
         senha = request.POST.get("senha")
