@@ -1,80 +1,49 @@
 """
 apps.core.repositories.organizacoes_repository
 ===============================================
-Repositório de acesso a dados para o domínio de Organizações Esportivas.
+Repositorio de acesso a dados para o dominio de Organizacoes Esportivas.
 
 Componentes Principais
 ----------------------
-- :class:`OrganizacoesRepository`: encapsula as operações CRUD sobre
-  :class:`~apps.core.models.organizacoes_models.Organizacao`.
+- OrganizacoesRepository: operacoes CRUD sobre Organizacao e UsuarioOrganizacao.
 
 Notas
 -----
 - Requer Python >= 3.12
-- Criado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
+- Criado por Welder60 em 02 junho 2026
 """
 
-# compatibilidade
 from __future__ import annotations
 
 import uuid
-
 from typing import List, Optional
 
-from apps.core.models.organizacoes_models import Organizacao
+from django.contrib.auth import get_user_model
 
-__version__ = "0.0.1"
+from apps.core.models.organizacoes_models import Organizacao, UsuarioOrganizacao
+
+__version__ = "0.0.2"
 __license__ = "AGPL V3"
+
+Usuario = get_user_model()
 
 
 class OrganizacoesRepository:
-    """Repositório para manipulação de dados de Organizações Esportivas."""
+    """Repositorio para manipulacao de dados de Organizacoes Esportivas."""
 
     def create(self, data: dict) -> Organizacao:
-        """
-        Cria uma nova organização no banco de dados.
-
-        :param data: Dicionário com os campos da organização.
-        :type data: dict
-        :returns: Instância da organização criada.
-        :rtype: Organizacao
-        """
         return Organizacao.objects.create(**data)
 
     def get_by_id(self, organizacao_id: uuid.UUID) -> Optional[Organizacao]:
-        """
-        Busca uma organização pelo seu UUID.
-
-        :param organizacao_id: Identificador UUID da organização.
-        :type organizacao_id: uuid.UUID
-        :returns: Instância da organização ou None se não encontrada.
-        :rtype: Organizacao or None
-        """
         try:
             return Organizacao.objects.get(id=organizacao_id)
         except Organizacao.DoesNotExist:
             return None
 
     def get_all(self) -> List[Organizacao]:
-        """
-        Retorna todas as organizações cadastradas.
-
-        :returns: Lista de instâncias de Organizacao.
-        :rtype: list[Organizacao]
-        """
         return list(Organizacao.objects.all())
 
     def update(self, organizacao_id: uuid.UUID, data: dict) -> Optional[Organizacao]:
-        """
-        Atualiza os campos de uma organização existente.
-
-        :param organizacao_id: Identificador UUID da organização a atualizar.
-        :type organizacao_id: uuid.UUID
-        :param data: Dicionário com os campos a atualizar.
-        :type data: dict
-        :returns: Instância atualizada ou None se não encontrada.
-        :rtype: Organizacao or None
-        """
         organizacao = self.get_by_id(organizacao_id)
         if organizacao is None:
             return None
@@ -84,16 +53,50 @@ class OrganizacoesRepository:
         return organizacao
 
     def delete(self, organizacao_id: uuid.UUID) -> bool:
-        """
-        Remove uma organização do banco de dados.
-
-        :param organizacao_id: Identificador UUID da organização a remover.
-        :type organizacao_id: uuid.UUID
-        :returns: True se removida com sucesso, False se não encontrada.
-        :rtype: bool
-        """
         organizacao = self.get_by_id(organizacao_id)
         if organizacao is None:
             return False
         organizacao.delete()
         return True
+
+    # ------------------------------------------------------------------
+    # Membros (UsuarioOrganizacao)
+    # ------------------------------------------------------------------
+
+    def listar_membros(self, organizacao_id: uuid.UUID) -> List:
+        """Retorna os vinculos UsuarioOrganizacao de uma organizacao."""
+        return list(
+            UsuarioOrganizacao.objects.filter(
+                organizacao_id=organizacao_id
+            ).select_related("usuario")
+        )
+
+    def adicionar_membro(self, organizacao_id: uuid.UUID, usuario_id: uuid.UUID) -> UsuarioOrganizacao:
+        """Cria vinculo entre usuario e organizacao (ignora se ja existe)."""
+        vinculo, _ = UsuarioOrganizacao.objects.get_or_create(
+            organizacao_id=organizacao_id,
+            usuario_id=usuario_id,
+        )
+        return vinculo
+
+    def remover_membro(self, organizacao_id: uuid.UUID, usuario_id: uuid.UUID) -> bool:
+        """Remove o vinculo entre usuario e organizacao."""
+        deleted, _ = UsuarioOrganizacao.objects.filter(
+            organizacao_id=organizacao_id,
+            usuario_id=usuario_id,
+        ).delete()
+        return deleted > 0
+
+    def listar_usuarios_sem_vinculo(self, organizacao_id: uuid.UUID) -> List:
+        """Retorna usuarios que ainda nao sao membros da organizacao."""
+        membros_ids = UsuarioOrganizacao.objects.filter(
+            organizacao_id=organizacao_id
+        ).values_list("usuario_id", flat=True)
+        return list(Usuario.objects.exclude(id__in=membros_ids).order_by("nome_completo"))
+
+    def listar_organizacoes_do_usuario(self, usuario_id: uuid.UUID) -> List[Organizacao]:
+        """Retorna as organizacoes as quais o usuario esta vinculado."""
+        ids = UsuarioOrganizacao.objects.filter(
+            usuario_id=usuario_id
+        ).values_list("organizacao_id", flat=True)
+        return list(Organizacao.objects.filter(id__in=ids))

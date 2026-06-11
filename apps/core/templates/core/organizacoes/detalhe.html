@@ -8,7 +8,7 @@
 {% block content %}
 <main>
 
-  <a href="{% url 'organizacoes-list' %}" class="btn-back">← Voltar para organizações</a>
+  <a href="{% url 'organizacoes-list' %}" class="btn-back">&#8592; Voltar para organizacoes</a>
 
   <div class="espaco-detalhe-card">
 
@@ -24,12 +24,15 @@
 
       <h1 class="event-title">{{ organizacao.nome }}</h1>
 
-      <p style="margin-top: 12px;"><strong>Descrição:</strong></p>
+      <p style="margin-top: 12px;"><strong>Descricao:</strong></p>
       <p>{{ organizacao.descricao }}</p>
 
       <div class="espaco-acoes" style="margin-top: 24px;">
         <a class="btn-editar" href="{% url 'organizacao-editar' organizacao.id %}">Editar</a>
         <a class="btn-deletar" href="{% url 'organizacao-deletar' organizacao.id %}">Excluir</a>
+        {% if request.user.tipo == 'GE' %}
+          <a class="btn-editar" href="{% url 'organizacao-membros' organizacao.id %}">Gerenciar Membros</a>
+        {% endif %}
       </div>
 
     </div>
