@@ -35,6 +35,7 @@ import uuid
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
+from django.db import transaction
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
@@ -267,25 +268,41 @@ def aprovar_reserva(request: HttpRequest, reserva_id: uuid.UUID) -> HttpResponse
     :returns: Redirecionamento para a listagem de gestão.
     """
     _somente_gestor(request)
-    reserva = get_object_or_404(ReservaEspaco, pk=reserva_id)
 
-    if reserva.status != ReservaEspaco.Status.PENDENTE:
-        messages.error(request, "Apenas reservas pendentes podem ser aprovadas.")
-        return redirect("gestao-reservas-list")
-
-    if ReservaEspaco.tem_conflito(
-        reserva.espaco, reserva.data_inicio, reserva.data_fim, excluir_pk=reserva.pk
-    ):
-        messages.error(
-            request,
-            f"Não é possível aprovar: já existe uma reserva aprovada para "
-            f"'{reserva.espaco.nome}' neste período.",
+    with transaction.atomic():
+        # Bloqueia a própria reserva para evitar aprovações duplicadas concorrentes.
+        reserva = get_object_or_404(
+            ReservaEspaco.objects.select_for_update(), pk=reserva_id
         )
-        return redirect("gestao-reserva-detalhe", reserva_id=reserva_id)
 
-    reserva.status = ReservaEspaco.Status.APROVADA
-    reserva.avaliador = request.user
-    reserva.save(update_fields=["status", "avaliador"])
+        if reserva.status != ReservaEspaco.Status.PENDENTE:
+            messages.error(request, "Apenas reservas pendentes podem ser aprovadas.")
+            return redirect("gestao-reservas-list")
+
+        # Bloqueia todas as reservas do mesmo espaço com período sobreposto antes
+        # de verificar conflito. Isso força serialização: se outra transação já
+        # tiver aprovado uma reserva conflitante, este SELECT FOR UPDATE aguarda
+        # o commit dela e enxerga o status atualizado na verificação seguinte.
+        ReservaEspaco.objects.select_for_update().filter(
+            espaco=reserva.espaco,
+            data_inicio__lt=reserva.data_fim,
+            data_fim__gt=reserva.data_inicio,
+        ).exclude(pk=reserva.pk).count()
+
+        if ReservaEspaco.tem_conflito(
+            reserva.espaco, reserva.data_inicio, reserva.data_fim, excluir_pk=reserva.pk
+        ):
+            messages.error(
+                request,
+                f"Não é possível aprovar: já existe uma reserva aprovada para "
+                f"'{reserva.espaco.nome}' neste período.",
+            )
+            return redirect("gestao-reserva-detalhe", reserva_id=reserva_id)
+
+        reserva.status = ReservaEspaco.Status.APROVADA
+        reserva.avaliador = request.user
+        reserva.save(update_fields=["status", "avaliador"])
+
     messages.success(request, "Reserva aprovada com sucesso.")
     next_url = request.POST.get("next") or "gestao-reservas-list"
     if next_url.startswith("/"):
