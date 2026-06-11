@@ -27,6 +27,21 @@ from apps.security.controllers.area_restrita_controller import (
     excluir_usuario,
 )
 
+from apps.security.controllers.cadastro_controller import cadastro
+from apps.security.controllers.area_restrita_controller import (
+    area_restrita_redirect,
+    perfil,
+    eventos_inscritos,
+    gestao_eventos_restrita,
+    organizacoes_vinculadas,
+    espacos_esportivos,
+    reservas,
+    gestao_usuarios,
+    alterar_perfil_usuario,
+    inativar_usuario,
+    excluir_usuario,
+)
+
 urlpatterns = [
     # Rota de Login
     path(
