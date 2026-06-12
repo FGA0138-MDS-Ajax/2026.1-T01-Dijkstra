@@ -37,9 +37,6 @@ __license__ = "AGPL V3"
 class EventosService:
     """Servico para regras de negocio de Eventos."""
 
-    def __init__(self, usuario: Usuario = None):
-        self.usuario = usuario
-
     def __init__(self: Self, repository: EventosRepository = None):
         """
         Inicializa o servico com o repositorio fornecido.
@@ -60,8 +57,7 @@ class EventosService:
         :returns: Instancia do evento criado.
         :rtype: Evento
         """
-        if self.usuario.filter(tipo='OR'):
-            return Evento.objects.create(**data)
+        return self.repository.create(data)
 
     def buscar_evento(self: Self, evento_id: uuid.UUID) -> Optional[Evento]:
         """
