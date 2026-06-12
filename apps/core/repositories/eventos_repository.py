@@ -45,7 +45,7 @@ class EventosRepository:
         :returns: Instancia do evento criado.
         :rtype: Evento
         """
-
+        return Evento.objects.create(**data)
 
     def get_by_id(self, evento_id: uuid.UUID) -> Optional[Evento]:
         """

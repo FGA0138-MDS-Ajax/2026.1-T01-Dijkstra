@@ -72,7 +72,7 @@ class EventosControllerExtraTest(TestCase):
         response = self.client.post(reverse("eventos-list"), data=data)
         self.assertEqual(response.status_code, 201)
 
-    @patch("apps.core.controllers.eventos_controller.EventosService.listar_eventos")
+    @patch("apps.core.controllers.eventos_controller.EventosService.listar_eventos_publicados")
     def test_get_json(self, mock_listar_eventos):
         evento = Evento.objects.create(
             nome="Evento JSON",

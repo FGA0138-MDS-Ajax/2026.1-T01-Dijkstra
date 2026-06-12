@@ -1,8 +1,44 @@
 {% extends 'security/base_restrita.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+{% endblock %}
 
 {% block restrita_content %}
-<h1>Organizações Vinculadas</h1>
-<div class="page-placeholder">
-  Esta página ainda não possui conteúdo.
-</div>
+<h1>Organizacoes Vinculadas</h1>
+
+{% if organizacoes %}
+  <div class="events-grid" style="margin-top: 24px;">
+    {% for org in organizacoes %}
+      <div class="event-card espaco-card">
+
+        {% if org.foto %}
+          <img class="event-img" src="{{ org.foto.url }}" alt="{{ org.nome }}">
+        {% else %}
+          <div class="event-img espaco-sem-foto">
+            <span>Sem foto</span>
+          </div>
+        {% endif %}
+
+        <div class="event-body">
+          <h3 class="event-title">{{ org.nome }}</h3>
+          <div class="event-info">
+            <p>{{ org.descricao|truncatechars:100 }}</p>
+          </div>
+          <div class="espaco-acoes">
+            <a class="btn-details" href="{% url 'organizacao-detalhe' org.id %}">Ver detalhes</a>
+            <a class="btn-editar" href="{% url 'organizacao-editar' org.id %}">Editar</a>
+          </div>
+        </div>
+
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="espaco-vazio" style="margin-top: 24px;">
+    Voce ainda nao esta vinculado a nenhuma organizacao.
+  </p>
+{% endif %}
+
 {% endblock %}

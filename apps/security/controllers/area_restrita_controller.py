@@ -30,7 +30,10 @@ from django.views.decorators.http import require_http_methods
 
 from apps.core.models.espacos_models import EspacoFisico
 from apps.core.models.reservas_models import ReservaEspaco
+from apps.core.services.organizacoes_service import OrganizacoesService
 from apps.security.models.usuario_models import TipoPerfil, Usuario
+
+_org_service = OrganizacoesService()
 
 __version__ = "0.0.1"
 __license__ = "AGPL V3"
@@ -117,7 +120,12 @@ def organizacoes_vinculadas(request: HttpRequest) -> HttpResponse:
     """
     if not _tem_acesso(request.user, _ORGANIZADOR):
         return redirect("area-restrita-perfil")
-    return render(request, "security/area_restrita/organizacoes_vinculadas.html")
+    organizacoes = _org_service.listar_organizacoes_do_usuario(request.user.id)
+    return render(
+        request,
+        "security/area_restrita/organizacoes_vinculadas.html",
+        {"organizacoes": organizacoes},
+    )
 
 
 @login_required

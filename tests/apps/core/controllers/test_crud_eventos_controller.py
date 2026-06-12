@@ -13,6 +13,7 @@ class CrudEventosControllerTest(TestCase):
         self.user = get_user_model().objects.create_user(
             username="tester",
             password="senha123",
+            tipo="OR",
         )
 
         self.client.login(
