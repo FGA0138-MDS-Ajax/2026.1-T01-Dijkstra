@@ -92,7 +92,7 @@ class OrganizacoesRepository:
         membros_ids = UsuarioOrganizacao.objects.filter(
             organizacao_id=organizacao_id
         ).values_list("usuario_id", flat=True)
-        return list(Usuario.objects.exclude(id__in=membros_ids).order_by("nome_completo"))
+        return list(Usuario.objects.exclude(id__in=membros_ids).filter(tipo='OR').order_by("nome_completo"))
 
     def listar_organizacoes_do_usuario(self, usuario_id: uuid.UUID) -> List[Organizacao]:
         """Retorna as organizacoes as quais o usuario esta vinculado."""
