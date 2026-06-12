@@ -47,8 +47,8 @@ class Organizacao(models.Model):
     )
 
     class Meta:  # pylint: disable=too-few-public-methods
-        verbose_name = "Organizacao"
-        verbose_name_plural = "Organizacoes"
+        verbose_name = "Organização"
+        verbose_name_plural = "Organizações"
         ordering = ["nome"]
 
     def __str__(self: Self) -> str:
