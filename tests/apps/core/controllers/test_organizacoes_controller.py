@@ -14,6 +14,7 @@ class OrganizacoesControllerTest(TestCase):
         self.user = User.objects.create_user(
             username="tester",
             password="12345678",
+            tipo="GE",
         )
 
         self.client.force_login(self.user)
