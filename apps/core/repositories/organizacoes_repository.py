@@ -99,4 +99,4 @@ class OrganizacoesRepository:
         ids = UsuarioOrganizacao.objects.filter(
             usuario_id=usuario_id
         ).values_list("organizacao_id", flat=True)
-        return list(Organizacao.objects.filter(id__in=ids))
+        return list(Organizacao.objects.filter(id__in=ids).filter())

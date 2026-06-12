@@ -18,6 +18,8 @@ from __future__ import annotations
 
 from django.core.exceptions import PermissionDenied
 from django.urls import path
+from django.shortcuts import redirect
+from django.contrib.auth.views import redirect_to_login
 
 from apps.core.controllers.home_controller import home
 from apps.core.controllers.eventos_controller import (
@@ -68,9 +70,11 @@ def somente_organizacao(view_func):
 
 def somente_gestor(view_func):
     def wrapper(request, *args, **kwargs):
-        if request.user.is_authenticated and request.user.tipo == "GE":
-            return view_func(request, *args, **kwargs)
-        raise PermissionDenied()
+        if not request.user.is_authenticated:
+            return redirect_to_login(request.get_full_path())
+        if request.user.tipo != "GE":
+            return redirect("home")
+        return view_func(request, *args, **kwargs)
     return wrapper
 
 
