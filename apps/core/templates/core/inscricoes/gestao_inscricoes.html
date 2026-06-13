@@ -1,0 +1,224 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+
+  <a href="{% url 'gestao-evento-detalhe' evento.id %}" class="btn-back">← Voltar para o evento</a>
+
+  <!-- ── Resumo do Evento ─────────────────────────────────────────── -->
+  <div class="espaco-detalhe-card" style="margin-bottom: 24px;">
+    <div class="espaco-detalhe-info">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px;">
+        <span class="section-tag" style="margin: 0;">Gestão de Inscritos</span>
+        <span class="status-badge {% if evento.status == 'publicado' %}status-disponivel{% else %}status-desativado{% endif %}">
+          {{ evento.get_status_display }}
+        </span>
+      </div>
+      <h1 class="event-title" style="margin-bottom: 12px;">{{ evento.nome }}</h1>
+      <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 0.9rem; color: #555;">
+        <span><strong>Data:</strong> {{ evento.data|date:"d/m/Y" }} às {{ evento.horario|time:"H:i" }}</span>
+        <span><strong>Local:</strong> {{ evento.local }}</span>
+        <span><strong>Capacidade:</strong> {{ evento.capacidade }}</span>
+      </div>
+
+      <!-- Contadores -->
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px;">
+        <div style="background: #eaf1fb; border-radius: 10px; padding: 10px 18px; text-align: center; min-width: 90px;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: var(--azul_unb);">{{ total }}</div>
+          <div style="font-size: 0.78rem; color: #666;">Total</div>
+        </div>
+        <div style="background: #fff8e1; border-radius: 10px; padding: 10px 18px; text-align: center; min-width: 90px;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: #b7860b;">{{ pendentes }}</div>
+          <div style="font-size: 0.78rem; color: #666;">Pendentes</div>
+        </div>
+        <div style="background: #eafaf1; border-radius: 10px; padding: 10px 18px; text-align: center; min-width: 90px;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: var(--verde_unb);">{{ aprovadas }}</div>
+          <div style="font-size: 0.78rem; color: #666;">Aprovadas</div>
+        </div>
+        <div style="background: #fdecea; border-radius: 10px; padding: 10px 18px; text-align: center; min-width: 90px;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: #c0392b;">{{ rejeitadas }}</div>
+          <div style="font-size: 0.78rem; color: #666;">Rejeitadas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Mensagens ────────────────────────────────────────────────── -->
+  {% if messages %}
+    {% for message in messages %}
+      <div style="
+        padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;
+        font-weight: 600; font-size: 0.9rem;
+        {% if message.tags == 'error' %}
+          background: #fdecea; color: #c0392b; border: 1.5px solid #c0392b;
+        {% elif message.tags == 'success' %}
+          background: #eafaf1; color: var(--verde_unb); border: 1.5px solid var(--verde_unb);
+        {% elif message.tags == 'warning' %}
+          background: #fff8e1; color: #b7860b; border: 1.5px solid #f0c030;
+        {% else %}
+          background: #eaf1fb; color: var(--azul_unb); border: 1.5px solid var(--azul_unb);
+        {% endif %}
+      ">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- ── Controles: filtro + ações em lote ───────────────────────── -->
+  <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
+
+    <form method="get" style="display: flex; align-items: center; gap: 8px;">
+      <label for="status" style="font-weight: 600; color: var(--azul_unb); font-size: 0.9rem;">Filtrar:</label>
+      <select name="status" id="status" onchange="this.form.submit()"
+        style="border: 1.5px solid #b0c4d8; border-radius: 10px; padding: 7px 12px; font-size: 0.9rem; background: #f4f8fb; color: var(--azul_unb);">
+        <option value="" {% if not status_filtro %}selected{% endif %}>Todos</option>
+        {% for value, label in status_choices %}
+          <option value="{{ value }}" {% if status_filtro == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+      </select>
+    </form>
+
+    <div style="display: flex; gap: 10px; margin-left: auto; flex-wrap: wrap;">
+      <!-- Aprovar todos os pendentes -->
+      {% if pendentes > 0 %}
+      <form method="post" action="{% url 'aprovar-todos-inscritos' evento.id %}"
+        onsubmit="return confirm('Aprovar todas as {{ pendentes }} inscrição(ões) pendente(s)?')">
+        {% csrf_token %}
+        <button type="submit" class="btn-reservar" style="font-size: 0.85rem; padding: 8px 16px;">
+          ✓ Aprovar todos os pendentes ({{ pendentes }})
+        </button>
+      </form>
+      {% endif %}
+
+      <!-- Exportar CSV -->
+      <a href="{% url 'exportar-inscricoes-csv' evento.id %}"
+        class="btn-details" style="font-size: 0.85rem; padding: 8px 16px; text-decoration: none;">
+        ⬇ Exportar CSV
+      </a>
+    </div>
+  </div>
+
+  <!-- ── Tabela de Inscritos ──────────────────────────────────────── -->
+  {% if page_obj.object_list %}
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+        <thead>
+          <tr style="background: var(--azul_unb); color: white;">
+            <th style="padding: 13px 16px; text-align: left; font-weight: 600; font-size: 0.88rem;">Matrícula</th>
+            <th style="padding: 13px 16px; text-align: left; font-weight: 600; font-size: 0.88rem;">Status</th>
+            <th style="padding: 13px 16px; text-align: left; font-weight: 600; font-size: 0.88rem;">Solicitado em</th>
+            <th style="padding: 13px 16px; text-align: left; font-weight: 600; font-size: 0.88rem;">Avaliador</th>
+            <th style="padding: 13px 16px; text-align: left; font-weight: 600; font-size: 0.88rem;">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for inscricao in page_obj %}
+            <tr style="border-bottom: 1px solid #e8eef3;">
+              <td style="padding: 11px 16px; font-size: 0.88rem;">
+                {{ inscricao.aluno.matricula|default:inscricao.aluno.username }}
+              </td>
+              <td style="padding: 11px 16px;">
+                <span class="status-badge
+                  {% if inscricao.status == 'aprovada' %}status-disponivel
+                  {% elif inscricao.status == 'pendente' %}status-manutencao
+                  {% else %}status-desativado{% endif %}">
+                  {{ inscricao.get_status_display }}
+                </span>
+                {% if inscricao.motivo_reprovacao %}
+                  <span title="{{ inscricao.motivo_reprovacao }}"
+                    style="cursor: help; margin-left: 6px; color: #c0392b; font-size: 0.8rem;">
+                    ⓘ motivo
+                  </span>
+                {% endif %}
+              </td>
+              <td style="padding: 11px 16px; font-size: 0.85rem; white-space: nowrap;">
+                {{ inscricao.data_solicitacao|date:"d/m/Y H:i" }}
+              </td>
+              <td style="padding: 11px 16px; font-size: 0.85rem;">
+                {% if inscricao.avaliador %}
+                  {{ inscricao.avaliador.get_full_name|default:inscricao.avaliador.username }}
+                  {% if inscricao.data_avaliacao %}
+                    <br><span style="font-size: 0.78rem; color: #888;">{{ inscricao.data_avaliacao|date:"d/m/Y H:i" }}</span>
+                  {% endif %}
+                {% else %}
+                  <span style="color: #aaa;">—</span>
+                {% endif %}
+              </td>
+              <td style="padding: 11px 16px;">
+                {% if inscricao.status == 'pendente' %}
+                  <div style="display: flex; flex-direction: column; gap: 6px; min-width: 220px;">
+                    <!-- Aprovar -->
+                    <form method="post" action="{% url 'aprovar-inscricao' inscricao.id %}"
+                      onsubmit="return confirm('Aprovar inscrição de {{ inscricao.aluno.get_full_name|default:inscricao.aluno.username|escapejs }}?')">
+                      {% csrf_token %}
+                      <button type="submit" class="btn-reservar"
+                        style="font-size: 0.8rem; padding: 6px 14px; width: 100%;">
+                        Aprovar
+                      </button>
+                    </form>
+
+                    <!-- Reprovar com motivo -->
+                    <details style="width: 100%;">
+                      <summary style="
+                        cursor: pointer; font-size: 0.8rem; font-weight: 600;
+                        color: #c0392b; padding: 5px 10px;
+                        border: 1.5px solid #c0392b; border-radius: 8px;
+                        background: #fdecea; list-style: none; text-align: center;">
+                        Reprovar
+                      </summary>
+                      <form method="post" action="{% url 'reprovar-inscricao' inscricao.id %}"
+                        style="margin-top: 6px; display: flex; flex-direction: column; gap: 6px;"
+                        onsubmit="return confirm('Reprovar inscrição de {{ inscricao.aluno.get_full_name|default:inscricao.aluno.username|escapejs }}?')">
+                        {% csrf_token %}
+                        <textarea name="motivo_reprovacao" rows="2" required
+                          placeholder="Motivo obrigatório..."
+                          style="border: 1.5px solid #c0392b; border-radius: 8px; padding: 6px 10px; font-size: 0.82rem; resize: vertical; font-family: inherit;"></textarea>
+                        <button type="submit" class="btn-deletar-confirm"
+                          style="font-size: 0.8rem; padding: 6px 14px;">
+                          Confirmar reprovação
+                        </button>
+                      </form>
+                    </details>
+                  </div>
+                {% else %}
+                  <span style="font-size: 0.82rem; color: #aaa;">—</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── Paginação ──────────────────────────────────────────────── -->
+    {% if page_obj.has_other_pages %}
+      <div style="display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 24px; flex-wrap: wrap;">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}&status={{ status_filtro }}"
+            class="btn-details" style="font-size: 0.85rem; padding: 7px 16px; text-decoration: none;">
+            ← Anterior
+          </a>
+        {% endif %}
+
+        <span style="font-size: 0.9rem; color: var(--azul_unb); font-weight: 600;">
+          Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}&status={{ status_filtro }}"
+            class="btn-details" style="font-size: 0.85rem; padding: 7px 16px; text-decoration: none;">
+            Próxima →
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  {% else %}
+    <p class="espaco-vazio">Nenhum inscrito encontrado{% if status_filtro %} com o filtro selecionado{% endif %}.</p>
+  {% endif %}
+
+</main>
+{% endblock %}

@@ -26,6 +26,7 @@ from __future__ import annotations
 from django import forms
 from apps.core.models.eventos_models import Evento
 from apps.core.models.espacos_models import EspacoFisico
+from apps.core.models.inscricao_models import Inscricao
 from apps.core.models.organizacoes_models import Organizacao
 from apps.core.models.reservas_models import ReservaEspaco
 
@@ -165,5 +166,20 @@ class ReprovacaoReservaForm(forms.ModelForm):
         widgets = {
             "motivo_reprovacao": forms.Textarea(
                 attrs={"rows": 4, "placeholder": "Informe o motivo da reprovação..."}
+            ),
+        }
+
+
+class ReprovacaoInscricaoForm(forms.ModelForm):
+    """Formulario para o organizador informar o motivo de reprovacao de uma inscricao."""
+
+    class Meta:
+        """Metadados do formulario ReprovacaoInscricaoForm."""
+
+        model = Inscricao
+        fields = ["motivo_reprovacao"]
+        widgets = {
+            "motivo_reprovacao": forms.Textarea(
+                attrs={"rows": 3, "placeholder": "Informe o motivo da reprovação..."}
             ),
         }

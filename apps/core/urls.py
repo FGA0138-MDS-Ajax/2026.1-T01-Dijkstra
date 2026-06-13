@@ -99,6 +99,13 @@ urlpatterns = [
     # US-009 Cancelamento
     path("evento/<uuid:evento_id>/cancelar/", inscricoes_controller.cancelar_inscricao, name="cancelar_inscricao"),
 
+    # Gestão de Inscritos (Organizador)
+    path("gestao/eventos/<uuid:evento_id>/inscritos/", somente_organizacao(inscricoes_controller.gestao_inscricoes), name="gestao-inscricoes"),
+    path("gestao/eventos/<uuid:evento_id>/inscritos/aprovar-todos/", somente_organizacao(inscricoes_controller.aprovar_todas_pendentes), name="aprovar-todos-inscritos"),
+    path("gestao/eventos/<uuid:evento_id>/inscritos/exportar-csv/", somente_organizacao(inscricoes_controller.exportar_inscricoes_csv), name="exportar-inscricoes-csv"),
+    path("gestao/inscricoes/<uuid:inscricao_id>/aprovar/", somente_organizacao(inscricoes_controller.aprovar_inscricao), name="aprovar-inscricao"),
+    path("gestao/inscricoes/<uuid:inscricao_id>/reprovar/", somente_organizacao(inscricoes_controller.reprovar_inscricao), name="reprovar-inscricao"),
+
     # Reservas de Espaco
     path("evento/<uuid:evento_id>/reservas/", reservas_controller.reservas_do_evento, name="reservas-do-evento"),
     path("evento/<uuid:evento_id>/reservar/", reservas_controller.solicitar_reserva, name="solicitar-reserva"),
