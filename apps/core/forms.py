@@ -183,3 +183,7 @@ class ReprovacaoInscricaoForm(forms.ModelForm):
                 attrs={"rows": 3, "placeholder": "Informe o motivo da reprovação..."}
             ),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["motivo_reprovacao"].required = True
