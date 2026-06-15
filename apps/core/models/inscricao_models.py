@@ -38,6 +38,9 @@ class Inscricao(models.Model):
     :param evento: Evento ao qual o aluno está inscrito.
     :param status: Situação atual da inscrição (Pendente, Aprovada, etc.).
     :param data_solicitacao: Data/hora em que a inscrição foi solicitada.
+    :param avaliador: Gestor que aprovou ou reprovou a inscrição (nullable).
+    :param data_avaliacao: Data/hora em que a inscrição foi avaliada (nullable).
+    :param motivo_reprovacao: Justificativa do gestor em caso de reprovação (nullable).
     """
 
     class Status(models.TextChoices):
@@ -76,6 +79,24 @@ class Inscricao(models.Model):
     data_solicitacao = models.DateTimeField(
         auto_now_add=True,
         verbose_name="Data da Solicitação",
+    )
+    avaliador = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        related_name="inscricoes_avaliadas",
+        verbose_name="Avaliador",
+        blank=True,
+        null=True,
+    )
+    data_avaliacao = models.DateTimeField(
+        verbose_name="Data da Avaliação",
+        blank=True,
+        null=True,
+    )
+    motivo_reprovacao = models.TextField(
+        verbose_name="Motivo da Reprovação",
+        blank=True,
+        null=True,
     )
 
     class Meta:  # pylint: disable=too-few-public-methods
