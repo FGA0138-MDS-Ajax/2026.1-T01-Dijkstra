@@ -34,8 +34,8 @@
       <p><strong>Data:</strong> {{ evento.data|date:"d/m/Y" }}</p>
       <p><strong>Horário:</strong> {{ evento.horario|time:"H:i" }}</p>
       <p><strong>Local:</strong> {{ evento.local }}</p>
-      <p><strong>Organizador:</strong> {{ evento.organizador }}</p>
-      <p><strong>Gestor:</strong> {{ evento.gestor }}</p>
+      <p><strong>Organizador:</strong> {{ evento.organizador.nome_completo|default:evento.organizador.username }}</p>
+      <p><strong>Organização:</strong> {{ evento.organizacao.nome }}</p>
       <p><strong>Capacidade:</strong> {{ evento.capacidade }} pessoas</p>
 
       {% if evento.descricao %}

@@ -78,7 +78,7 @@
           <div class="card-coluna3">
             
             <p><strong>Data e Horário: </strong> {{ evento.data|date:"d/m/Y" }} às {{ evento.horario}}</p>
-            <p><strong>Organização: </strong> {{ evento.organizador}}</p>
+            <p><strong>Organização: </strong> {{ evento.organizacao.nome }}</p>
             <p><strong>Local: </strong>{{ evento.local }}</p>
             
             <p><strong>Inscritos: </strong>{{ evento.vagas_ocupadas }}/{{ evento.capacidade }}</p>

@@ -18,6 +18,7 @@ from django.urls import reverse
 
 from apps.core.models.eventos_models import Evento
 from apps.core.models.inscricao_models import Inscricao
+from apps.core.models.organizacoes_models import Organizacao
 
 User = get_user_model()
 
@@ -58,13 +59,17 @@ class BaseInscricoesTest(TestCase):
             nome_completo="Gestor Teste",
         )
 
+        self.organizacao = Organizacao.objects.create(
+            nome="Organização Inscrições", descricao="Org de teste.",
+        )
+
         self.evento = Evento.objects.create(
             nome="Torneio de Xadrez",
             data=date(2026, 9, 15),
             horario=time(10, 0),
             local="Auditório FGA",
-            organizador="Organizador Teste",
-            gestor="Gestor Teste",
+            organizador=self.organizador,
+            organizacao=self.organizacao,
             descricao="Evento de xadrez universitário",
             capacidade=30,
             status=Evento.Status.PUBLICADO,

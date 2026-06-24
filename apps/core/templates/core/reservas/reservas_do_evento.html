@@ -55,8 +55,8 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 24px; font-size: 0.9rem;">
           <p><strong>Data:</strong> {{ evento.data|date:"d/m/Y" }} às {{ evento.horario|time:"H:i" }}</p>
           <p><strong>Local:</strong> {{ evento.local }}</p>
-          <p><strong>Organizador:</strong> {{ evento.organizador }}</p>
-          <p><strong>Gestor:</strong> {{ evento.gestor }}</p>
+          <p><strong>Organizador:</strong> {{ evento.organizador.nome_completo|default:evento.organizador.username }}</p>
+          <p><strong>Organização:</strong> {{ evento.organizacao.nome }}</p>
           <p><strong>Capacidade:</strong> {{ evento.capacidade }} pessoas</p>
         </div>
 

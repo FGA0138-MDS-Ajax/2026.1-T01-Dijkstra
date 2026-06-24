@@ -113,10 +113,23 @@ class EventosController(View):
             "data": format_field(evento.data),
             "horario": format_field(evento.horario),
             "local": evento.local,
-            "organizador": evento.organizador,
+            "organizador": (
+                str(evento.organizador_id) if evento.organizador_id else None
+            ),
+            "organizador_nome": (
+                getattr(evento.organizador, "nome_completo", None)
+                or getattr(evento.organizador, "username", None)
+                if evento.organizador_id
+                else None
+            ),
+            "organizacao": (
+                str(evento.organizacao_id) if evento.organizacao_id else None
+            ),
+            "organizacao_nome": (
+                evento.organizacao.nome if evento.organizacao_id else None
+            ),
             "descricao": evento.descricao,
             "capacidade": evento.capacidade,
-            "gestor": evento.gestor,
             "criado_em": format_field(evento.criado_em),
             "atualizado_em": format_field(evento.atualizado_em),
             "imagem": (

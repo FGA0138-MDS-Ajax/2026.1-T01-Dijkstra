@@ -1,19 +1,31 @@
 from datetime import date, time
 
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 
 from apps.core.models.eventos_models import Evento
+from apps.core.models.organizacoes_models import Organizacao
 
 
 class TestEventoModel(TestCase):
     def setUp(self):
+        self.organizador = get_user_model().objects.create_user(
+            username="org_user",
+            password="senha123",
+            tipo="OR",
+            nome_completo="Liga Universitária de Esportes",
+        )
+        self.organizacao = Organizacao.objects.create(
+            nome="Liga Universitária de Esportes",
+            descricao="Organização de teste.",
+        )
         self.evento = Evento.objects.create(
             nome="Torneio Universitário de Futsal",
             data=date(2026, 8, 15),
             horario=time(9, 0),
             local="Ginásio Darcy Ribeiro",
-            organizador="Liga Universitária de Esportes",
-            gestor="Coordenação de Esportes UnB",
+            organizador=self.organizador,
+            organizacao=self.organizacao,
             descricao="Torneio interuniversitário de futsal masculino e feminino.",
             capacidade=200,
         )

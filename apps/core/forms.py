@@ -35,7 +35,13 @@ __license__ = "AGPL V3"
 
 
 class EventoForm(forms.ModelForm):
-    """Formulario para criacao e edicao de eventos."""
+    """Formulario para criacao e edicao de eventos.
+
+    O ``organizador`` e o usuario que cria o evento e e definido pelo
+    controller (nao exposto no formulario). O campo ``organizacao`` e
+    obrigatorio e lista apenas as organizacoes as quais o organizador
+    esta vinculado.
+    """
 
     class Meta:
         """Metadados do formulario EventoForm."""
@@ -46,8 +52,7 @@ class EventoForm(forms.ModelForm):
             "data",
             "horario",
             "local",
-            "organizador",
-            "gestor",
+            "organizacao",
             "descricao",
             "capacidade",
             "imagem",
@@ -58,6 +63,28 @@ class EventoForm(forms.ModelForm):
             "horario": forms.TimeInput(attrs={"type": "time"}),
             "status": forms.RadioSelect(),
         }
+
+    def __init__(self, *args, usuario=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Organizador = usuario que cria o evento (criacao) ou o ja vinculado (edicao).
+        organizador = usuario
+        if organizador is None and getattr(self.instance, "organizador_id", None):
+            organizador = self.instance.organizador
+
+        if organizador is not None:
+            queryset = Organizacao.objects.filter(membros__usuario=organizador)
+        else:
+            queryset = Organizacao.objects.none()
+
+        # Mantem a organizacao ja vinculada disponivel na edicao.
+        org_atual_id = getattr(self.instance, "organizacao_id", None)
+        if org_atual_id is not None:
+            queryset = queryset | Organizacao.objects.filter(pk=org_atual_id)
+
+        self.fields["organizacao"].queryset = queryset.distinct()
+        self.fields["organizacao"].required = True
+        self.fields["organizacao"].empty_label = "Selecione uma organização"
 
 
 class DateFilterForm(forms.Form):
