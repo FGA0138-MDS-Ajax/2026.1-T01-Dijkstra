@@ -4,8 +4,10 @@ from datetime import date, time
 from unittest.mock import MagicMock
 
 from django.test import TestCase
+from django.contrib.auth import get_user_model
 
 from apps.core.models.eventos_models import Evento
+from apps.core.models.organizacoes_models import Organizacao
 from apps.core.repositories.eventos_repository import EventosRepository
 
 
@@ -15,12 +17,19 @@ class TestEventosRepositoryFiltros(TestCase):
     def setUp(self):
         Evento.objects.all().delete()
         self.repository = EventosRepository()
+        self.organizador = get_user_model().objects.create_user(
+            username="rep_org", password="senha123", tipo="OR",
+        )
+        self.organizacao = Organizacao.objects.create(
+            nome="Organização Repo", descricao="Org de teste.",
+        )
         self.evento_data = {
             "nome": "Evento Teste",
             "data": date(2023, 10, 27),
             "horario": time(14, 0),
             "local": "Local Teste",
-            "organizador": "Organizador Teste",
+            "organizador": self.organizador,
+            "organizacao": self.organizacao,
             "descricao": "Descrição Teste",
             "capacidade": 100,
         }

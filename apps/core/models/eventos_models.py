@@ -16,6 +16,8 @@ Notas
 - Lint e testes por `Saresu <https://github.com/Saresu>`_ em 28 maio 2026
 - Alerado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
 - Lint por `Saresu <https://github.com/Saresu>`_ em 05 junho 2026
+- Vinculo a organizador (Usuario) e organizacao por
+  `Welder60 <https://github.com/welder60>`_ em 23 junho 2026
 """
 
 from __future__ import annotations
@@ -23,6 +25,7 @@ from __future__ import annotations
 import uuid
 from typing import Self
 
+from django.conf import settings
 from django.db import models
 
 __version__ = "0.0.5"
@@ -37,8 +40,8 @@ class Evento(models.Model):
     :param data: Data de realizacao do evento.
     :param horario: Horario de realizacao do evento.
     :param local: Local de realizacao do evento.
-    :param organizador: Nome do organizador responsavel.
-    :param gestor: Nome do gestor do evento.
+    :param organizador: Usuario que cria/organiza o evento.
+    :param organizacao: Organizacao a qual o evento esta vinculado.
     :param descricao: Descricao opcional do evento.
     :param capacidade: Numero maximo de pessoas.
     :param imagem: Imagem ilustrativa do evento (opcional).
@@ -65,8 +68,18 @@ class Evento(models.Model):
     data = models.DateField(verbose_name="Data do Evento")
     horario = models.TimeField(verbose_name="Horario do Evento")
     local = models.CharField(max_length=150, verbose_name="Local")
-    organizador = models.CharField(max_length=100, verbose_name="Organizador")
-    gestor = models.CharField(max_length=100, verbose_name="Gestor")
+    organizador = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="eventos_organizados",
+        verbose_name="Organizador",
+    )
+    organizacao = models.ForeignKey(
+        "core.Organizacao",
+        on_delete=models.PROTECT,
+        related_name="eventos",
+        verbose_name="Organizacao",
+    )
     descricao = models.TextField(verbose_name="Descricao", blank=True, null=True)
     capacidade = models.PositiveIntegerField(verbose_name="Capacidade de Pessoas")
     vagas_ocupadas = models.PositiveIntegerField(default=0, verbose_name="Vagas Ocupadas")

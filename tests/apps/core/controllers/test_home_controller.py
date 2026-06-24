@@ -3,11 +3,21 @@ from unittest.mock import patch
 
 from django.test import TestCase
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
 from apps.core.models.eventos_models import Evento
+from apps.core.models.organizacoes_models import Organizacao
 
 
 class HomeControllerTest(TestCase):
+    def setUp(self):
+        self.organizador = get_user_model().objects.create_user(
+            username="home_org", password="senha123", tipo="OR",
+        )
+        self.organizacao = Organizacao.objects.create(
+            nome="Organização Home", descricao="Org de teste.",
+        )
+
     @patch("apps.core.controllers.home_controller.EventosService.get_filtered_events")
     def test_home(self, mock_get_filtered_events):
         evento = Evento.objects.create(
@@ -15,8 +25,8 @@ class HomeControllerTest(TestCase):
             data=date.today(),
             horario=time(10, 0),
             local="Local",
-            organizador="Organizador",
-            gestor="Gestor",
+            organizador=self.organizador,
+            organizacao=self.organizacao,
             capacidade=100,
         )
 
@@ -34,8 +44,8 @@ class HomeControllerTest(TestCase):
             data=date.today(),
             horario=time(10, 0),
             local="Local",
-            organizador="Organizador",
-            gestor="Gestor",
+            organizador=self.organizador,
+            organizacao=self.organizacao,
             capacidade=100,
         )
 
@@ -69,8 +79,8 @@ class HomeControllerTest(TestCase):
                     data=date.today(),
                     horario=time(10, 0),
                     local="Local",
-                    organizador="Organizador",
-                    gestor="Gestor",
+                    organizador=self.organizador,
+                    organizacao=self.organizacao,
                     capacidade=100,
                 )
             )

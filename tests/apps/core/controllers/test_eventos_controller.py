@@ -6,8 +6,11 @@ from unittest.mock import MagicMock, patch
 from django.test import TestCase, Client
 from django.urls import reverse
 
+from django.contrib.auth import get_user_model
+
 from apps.core.controllers.eventos_controller import EventosController
 from apps.core.models.eventos_models import Evento
+from apps.core.models.organizacoes_models import Organizacao
 
 
 class EventosControllerExtraTest(TestCase):
@@ -15,13 +18,22 @@ class EventosControllerExtraTest(TestCase):
 
     def setUp(self):
         self.client = Client()
+        self.organizador = get_user_model().objects.create_user(
+            username="rest_org",
+            password="senha123",
+            tipo="OR",
+            nome_completo="Organizador Teste",
+        )
+        self.organizacao = Organizacao.objects.create(
+            nome="Organização REST", descricao="Org de teste.",
+        )
         self.evento_data = {
             "nome": "Evento Teste",
             "data": "2023-10-27",
             "horario": "14:00:00",
             "local": "Local Teste",
-            "organizador": "Organizador Teste",
-            "gestor": "Gestor Teste",
+            "organizador_id": str(self.organizador.id),
+            "organizacao_id": str(self.organizacao.id),
             "descricao": "Descrição Teste",
             "capacidade": 100,
         }
@@ -30,8 +42,8 @@ class EventosControllerExtraTest(TestCase):
             data=date(2023, 10, 27),
             horario=time(14, 0),
             local="Local",
-            organizador="Org",
-            gestor="Gestor",
+            organizador=self.organizador,
+            organizacao=self.organizacao,
             descricao="Desc",
             capacidade=50,
         )
@@ -79,8 +91,8 @@ class EventosControllerExtraTest(TestCase):
             data=date.today(),
             horario=time(10, 0),
             local="Local",
-            organizador="Org",
-            gestor="Gestor",
+            organizador=self.organizador,
+            organizacao=self.organizacao,
             capacidade=100,
         )
 
@@ -104,8 +116,8 @@ class EventosControllerExtraTest(TestCase):
             data=date.today(),
             horario=time(10, 0),
             local="Local",
-            organizador="Org",
-            gestor="Gestor",
+            organizador=self.organizador,
+            organizacao=self.organizacao,
             capacidade=100,
         )
 
@@ -115,8 +127,8 @@ class EventosControllerExtraTest(TestCase):
 
         self.assertEqual(data["nome"], evento.nome)
         self.assertEqual(data["local"], evento.local)
-        self.assertEqual(data["organizador"], evento.organizador)
-        self.assertEqual(data["gestor"], evento.gestor)
+        self.assertEqual(data["organizador"], str(evento.organizador_id))
+        self.assertEqual(data["organizacao"], str(evento.organizacao_id))
         self.assertEqual(data["capacidade"], evento.capacidade)
         self.assertEqual(data["imagem"], None)
 
@@ -154,8 +166,8 @@ class EventosControllerExtraTest(TestCase):
             data=date.today(),
             horario=time(10, 0),
             local="Local",
-            organizador="Org",
-            gestor="Gestor",
+            organizador=self.organizador,
+            organizacao=self.organizacao,
             capacidade=100,
         )
 
