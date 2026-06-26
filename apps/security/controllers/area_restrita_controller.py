@@ -32,6 +32,8 @@ from apps.core.models.espacos_models import EspacoFisico
 from apps.core.models.reservas_models import ReservaEspaco
 from apps.core.services.organizacoes_service import OrganizacoesService
 from apps.security.models.usuario_models import TipoPerfil, Usuario
+from apps.core.models import Inscricao
+
 
 _org_service = OrganizacoesService()
 
@@ -75,22 +77,22 @@ def perfil(request: HttpRequest) -> HttpResponse:
     return render(request, "security/area_restrita/perfil.html")
 
 
+
 @login_required
 @require_http_methods(["GET"])
 def eventos_inscritos(request: HttpRequest) -> HttpResponse:
-    """
-    Exibe a página de Eventos Inscritos.
-
-    Acessível a Alunos e superusers.
-
-    :param request: Objeto da requisicao HTTP.
-    :rtype: HttpResponse
-    """
     if not _tem_acesso(request.user, _ALUNO):
         return redirect("area-restrita-perfil")
-    return render(request, "security/area_restrita/eventos_inscritos.html")
 
+    inscricoes = Inscricao.objects.filter(aluno=request.user)
 
+    return render(
+        request,
+        "security/area_restrita/eventos_inscritos.html",
+        {
+            "inscricoes": inscricoes
+        }
+    )
 @login_required
 @require_http_methods(["GET"])
 def gestao_eventos_restrita(request: HttpRequest) -> HttpResponse:
@@ -280,3 +282,9 @@ def excluir_usuario(request: HttpRequest, usuario_id: str) -> HttpResponse:
         return redirect("area-restrita-gestao-usuarios")
     alvo.delete()
     return redirect("area-restrita-gestao-usuarios")
+
+def termos_de_uso(request):
+    return render(request, "security/area_restrita/termos_de_uso.html")
+
+def politica_privacidade(request):
+    return render(request, "security/area_restrita/politica_privacidade.html")
