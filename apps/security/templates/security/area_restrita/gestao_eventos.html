@@ -70,11 +70,29 @@
     .btn-detalhes:hover {
         background: #2A8B4B;
     }
+
+    .btn-novo-evento {
+        display: inline-block;
+        background: #2A8B4B;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: .2s;
+        margin-bottom: 20px;
+    }
+
+    .btn-novo-evento:hover {
+        background: #1F3B5B;
+        color: white;
+    }
   </style>
 {% endblock %}
 
 {% block restrita_content %}
 <h1>Gestão de Eventos</h1>
+<a href="{% url 'gestao-evento-novo' %}" class="btn-novo-evento">+ Novo Evento</a>
 <div class="page-placeholder">
     {% if eventos %}
 <div class="eventos-grid">
