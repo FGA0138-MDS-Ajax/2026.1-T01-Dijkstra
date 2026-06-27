@@ -32,7 +32,7 @@ from apps.core.models.espacos_models import EspacoFisico
 from apps.core.models.reservas_models import ReservaEspaco
 from apps.core.services.organizacoes_service import OrganizacoesService
 from apps.security.models.usuario_models import TipoPerfil, Usuario
-from apps.core.models import Inscricao
+from apps.core.models import Inscricao, Evento, EspacoFisico
 
 
 _org_service = OrganizacoesService()
@@ -104,9 +104,12 @@ def gestao_eventos_restrita(request: HttpRequest) -> HttpResponse:
     :param request: Objeto da requisicao HTTP.
     :rtype: HttpResponse
     """
+
     if not _tem_acesso(request.user, _ORGANIZADOR):
         return redirect("area-restrita-perfil")
-    return render(request, "security/area_restrita/gestao_eventos.html")
+    
+    eventos = Evento.objects.filter(organizador=request.user)
+    return render(request, "security/area_restrita/gestao_eventos.html", {"eventos": eventos})
 
 
 @login_required
@@ -143,7 +146,8 @@ def espacos_esportivos(request: HttpRequest) -> HttpResponse:
     """
     if not _tem_acesso(request.user, _GESTOR):
         return redirect("area-restrita-perfil")
-    return render(request, "security/area_restrita/espacos_esportivos.html")
+    espacos = EspacoFisico.objects.all()
+    return render(request, "security/area_restrita/espacos_esportivos.html", {"espacos": espacos})
 
 
 @login_required

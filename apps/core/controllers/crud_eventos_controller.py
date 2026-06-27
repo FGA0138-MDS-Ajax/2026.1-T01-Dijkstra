@@ -44,7 +44,7 @@ def gestao_eventos_list(request: HttpRequest) -> HttpResponse:
     :rtype: HttpResponse
     """
     status_filtro = request.GET.get("status", "")
-    eventos = Evento.objects.all()
+    eventos = Evento.objects.filter(organizador=request.user)
     if status_filtro:
         eventos = eventos.filter(status=status_filtro)
     return render(

@@ -50,9 +50,6 @@
   <div class="nav-links">
     <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'eventos-list' %}active{% endif %}">Início</a>
     {% if user.is_authenticated %}
-    {% if user.tipo == "OR" %}
-    <a href="{% url 'gestao-eventos-list' %}" class="{% if 'gestao-evento' in request.resolver_match.url_name %}active{% endif %}">Gestão de Eventos</a>  
-    {% endif %}
     <a href="{% url 'area-restrita' %}" class="{% if 'area-restrita' in request.resolver_match.url_name %}active{% endif %}">Minha Área</a>
     {% endif %}
     {% if user.is_authenticated and user.tipo == "GE" %}

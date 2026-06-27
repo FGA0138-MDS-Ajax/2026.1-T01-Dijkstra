@@ -28,8 +28,12 @@
       <p>{{ organizacao.descricao }}</p>
 
       <div class="espaco-acoes" style="margin-top: 24px;">
+        {% if request.user.tipo == 'GE' %}
         <a class="btn-editar" href="{% url 'organizacao-editar' organizacao.id %}">Editar</a>
+        {% endif %}
+        {% if request.user.tipo == 'GE' %}
         <a class="btn-deletar" href="{% url 'organizacao-deletar' organizacao.id %}">Excluir</a>
+        {% endif %}
         {% if request.user.tipo == 'GE' %}
           <a class="btn-editar" href="{% url 'organizacao-membros' organizacao.id %}">Gerenciar Membros</a>
         {% endif %}

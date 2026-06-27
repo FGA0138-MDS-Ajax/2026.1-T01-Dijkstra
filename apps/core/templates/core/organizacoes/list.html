@@ -35,17 +35,25 @@
             <p>{{ organizacao.descricao|truncatechars:100 }}</p>
           </div>
 
+          {% if user.is_authenticated %}
           <div class="espaco-acoes">
-            <a class="btn-details" href="{% url 'organizacao-detalhe' organizacao.id %}">
-              Ver detalhes
-            </a>
-            <a class="btn-editar" href="{% url 'organizacao-editar' organizacao.id %}">
-              Editar
-            </a>
-            <a class="btn-deletar" href="{% url 'organizacao-deletar' organizacao.id %}">
-              Excluir
-            </a>
+
+              <a class="btn-details" href="{% url 'organizacao-detalhe' organizacao.id %}">
+                  Ver detalhes
+              </a>
+
+              {% if user.tipo == "GE" %}
+                  <a class="btn-editar" href="{% url 'organizacao-editar' organizacao.id %}">
+                      Editar
+                  </a>
+
+                  <a class="btn-deletar" href="{% url 'organizacao-deletar' organizacao.id %}">
+                      Excluir
+                  </a>
+              {% endif %}
+
           </div>
+          {% endif %}
 
         </div>
       </div>

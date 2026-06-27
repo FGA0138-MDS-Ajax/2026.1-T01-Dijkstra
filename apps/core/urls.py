@@ -133,8 +133,8 @@ urlpatterns = [
     path("espacos/<uuid:espaco_id>/deletar/", somente_gestor(espaco_deletar), name="espaco-deletar"),
 
     # Organizacoes Esportivas (gestor e organizador)
-    path("organizacoes/", gestor_ou_organizacao(organizacoes_list), name="organizacoes-list"),
-    path("organizacoes/nova/", gestor_ou_organizacao(organizacao_nova), name="organizacao-nova"),
+    path("organizacoes/", organizacoes_list , name="organizacoes-list"),
+    path("organizacoes/nova/", somente_gestor(organizacao_nova), name="organizacao-nova"),
     path("organizacoes/<uuid:organizacao_id>/", gestor_ou_organizacao(organizacao_detalhe), name="organizacao-detalhe"),
     path("organizacoes/<uuid:organizacao_id>/editar/", gestor_ou_organizacao(organizacao_editar), name="organizacao-editar"),
     path("organizacoes/<uuid:organizacao_id>/deletar/", gestor_ou_organizacao(organizacao_deletar), name="organizacao-deletar"),
