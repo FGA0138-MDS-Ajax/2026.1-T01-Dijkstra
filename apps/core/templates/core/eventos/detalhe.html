@@ -34,8 +34,8 @@
       <p><strong>Data:</strong> {{ evento.data|date:"d/m/Y" }}</p>
       <p><strong>Horário:</strong> {{ evento.horario|time:"H:i" }}</p>
       <p><strong>Local:</strong> {{ evento.local }}</p>
-      <p><strong>Organizador:</strong> {{ evento.organizador }}</p>
-      <p><strong>Gestor:</strong> {{ evento.gestor }}</p>
+      <p><strong>Organizador:</strong> {{ evento.organizador.nome_completo|default:evento.organizador.username }}</p>
+      <p><strong>Organização:</strong> {{ evento.organizacao.nome }}</p>
       <p><strong>Capacidade:</strong> {{ evento.capacidade }} pessoas</p>
 
       {% if evento.descricao %}
@@ -44,6 +44,8 @@
       {% endif %}
 
       <div class="espaco-acoes" style="margin-top: 24px;">
+        <a class="btn-reservar" href="{% url 'reservas-do-evento' evento.id %}">Reservas de Espaço</a>
+        <a class="btn-details" href="{% url 'gestao-inscricoes' evento.id %}">Gerenciar Inscritos</a>
         <a class="btn-editar" href="{% url 'gestao-evento-editar' evento.id %}">Editar</a>
         <a class="btn-deletar" href="{% url 'gestao-evento-deletar' evento.id %}">Excluir</a>
       </div>

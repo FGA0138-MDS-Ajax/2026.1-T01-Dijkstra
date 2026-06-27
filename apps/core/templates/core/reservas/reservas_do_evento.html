@@ -1,0 +1,150 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+
+  <a href="{% url 'gestao-eventos-list' %}" class="btn-back">← Voltar para gestão de eventos</a>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div style="
+        padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;
+        font-weight: 600; font-size: 0.9rem;
+        {% if message.tags == 'error' %}
+          background: #fdecea; color: #c0392b; border: 1.5px solid #c0392b;
+        {% elif message.tags == 'success' %}
+          background: #eafaf1; color: var(--verde_unb); border: 1.5px solid var(--verde_unb);
+        {% else %}
+          background: #eaf1fb; color: var(--azul_unb); border: 1.5px solid var(--azul_unb);
+        {% endif %}
+      ">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Dados do evento -->
+  <div style="background: white; border-radius: 14px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); padding: 24px; margin-bottom: 32px;">
+
+    <div style="display: flex; align-items: flex-start; gap: 24px; flex-wrap: wrap;">
+
+      {% if evento.imagem %}
+        <img src="{{ evento.imagem.url }}" alt="{{ evento.nome }}"
+          style="width: 200px; height: 140px; object-fit: cover; border-radius: 10px; flex-shrink: 0;">
+      {% else %}
+        <div style="width: 200px; height: 140px; border-radius: 10px; background: #d0dfe8;
+          display: flex; align-items: center; justify-content: center;
+          color: var(--azul_unb); font-weight: 600; font-size: 0.9rem; flex-shrink: 0;">
+          Sem imagem
+        </div>
+      {% endif %}
+
+      <div style="flex: 1; min-width: 220px;">
+        <h1 style="font-size: 1.4rem; color: var(--azul_unb); margin-bottom: 12px;">{{ evento.nome }}</h1>
+
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+          <span style="font-size: 0.85rem; color: #6c757d;">Status:</span>
+          <span class="status-badge {% if evento.status == 'publicado' %}status-disponivel{% else %}status-desativado{% endif %}">
+            {{ evento.get_status_display }}
+          </span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px 24px; font-size: 0.9rem;">
+          <p><strong>Data:</strong> {{ evento.data|date:"d/m/Y" }} às {{ evento.horario|time:"H:i" }}</p>
+          <p><strong>Local:</strong> {{ evento.local }}</p>
+          <p><strong>Organizador:</strong> {{ evento.organizador.nome_completo|default:evento.organizador.username }}</p>
+          <p><strong>Organização:</strong> {{ evento.organizacao.nome }}</p>
+          <p><strong>Capacidade:</strong> {{ evento.capacidade }} pessoas</p>
+        </div>
+
+        {% if evento.descricao %}
+          <p style="margin-top: 10px; font-size: 0.9rem; color: #4a6075;">{{ evento.descricao }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Cabeçalho da seção de reservas -->
+  <div class="espacos-header">
+    <span class="section-tag">Reservas de Espaço</span>
+    {% if request.user.tipo == "OR" %}
+      <a href="{% url 'solicitar-reserva' evento.id %}" class="btn-reservar">+ Nova Reserva</a>
+    {% endif %}
+  </div>
+
+  <!-- Tabela de reservas -->
+  {% if reservas %}
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+        <thead>
+          <tr style="background: var(--azul_unb); color: white;">
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Espaço</th>
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Solicitante</th>
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Início</th>
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Término</th>
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Status</th>
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for reserva in reservas %}
+            <tr style="border-bottom: 1px solid #e8eef3;">
+              <td style="padding: 12px 16px; font-size: 0.9rem;">{{ reserva.espaco.nome }}</td>
+              <td style="padding: 12px 16px; font-size: 0.9rem;">
+                {{ reserva.solicitante.get_full_name|default:reserva.solicitante.username }}
+              </td>
+              <td style="padding: 12px 16px; font-size: 0.9rem;">{{ reserva.data_inicio|date:"d/m/Y H:i" }}</td>
+              <td style="padding: 12px 16px; font-size: 0.9rem;">{{ reserva.data_fim|date:"d/m/Y H:i" }}</td>
+              <td style="padding: 12px 16px;">
+                <span class="status-badge
+                  {% if reserva.status == 'aprovada' %}status-disponivel
+                  {% elif reserva.status == 'pendente' %}status-manutencao
+                  {% else %}status-desativado{% endif %}">
+                  {{ reserva.get_status_display }}
+                </span>
+              </td>
+              <td style="padding: 12px 16px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+                {% if request.user.tipo == "GE" %}
+                  <a class="btn-details" href="{% url 'gestao-reserva-detalhe' reserva.id %}"
+                    style="font-size: 0.8rem; padding: 7px 14px;">Ver</a>
+                {% endif %}
+                {% if request.user.tipo == "OR" and reserva.solicitante == request.user and reserva.status == 'pendente' %}
+                  <form method="post" action="{% url 'cancelar-reserva' reserva.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-deletar"
+                      style="font-size: 0.8rem; padding: 7px 14px;"
+                      onclick="return confirm('Cancelar esta reserva?')">
+                      Cancelar
+                    </button>
+                  </form>
+                {% endif %}
+                {% if reserva.status == 'reprovada' and reserva.motivo_reprovacao %}
+                  <span title="{{ reserva.motivo_reprovacao }}"
+                    style="font-size: 0.82rem; color: #c0392b; cursor: help;">
+                    Ver motivo ⓘ
+                  </span>
+                {% endif %}
+                {% if reserva.status != 'pendente' and reserva.status != 'reprovada' and request.user.tipo == "OR" and reserva.solicitante == request.user %}
+                  <span style="font-size: 0.82rem; color: #6c757d;">—</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="espaco-vazio">
+      Nenhuma reserva cadastrada para este evento.
+      {% if request.user.tipo == "OR" %}
+        <a href="{% url 'solicitar-reserva' evento.id %}">Solicitar a primeira reserva</a>.
+      {% endif %}
+    </p>
+  {% endif %}
+
+</main>
+{% endblock %}

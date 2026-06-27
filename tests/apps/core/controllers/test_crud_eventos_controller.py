@@ -6,6 +6,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from apps.core.models.eventos_models import Evento
+from apps.core.models.organizacoes_models import Organizacao, UsuarioOrganizacao
 
 
 class CrudEventosControllerTest(TestCase):
@@ -13,6 +14,7 @@ class CrudEventosControllerTest(TestCase):
         self.user = get_user_model().objects.create_user(
             username="tester",
             password="senha123",
+            tipo="OR",
         )
 
         self.client.login(
@@ -20,13 +22,20 @@ class CrudEventosControllerTest(TestCase):
             password="senha123",
         )
 
+        self.organizacao = Organizacao.objects.create(
+            nome="Organização Teste", descricao="Org de teste.",
+        )
+        UsuarioOrganizacao.objects.create(
+            usuario=self.user, organizacao=self.organizacao,
+        )
+
         self.evento = Evento.objects.create(
             nome="Evento Teste",
             data=date.today(),
             horario=time(10, 0),
             local="Local Teste",
-            organizador="Organizador",
-            gestor="Gestor",
+            organizador=self.user,
+            organizacao=self.organizacao,
             descricao="Descricao teste",
             capacidade=100,
             status=Evento.Status.PUBLICADO,
@@ -62,8 +71,8 @@ class CrudEventosControllerTest(TestCase):
             data=date.today(),
             horario=time(12, 0),
             local="Outro Local",
-            organizador="Outro",
-            gestor="Outro",
+            organizador=self.user,
+            organizacao=self.organizacao,
             descricao="Outro",
             capacidade=50,
             status=Evento.Status.RASCUNHO,
@@ -107,8 +116,7 @@ class CrudEventosControllerTest(TestCase):
                 "data": "2026-06-20",
                 "horario": "10:00",
                 "local": "Auditório",
-                "organizador": "Organizador",
-                "gestor": "Gestor",
+                "organizacao": str(self.organizacao.id),
                 "descricao": "Campeonato de Magic",
                 "capacidade": 100,
                 "status": Evento.Status.PUBLICADO,
@@ -207,8 +215,7 @@ class CrudEventosControllerTest(TestCase):
                 "data": self.evento.data.strftime("%Y-%m-%d"),
                 "horario": self.evento.horario.strftime("%H:%M"),
                 "local": self.evento.local,
-                "organizador": self.evento.organizador,
-                "gestor": self.evento.gestor,
+                "organizacao": str(self.evento.organizacao_id),
                 "descricao": self.evento.descricao,
                 "capacidade": self.evento.capacidade,
                 "status": self.evento.status,

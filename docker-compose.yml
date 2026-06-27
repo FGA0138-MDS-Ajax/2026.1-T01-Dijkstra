@@ -1,11 +1,24 @@
+# logica simplificada para manter sempre a versão atual
+# a seguranca foi exposta com o secret-key mas o resto foi
+# preservado. ato contínuo, o uso de media local static fica
+# mais rapido para o servidor vs cloudflare vs cliente
+# agora tem de rodar o rum com build 
 services:
   web:
-    image: sigesporte_alpha_001
-    restart: unless-stopped
+    # coidado com as versoes para nao deletar as imagens de release
+    # que estao salvas na release e no servidor
+    image: sigesporte:0.0.5-alpha
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    env_file:
-      - .env
+    restart: always
+    environment:
+      - SECRET_KEY=mude_para_uma_chave_super_segura_depois
     volumes:
+      - static_data:/app/staticfiles
       - ./media:/app/media
 
+volumes:
+  static_data:

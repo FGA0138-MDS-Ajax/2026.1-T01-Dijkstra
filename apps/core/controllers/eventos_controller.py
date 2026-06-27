@@ -20,6 +20,7 @@ Notas
 - Lint e testes por `Saresu <https://github.com/Saresu>`_ em 28 maio 2026
 - Revisado por `Gui-fga <https://github.com/Gui-fga>`_ em 30 maio 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
+- Alterado por `DaviiGualbertoo <https://github.com/DaviiGualbertoo>`_ em 08 junho 2026
 """
 
 from __future__ import annotations
@@ -36,6 +37,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from apps.core.forms import DateFilterForm
 from apps.core.services.eventos_service import EventosService
+from apps.core.models.inscricao_models import Inscricao
 
 __version__ = "0.0.4"
 __license__ = "AGPL V3"
@@ -52,14 +54,14 @@ class EventosController(View):
 
     def get(self: Self, request: HttpRequest) -> JsonResponse | HttpResponse:
         """
-        Lista todos os eventos.
+        Lista todos os eventos publicados.
 
         :param request: Objeto da requisicao HTTP.
         :type request: HttpRequest
         :returns: JsonResponse ou HttpResponse com a lista de eventos.
         :rtype: JsonResponse | HttpResponse
         """
-        eventos = self.service.listar_eventos()
+        eventos = self.service.listar_eventos_publicados()
         if request.headers.get("Accept") == "application/json":
             return JsonResponse(
                 [self._serialize_evento(e) for e in eventos], safe=False
@@ -111,10 +113,23 @@ class EventosController(View):
             "data": format_field(evento.data),
             "horario": format_field(evento.horario),
             "local": evento.local,
-            "organizador": evento.organizador,
+            "organizador": (
+                str(evento.organizador_id) if evento.organizador_id else None
+            ),
+            "organizador_nome": (
+                getattr(evento.organizador, "nome_completo", None)
+                or getattr(evento.organizador, "username", None)
+                if evento.organizador_id
+                else None
+            ),
+            "organizacao": (
+                str(evento.organizacao_id) if evento.organizacao_id else None
+            ),
+            "organizacao_nome": (
+                evento.organizacao.nome if evento.organizacao_id else None
+            ),
             "descricao": evento.descricao,
             "capacidade": evento.capacidade,
-            "gestor": evento.gestor,
             "criado_em": format_field(evento.criado_em),
             "atualizado_em": format_field(evento.atualizado_em),
             "imagem": (
@@ -178,8 +193,20 @@ def detalhes_evento(request, evento_id):
     service = EventosService()
     evento = service.buscar_evento(evento_id)
 
+    inscricao = None
+    if request.user.is_authenticated:
+        inscricao = Inscricao.objects.filter(aluno=request.user, evento=evento).first()
+
+    evento.vagas_ocupadas = Inscricao.objects.filter(evento=evento).exclude(
+        status__in=[Inscricao.Status.CANCELADA, Inscricao.Status.REJEITADA]
+    ).count()
+
+
     return render(
         request,
         "core/detalhes_evento.html",
-        {"evento": evento},
+        {
+            "evento": evento,
+            "inscricao": inscricao,
+        },
     )

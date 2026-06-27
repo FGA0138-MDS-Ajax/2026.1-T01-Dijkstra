@@ -1,0 +1,98 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+
+  <a href="{% url 'gestao-reservas-list' %}" class="btn-back">← Voltar para reservas</a>
+
+  <div class="espaco-detalhe-card">
+
+    <div class="espaco-detalhe-info">
+
+      <h1 class="event-title" style="font-size: 1.3rem; margin-bottom: 16px;">Detalhes da Reserva</h1>
+
+      <div class="event-status" style="margin-bottom: 16px;">
+        <span>Status:</span>
+        <span class="status-badge
+          {% if reserva.status == 'aprovada' %}status-disponivel
+          {% elif reserva.status == 'pendente' %}status-manutencao
+          {% else %}status-desativado{% endif %}">
+          {{ reserva.get_status_display }}
+        </span>
+      </div>
+
+      <p><strong>Espaço:</strong> {{ reserva.espaco.nome }}</p>
+      <p><strong>Localização:</strong> {{ reserva.espaco.localizacao }}</p>
+      <p><strong>Evento:</strong> {{ reserva.evento.nome }}</p>
+      <p><strong>Solicitante:</strong> {{ reserva.solicitante.get_full_name|default:reserva.solicitante.username }}</p>
+      <p><strong>Início:</strong> {{ reserva.data_inicio|date:"d/m/Y H:i" }}</p>
+      <p><strong>Término:</strong> {{ reserva.data_fim|date:"d/m/Y H:i" }}</p>
+      <p><strong>Solicitado em:</strong> {{ reserva.criado_em|date:"d/m/Y H:i" }}</p>
+
+      {% if reserva.avaliador %}
+        <p><strong>Avaliado por:</strong> {{ reserva.avaliador.get_full_name|default:reserva.avaliador.username }}</p>
+      {% endif %}
+
+      {% if reserva.motivo_reprovacao %}
+        <div style="margin-top: 12px; padding: 12px 16px; background: #fdecea; border-radius: 10px; border: 1.5px solid #c0392b;">
+          <strong style="color: #c0392b;">Motivo da reprovação:</strong>
+          <p style="margin-top: 6px; color: #c0392b;">{{ reserva.motivo_reprovacao }}</p>
+        </div>
+      {% endif %}
+
+      {% if messages %}
+        {% for message in messages %}
+          <div style="
+            padding: 12px 16px; border-radius: 10px; margin-top: 16px;
+            font-weight: 600; font-size: 0.9rem;
+            {% if message.tags == 'error' %}
+              background: #fdecea; color: #c0392b; border: 1.5px solid #c0392b;
+            {% else %}
+              background: #eaf1fb; color: var(--azul_unb); border: 1.5px solid var(--azul_unb);
+            {% endif %}
+          ">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+
+      {% if reserva.status == 'pendente' %}
+        <div class="espaco-acoes" style="margin-top: 24px; flex-wrap: wrap;">
+
+          <form method="post" action="{% url 'aprovar-reserva' reserva.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn-reservar"
+              onclick="return confirm('Aprovar esta reserva?')">
+              Aprovar
+            </button>
+          </form>
+
+          <form method="post" action="{% url 'reprovar-reserva' reserva.id %}"
+            style="display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 260px;">
+            {% csrf_token %}
+            <div class="form-field">
+              <label style="font-weight: 600; font-size: 0.9rem; color: var(--azul_unb);">Motivo da reprovação *</label>
+              {{ form_reprovacao.motivo_reprovacao }}
+              {% if form_reprovacao.motivo_reprovacao.errors %}
+                <span class="form-erro">{{ form_reprovacao.motivo_reprovacao.errors.as_text }}</span>
+              {% endif %}
+            </div>
+            <div>
+              <button type="submit" class="btn-deletar-confirm"
+                onclick="return confirm('Reprovar esta reserva?')">
+                Reprovar
+              </button>
+            </div>
+          </form>
+
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+</main>
+{% endblock %}

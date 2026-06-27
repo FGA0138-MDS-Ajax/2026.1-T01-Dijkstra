@@ -1,0 +1,95 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/espacos.css' %}">
+{% endblock %}
+
+{% block content %}
+<main>
+
+  <div class="espacos-header">
+    <span class="section-tag">Minhas Reservas</span>
+    <a href="{% url 'gestao-eventos-list' %}" class="btn-novo-espaco">← Voltar para Eventos</a>
+  </div>
+
+  {% if messages %}
+    {% for message in messages %}
+      <div style="
+        padding: 12px 16px;
+        border-radius: 10px;
+        margin-bottom: 16px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        {% if message.tags == 'error' %}
+          background: #fdecea; color: #c0392b; border: 1.5px solid #c0392b;
+        {% elif message.tags == 'success' %}
+          background: #eafaf1; color: var(--verde_unb); border: 1.5px solid var(--verde_unb);
+        {% else %}
+          background: #eaf1fb; color: var(--azul_unb); border: 1.5px solid var(--azul_unb);
+        {% endif %}
+      ">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  {% if reservas %}
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; background: white; border-radius: 14px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+        <thead>
+          <tr style="background: var(--azul_unb); color: white;">
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Espaço</th>
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Evento</th>
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Início</th>
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Término</th>
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Status</th>
+            <th style="padding: 14px 16px; text-align: left; font-weight: 600; font-size: 0.9rem;">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for reserva in reservas %}
+            <tr style="border-bottom: 1px solid #e8eef3;">
+              <td style="padding: 12px 16px; font-size: 0.9rem;">{{ reserva.espaco.nome }}</td>
+              <td style="padding: 12px 16px; font-size: 0.9rem;">{{ reserva.evento.nome }}</td>
+              <td style="padding: 12px 16px; font-size: 0.9rem;">{{ reserva.data_inicio|date:"d/m/Y H:i" }}</td>
+              <td style="padding: 12px 16px; font-size: 0.9rem;">{{ reserva.data_fim|date:"d/m/Y H:i" }}</td>
+              <td style="padding: 12px 16px;">
+                <span class="status-badge
+                  {% if reserva.status == 'aprovada' %}status-disponivel
+                  {% elif reserva.status == 'pendente' %}status-manutencao
+                  {% else %}status-desativado{% endif %}">
+                  {{ reserva.get_status_display }}
+                </span>
+              </td>
+              <td style="padding: 12px 16px;">
+                {% if reserva.status == 'pendente' %}
+                  <form method="post" action="{% url 'cancelar-reserva' reserva.id %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-deletar"
+                      onclick="return confirm('Cancelar esta reserva?')">
+                      Cancelar
+                    </button>
+                  </form>
+                {% elif reserva.status == 'reprovada' and reserva.motivo_reprovacao %}
+                  <span style="font-size: 0.82rem; color: #c0392b;" title="{{ reserva.motivo_reprovacao }}">
+                    Ver motivo ⓘ
+                  </span>
+                {% else %}
+                  <span style="font-size: 0.82rem; color: #6c757d;">—</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="espaco-vazio">
+      Você ainda não possui reservas solicitadas.
+      <a href="{% url 'gestao-eventos-list' %}">Solicite uma a partir de um evento</a>.
+    </p>
+  {% endif %}
+
+</main>
+{% endblock %}

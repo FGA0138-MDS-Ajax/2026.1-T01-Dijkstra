@@ -15,16 +15,71 @@
     .auth-input {
         width: 100%;
         padding: 10px;
-        margin: 5px 0 15px;
+        margin: 5px 0 4px;
         border: 1px solid #96BBAF;
         border-radius: 10px;
         font-family: inherit;
+        font-size: 0.95rem;
+    }
+    .auth-input:focus {
+        outline: none;
+        border-color: var(--verde_unb);
     }
     .auth-label {
         font-weight: 600;
         display: block;
         text-align: left;
         font-size: 0.95rem;
+        margin-top: 12px;
+    }
+    .field-error {
+        color: #c0392b;
+        font-size: 0.82rem;
+        text-align: left;
+        margin-bottom: 4px;
+        display: block;
+    }
+    .alert-success {
+        background: #d1fae5;
+        color: #065f46;
+        border-radius: 10px;
+        padding: 12px 16px;
+        margin-bottom: 18px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-align: left;
+    }
+    .alert-error {
+        background: #fee2e2;
+        color: #991b1b;
+        border-radius: 10px;
+        padding: 12px 16px;
+        margin-bottom: 18px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-align: left;
+    }
+   
+    .termos-group {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-top: 16px;
+        text-align: left;
+        background: #f4f8fb;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #e8edf2;
+    }
+    .termos-group input[type="checkbox"] {
+        margin-top: 4px;
+        cursor: pointer;
+    }
+    .termos-group label {
+        font-size: 0.85rem;
+        color: #555;
+        line-height: 1.4;
+        cursor: pointer;
     }
 </style>
 {% endblock %}
@@ -33,38 +88,53 @@
 <main>
     <div class="auth-container">
         <h2 style="color: var(--azul_unb); margin-bottom: 20px;">CADASTRAR</h2>
-        
+
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="alert-{{ msg.tags }}">{{ msg }}</div>
+            {% endfor %}
+        {% endif %}
+
         <form method="POST" action="{% url 'cadastro' %}">
             {% csrf_token %}
-            
-            <label class="auth-label">Nome:</label>
-            <input type="text" name="nome" class="auth-input" required>
-            
-            <label class="auth-label">Matrícula:</label>
-            <input type="text" name="matricula" class="auth-input" required>
 
-            <div style="text-align: left; margin-bottom: 15px;">
-                <label class="auth-label" style="margin-bottom: 5px;">Tipo de Perfil:</label>
-                <input type="radio" name="tipo" value="aluno" id="aluno" required> <label for="aluno" style="margin-right: 15px;">Aluno</label>
-                <input type="radio" name="tipo" value="organizador" id="org"> <label for="org">Organizador</label>
-            </div>
-            
-            <label class="auth-label">Senha:</label>
-            <input type="password" name="senha" class="auth-input" required>
-            
-            <label class="auth-label">Confirmar senha:</label>
-            <input type="password" name="confirmar_senha" class="auth-input" required>
+            <label class="auth-label" for="id_matricula">Matrícula</label>
+            {{ form.matricula }}
+            {% for e in form.matricula.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
 
-            <div style="text-align: left; margin-bottom: 20px; font-size: 0.9rem;">
-                <input type="checkbox" required id="termos">
-                <label for="termos">Li e aceito os Termos de Uso</label>
+            <label class="auth-label" for="id_password">Senha</label>
+            {{ form.password }}
+            {% for e in form.password.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+            <label class="auth-label" for="id_confirmar_senha">Confirmar senha</label>
+            {{ form.confirmar_senha }}
+            {% for e in form.confirmar_senha.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+            <div class="termos-group">
+                {{ form.termos_uso }}
+                <label for="{{ form.termos_uso.id_for_label }}">
+                    Declaro que li e concordo com os Termos de Uso. Compreendo que esta plataforma adota o princípio de minimização de dados e armazenará apenas a minha matrícula institucional.
+                </label>
             </div>
-            
-            <button type="submit" class="btn-header" style="border:none; cursor:pointer; width: 100%;">CRIAR CONTA</button>
+            {% for e in form.termos_uso.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+
+            {% if form.non_field_errors %}
+                <div class="alert-error" style="margin-top:10px;">
+                    {% for e in form.non_field_errors %}{{ e }}{% endfor %}
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn-header"
+                    style="border:none; cursor:pointer; width:100%; margin-top:20px;">
+                CRIAR CONTA
+            </button>
         </form>
 
         <p style="margin-top: 20px; font-size: 0.9rem; color: #555;">
-            Já tem conta? <a href="{% url 'login' %}" style="color: var(--azul_unb); font-weight: 700; text-decoration: none;">ENTRAR ></a>
+            Já tem conta?
+            <a href="{% url 'login' %}" style="color: var(--azul_unb); font-weight: 700; text-decoration: none;">
+                ENTRAR &gt;
+            </a>
         </p>
     </div>
 </main>

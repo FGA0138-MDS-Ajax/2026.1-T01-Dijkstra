@@ -66,12 +66,15 @@ def gestao_evento_novo(request: HttpRequest) -> HttpResponse:
     :rtype: HttpResponse
     """
     if request.method == "POST":
-        form = EventoForm(request.POST, request.FILES)
+        form = EventoForm(request.POST, request.FILES, usuario=request.user)
         if form.is_valid():
-            form.save()
+            evento = form.save(commit=False)
+            # O organizador do evento e o usuario que o cria.
+            evento.organizador = request.user
+            evento.save()
             return redirect("gestao-eventos-list")
     else:
-        form = EventoForm()
+        form = EventoForm(usuario=request.user)
     return render(
         request,
         "core/eventos/form.html",
@@ -115,12 +118,17 @@ def gestao_evento_editar(
     """
     evento = get_object_or_404(Evento, pk=evento_id)
     if request.method == "POST":
-        form = EventoForm(request.POST, request.FILES, instance=evento)
+        form = EventoForm(
+            request.POST,
+            request.FILES,
+            instance=evento,
+            usuario=evento.organizador,
+        )
         if form.is_valid():
             form.save()
             return redirect("gestao-evento-detalhe", evento_id=evento.id)
     else:
-        form = EventoForm(instance=evento)
+        form = EventoForm(instance=evento, usuario=evento.organizador)
     return render(
         request,
         "core/eventos/form.html",

@@ -169,14 +169,8 @@ def comprimir_logs(
     return comprimidos, erros
 
 
-if __name__ == "__main__":  # pragma: no cover
-    APP_NOME = "zstd"
-    path = shutil.which(APP_NOME)
-
-    if not path:
-        logger.error("O script precisa do modulo zstd instalado no sistema. Saindo.")
-        sys.exit(100)
-
+def main() -> None:
+    """Ponto de entrada da CLI."""
     parser = argparse.ArgumentParser(
         description="Comprime logs rotacionados em tar.zst."
     )
@@ -186,4 +180,14 @@ if __name__ == "__main__":  # pragma: no cover
 
     args = parser.parse_args()
 
+    if not args.dry_run:
+        APP_NOME = "zstd"
+        if not shutil.which(APP_NOME):
+            logger.error("O script precisa do modulo zstd instalado no sistema. Saindo.")
+            sys.exit(100)
+
     comprimir_logs(args.log_dir, args.archive, args.dry_run)
+
+
+if __name__ == "__main__":  # pragma: no cover
+    main()

@@ -3,11 +3,62 @@
 
 {% block extra_css %}
   <link rel="stylesheet" href="{% static 'css/detalhes_evento.css' %}">
+  
+  <style>
+    .messages-container { margin: 15px 0; width: 100%; max-width: 800px; }
+    .alert { padding: 15px; border-radius: 6px; font-weight: 500; margin-bottom: 10px; font-family: inherit; }
+    .alert-success { background-color: #d1fae5; color: #065f46; border: 1px solid #34d399; }
+    .alert-error { background-color: #fee2e2; color: #991b1b; border: 1px solid #f87171; }
+    .alert-warning { background-color: #fef3c7; color: #92400e; border: 1px solid #fbbf24; }
+
+    .custom-modal-overlay {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(2px);
+        display: none; justify-content: center; align-items: center; z-index: 1000;
+        opacity: 0; transition: opacity 0.3s ease;
+    }
+    .custom-modal-overlay.show { opacity: 1; }
+    .modal-box {
+        background: #ffffff; padding: 30px; border-radius: 10px; width: 90%; max-width: 450px;
+        text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        transform: translateY(-20px); transition: transform 0.3s ease;
+    }
+    .custom-modal-overlay.show .modal-box { transform: translateY(0); }
+    .modal-box h2 { margin-top: 0; color: #1f2937; font-size: 1.5rem; margin-bottom: 10px; }
+    .modal-box p { color: #4b5563; margin-bottom: 25px; line-height: 1.5; }
+    .modal-actions { display: flex; justify-content: center; gap: 15px; }
+    .btn-voltar {
+        background-color: #e5e7eb; color: #374151; border: none; padding: 10px 20px;
+        border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s; font-family: inherit;
+    }
+    .btn-voltar:hover { background-color: #d1d5db; }
+  </style>
 {% endblock %}
 
 {% block content %}
 <main>
-  <a href="{% url 'home' %}" class="btn-back">Voltar para eventos</a>
+    
+    <a href="{% url 'home' %}" class="btn-back">Voltar para eventos</a>
+    
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if evento.vagas_ocupadas >= evento.capacidade %}
+    <div class="messages-container">
+        <div class="alert alert-error">
+        Não há mais vagas disponíveis para este evento.
+    </div>
+    </div>
+    {% endif %}
+    
+
     <div class="event-info">
         <h1 class="event-title">
           {{ evento.nome }}
@@ -27,22 +78,84 @@
           <div class="card-coluna3">
             
             <p><strong>Data e Horário: </strong> {{ evento.data|date:"d/m/Y" }} às {{ evento.horario}}</p>
-            <p><strong>Organização: </strong> {{ evento.organizador}}</p>
+            <p><strong>Organização: </strong> {{ evento.organizacao.nome }}</p>
             <p><strong>Local: </strong>{{ evento.local }}</p>
-            <p><strong>Vagas: </strong>{{ evento.vagas }}/{{ evento.capacidade }}</p>
-            <p><strong>Status: </strong>Inscrições Abertas</p>
-
-            {% if user.is_authenticated %}
-                {% if inscrito %}
-                <a href="#" class="btn-ins-canc btn-cancelar">Cancelar Inscrição</a>
-                {% else %}
-                <a href="#" class="btn-ins-canc btn-inscrever">Inscrever-se</a>
-                {% endif %}
+            
+            <p><strong>Inscritos: </strong>{{ evento.vagas_ocupadas }}/{{ evento.capacidade }}</p>
+            
+            {% if evento.vagas_ocupadas >= evento.capacidade %}
+            <p><strong>Status: </strong>Inscrições Encerradas</p>
             {% else %}
-                <a href="{% url 'login' %}?next={{ request.path }}" class="btn-ins-canc btn-inscrever">Inscrever-se</a>
+            <p><strong>Status: </strong>Inscrições Abertas</p>
             {% endif %}
 
+            {% if user.is_authenticated %}
+                {% if inscricao %}
+                
+                <p><strong>Status da Inscrição: </strong> <span style="color: #d97706; font-weight: bold;">{{ inscricao.get_status_display }}</span></p>
+        
+                <form id="form-cancelamento" action="{% url 'cancelar_inscricao' evento.id %}" method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="button" class="btn-ins-canc btn-cancelar" style="border: none; cursor: pointer; font-family: inherit;" onclick="abrirModal()">
+                        Cancelar Inscrição
+                    </button>
+                </form>
+                
+
+                {% else %}
+                {% if evento.capacidade > evento.vagas_ocupadas %}
+                <form action="{% url 'inscrever_evento' evento.id %}" method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-ins-canc btn-inscrever" style="border: none; cursor: pointer; font-family: inherit;">
+                        Inscrever-se
+                    </button>
+                </form>
+                {% endif %}
+                {% endif %}
+                
+                
+                {% else %}
+                {% if evento.capacidade > evento.vagas_ocupadas %}
+                <a href="{% url 'login' %}?next={{ request.path }}" class="btn-ins-canc btn-inscrever">Inscrever-se</a>
+                {% endif %}
+                {% endif %}
+                
           </div>
     </div>
 </main>
+
+<div id="modal-cancelamento" class="custom-modal-overlay">
+    <div class="modal-box">
+        <h2>Cancelar Inscrição</h2>
+        <p>Tem certeza que deseja cancelar sua inscrição neste evento? Sua vaga será liberada imediatamente.</p>
+        <div class="modal-actions">
+            <button type="button" class="btn-voltar" onclick="fecharModal()">Voltar</button>
+            <button type="button" class="btn-ins-canc btn-cancelar" style="border: none; cursor: pointer; margin: 0;" onclick="confirmarCancelamento()">
+                Sim, Cancelar
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById('modal-cancelamento');
+    const formCancelamento = document.getElementById('form-cancelamento');
+
+    function abrirModal() {
+        modal.style.display = 'flex';
+        // Pequeno delay para a transição suave do CSS funcionar
+        setTimeout(() => modal.classList.add('show'), 10);
+    }
+
+    function fecharModal() {
+        modal.classList.remove('show');
+        // Aguarda a transição de saída terminar para esconder o elemento
+        setTimeout(() => modal.style.display = 'none', 300);
+    }
+
+    function confirmarCancelamento() {
+        // Envia o formulário de cancelamento ao banco de dados
+        formCancelamento.submit();
+    }
+</script>
 {% endblock %}

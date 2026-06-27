@@ -54,21 +54,12 @@
         {% endif %}
       </div>
 
-      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-        <div class="form-field" style="flex: 1; min-width: 180px;">
-          <label for="{{ form.organizador.id_for_label }}">Organizador *</label>
-          {{ form.organizador }}
-          {% if form.organizador.errors %}
-            <span class="form-erro">{{ form.organizador.errors.as_text }}</span>
-          {% endif %}
-        </div>
-        <div class="form-field" style="flex: 1; min-width: 180px;">
-          <label for="{{ form.gestor.id_for_label }}">Gestor *</label>
-          {{ form.gestor }}
-          {% if form.gestor.errors %}
-            <span class="form-erro">{{ form.gestor.errors.as_text }}</span>
-          {% endif %}
-        </div>
+      <div class="form-field">
+        <label for="{{ form.organizacao.id_for_label }}">Organização *</label>
+        {{ form.organizacao }}
+        {% if form.organizacao.errors %}
+          <span class="form-erro">{{ form.organizacao.errors.as_text }}</span>
+        {% endif %}
       </div>
 
       <div class="form-field">
