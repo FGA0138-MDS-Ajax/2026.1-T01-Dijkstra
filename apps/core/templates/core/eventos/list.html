@@ -38,13 +38,13 @@
         {% endif %}
 
         <div class="event-body">
-
           <h3 class="event-title">{{ evento.nome }}</h3>
-
+          
+          <p>tipo: {{ user.tipo }} | minha: {{ organizacao.é_minha }}</p>
           <div class="event-info">
             <p><strong>Data:</strong> {{ evento.data|date:"d/m/Y" }} às {{ evento.horario|time:"H:i" }}</p>
             <p><strong>Local:</strong> {{ evento.local }}</p>
-
+            
             <div class="event-status">
               <span>Status:</span>
               <span class="status-badge {% if evento.status == 'publicado' %}status-disponivel{% else %}status-desativado{% endif %}">

@@ -1,8 +1,124 @@
 {% extends 'security/base_restrita.html' %}
 
+{% block extra_css %}
+
+  <style>
+    .eventos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+        margin-top: 20px;
+    }
+
+    .evento-card {
+        background: white;
+        border-radius: 16px;
+        padding: 20px;
+
+        box-shadow: 0 4px 12px rgba(0,0,0,.08);
+        border-top: 5px solid #2A8B4B;
+
+        transition: all .2s ease;
+    }
+
+    .evento-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0,0,0,.12);
+    }
+
+    .evento-card h3 {
+        color: #1F3B5B;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        line-height: 1.3;
+    }
+
+    .evento-info {
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .status {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: .85rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .status-aprovada {
+        background: #E6F7EE;
+        color: #2A8B4B;
+    }
+
+    .btn-detalhes {
+        display: block;
+        text-align: center;
+
+        background: #1F3B5B;
+        color: white;
+
+        padding: 10px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+
+        transition: .2s;
+    }
+
+    .btn-detalhes:hover {
+        background: #2A8B4B;
+    }
+  </style>
+{% endblock %}
+
 {% block restrita_content %}
 <h1>Gestão de Eventos</h1>
 <div class="page-placeholder">
-  
+    {% if eventos %}
+<div class="eventos-grid">
+
+    {% for evento in eventos %}
+    <div class="evento-card">
+
+        <div class="evento-info">
+
+            <h3>{{ evento.nome }}</h3>
+
+            <p>
+                <strong>Data:</strong>
+                {{ evento.data|date:"d/m/Y" }}
+            </p>
+
+            <p>
+                <strong>Local:</strong>
+                {{ evento.local }}
+            </p>
+
+            <span class="status status-aprovada">
+                {{ evento.get_status_display }}
+            </span>
+
+        </div>
+
+        <div class="evento-acoes">
+
+        <a href="{% url 'gestao-evento-detalhe' evento.id %}"
+               class="btn-detalhes">
+                Gerenciar
+            </a>
+
+        </div>
+
+    </div>
+    {% endfor %}
+
 </div>
+
+{% else %}
+
+<p>Nenhum evento foi cadastrado.</p>
+
+{% endif %}
 {% endblock %}

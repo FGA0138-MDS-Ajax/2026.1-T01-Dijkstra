@@ -28,6 +28,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods
 
 from apps.core.models.organizacoes_models import Organizacao
+from apps.core.models.organizacoes_models import UsuarioOrganizacao
 from apps.core.services.organizacoes_service import OrganizacoesService
 from apps.core.forms import OrganizacaoForm
 
@@ -36,25 +37,32 @@ __license__ = "AGPL V3"
 
 _service = OrganizacoesService()
 
-
-@login_required
 @require_http_methods(["GET"])
 def organizacoes_list(request: HttpRequest) -> HttpResponse:
     """
     Exibe a listagem de todas as organizações em cards.
-
-    :param request: Objeto da requisição HTTP.
-    :type request: HttpRequest
-    :returns: Página HTML com os cards de organizações.
-    :rtype: HttpResponse
     """
     organizacoes = _service.listar_organizacoes()
+
+    if request.user.is_authenticated:
+        ids_minhas = set(
+            UsuarioOrganizacao.objects
+            .filter(usuario=request.user)
+            .values_list("organizacao_id", flat=True)
+        )
+
+        for org in organizacoes:
+            org.e_minha = org.id in ids_minhas
+
+    else:
+        for org in organizacoes:
+            org.e_minha = False
+
     return render(
         request,
         "core/organizacoes/list.html",
         {"organizacoes": organizacoes},
     )
-
 
 @login_required
 @require_http_methods(["GET", "POST"])

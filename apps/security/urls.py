@@ -24,8 +24,6 @@ from apps.security.controllers.area_restrita_controller import (
     alterar_perfil_usuario,
     inativar_usuario,
     excluir_usuario,
-    termos_de_uso,
-    politica_privacidade,
 )
 
 urlpatterns = [
@@ -88,17 +86,4 @@ urlpatterns = [
         excluir_usuario,
         name="area-restrita-excluir-usuario",
     ),
-
-     #Termos de uso e Política de privacidade
-    path(
-    "termos-de-uso/",
-    termos_de_uso,
-    name="termos-de-uso",
-    ),
-    path(
-    "politica-de-privacidade/",
-    politica_privacidade,
-    name="politica-de-privacidade",
-    ),
-
 ]
