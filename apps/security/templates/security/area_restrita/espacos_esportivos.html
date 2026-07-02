@@ -73,12 +73,40 @@
     .btn-detalhes:hover {
         background: #2A8B4B;
     }
+
+    .espacos-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+
+    .btn-novo-espaco {
+        display: inline-block;
+        background: #2A8B4B;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: .2s;
+    }
+
+    .btn-novo-espaco:hover {
+        background: #1F3B5B;
+    }
 </style>
 {% endblock %}
 
 {% block restrita_content %}
 
-<h1>Espaços Esportivos</h1>
+<div class="espacos-header">
+    <h1>Espaços Esportivos</h1>
+    {% if user.is_superuser or user.tipo == 'GE' %}
+    <a href="{% url 'espaco-novo' %}" class="btn-novo-espaco">+ Novo Espaço</a>
+    {% endif %}
+</div>
 
 <div class="page-placeholder">
 
