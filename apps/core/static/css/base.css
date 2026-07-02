@@ -133,45 +133,50 @@ body {
    SUB-NAVBAR (ÁREA RESTRITA)
 ========================= */
 .subnav {
-  background-color: var(--azul_unb);
-  padding: 0 2rem;
+  background-color: transparent;
+  padding: 0.6rem 2rem;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   min-height: 50px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
   overflow-x: auto;
 }
 
 .subnav-links {
   display: flex;
-  gap: 0.25rem;
-  align-items: flex-end;
+  gap: 0.5rem;
+  align-items: center;
   flex-wrap: nowrap;
 }
 
 .subnav-links a {
-  color: rgba(255, 255, 255, 0.75);
+  color: #ffffff;
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
-  padding: 0.65rem 1.1rem;
-  border-radius: 6px 6px 0 0;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
   transition: background-color 0.2s ease, color 0.2s ease;
   white-space: nowrap;
-  border-bottom: 3px solid transparent;
+  background-color: var(--azul_unb);
+  border: 1px solid var(--azul_unb);
 }
 
 .subnav-links a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #0b2237;
   color: #ffffff;
 }
 
 .subnav-links a.active {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: var(--verde_unb);
   color: #ffffff;
   font-weight: 700;
-  border-bottom: 3px solid #c7e0d0;
+  border-color: var(--verde_unb);
+}
+
+.subnav-links a.active:hover {
+  background-color: var(--verde_unb);
+  color: #ffffff;
 }
 
 .area-restrita-content {
@@ -201,13 +206,37 @@ body {
 
 @media (max-width: 980px) {
   .subnav {
-    padding: 0 0.5rem;
+    padding: 0.6rem 0.75rem;
     justify-content: flex-start;
+  }
+
+  .subnav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 0.4rem;
   }
 
   .subnav-links a {
     font-size: 0.8rem;
-    padding: 0.55rem 0.75rem;
+    padding: 0.5rem 0.9rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .subnav {
+    padding: 0.5rem 0.5rem;
+  }
+
+  .subnav-links {
+    gap: 0.35rem;
+  }
+
+  .subnav-links a {
+    font-size: 0.78rem;
+    padding: 0.45rem 0.8rem;
+    flex: 1 1 auto;
+    text-align: center;
   }
 }
 
