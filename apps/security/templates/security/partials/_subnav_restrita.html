@@ -1,0 +1,59 @@
+{% comment %}
+  Subnav de pílulas da área restrita.
+  Padrão único de nav-links (pílulas). Renderizada apenas para usuários autenticados.
+  Incluída por base_restrita.html e por todos os templates autenticados que
+  não estendem base_restrita.html.
+{% endcomment %}
+{% if user.is_authenticated %}
+<nav class="subnav">
+  <div class="subnav-links">
+
+    {# Meu Perfil — todos os usuários autenticados #}
+    <a href="{% url 'area-restrita-perfil' %}"
+       class="{% if request.resolver_match.url_name == 'area-restrita-perfil' %}active{% endif %}">
+      Meu Perfil
+    </a>
+
+    {# Aluno #}
+    {% if user.is_superuser or user.tipo == 'AL' %}
+    <a href="{% url 'area-restrita-eventos-inscritos' %}"
+       class="{% if request.resolver_match.url_name == 'area-restrita-eventos-inscritos' %}active{% endif %}">
+      Eventos Inscritos
+    </a>
+    {% endif %}
+
+    {# Organizador #}
+    {% if user.is_superuser or user.tipo == 'OR' %}
+    <a href="{% url 'area-restrita-gestao-eventos' %}"
+       class="{% if request.resolver_match.url_name == 'area-restrita-gestao-eventos' %}active{% endif %}">
+      Gestão de Eventos
+    </a>
+    <a href="{% url 'area-restrita-organizacoes-vinculadas' %}"
+       class="{% if request.resolver_match.url_name == 'area-restrita-organizacoes-vinculadas' %}active{% endif %}">
+      Organizações Vinculadas
+    </a>
+    {% endif %}
+
+    {# Gestor #}
+    {% if user.is_superuser or user.tipo == 'GE' %}
+    <a href="{% url 'organizacoes-list' %}"
+       class="{% if request.resolver_match.url_name == 'organizacoes-list' %}active{% endif %}">
+      Organizações Esportivas
+    </a>
+    <a href="{% url 'area-restrita-espacos-esportivos' %}"
+       class="{% if request.resolver_match.url_name == 'area-restrita-espacos-esportivos' %}active{% endif %}">
+      Espaços Esportivos
+    </a>
+    <a href="{% url 'area-restrita-reservas' %}"
+       class="{% if request.resolver_match.url_name == 'area-restrita-reservas' %}active{% endif %}">
+      Reservas de Espaços
+    </a>
+    <a href="{% url 'area-restrita-gestao-usuarios' %}"
+       class="{% if request.resolver_match.url_name == 'area-restrita-gestao-usuarios' %}active{% endif %}">
+      Gestão de Usuários
+    </a>
+    {% endif %}
+
+  </div>
+</nav>
+{% endif %}

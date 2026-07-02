@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+{% include 'security/partials/_subnav_restrita.html' %}
 <main>
 
   <a href="{% url 'gestao-eventos-list' %}" class="btn-back">← Voltar para gestão de eventos</a>

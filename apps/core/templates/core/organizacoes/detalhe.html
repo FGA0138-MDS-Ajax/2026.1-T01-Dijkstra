@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+{% include 'security/partials/_subnav_restrita.html' %}
 <main>
 
   <a href="{% url 'organizacoes-list' %}" class="btn-back">&#8592; Voltar para organizacoes</a>
