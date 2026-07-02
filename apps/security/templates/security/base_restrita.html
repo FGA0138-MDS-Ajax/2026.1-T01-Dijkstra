@@ -34,6 +34,10 @@
 
     {# Gestor #}
     {% if user.is_superuser or user.tipo == 'GE' %}
+    <a href="{% url 'organizacoes-list' %}"
+       class="{% if request.resolver_match.url_name == 'organizacoes-list' %}active{% endif %}">
+      Organizações Esportivas
+    </a>
     <a href="{% url 'area-restrita-espacos-esportivos' %}"
        class="{% if request.resolver_match.url_name == 'area-restrita-espacos-esportivos' %}active{% endif %}">
       Espaços Esportivos

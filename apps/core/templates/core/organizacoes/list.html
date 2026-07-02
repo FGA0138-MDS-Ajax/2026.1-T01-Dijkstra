@@ -10,7 +10,9 @@
 
   <div class="espacos-header">
     <span class="section-tag">Organizações Esportivas</span>
-    <a href="{% url 'organizacao-nova' %}" class="btn-novo-espaco">+ Nova Organização</a>
+    {% if user.tipo == "GE" %}
+      <a href="{% url 'organizacao-nova' %}" class="btn-novo-espaco">+ Nova Organização</a>
+    {% endif %}
   </div>
 
   <div class="events-grid">
@@ -60,7 +62,9 @@
 
     {% empty %}
       <p class="espaco-vazio">Nenhuma organização cadastrada ainda.
-        <a href="{% url 'organizacao-nova' %}">Cadastrar agora</a>.
+        {% if user.tipo == "GE" %}
+          <a href="{% url 'organizacao-nova' %}">Cadastrar agora</a>.
+        {% endif %}
       </p>
     {% endfor %}
 
