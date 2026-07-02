@@ -254,7 +254,8 @@ class EspacosControllerTest(TestCase):
             404,
         )
 
-    def test_espaco_deletar_get(self):
+    def test_espaco_deletar_get_nao_permitido(self):
+        """Exclusão é POST-only (confirmação ocorre em modal no front)."""
         response = self.client.get(
             reverse(
                 "espaco-deletar",
@@ -266,12 +267,7 @@ class EspacosControllerTest(TestCase):
 
         self.assertEqual(
             response.status_code,
-            200,
-        )
-
-        self.assertTemplateUsed(
-            response,
-            "core/espacos/confirmar_deletar.html",
+            405,
         )
 
     def test_espaco_deletar_post(self):
@@ -294,7 +290,7 @@ class EspacosControllerTest(TestCase):
         self.assertFalse(EspacoFisico.objects.filter(id=espaco_id).exists())
 
     def test_espaco_deletar_404(self):
-        response = self.client.get(
+        response = self.client.post(
             reverse(
                 "espaco-deletar",
                 kwargs={

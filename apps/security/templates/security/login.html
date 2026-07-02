@@ -53,11 +53,6 @@
     <div class="auth-container">
         <h2 style="color: var(--azul_unb); margin-bottom: 20px;">Acesse sua conta</h2>
         
-        {% if messages %}
-            {% for msg in messages %}
-                <div class="alert-{{ msg.tags }}">{{ msg }}</div>
-            {% endfor %}
-        {% endif %}
 
         {% if form.non_field_errors %}
             <div class="alert-error">

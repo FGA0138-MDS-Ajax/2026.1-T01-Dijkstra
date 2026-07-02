@@ -13,26 +13,6 @@
     <a href="{% url 'gestao-eventos-list' %}" class="btn-novo-espaco">← Voltar para Eventos</a>
   </div>
 
-  {% if messages %}
-    {% for message in messages %}
-      <div style="
-        padding: 12px 16px;
-        border-radius: 10px;
-        margin-bottom: 16px;
-        font-weight: 600;
-        font-size: 0.9rem;
-        {% if message.tags == 'error' %}
-          background: #fdecea; color: #c0392b; border: 1.5px solid #c0392b;
-        {% elif message.tags == 'success' %}
-          background: #eafaf1; color: var(--verde_unb); border: 1.5px solid var(--verde_unb);
-        {% else %}
-          background: #eaf1fb; color: var(--azul_unb); border: 1.5px solid var(--azul_unb);
-        {% endif %}
-      ">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
 
   {% if reservas %}
     <div style="overflow-x: auto;">
@@ -64,10 +44,11 @@
               </td>
               <td style="padding: 12px 16px;">
                 {% if reserva.status == 'pendente' %}
-                  <form method="post" action="{% url 'cancelar-reserva' reserva.id %}" style="display: inline;">
+                  <form method="post" action="{% url 'cancelar-reserva' reserva.id %}" style="display: inline;"
+                    data-confirm="Tem certeza que deseja cancelar esta reserva?"
+                    data-confirm-title="Cancelar Reserva" data-confirm-btn="Sim, cancelar">
                     {% csrf_token %}
-                    <button type="submit" class="btn-deletar"
-                      onclick="return confirm('Cancelar esta reserva?')">
+                    <button type="submit" class="btn-deletar">
                       Cancelar
                     </button>
                   </form>

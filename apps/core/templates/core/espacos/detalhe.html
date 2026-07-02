@@ -37,7 +37,12 @@
 
       <div class="espaco-acoes" style="margin-top: 24px;">
         <a class="btn-editar" href="{% url 'espaco-editar' espaco.id %}">Editar</a>
-        <a class="btn-deletar" href="{% url 'espaco-deletar' espaco.id %}">Excluir</a>
+        <form method="post" action="{% url 'espaco-deletar' espaco.id %}" style="display: inline;"
+              data-confirm="Tem certeza que deseja excluir o espaço {{ espaco.nome }}? Esta ação não pode ser desfeita."
+              data-confirm-title="Confirmar Exclusão" data-confirm-btn="Sim, excluir">
+          {% csrf_token %}
+          <button type="submit" class="btn-deletar">Excluir</button>
+        </form>
       </div>
 
     </div>

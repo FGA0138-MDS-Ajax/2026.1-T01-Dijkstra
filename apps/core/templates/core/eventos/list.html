@@ -60,9 +60,12 @@
             <a class="btn-editar" href="{% url 'gestao-evento-editar' evento.id %}">
               Editar
             </a>
-            <a class="btn-deletar" href="{% url 'gestao-evento-deletar' evento.id %}">
-              Excluir
-            </a>
+            <form method="post" action="{% url 'gestao-evento-deletar' evento.id %}" style="display: inline;"
+                  data-confirm="Tem certeza que deseja excluir o evento {{ evento.nome }}? Esta ação não pode ser desfeita."
+                  data-confirm-title="Confirmar Exclusão" data-confirm-btn="Sim, excluir">
+              {% csrf_token %}
+              <button type="submit" class="btn-deletar">Excluir</button>
+            </form>
           </div>
 
         </div>

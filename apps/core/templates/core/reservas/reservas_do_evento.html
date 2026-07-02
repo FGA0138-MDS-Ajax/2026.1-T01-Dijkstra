@@ -10,21 +10,6 @@
 
   <a href="{% url 'gestao-eventos-list' %}" class="btn-back">← Voltar para gestão de eventos</a>
 
-  {% if messages %}
-    {% for message in messages %}
-      <div style="
-        padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;
-        font-weight: 600; font-size: 0.9rem;
-        {% if message.tags == 'error' %}
-          background: #fdecea; color: #c0392b; border: 1.5px solid #c0392b;
-        {% elif message.tags == 'success' %}
-          background: #eafaf1; color: var(--verde_unb); border: 1.5px solid var(--verde_unb);
-        {% else %}
-          background: #eaf1fb; color: var(--azul_unb); border: 1.5px solid var(--azul_unb);
-        {% endif %}
-      ">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
 
   <!-- Dados do evento -->
   <div style="background: white; border-radius: 14px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); padding: 24px; margin-bottom: 32px;">
@@ -113,11 +98,12 @@
                     style="font-size: 0.8rem; padding: 7px 14px;">Ver</a>
                 {% endif %}
                 {% if request.user.tipo == "OR" and reserva.solicitante == request.user and reserva.status == 'pendente' %}
-                  <form method="post" action="{% url 'cancelar-reserva' reserva.id %}">
+                  <form method="post" action="{% url 'cancelar-reserva' reserva.id %}"
+                    data-confirm="Tem certeza que deseja cancelar esta reserva?"
+                    data-confirm-title="Cancelar Reserva" data-confirm-btn="Sim, cancelar">
                     {% csrf_token %}
                     <button type="submit" class="btn-deletar"
-                      style="font-size: 0.8rem; padding: 7px 14px;"
-                      onclick="return confirm('Cancelar esta reserva?')">
+                      style="font-size: 0.8rem; padding: 7px 14px;">
                       Cancelar
                     </button>
                   </form>

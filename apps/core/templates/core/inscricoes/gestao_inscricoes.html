@@ -49,23 +49,6 @@
   </div>
 
   <!-- ── Mensagens ────────────────────────────────────────────────── -->
-  {% if messages %}
-    {% for message in messages %}
-      <div style="
-        padding: 12px 16px; border-radius: 10px; margin-bottom: 16px;
-        font-weight: 600; font-size: 0.9rem;
-        {% if message.tags == 'error' %}
-          background: #fdecea; color: #c0392b; border: 1.5px solid #c0392b;
-        {% elif message.tags == 'success' %}
-          background: #eafaf1; color: var(--verde_unb); border: 1.5px solid var(--verde_unb);
-        {% elif message.tags == 'warning' %}
-          background: #fff8e1; color: #b7860b; border: 1.5px solid #f0c030;
-        {% else %}
-          background: #eaf1fb; color: var(--azul_unb); border: 1.5px solid var(--azul_unb);
-        {% endif %}
-      ">{{ message }}</div>
-    {% endfor %}
-  {% endif %}
 
   <!-- ── Controles: filtro + ações em lote ───────────────────────── -->
   <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px;">
