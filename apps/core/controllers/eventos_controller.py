@@ -21,6 +21,7 @@ Notas
 - Revisado por `Gui-fga <https://github.com/Gui-fga>`_ em 30 maio 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
 - Alterado por `DaviiGualbertoo <https://github.com/DaviiGualbertoo>`_ em 08 junho 2026
+- Lint por Saresu 02 julho 2026
 """
 
 from __future__ import annotations
@@ -39,7 +40,7 @@ from apps.core.forms import DateFilterForm
 from apps.core.services.eventos_service import EventosService
 from apps.core.models.inscricao_models import Inscricao
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 __license__ = "AGPL V3"
 
 
@@ -161,9 +162,7 @@ def event_list_controller(request):
         data_inicio = form.cleaned_data.get("data_inicio")
         data_fim = form.cleaned_data.get("data_fim")
 
-    events = service.get_filtered_events(
-        data_inicio=data_inicio, data_fim=data_fim
-    )
+    events = service.get_filtered_events(data_inicio=data_inicio, data_fim=data_fim)
 
     paginator = Paginator(events, 6)
     page_number = request.GET.get("page")
@@ -197,10 +196,11 @@ def detalhes_evento(request, evento_id):
     if request.user.is_authenticated:
         inscricao = Inscricao.objects.filter(aluno=request.user, evento=evento).first()
 
-    evento.vagas_ocupadas = Inscricao.objects.filter(evento=evento).exclude(
-        status__in=[Inscricao.Status.CANCELADA, Inscricao.Status.REJEITADA]
-    ).count()
-
+    evento.vagas_ocupadas = (
+        Inscricao.objects.filter(evento=evento)
+        .exclude(status__in=[Inscricao.Status.CANCELADA, Inscricao.Status.REJEITADA])
+        .count()
+    )
 
     return render(
         request,

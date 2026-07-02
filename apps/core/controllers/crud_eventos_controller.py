@@ -11,6 +11,7 @@ página inicial pública, que é apenas de consulta.
 Notas
 -----
 - Requer Python >= 3.12
+- Lint por Saresu 02 julho 2026
 """
 
 from __future__ import annotations
@@ -75,7 +76,9 @@ def gestao_evento_novo(request: HttpRequest) -> HttpResponse:
             evento.save()
             messages.success(request, f'Evento "{evento.nome}" criado com sucesso.')
             return redirect("gestao-eventos-list")
-        messages.error(request, "Não foi possível criar o evento. Verifique os campos destacados.")
+        messages.error(
+            request, "Não foi possível criar o evento. Verifique os campos destacados."
+        )
     else:
         form = EventoForm(usuario=request.user)
     return render(
@@ -87,9 +90,7 @@ def gestao_evento_novo(request: HttpRequest) -> HttpResponse:
 
 @login_required
 @require_http_methods(["GET"])
-def gestao_evento_detalhe(
-    request: HttpRequest, evento_id: uuid.UUID
-) -> HttpResponse:
+def gestao_evento_detalhe(request: HttpRequest, evento_id: uuid.UUID) -> HttpResponse:
     """
     Exibe os detalhes de um evento específico na visão de gestão.
 
@@ -106,9 +107,7 @@ def gestao_evento_detalhe(
 
 @login_required
 @require_http_methods(["GET", "POST"])
-def gestao_evento_editar(
-    request: HttpRequest, evento_id: uuid.UUID
-) -> HttpResponse:
+def gestao_evento_editar(request: HttpRequest, evento_id: uuid.UUID) -> HttpResponse:
     """
     Exibe o formulário de edição de evento e processa o envio.
 
@@ -131,7 +130,10 @@ def gestao_evento_editar(
             form.save()
             messages.success(request, f'Evento "{evento.nome}" atualizado com sucesso.')
             return redirect("gestao-evento-detalhe", evento_id=evento.id)
-        messages.error(request, "Não foi possível salvar as alterações. Verifique os campos destacados.")
+        messages.error(
+            request,
+            "Não foi possível salvar as alterações. Verifique os campos destacados.",
+        )
     else:
         form = EventoForm(instance=evento, usuario=evento.organizador)
     return render(
@@ -143,9 +145,7 @@ def gestao_evento_editar(
 
 @login_required
 @require_http_methods(["POST"])
-def gestao_evento_deletar(
-    request: HttpRequest, evento_id: uuid.UUID
-) -> HttpResponse:
+def gestao_evento_deletar(request: HttpRequest, evento_id: uuid.UUID) -> HttpResponse:
     """
     Processa a remoção de um evento (a confirmação ocorre em modal no front).
 

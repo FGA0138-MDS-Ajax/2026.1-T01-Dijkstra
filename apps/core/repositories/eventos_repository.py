@@ -15,6 +15,7 @@ Notas
 - Requer Python >= 3.12
 - Criado por `MontMarcos <https://github.com/MontMarcos>`_ em 26 maio 2026
 - Lint e testes por `Saresu <https://github.com/Saresu>`_ em 28 maio 2026
+- Lint por Saresu 02 julho 2026
 """
 
 from __future__ import annotations
@@ -26,13 +27,14 @@ from django.db.models import Q
 
 from apps.core.models.eventos_models import Evento
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __license__ = "AGPL V3"
 
 
 class EventosRepository:
     """Repositorio para manipulacao de dados de Eventos."""
-    #definindo o usuario.
+
+    # definindo o usuario.
     def __init__(self):
         self.usuario = None
 
@@ -60,7 +62,7 @@ class EventosRepository:
             return Evento.objects.get(id=evento_id)
         except Evento.DoesNotExist:
             return None
-        
+
     def get_publicados(self) -> List[Evento]:
         """
         Retorna todos os eventos publicados.
@@ -69,7 +71,6 @@ class EventosRepository:
         :rtype: list[Evento]
         """
         return list(Evento.objects.filter(status=Evento.Status.PUBLICADO))
-
 
     def get_all(self) -> List[Evento]:
         """
@@ -80,9 +81,7 @@ class EventosRepository:
         """
         return list(Evento.objects.all())
 
-    def update(
-        self, evento_id: uuid.UUID, data: dict
-    ) -> Optional[Evento]:
+    def update(self, evento_id: uuid.UUID, data: dict) -> Optional[Evento]:
         """
         Atualiza os campos de um evento existente.
 

@@ -15,6 +15,7 @@ Notas
 -----
 - Requer Python >= 3.12
 - Criado por `Welder60 <https://github.com/welder60>`_ em 01 de junho de 2026
+- Lint por Saresu 02 julho 2026
 """
 
 # compatibilidade
@@ -32,7 +33,7 @@ from apps.core.models.espacos_models import EspacoFisico
 from apps.core.services.espacos_service import EspacosService
 from apps.core.forms import EspacoFisicoForm
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __license__ = "AGPL V3"
 
 _service = EspacosService()
@@ -70,7 +71,9 @@ def espaco_novo(request: HttpRequest) -> HttpResponse:
             espaco = form.save()
             messages.success(request, f'Espaço "{espaco.nome}" criado com sucesso.')
             return redirect("espacos-list")
-        messages.error(request, "Não foi possível criar o espaço. Verifique os campos destacados.")
+        messages.error(
+            request, "Não foi possível criar o espaço. Verifique os campos destacados."
+        )
     else:
         form = EspacoFisicoForm()
     return render(request, "core/espacos/form.html", {"form": form, "acao": "Criar"})
@@ -113,7 +116,10 @@ def espaco_editar(request: HttpRequest, espaco_id: uuid.UUID) -> HttpResponse:
             form.save()
             messages.success(request, f'Espaço "{espaco.nome}" atualizado com sucesso.')
             return redirect("espaco-detalhe", espaco_id=espaco.id)
-        messages.error(request, "Não foi possível salvar as alterações. Verifique os campos destacados.")
+        messages.error(
+            request,
+            "Não foi possível salvar as alterações. Verifique os campos destacados.",
+        )
     else:
         form = EspacoFisicoForm(instance=espaco)
     return render(

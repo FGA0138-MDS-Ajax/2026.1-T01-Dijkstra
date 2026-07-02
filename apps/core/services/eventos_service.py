@@ -18,6 +18,7 @@ Notas
 - Lint e testes por `Saresu <https://github.com/Saresu>`_ em 28 maio 2026
 - Revisado por `Gui-fga <https://github.com/Gui-fga>`_ em 30 maio 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
+- Lint por Saresu 02 julho 2026
 """
 
 from __future__ import annotations
@@ -27,6 +28,8 @@ from typing import List, Optional, Self
 
 from apps.core.models.eventos_models import Evento
 from apps.core.repositories.eventos_repository import EventosRepository
+
+# pylint: disable=unused-import
 from apps.security.models.usuario_models import Usuario
 from apps.security.repositories.usuarios_repositories import UsuarioRepository
 
@@ -130,6 +133,4 @@ class EventosService:
         :returns: QuerySet de eventos filtrados.
         """
         eventos = Evento.objects.filter(status=Evento.Status.PUBLICADO)
-        return self.repository.filter_events(
-            eventos, query, data_inicio, data_fim
-        )
+        return self.repository.filter_events(eventos, query, data_inicio, data_fim)
