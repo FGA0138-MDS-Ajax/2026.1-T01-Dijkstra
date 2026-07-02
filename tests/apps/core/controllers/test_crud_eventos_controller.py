@@ -273,7 +273,8 @@ class CrudEventosControllerTest(TestCase):
     # EXCLUSÃO
     # ------------------------------------------------------------------
 
-    def test_gestao_evento_deletar_get(self):
+    def test_gestao_evento_deletar_get_nao_permitido(self):
+        """Exclusão é POST-only (confirmação ocorre em modal no front)."""
         response = self.client.get(
             reverse(
                 "gestao-evento-deletar",
@@ -283,12 +284,7 @@ class CrudEventosControllerTest(TestCase):
             )
         )
 
-        self.assertEqual(response.status_code, 200)
-
-        self.assertTemplateUsed(
-            response,
-            "core/eventos/confirmar_deletar.html",
-        )
+        self.assertEqual(response.status_code, 405)
 
     def test_gestao_evento_deletar_post(self):
         evento_id = self.evento.id
@@ -310,7 +306,7 @@ class CrudEventosControllerTest(TestCase):
         self.assertFalse(Evento.objects.filter(id=evento_id).exists())
 
     def test_gestao_evento_deletar_404(self):
-        response = self.client.get(
+        response = self.client.post(
             reverse(
                 "gestao-evento-deletar",
                 kwargs={

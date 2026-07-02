@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import uuid
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -78,8 +79,10 @@ def organizacao_nova(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = OrganizacaoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            organizacao = form.save()
+            messages.success(request, f'Organização "{organizacao.nome}" criada com sucesso.')
             return redirect("organizacoes-list")
+        messages.error(request, "Não foi possível criar a organização. Verifique os campos destacados.")
     else:
         form = OrganizacaoForm()
     return render(
@@ -130,7 +133,9 @@ def organizacao_editar(
         form = OrganizacaoForm(request.POST, request.FILES, instance=organizacao)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Organização "{organizacao.nome}" atualizada com sucesso.')
             return redirect("organizacao-detalhe", organizacao_id=organizacao.id)
+        messages.error(request, "Não foi possível salvar as alterações. Verifique os campos destacados.")
     else:
         form = OrganizacaoForm(instance=organizacao)
     return render(
@@ -141,26 +146,22 @@ def organizacao_editar(
 
 
 @login_required
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["POST"])
 def organizacao_deletar(
     request: HttpRequest, organizacao_id: uuid.UUID
 ) -> HttpResponse:
     """
-    Exibe a página de confirmação de exclusão e processa a remoção.
+    Processa a remoção de uma organização (a confirmação ocorre em modal no front).
 
     :param request: Objeto da requisição HTTP.
     :type request: HttpRequest
     :param organizacao_id: UUID da organização a remover.
     :type organizacao_id: uuid.UUID
-    :returns: Página de confirmação ou redirecionamento para a listagem.
+    :returns: Redirecionamento para a listagem.
     :rtype: HttpResponse
     """
     organizacao = get_object_or_404(Organizacao, pk=organizacao_id)
-    if request.method == "POST":
-        organizacao.delete()
-        return redirect("organizacoes-list")
-    return render(
-        request,
-        "core/organizacoes/confirmar_deletar.html",
-        {"organizacao": organizacao},
-    )
+    nome = organizacao.nome
+    organizacao.delete()
+    messages.success(request, f'Organização "{nome}" excluída com sucesso.')
+    return redirect("organizacoes-list")

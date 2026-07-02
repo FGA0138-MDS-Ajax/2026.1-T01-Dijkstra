@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <link rel="stylesheet" href="{% static 'css/feedback.css' %}">
   {% block extra_css %}{% endblock %}
 </head>
 
@@ -30,7 +31,9 @@
         <span style="color: white; align-self: center; font-weight: 600; font-size: 1.1rem;">
             Olá, {{ user.first_name|default:user.username }}!
         </span>
-        
+
+        <a href="{% url 'area-restrita' %}" class="btn-header">Meu Perfil ></a>
+
         <form method="post" action="{% url 'logout' %}" style="display: inline;">
             {% csrf_token %}
             <button type="submit" class="btn-header" style="border: none; cursor: pointer;">
@@ -45,26 +48,40 @@
     </div>
 </header>
 
-{% if request.resolver_match.url_name not in 'login cadastro esqueceu_senha' %}
 <nav class="navbar">
-  <div class="nav-links">
-    <a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' or request.resolver_match.url_name == 'eventos-list' %}active{% endif %}">Início</a>
-    {% if user.is_authenticated %}
-    <a href="{% url 'area-restrita' %}" class="{% if 'area-restrita' in request.resolver_match.url_name %}active{% endif %}">Minha Área</a>
-    {% endif %}
-    {% if user.is_authenticated and user.tipo == "GE" %}
-    <a href="{% url 'espacos-list' %}" class="{% if 'espaco' in request.resolver_match.url_name %}active{% endif %}">Espaços</a>
-    {% endif %}
-    <a href="{% url 'organizacoes-list' %}" class="{% if 'organizacao' in request.resolver_match.url_name %}active{% endif %}">Organizações Esportivas</a>
-  </div>
 </nav>
+
+{# Toasts globais de feedback (django messages) #}
+{% if messages %}
+<div class="toast-container">
+  {% for msg in messages %}
+  <div class="toast toast-{{ msg.tags|default:'info' }}" role="alert">
+    <span class="toast-msg">{{ msg }}</span>
+    <button type="button" class="toast-close" aria-label="Fechar">&times;</button>
+  </div>
+  {% endfor %}
+</div>
 {% endif %}
+
 {% block content %}
 {% endblock %}
+
+{# Modal global de confirmação para ações destrutivas #}
+<div class="confirm-overlay" id="confirm-overlay" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+  <div class="confirm-modal">
+    <h3 id="confirm-title">Confirmar ação</h3>
+    <p id="confirm-msg"></p>
+    <div class="confirm-modal-acoes">
+      <button type="button" class="confirm-modal-btn confirm-modal-btn-ok" id="confirm-ok">Sim, confirmar</button>
+      <button type="button" class="confirm-modal-btn confirm-modal-btn-cancel" id="confirm-cancel">Cancelar</button>
+    </div>
+  </div>
+</div>
 
 <footer>
   &copy; 2026 SIGEsporte
 </footer>
 
+<script src="{% static 'js/feedback.js' %}"></script>
 </body>
 </html>

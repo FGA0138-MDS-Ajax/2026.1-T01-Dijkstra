@@ -291,13 +291,6 @@
   <span class="reservas-count">{{ reservas|length }} reserva{{ reservas|length|pluralize:"s" }}</span>
 </div>
 
-{% if messages %}
-  {% for message in messages %}
-    <div class="flash-msg {% if message.tags == 'error' %}flash-error{% elif message.tags == 'success' %}flash-success{% else %}flash-other{% endif %}">
-      {{ message }}
-    </div>
-  {% endfor %}
-{% endif %}
 
 <!-- Filtros -->
 <form method="get" class="filtros-bar">

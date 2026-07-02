@@ -40,15 +40,6 @@
     
     <a href="{% url 'home' %}" class="btn-back">Voltar para eventos</a>
     
-    {% if messages %}
-    <div class="messages-container">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
     
     {% if evento.vagas_ocupadas >= evento.capacidade %}
     <div class="messages-container">

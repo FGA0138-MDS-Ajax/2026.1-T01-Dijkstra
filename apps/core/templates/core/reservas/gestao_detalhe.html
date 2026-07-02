@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+{% include 'security/partials/_subnav_restrita.html' %}
 <main>
 
   <a href="{% url 'gestao-reservas-list' %}" class="btn-back">← Voltar para reservas</a>
@@ -45,19 +46,6 @@
         </div>
       {% endif %}
 
-      {% if messages %}
-        {% for message in messages %}
-          <div style="
-            padding: 12px 16px; border-radius: 10px; margin-top: 16px;
-            font-weight: 600; font-size: 0.9rem;
-            {% if message.tags == 'error' %}
-              background: #fdecea; color: #c0392b; border: 1.5px solid #c0392b;
-            {% else %}
-              background: #eaf1fb; color: var(--azul_unb); border: 1.5px solid var(--azul_unb);
-            {% endif %}
-          ">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
 
       {% if reserva.status == 'pendente' %}
         <div class="espaco-acoes" style="margin-top: 24px; flex-wrap: wrap;">

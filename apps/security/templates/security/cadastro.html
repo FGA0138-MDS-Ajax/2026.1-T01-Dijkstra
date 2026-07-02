@@ -89,11 +89,6 @@
     <div class="auth-container">
         <h2 style="color: var(--azul_unb); margin-bottom: 20px;">CADASTRAR</h2>
 
-        {% if messages %}
-            {% for msg in messages %}
-                <div class="alert-{{ msg.tags }}">{{ msg }}</div>
-            {% endfor %}
-        {% endif %}
 
         <form method="POST" action="{% url 'cadastro' %}">
             {% csrf_token %}

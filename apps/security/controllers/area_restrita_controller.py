@@ -25,6 +25,7 @@ from __future__ import annotations
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
@@ -242,6 +243,12 @@ def alterar_perfil_usuario(request: HttpRequest, usuario_id: str) -> HttpRespons
     if novo_tipo in tipos_validos:
         alvo.tipo = novo_tipo
         alvo.save(update_fields=["tipo"])
+        messages.success(
+            request,
+            f"Perfil de {alvo.nome_completo or alvo.username} alterado com sucesso.",
+        )
+    else:
+        messages.error(request, "Tipo de perfil inválido.")
     return redirect("area-restrita-gestao-usuarios")
 
 
@@ -264,6 +271,11 @@ def inativar_usuario(request: HttpRequest, usuario_id: str) -> HttpResponse:
         return redirect("area-restrita-gestao-usuarios")
     alvo.is_active = not alvo.is_active
     alvo.save(update_fields=["is_active"])
+    acao = "reativado" if alvo.is_active else "inativado"
+    messages.success(
+        request,
+        f"Usuário {alvo.nome_completo or alvo.username} {acao} com sucesso.",
+    )
     return redirect("area-restrita-gestao-usuarios")
 
 
@@ -284,7 +296,9 @@ def excluir_usuario(request: HttpRequest, usuario_id: str) -> HttpResponse:
     alvo = get_object_or_404(Usuario, pk=usuario_id)
     if not _pode_gerenciar(request.user, alvo):
         return redirect("area-restrita-gestao-usuarios")
+    nome = alvo.nome_completo or alvo.username
     alvo.delete()
+    messages.success(request, f"Usuário {nome} excluído com sucesso.")
     return redirect("area-restrita-gestao-usuarios")
 
 def termos_de_uso(request):
