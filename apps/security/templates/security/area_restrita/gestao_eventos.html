@@ -87,6 +87,31 @@
         background: #1F3B5B;
         color: white;
     }
+
+    @media (max-width: 400px) {
+    .evento-card {
+        padding: 9px;
+    }
+
+    .evento-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .evento-info {
+        font-size: 0.75rem;
+    }
+
+    .status {
+        padding: 3px 8px;
+        font-size: 0.65rem;
+    }
+
+    .eventos-grid {
+        grid-template-columns: 1fr;
+    }
+
+    }
+
   </style>
 {% endblock %}
 
@@ -139,4 +164,5 @@
 <p>Nenhum evento foi cadastrado.</p>
 
 {% endif %}
+</div>
 {% endblock %}
