@@ -281,7 +281,6 @@ class EventosControllerCoverageTest(TestCase):
             tipo="AL",
         )
 
-        # 1b. Cria o usuário Organizador, exigido pelo modelo de Evento
         organizador = Usuario.objects.create_user(
             username="organizador_detalhe_test",
             email="organizador_detalhe@test.com",
@@ -289,29 +288,23 @@ class EventosControllerCoverageTest(TestCase):
             tipo="OR",
         )
 
-        # 2. Cria a Organização obrigatória exigida pelo banco de dados
         organizacao = Organizacao.objects.create(
             nome="Organização de Teste",
-            # adicione outros campos obrigatórios da sua Organização aqui se houver, ex: CNPJ, etc.
         )
 
-        # 3. Cria o Evento associando-o ao organizador e à organização criada
         evento = Evento.objects.create(
             nome="Evento Cobertura 100",
             data=datetime.date.today(),
             horario=datetime.time(14, 0),
             local="Auditório",
             capacidade=50,
-            organizador=organizador,  # <--- CORREÇÃO: Passando o organizador obrigatório
-            organizacao=organizacao,  # <--- CORREÇÃO: Passando a organização obrigatória
+            organizador=organizador,
+            organizacao=organizacao,
         )
 
-        # 4. Autentica o cliente no sistema
         self.client.login(username="aluno_detalhe_test", password="SenhaForte123!")
 
-        # 5. Executa a requisição GET para a view de detalhes
         url = reverse("detalhes_evento", kwargs={"evento_id": evento.id})
         response = self.client.get(url)
 
-        # 6. Valida o sucesso da resposta
         self.assertEqual(response.status_code, 200)

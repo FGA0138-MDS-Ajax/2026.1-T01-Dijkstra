@@ -561,35 +561,6 @@ class ReprovarReservaTest(ReservasControllerTestBase):
         self.assertEqual(response.status_code, 302)
         self.assertEqual(response.url, destino)
 
-    # def test_reprovar_reserva_invalido_sem_next(self):
-    #     self.client.force_login(self.gestor)
-
-    #     response = self.client.post(
-    #         reverse("reprovar-reserva", kwargs={"reserva_id": self.reserva.id}),
-    #         {"motivo_reprovacao": ""},
-    #     )
-
-    #     self.assertEqual(response.status_code, 302)
-    #     self.assertEqual(
-    #         response.url,
-    #         reverse("gestao-reserva-detalhe", kwargs={"reserva_id": self.reserva.id}),
-    #     )
-
-    #     self.reserva.refresh_from_db()
-    #     self.assertEqual(self.reserva.status, ReservaEspaco.Status.PENDENTE)
-
-    # def test_reprovar_reserva_invalido_com_next_relativo(self):
-    #     self.client.force_login(self.gestor)
-    #     destino = reverse("minhas-reservas")
-
-    #     response = self.client.post(
-    #         reverse("reprovar-reserva", kwargs={"reserva_id": self.reserva.id}),
-    #         {"motivo_reprovacao": "", "next": destino},
-    #     )
-
-    #     self.assertEqual(response.status_code, 302)
-    #     self.assertEqual(response.url, destino)
-
     def test_reprovar_reserva_invalido_sem_next(self):
         # motivo_reprovacao é blank=True no model, então o form nunca fica
         # inválido "naturalmente" só por vir vazio; forçamos is_valid=False

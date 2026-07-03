@@ -47,10 +47,10 @@ class TestIdentificacaoDeArquivos(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()  # pylint: disable=consider-using-with
         self.log_path = Path(self.tmp.name)
-        (self.log_path / "app.log").touch()  # ativo — ignorado
-        (self.log_path / "app.log.1").touch()  # rotacionado ✓
-        (self.log_path / "app.log.2026-03-01").touch()  # rotacionado ✓
-        (self.log_path / "old.zst").touch()  # comprimido — ignorado
+        (self.log_path / "app.log").touch()
+        (self.log_path / "app.log.1").touch()
+        (self.log_path / "app.log.2026-03-01").touch()
+        (self.log_path / "old.zst").touch()
 
     def tearDown(self):
         self.tmp.cleanup()

@@ -263,87 +263,6 @@ class EventosControllerCoverageTest(TestCase):
             2,
         )
 
-    # def test_detalhes_evento_usuario_autenticado(self) -> None:
-    #     """Garante cobertura para quando um usuário autenticado visualiza os detalhes do evento."""
-    #     # 1. Cria ou recupera um usuário e um evento de teste
-    #     # (Adapte conforme a criação de objetos que você já usa no setUp desse arquivo)
-    #     from apps.security.models.usuario_models import Usuario
-    #     from apps.core.models.eventos_models import Evento
-    #     import datetime
-
-    #     usuario = Usuario.objects.create_user(
-    #         username="aluno_detalhe_test",
-    #         email="aluno_detalhe@test.com",
-    #         password="SenhaForte123!",
-    #         tipo="AL",
-    #     )
-
-    #     evento = Evento.objects.create(
-    #         nome="Evento Cobertura 100",
-    #         data=datetime.date.today(),
-    #         horario=datetime.time(14, 0),
-    #         local="Auditório",
-    #         capacidade=50,
-    #     )
-
-    #     # 2. Autentica o cliente
-    #     self.client.login(username="aluno_detalhe_test", password="SenhaForte123!")
-
-    #     # 3. Faz a requisição GET na rota de detalhes do evento
-    #     # Ajuste o nome da rota reversa conforme definido no seu urls.py (ex: 'core:detalhes_evento')
-    #     from django.urls import reverse
-
-    #     url = reverse("core:detalhes_evento", kwargs={"evento_id": evento.id})
-    #     response = self.client.get(url)
-
-    #     # 4. Verifica se respondeu sucesso e se a linha foi executada com sucesso
-    #     self.assertEqual(response.status_code, 200)
-
-    # def test_detalhes_evento_usuario_autenticado(self) -> None:
-    #     """Garante cobertura para quando um usuário autenticado visualiza os detalhes do evento."""
-    #     from apps.security.models.usuario_models import Usuario
-    #     from apps.core.models.eventos_models import Evento
-    #     from apps.core.models.organizacoes_models import (
-    #         Organizacao,
-    #     )  # Importe o modelo de Organização
-    #     import datetime
-    #     from django.urls import reverse
-
-    #     # 1. Cria o usuário Aluno
-    #     usuario = Usuario.objects.create_user(
-    #         username="aluno_detalhe_test",
-    #         email="aluno_detalhe@test.com",
-    #         password="SenhaForte123!",
-    #         tipo="AL",
-    #     )
-
-    #     # 2. Cria a Organização obrigatória exigida pelo banco de dados
-    #     organizacao = Organizacao.objects.create(
-    #         nome="Organização de Teste",
-    #         # adicione outros campos obrigatórios da sua Organização aqui se houver, ex: CNPJ, etc.
-    #     )
-
-    #     # 3. Cria o Evento associando-o à organização criada
-    #     evento = Evento.objects.create(
-    #         nome="Evento Cobertura 100",
-    #         data=datetime.date.today(),
-    #         horario=datetime.time(14, 0),
-    #         local="Auditório",
-    #         capacidade=50,
-    #         organizacao=organizacao,  # <--- CORREÇÃO: Passando a organização obrigatória
-    #     )
-
-    #     # 4. Autentica o cliente no sistema
-    #     self.client.login(username="aluno_detalhe_test", password="SenhaForte123!")
-
-    #     # 5. Executa a requisição GET para a view de detalhes
-    #     url = reverse("core:detalhes_evento", kwargs={"evento_id": evento.id})
-    #     response = self.client.get(url)
-
-    #     # 6. Valida o sucesso da resposta
-    #     self.assertEqual(response.status_code, 200)
-
-
     def test_detalhes_evento_usuario_autenticado(self) -> None:
         """Garante cobertura para quando um usuário autenticado visualiza os detalhes do evento."""
         from apps.security.models.usuario_models import Usuario
@@ -362,7 +281,6 @@ class EventosControllerCoverageTest(TestCase):
             tipo="AL",
         )
 
-        # 1b. Cria o usuário Organizador, exigido pelo modelo de Evento
         organizador = Usuario.objects.create_user(
             username="organizador_detalhe_test",
             email="organizador_detalhe@test.com",
@@ -370,29 +288,23 @@ class EventosControllerCoverageTest(TestCase):
             tipo="OR",
         )
 
-        # 2. Cria a Organização obrigatória exigida pelo banco de dados
         organizacao = Organizacao.objects.create(
             nome="Organização de Teste",
-            # adicione outros campos obrigatórios da sua Organização aqui se houver, ex: CNPJ, etc.
         )
 
-        # 3. Cria o Evento associando-o ao organizador e à organização criada
         evento = Evento.objects.create(
             nome="Evento Cobertura 100",
             data=datetime.date.today(),
             horario=datetime.time(14, 0),
             local="Auditório",
             capacidade=50,
-            organizador=organizador,  # <--- CORREÇÃO: Passando o organizador obrigatório
-            organizacao=organizacao,  # <--- CORREÇÃO: Passando a organização obrigatória
+            organizador=organizador,
+            organizacao=organizacao,
         )
 
-        # 4. Autentica o cliente no sistema
         self.client.login(username="aluno_detalhe_test", password="SenhaForte123!")
 
-        # 5. Executa a requisição GET para a view de detalhes
         url = reverse("detalhes_evento", kwargs={"evento_id": evento.id})
         response = self.client.get(url)
 
-        # 6. Valida o sucesso da resposta
         self.assertEqual(response.status_code, 200)
