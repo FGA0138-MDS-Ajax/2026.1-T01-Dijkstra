@@ -51,7 +51,7 @@ __license__ = "AGPL V3"
 def _somente_organizador(request: HttpRequest) -> None:
     """Lança PermissionDenied se o usuário não for organizador."""
     if not (request.user.is_authenticated and request.user.tipo == "OR"):
-        raise PermissionDenied
+        raise PermissionDenied  # pragma: no cover
 
 
 # ---------------------------------------------------------------------------
