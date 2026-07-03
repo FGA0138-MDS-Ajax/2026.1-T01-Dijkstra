@@ -40,8 +40,10 @@ from apps.utils.logger import get_logger
 
 logger = get_logger(__name__)
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __license__ = "AGPLV3"
+
+# pylint: disable=invalid-name
 
 
 def comprimir_logs(
@@ -183,7 +185,9 @@ def main() -> None:
     if not args.dry_run:
         APP_NOME = "zstd"
         if not shutil.which(APP_NOME):
-            logger.error("O script precisa do modulo zstd instalado no sistema. Saindo.")
+            logger.error(
+                "O script precisa do modulo zstd instalado no sistema. Saindo."
+            )
             sys.exit(100)
 
     comprimir_logs(args.log_dir, args.archive, args.dry_run)

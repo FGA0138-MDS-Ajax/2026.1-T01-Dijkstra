@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
+- Revisado por `Saresu <https://github.com/Saresu>`_ em 02 julho 2026
 """
 
 from pathlib import Path
@@ -168,7 +169,7 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 
-# Segurança Adicional 
+# Segurança Adicional
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True

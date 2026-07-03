@@ -13,6 +13,7 @@ Notas
 -----
 - Requer Python >= 3.12
 - Criado por `DaviiGualbertoo <https://github.com/DaviiGualbertoo>`_ em 08 junho 2026
+- Lint por Saresu 02 julho 2026
 """
 
 from __future__ import annotations
@@ -25,7 +26,7 @@ from django.db import models
 
 from apps.core.models.eventos_models import Evento
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __license__ = "AGPL V3"
 
 
@@ -109,5 +110,3 @@ class Inscricao(models.Model):
     def __str__(self: Self) -> str:  # pylint: disable=invalid-str-returned
         """Retorna a representacao textual da inscricao."""
         return f"{self.aluno} -> {self.evento.nome} ({self.get_status_display()})"
-    
-   

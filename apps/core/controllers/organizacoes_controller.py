@@ -15,6 +15,7 @@ Notas
 -----
 - Requer Python >= 3.12
 - Criado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
+- Lint por Saresu 02 julho 2026
 """
 
 # compatibilidade
@@ -33,10 +34,11 @@ from apps.core.models.organizacoes_models import UsuarioOrganizacao
 from apps.core.services.organizacoes_service import OrganizacoesService
 from apps.core.forms import OrganizacaoForm
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __license__ = "AGPL V3"
 
 _service = OrganizacoesService()
+
 
 @require_http_methods(["GET"])
 def organizacoes_list(request: HttpRequest) -> HttpResponse:
@@ -47,9 +49,9 @@ def organizacoes_list(request: HttpRequest) -> HttpResponse:
 
     if request.user.is_authenticated:
         ids_minhas = set(
-            UsuarioOrganizacao.objects
-            .filter(usuario=request.user)
-            .values_list("organizacao_id", flat=True)
+            UsuarioOrganizacao.objects.filter(usuario=request.user).values_list(
+                "organizacao_id", flat=True
+            )
         )
 
         for org in organizacoes:
@@ -64,6 +66,7 @@ def organizacoes_list(request: HttpRequest) -> HttpResponse:
         "core/organizacoes/list.html",
         {"organizacoes": organizacoes},
     )
+
 
 @login_required
 @require_http_methods(["GET", "POST"])
@@ -80,9 +83,14 @@ def organizacao_nova(request: HttpRequest) -> HttpResponse:
         form = OrganizacaoForm(request.POST, request.FILES)
         if form.is_valid():
             organizacao = form.save()
-            messages.success(request, f'Organização "{organizacao.nome}" criada com sucesso.')
+            messages.success(
+                request, f'Organização "{organizacao.nome}" criada com sucesso.'
+            )
             return redirect("organizacoes-list")
-        messages.error(request, "Não foi possível criar a organização. Verifique os campos destacados.")
+        messages.error(
+            request,
+            "Não foi possível criar a organização. Verifique os campos destacados.",
+        )
     else:
         form = OrganizacaoForm()
     return render(
@@ -94,7 +102,9 @@ def organizacao_nova(request: HttpRequest) -> HttpResponse:
 
 @login_required
 @require_http_methods(["GET"])
-def organizacao_detalhe(request: HttpRequest, organizacao_id: uuid.UUID) -> HttpResponse:
+def organizacao_detalhe(
+    request: HttpRequest, organizacao_id: uuid.UUID
+) -> HttpResponse:
     """
     Exibe os detalhes de uma organização específica.
 
@@ -115,9 +125,7 @@ def organizacao_detalhe(request: HttpRequest, organizacao_id: uuid.UUID) -> Http
 
 @login_required
 @require_http_methods(["GET", "POST"])
-def organizacao_editar(
-    request: HttpRequest, organizacao_id: uuid.UUID
-) -> HttpResponse:
+def organizacao_editar(request: HttpRequest, organizacao_id: uuid.UUID) -> HttpResponse:
     """
     Exibe o formulário de edição de organização e processa o envio.
 
@@ -133,9 +141,14 @@ def organizacao_editar(
         form = OrganizacaoForm(request.POST, request.FILES, instance=organizacao)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Organização "{organizacao.nome}" atualizada com sucesso.')
+            messages.success(
+                request, f'Organização "{organizacao.nome}" atualizada com sucesso.'
+            )
             return redirect("organizacao-detalhe", organizacao_id=organizacao.id)
-        messages.error(request, "Não foi possível salvar as alterações. Verifique os campos destacados.")
+        messages.error(
+            request,
+            "Não foi possível salvar as alterações. Verifique os campos destacados.",
+        )
     else:
         form = OrganizacaoForm(instance=organizacao)
     return render(
