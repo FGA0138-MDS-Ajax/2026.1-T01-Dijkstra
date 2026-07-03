@@ -40,15 +40,6 @@
     
     <a href="{% url 'home' %}" class="btn-back">Voltar para eventos</a>
     
-    {% if messages %}
-    <div class="messages-container">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
     
     {% if evento.vagas_ocupadas >= evento.capacidade %}
     <div class="messages-container">
@@ -88,12 +79,22 @@
             {% else %}
             <p><strong>Status: </strong>Inscrições Abertas</p>
             {% endif %}
-
             {% if user.is_authenticated %}
-                {% if inscricao %}
-                
-                <p><strong>Status da Inscrição: </strong> <span style="color: #d97706; font-weight: bold;">{{ inscricao.get_status_display }}</span></p>
-        
+            {% if inscricao %}
+                <p>
+                    <strong>Status da Inscrição:</strong>
+
+                    {% if inscricao.status == 'aprovada' %}
+                        <span style="color: green; font-weight: bold;">
+                            {{ inscricao.get_status_display }}
+                        </span>
+                    {% else %}
+                        <span style="color: #d97706; font-weight: bold;">
+                            {{ inscricao.get_status_display }}
+                        </span>
+                    {% endif %}
+                </p>
+
                 <form id="form-cancelamento" action="{% url 'cancelar_inscricao' evento.id %}" method="POST" style="display: inline;">
                     {% csrf_token %}
                     <button type="button" class="btn-ins-canc btn-cancelar" style="border: none; cursor: pointer; font-family: inherit;" onclick="abrirModal()">

@@ -14,6 +14,7 @@ Notas
 -----
 - Requer Python >= 3.12
 - Requer AUTH_USER_MODEL = 'security.Usuario' no settings.py
+- Revisado por `Saresu <https://github.com/Saresu>`_ em 02 julho 2026
 """
 
 from __future__ import annotations
@@ -24,7 +25,7 @@ from typing import Self
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-__version__ = "0.0.1"
+__version__ = "0.0.3"
 __license__ = "AGPL V3"
 
 
@@ -91,14 +92,14 @@ class Usuario(AbstractUser):
     @property
     def is_aluno(self: Self) -> bool:
         """Retorna True se o perfil do usuario for Aluno."""
-        return self.tipo == TipoPerfil.ALUNO
+        return bool(self.tipo == TipoPerfil.ALUNO)
 
     @property
     def is_organizador(self: Self) -> bool:
         """Retorna True se o perfil do usuario for Organizador."""
-        return self.tipo == TipoPerfil.ORGANIZADOR
+        return bool(self.tipo == TipoPerfil.ORGANIZADOR)
 
     @property
     def is_gestor(self: Self) -> bool:
         """Retorna True se o perfil do usuario for Gestor."""
-        return self.tipo == TipoPerfil.GESTOR
+        return bool(self.tipo == TipoPerfil.GESTOR)

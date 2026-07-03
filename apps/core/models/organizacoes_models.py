@@ -12,6 +12,7 @@ Notas
 -----
 - Requer Python >= 3.12
 - Criado por Welder60 em 02 junho 2026
+- Revisado por `Saresu <https://github.com/Saresu>`_ em 02 julho 2026
 """
 
 # compatibilidade
@@ -24,8 +25,10 @@ from typing import Self
 from django.conf import settings
 from django.db import models
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 __license__ = "AGPL V3"
+
+# pylint: disable=duplicate-code
 
 
 class Organizacao(models.Model):

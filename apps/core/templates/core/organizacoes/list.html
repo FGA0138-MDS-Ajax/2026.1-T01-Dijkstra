@@ -10,7 +10,9 @@
 
   <div class="espacos-header">
     <span class="section-tag">Organizações Esportivas</span>
-    <a href="{% url 'organizacao-nova' %}" class="btn-novo-espaco">+ Nova Organização</a>
+    {% if user.tipo == "GE" %}
+      <a href="{% url 'organizacao-nova' %}" class="btn-novo-espaco">+ Nova Organização</a>
+    {% endif %}
   </div>
 
   <div class="events-grid">
@@ -35,24 +37,37 @@
             <p>{{ organizacao.descricao|truncatechars:100 }}</p>
           </div>
 
+          {% if user.is_authenticated %}
           <div class="espaco-acoes">
-            <a class="btn-details" href="{% url 'organizacao-detalhe' organizacao.id %}">
-              Ver detalhes
-            </a>
-            <a class="btn-editar" href="{% url 'organizacao-editar' organizacao.id %}">
-              Editar
-            </a>
-            <a class="btn-deletar" href="{% url 'organizacao-deletar' organizacao.id %}">
-              Excluir
-            </a>
+
+              <a class="btn-details" href="{% url 'organizacao-detalhe' organizacao.id %}">
+                  Ver detalhes
+              </a>
+
+              {% if user.tipo == "GE" %}
+                  <a class="btn-editar" href="{% url 'organizacao-editar' organizacao.id %}">
+                      Editar
+                  </a>
+
+                  <form method="post" action="{% url 'organizacao-deletar' organizacao.id %}" style="display: inline;"
+                        data-confirm="Tem certeza que deseja excluir a organização {{ organizacao.nome }}? Esta ação não pode ser desfeita."
+                        data-confirm-title="Confirmar Exclusão" data-confirm-btn="Sim, excluir">
+                      {% csrf_token %}
+                      <button type="submit" class="btn-deletar">Excluir</button>
+                  </form>
+              {% endif %}
+
           </div>
+          {% endif %}
 
         </div>
       </div>
 
     {% empty %}
       <p class="espaco-vazio">Nenhuma organização cadastrada ainda.
-        <a href="{% url 'organizacao-nova' %}">Cadastrar agora</a>.
+        {% if user.tipo == "GE" %}
+          <a href="{% url 'organizacao-nova' %}">Cadastrar agora</a>.
+        {% endif %}
       </p>
     {% endfor %}
 

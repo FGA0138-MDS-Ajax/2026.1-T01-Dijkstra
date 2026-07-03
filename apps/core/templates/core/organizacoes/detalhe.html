@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+{% include 'security/partials/_subnav_restrita.html' %}
 <main>
 
   <a href="{% url 'organizacoes-list' %}" class="btn-back">&#8592; Voltar para organizacoes</a>
@@ -28,8 +29,17 @@
       <p>{{ organizacao.descricao }}</p>
 
       <div class="espaco-acoes" style="margin-top: 24px;">
+        {% if request.user.tipo == 'GE' %}
         <a class="btn-editar" href="{% url 'organizacao-editar' organizacao.id %}">Editar</a>
-        <a class="btn-deletar" href="{% url 'organizacao-deletar' organizacao.id %}">Excluir</a>
+        {% endif %}
+        {% if request.user.tipo == 'GE' %}
+        <form method="post" action="{% url 'organizacao-deletar' organizacao.id %}" style="display: inline;"
+              data-confirm="Tem certeza que deseja excluir a organização {{ organizacao.nome }}? Esta ação não pode ser desfeita."
+              data-confirm-title="Confirmar Exclusão" data-confirm-btn="Sim, excluir">
+          {% csrf_token %}
+          <button type="submit" class="btn-deletar">Excluir</button>
+        </form>
+        {% endif %}
         {% if request.user.tipo == 'GE' %}
           <a class="btn-editar" href="{% url 'organizacao-membros' organizacao.id %}">Gerenciar Membros</a>
         {% endif %}

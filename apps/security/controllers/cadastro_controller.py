@@ -9,6 +9,7 @@ seguindo o princípio de minimização de dados (LGPD / US-012).
 Notas
 -----
 - Requer Python >= 3.12
+- Revisado por `Saresu <https://github.com/Saresu>`_ em 02 julho 2026
 """
 
 from __future__ import annotations
@@ -21,7 +22,7 @@ from django_ratelimit.decorators import ratelimit
 
 from apps.security.forms import CadastroForm
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 __license__ = "AGPL V3"
 
 
@@ -33,7 +34,7 @@ def cadastro(request: HttpRequest) -> HttpResponse:
     Exibe e processa o formulário de cadastro simplificado.
 
     GET  → renderiza o formulário vazio.
-    POST → valida a matrícula e senhas, cria o usuário com privilégios 
+    POST → valida a matrícula e senhas, cria o usuário com privilégios
            mínimos e redireciona para o login.
 
     Possui proteção anti-bot via rate limiting (máximo de 5 tentativas por minuto por IP).
@@ -48,7 +49,9 @@ def cadastro(request: HttpRequest) -> HttpResponse:
         form = CadastroForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, "Conta criada com sucesso! Faça login para continuar.")
+            messages.success(
+                request, "Conta criada com sucesso! Faça login para continuar."
+            )
             return redirect("login")
     else:
         form = CadastroForm()

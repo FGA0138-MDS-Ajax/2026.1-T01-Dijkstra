@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block content %}
+{% include 'security/partials/_subnav_restrita.html' %}
 <main>
 
   <a href="{% url 'organizacao-detalhe' organizacao.id %}" class="btn-back">← Voltar para {{ organizacao.nome }}</a>
@@ -36,7 +37,8 @@
             <td style="padding: 8px; border-bottom: 1px solid #f0f0f0;">{{ vinculo.usuario.get_tipo_display }}</td>
             <td style="padding: 8px; border-bottom: 1px solid #f0f0f0; text-align: right;">
               <form method="post" action="{% url 'organizacao-remover-membro' organizacao.id vinculo.usuario.id %}"
-                    onsubmit="return confirm('Remover {{ vinculo.usuario.nome_completo }} da organização?');">
+                    data-confirm="Remover {{ vinculo.usuario.nome_completo }} da organização?"
+                    data-confirm-title="Remover Membro" data-confirm-btn="Sim, remover">
                 {% csrf_token %}
                 <button type="submit" class="btn-deletar" style="padding: 4px 12px; font-size: 0.85rem;">
                   Remover

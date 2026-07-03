@@ -89,11 +89,6 @@
     <div class="auth-container">
         <h2 style="color: var(--azul_unb); margin-bottom: 20px;">CADASTRAR</h2>
 
-        {% if messages %}
-            {% for msg in messages %}
-                <div class="alert-{{ msg.tags }}">{{ msg }}</div>
-            {% endfor %}
-        {% endif %}
 
         <form method="POST" action="{% url 'cadastro' %}">
             {% csrf_token %}
@@ -113,7 +108,7 @@
             <div class="termos-group">
                 {{ form.termos_uso }}
                 <label for="{{ form.termos_uso.id_for_label }}">
-                    Declaro que li e concordo com os Termos de Uso. Compreendo que esta plataforma adota o princípio de minimização de dados e armazenará apenas a minha matrícula institucional.
+                    Declaro que li e concordo com a <a href="{% url 'politica-de-privacidade' %}">Política de Privacidade</a> e os <a href="{% url 'termos-de-uso' %}">Termos de Uso</a>. Compreendo que esta plataforma adota o princípio de minimização de dados e armazenará apenas a minha matrícula institucional.
                 </label>
             </div>
             {% for e in form.termos_uso.errors %}<span class="field-error">{{ e }}</span>{% endfor %}

@@ -15,6 +15,7 @@ Notas
 -----
 - Requer Python >= 3.12
 - Criado por `Welder60 <https://github.com/welder60>`_ em 02 junho 2026
+- Lint por Saresu 02 julho 2026
 """
 
 # compatibilidade
@@ -22,33 +23,44 @@ from __future__ import annotations
 
 import uuid
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods
 
 from apps.core.models.organizacoes_models import Organizacao
+from apps.core.models.organizacoes_models import UsuarioOrganizacao
 from apps.core.services.organizacoes_service import OrganizacoesService
 from apps.core.forms import OrganizacaoForm
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __license__ = "AGPL V3"
 
 _service = OrganizacoesService()
 
 
-@login_required
 @require_http_methods(["GET"])
 def organizacoes_list(request: HttpRequest) -> HttpResponse:
     """
     Exibe a listagem de todas as organizações em cards.
-
-    :param request: Objeto da requisição HTTP.
-    :type request: HttpRequest
-    :returns: Página HTML com os cards de organizações.
-    :rtype: HttpResponse
     """
     organizacoes = _service.listar_organizacoes()
+
+    if request.user.is_authenticated:
+        ids_minhas = set(
+            UsuarioOrganizacao.objects.filter(usuario=request.user).values_list(
+                "organizacao_id", flat=True
+            )
+        )
+
+        for org in organizacoes:
+            org.e_minha = org.id in ids_minhas
+
+    else:
+        for org in organizacoes:
+            org.e_minha = False
+
     return render(
         request,
         "core/organizacoes/list.html",
@@ -70,8 +82,15 @@ def organizacao_nova(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = OrganizacaoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            organizacao = form.save()
+            messages.success(
+                request, f'Organização "{organizacao.nome}" criada com sucesso.'
+            )
             return redirect("organizacoes-list")
+        messages.error(
+            request,
+            "Não foi possível criar a organização. Verifique os campos destacados.",
+        )
     else:
         form = OrganizacaoForm()
     return render(
@@ -83,7 +102,9 @@ def organizacao_nova(request: HttpRequest) -> HttpResponse:
 
 @login_required
 @require_http_methods(["GET"])
-def organizacao_detalhe(request: HttpRequest, organizacao_id: uuid.UUID) -> HttpResponse:
+def organizacao_detalhe(
+    request: HttpRequest, organizacao_id: uuid.UUID
+) -> HttpResponse:
     """
     Exibe os detalhes de uma organização específica.
 
@@ -104,9 +125,7 @@ def organizacao_detalhe(request: HttpRequest, organizacao_id: uuid.UUID) -> Http
 
 @login_required
 @require_http_methods(["GET", "POST"])
-def organizacao_editar(
-    request: HttpRequest, organizacao_id: uuid.UUID
-) -> HttpResponse:
+def organizacao_editar(request: HttpRequest, organizacao_id: uuid.UUID) -> HttpResponse:
     """
     Exibe o formulário de edição de organização e processa o envio.
 
@@ -122,7 +141,14 @@ def organizacao_editar(
         form = OrganizacaoForm(request.POST, request.FILES, instance=organizacao)
         if form.is_valid():
             form.save()
+            messages.success(
+                request, f'Organização "{organizacao.nome}" atualizada com sucesso.'
+            )
             return redirect("organizacao-detalhe", organizacao_id=organizacao.id)
+        messages.error(
+            request,
+            "Não foi possível salvar as alterações. Verifique os campos destacados.",
+        )
     else:
         form = OrganizacaoForm(instance=organizacao)
     return render(
@@ -133,26 +159,22 @@ def organizacao_editar(
 
 
 @login_required
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["POST"])
 def organizacao_deletar(
     request: HttpRequest, organizacao_id: uuid.UUID
 ) -> HttpResponse:
     """
-    Exibe a página de confirmação de exclusão e processa a remoção.
+    Processa a remoção de uma organização (a confirmação ocorre em modal no front).
 
     :param request: Objeto da requisição HTTP.
     :type request: HttpRequest
     :param organizacao_id: UUID da organização a remover.
     :type organizacao_id: uuid.UUID
-    :returns: Página de confirmação ou redirecionamento para a listagem.
+    :returns: Redirecionamento para a listagem.
     :rtype: HttpResponse
     """
     organizacao = get_object_or_404(Organizacao, pk=organizacao_id)
-    if request.method == "POST":
-        organizacao.delete()
-        return redirect("organizacoes-list")
-    return render(
-        request,
-        "core/organizacoes/confirmar_deletar.html",
-        {"organizacao": organizacao},
-    )
+    nome = organizacao.nome
+    organizacao.delete()
+    messages.success(request, f'Organização "{nome}" excluída com sucesso.')
+    return redirect("organizacoes-list")

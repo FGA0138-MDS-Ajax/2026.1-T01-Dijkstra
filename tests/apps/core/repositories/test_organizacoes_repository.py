@@ -1,68 +1,3 @@
-# # test_organizacoes_repository.py
-
-# from django.test import TestCase
-
-# from apps.core.models.organizacoes_models import Organizacao
-# from apps.core.repositories.organizacoes_repository import OrganizacoesRepository
-
-
-# class OrganizacoesRepositoryTest(TestCase):
-#     def setUp(self):
-#         self.repository = OrganizacoesRepository()
-
-#         self.data = {
-#             "nome": "Quadra Central",
-#             "localizacao": "Campus",
-#             "descricao": "Quadra esportiva",
-#         }
-
-#     def test_create(self):
-#         espaco = self.repository.create(self.data)
-
-#         self.assertEqual(espaco.nome, "Quadra Central")
-#         self.assertEqual(Organizacao.objects.count(), 1)
-
-#     def test_get_by_id(self):
-#         espaco = self.repository.create(self.data)
-
-#         encontrado = self.repository.get_by_id(espaco.id)
-
-#         self.assertEqual(encontrado.id, espaco.id)
-
-#     def test_get_by_id_inexistente(self):
-#         self.assertIsNone(
-#             self.repository.get_by_id("00000000-0000-0000-0000-000000000000")
-#         )
-
-#     def test_get_all(self):
-#         self.repository.create(self.data)
-#         self.repository.create({**self.data, "nome": "Ginásio"})
-
-#         self.assertEqual(len(self.repository.get_all()), 2)
-
-#     def test_update(self):
-#         espaco = self.repository.create(self.data)
-
-#         atualizado = self.repository.update(espaco.id, {"nome": "Novo Nome"})
-
-#         self.assertEqual(atualizado.nome, "Novo Nome")
-
-#     def test_update_inexistente(self):
-#         self.assertIsNone(
-#             self.repository.update(
-#                 "00000000-0000-0000-0000-000000000000", {"nome": "X"}
-#             )
-#         )
-
-#     def test_delete(self):
-#         espaco = self.repository.create(self.data)
-
-#         self.assertTrue(self.repository.delete(espaco.id))
-
-#         self.assertEqual(Organizacao.objects.count(), 0)
-
-#     def test_delete_inexistente(self):
-#         self.assertFalse(self.repository.delete("00000000-0000-0000-0000-000000000000"))
 from unittest.mock import MagicMock, patch
 
 from django.test import TestCase
@@ -265,9 +200,7 @@ class VinculoMembroRepositoryTest(TestCase):
 
         self.assertFalse(result)
 
-    @patch(
-        "apps.core.repositories.organizacoes_repository.Usuario.objects.exclude"
-    )
+    @patch("apps.core.repositories.organizacoes_repository.Usuario.objects.exclude")
     @patch(
         "apps.core.repositories.organizacoes_repository.UsuarioOrganizacao.objects.filter"
     )
@@ -282,9 +215,7 @@ class VinculoMembroRepositoryTest(TestCase):
         mock_exclude.assert_called_once_with(id__in=["usr-1"])
         self.assertEqual(result, [usuario])
 
-    @patch(
-        "apps.core.repositories.organizacoes_repository.Organizacao.objects.filter"
-    )
+    @patch("apps.core.repositories.organizacoes_repository.Organizacao.objects.filter")
     @patch(
         "apps.core.repositories.organizacoes_repository.UsuarioOrganizacao.objects.filter"
     )

@@ -19,23 +19,28 @@ Notas
 -----
 - Requer Python >= 3.12
 - Acesso restrito via ``@login_required`` e verificação de perfil.
+- Revisado por `Saresu <https://github.com/Saresu>`_ em 02 julho 2026
 """
 
 from __future__ import annotations
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
-from apps.core.models.espacos_models import EspacoFisico
+# comentado. esta importado logo abaixo. mantido para facilitar a restauracao
+# from apps.core.models.espacos_models import EspacoFisico
 from apps.core.models.reservas_models import ReservaEspaco
 from apps.core.services.organizacoes_service import OrganizacoesService
 from apps.security.models.usuario_models import TipoPerfil, Usuario
+from apps.core.models import Inscricao, Evento, EspacoFisico
+
 
 _org_service = OrganizacoesService()
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __license__ = "AGPL V3"
 
 # Tipos de perfil aceitos por cada view
@@ -75,20 +80,42 @@ def perfil(request: HttpRequest) -> HttpResponse:
     return render(request, "security/area_restrita/perfil.html")
 
 
+# @login_required
+# @require_http_methods(["GET"])
+# def eventos_inscritos(request: HttpRequest) -> HttpResponse:
+
+#     if not _tem_acesso(request.user, _ALUNO):
+#         return redirect("area-restrita-perfil")
+
+#     inscricoes = Inscricao.objects.filter(aluno=request.user)
+
+
+#     return render(
+#         request,
+#         "security/area_restrita/eventos_inscritos.html",
+#         {"inscricoes": inscricoes},
+#     )
 @login_required
 @require_http_methods(["GET"])
 def eventos_inscritos(request: HttpRequest) -> HttpResponse:
     """
-    Exibe a página de Eventos Inscritos.
+    Exibe a página de eventos nos quais o aluno está inscrito.
 
-    Acessível a Alunos e superusers.
+    Acessível apenas a Alunos e superusers.
 
-    :param request: Objeto da requisicao HTTP.
+    :param request: Objeto da requisição HTTP.
     :rtype: HttpResponse
     """
     if not _tem_acesso(request.user, _ALUNO):
         return redirect("area-restrita-perfil")
-    return render(request, "security/area_restrita/eventos_inscritos.html")
+
+    inscricoes = Inscricao.objects.filter(aluno=request.user)
+
+    return render(
+        request,
+        "security/area_restrita/eventos_inscritos.html",
+        {"inscricoes": inscricoes},
+    )
 
 
 @login_required
@@ -102,9 +129,14 @@ def gestao_eventos_restrita(request: HttpRequest) -> HttpResponse:
     :param request: Objeto da requisicao HTTP.
     :rtype: HttpResponse
     """
+
     if not _tem_acesso(request.user, _ORGANIZADOR):
         return redirect("area-restrita-perfil")
-    return render(request, "security/area_restrita/gestao_eventos.html")
+
+    eventos = Evento.objects.filter(organizador=request.user)
+    return render(
+        request, "security/area_restrita/gestao_eventos.html", {"eventos": eventos}
+    )
 
 
 @login_required
@@ -141,7 +173,10 @@ def espacos_esportivos(request: HttpRequest) -> HttpResponse:
     """
     if not _tem_acesso(request.user, _GESTOR):
         return redirect("area-restrita-perfil")
-    return render(request, "security/area_restrita/espacos_esportivos.html")
+    espacos = EspacoFisico.objects.all()
+    return render(
+        request, "security/area_restrita/espacos_esportivos.html", {"espacos": espacos}
+    )
 
 
 @login_required
@@ -236,6 +271,12 @@ def alterar_perfil_usuario(request: HttpRequest, usuario_id: str) -> HttpRespons
     if novo_tipo in tipos_validos:
         alvo.tipo = novo_tipo
         alvo.save(update_fields=["tipo"])
+        messages.success(
+            request,
+            f"Perfil de {alvo.nome_completo or alvo.username} alterado com sucesso.",
+        )
+    else:
+        messages.error(request, "Tipo de perfil inválido.")
     return redirect("area-restrita-gestao-usuarios")
 
 
@@ -258,6 +299,11 @@ def inativar_usuario(request: HttpRequest, usuario_id: str) -> HttpResponse:
         return redirect("area-restrita-gestao-usuarios")
     alvo.is_active = not alvo.is_active
     alvo.save(update_fields=["is_active"])
+    acao = "reativado" if alvo.is_active else "inativado"
+    messages.success(
+        request,
+        f"Usuário {alvo.nome_completo or alvo.username} {acao} com sucesso.",
+    )
     return redirect("area-restrita-gestao-usuarios")
 
 
@@ -278,5 +324,31 @@ def excluir_usuario(request: HttpRequest, usuario_id: str) -> HttpResponse:
     alvo = get_object_or_404(Usuario, pk=usuario_id)
     if not _pode_gerenciar(request.user, alvo):
         return redirect("area-restrita-gestao-usuarios")
+    nome = alvo.nome_completo or alvo.username
     alvo.delete()
+    messages.success(request, f"Usuário {nome} excluído com sucesso.")
     return redirect("area-restrita-gestao-usuarios")
+
+
+def termos_de_uso(request):
+    """
+    Exibe a página com os Termos de Uso da plataforma.
+
+    Acessível publicamente por qualquer usuário.
+
+    :param request: Objeto da requisição HTTP.
+    :rtype: HttpResponse
+    """
+    return render(request, "security/area_restrita/termos_de_uso.html")
+
+
+def politica_privacidade(request):
+    """
+    Exibe a página com a Política de Privacidade do sistema.
+
+    Acessível publicamente por qualquer usuário.
+
+    :param request: Objeto da requisição HTTP.
+    :rtype: HttpResponse
+    """
+    return render(request, "security/area_restrita/politica_privacidade.html")

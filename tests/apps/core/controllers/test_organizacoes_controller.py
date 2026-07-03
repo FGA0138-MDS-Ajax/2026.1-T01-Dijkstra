@@ -116,7 +116,8 @@ class OrganizacoesControllerTest(TestCase):
             "Atlética Atualizada",
         )
 
-    def test_organizacao_deletar_get(self):
+    def test_organizacao_deletar_get_nao_permitido(self):
+        """Exclusão é POST-only (confirmação ocorre em modal no front)."""
         response = self.client.get(
             reverse(
                 "organizacao-deletar",
@@ -126,7 +127,7 @@ class OrganizacoesControllerTest(TestCase):
 
         self.assertEqual(
             response.status_code,
-            200,
+            405,
         )
 
     def test_organizacao_deletar_post(self):

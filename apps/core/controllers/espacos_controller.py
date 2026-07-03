@@ -9,12 +9,13 @@ Componentes Principais
 - :func:`espaco_novo`: exibe e processa o formulário de criação.
 - :func:`espaco_detalhe`: exibe os detalhes de um espaço.
 - :func:`espaco_editar`: exibe e processa o formulário de edição.
-- :func:`espaco_deletar`: exibe confirmação e processa a remoção.
+- :func:`espaco_deletar`: processa a remoção (confirmação em modal no front).
 
 Notas
 -----
 - Requer Python >= 3.12
 - Criado por `Welder60 <https://github.com/welder60>`_ em 01 de junho de 2026
+- Lint por Saresu 02 julho 2026
 """
 
 # compatibilidade
@@ -22,6 +23,7 @@ from __future__ import annotations
 
 import uuid
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -31,7 +33,7 @@ from apps.core.models.espacos_models import EspacoFisico
 from apps.core.services.espacos_service import EspacosService
 from apps.core.forms import EspacoFisicoForm
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __license__ = "AGPL V3"
 
 _service = EspacosService()
@@ -66,8 +68,12 @@ def espaco_novo(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = EspacoFisicoForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            espaco = form.save()
+            messages.success(request, f'Espaço "{espaco.nome}" criado com sucesso.')
             return redirect("espacos-list")
+        messages.error(
+            request, "Não foi possível criar o espaço. Verifique os campos destacados."
+        )
     else:
         form = EspacoFisicoForm()
     return render(request, "core/espacos/form.html", {"form": form, "acao": "Criar"})
@@ -108,7 +114,12 @@ def espaco_editar(request: HttpRequest, espaco_id: uuid.UUID) -> HttpResponse:
         form = EspacoFisicoForm(request.POST, request.FILES, instance=espaco)
         if form.is_valid():
             form.save()
+            messages.success(request, f'Espaço "{espaco.nome}" atualizado com sucesso.')
             return redirect("espaco-detalhe", espaco_id=espaco.id)
+        messages.error(
+            request,
+            "Não foi possível salvar as alterações. Verifique os campos destacados.",
+        )
     else:
         form = EspacoFisicoForm(instance=espaco)
     return render(
@@ -119,20 +130,20 @@ def espaco_editar(request: HttpRequest, espaco_id: uuid.UUID) -> HttpResponse:
 
 
 @login_required
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["POST"])
 def espaco_deletar(request: HttpRequest, espaco_id: uuid.UUID) -> HttpResponse:
     """
-    Exibe a página de confirmação de exclusão e processa a remoção.
+    Processa a remoção de um espaço (a confirmação ocorre em modal no front).
 
     :param request: Objeto da requisição HTTP.
     :type request: HttpRequest
     :param espaco_id: UUID do espaço a remover.
     :type espaco_id: uuid.UUID
-    :returns: Página de confirmação ou redirecionamento para a listagem.
+    :returns: Redirecionamento para a listagem.
     :rtype: HttpResponse
     """
     espaco = get_object_or_404(EspacoFisico, pk=espaco_id)
-    if request.method == "POST":
-        espaco.delete()
-        return redirect("espacos-list")
-    return render(request, "core/espacos/confirmar_deletar.html", {"espaco": espaco})
+    nome = espaco.nome
+    espaco.delete()
+    messages.success(request, f'Espaço "{nome}" excluído com sucesso.')
+    return redirect("espacos-list")

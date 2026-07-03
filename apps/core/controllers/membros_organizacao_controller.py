@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import uuid
 
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -74,6 +75,9 @@ def adicionar_membro(request: HttpRequest, organizacao_id: uuid.UUID) -> HttpRes
     usuario_id = request.POST.get("usuario_id")
     if usuario_id:
         _service.adicionar_membro(organizacao_id, uuid.UUID(usuario_id))
+        messages.success(request, "Membro adicionado com sucesso.")
+    else:
+        messages.error(request, "Selecione um usuário para adicionar.")
     return redirect("organizacao-membros", organizacao_id=organizacao_id)
 
 
@@ -92,4 +96,5 @@ def remover_membro(
     :rtype: HttpResponse
     """
     _service.remover_membro(organizacao_id, usuario_id)
+    messages.success(request, "Membro removido da organização.")
     return redirect("organizacao-membros", organizacao_id=organizacao_id)

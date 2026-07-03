@@ -12,6 +12,7 @@ Componentes Principais
 Notas
 -----
 - Requer Python >= 3.12
+- Revisado por `Saresu <https://github.com/Saresu>`_ em 02 julho 2026
 """
 
 from __future__ import annotations
@@ -35,25 +36,33 @@ class CadastroForm(forms.Form):
         label="Matrícula",
         validators=[
             RegexValidator(
-                regex=r'^\d{9}$',
-                message='A matrícula deve conter exatamente 9 dígitos numéricos (padrão UnB).'
+                regex=r"^\d{9}$",
+                message="A matrícula deve conter exatamente 9 dígitos numéricos (padrão UnB).",
             )
         ],
-        widget=forms.TextInput(attrs={"class": "auth-input", "placeholder": "Ex: 190012345"}),
+        widget=forms.TextInput(
+            attrs={"class": "auth-input", "placeholder": "Ex: 190012345"}
+        ),
     )
     password = forms.CharField(
         label="Senha",
-        widget=forms.PasswordInput(attrs={"class": "auth-input", "placeholder": "Mínimo 8 caracteres"}),
+        widget=forms.PasswordInput(
+            attrs={"class": "auth-input", "placeholder": "Mínimo 8 caracteres"}
+        ),
         min_length=8,
     )
     confirmar_senha = forms.CharField(
         label="Confirmar senha",
-        widget=forms.PasswordInput(attrs={"class": "auth-input", "placeholder": "Repita a senha"}),
+        widget=forms.PasswordInput(
+            attrs={"class": "auth-input", "placeholder": "Repita a senha"}
+        ),
     )
     termos_uso = forms.BooleanField(
         required=True,
         label="Termos de Uso",
-        error_messages={'required': 'Você deve aceitar os Termos de Uso para criar a conta.'},
+        error_messages={
+            "required": "Você deve aceitar os Termos de Uso para criar a conta."
+        },
     )
 
     def clean_matricula(self) -> str:

@@ -42,6 +42,16 @@ urlpatterns = [
         TemplateView.as_view(template_name="security/esqueci_senha.html"),
         name="esqueceu_senha",
     ),
+    path(
+        "politica-de-privacidade/",
+        TemplateView.as_view(template_name="security/area_restrita/politica_privacidade.html"),
+        name="politica-de-privacidade",
+    ),
+    path(
+        "termos-de-uso/",
+        TemplateView.as_view(template_name="security/area_restrita/termos_de_uso.html"),
+        name="termos-de-uso",
+    ),
     # Área Restrita
     path("area-restrita/", area_restrita_redirect, name="area-restrita"),
     path("area-restrita/perfil/", perfil, name="area-restrita-perfil"),
