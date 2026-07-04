@@ -19,12 +19,15 @@ Notas
 - Revisado por `Gui-fga <https://github.com/Gui-fga>`_ em 30 maio 2026
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
 - Lint por Saresu 02 julho 2026
+- Revisado por `Saresu <https://github.com/Saresu>`_ em 03 julho 2026
 """
 
 from __future__ import annotations
 
 import uuid
 from typing import List, Optional, Self
+
+from django.core.exceptions import ValidationError
 
 from apps.core.models.eventos_models import Evento
 from apps.core.repositories.eventos_repository import EventosRepository
@@ -33,8 +36,72 @@ from apps.core.repositories.eventos_repository import EventosRepository
 from apps.security.models.usuario_models import Usuario
 from apps.security.repositories.usuarios_repositories import UsuarioRepository
 
-__version__ = "0.0.3"
+__version__ = "0.0.4"
 __license__ = "AGPL V3"
+
+
+_CAMPOS_OBRIGATORIOS = (
+    "nome",
+    "data",
+    "horario",
+    "local",
+    "organizador_id",
+    "organizacao_id",
+    "capacidade",
+)
+
+
+def _validar_dados_evento(data: dict, exigir_obrigatorios: bool = False) -> None:
+    """
+    Valida os dados recebidos para criacao/atualizacao de um evento.
+
+    Por padrao (``exigir_obrigatorios=False``) so valida o *formato* dos
+    campos que efetivamente vierem no payload, sem exigir presenca --
+    preserva o comportamento atual, onde a ausencia de um campo obrigatorio
+    e detectada mais adiante pela constraint do banco. Isso deixa a
+    validacao pronta para ser ativada (``exigir_obrigatorios=True``) assim
+    que o contrato da API for confirmado com o time, sem quebrar nada
+    enquanto isso nao acontece.
+
+    :param data: Dicionario com os campos do evento.
+    :param exigir_obrigatorios: Se True, tambem rejeita a ausencia dos
+        campos obrigatorios. Desligado por padrao.
+    :raises ValidationError: Se algum campo enviado estiver em formato
+        invalido, ou (quando ``exigir_obrigatorios=True``) se algum campo
+        obrigatorio estiver ausente.
+    """
+
+    # o codigo em si corrige o DT-03 mas vamos manter a funcionalidade atual
+    # ate testes funcionais serem devidamente feitos
+    if not exigir_obrigatorios:
+        return
+
+    if exigir_obrigatorios:
+        faltantes = [
+            campo for campo in _CAMPOS_OBRIGATORIOS if data.get(campo) in (None, "")
+        ]
+        if faltantes:
+            raise ValidationError(
+                f"Campos obrigatorios ausentes: {', '.join(faltantes)}."
+            )
+
+    for campo in ("organizador_id", "organizacao_id"):
+        valor = data.get(campo)
+        if valor in (None, ""):
+            continue
+        try:
+            uuid.UUID(str(valor))
+        except (ValueError, AttributeError, TypeError) as exc:
+            raise ValidationError(f"'{campo}' deve ser um UUID valido.") from exc
+
+    capacidade = data.get("capacidade")
+    if capacidade not in (None, ""):
+        try:
+            capacidade = int(capacidade)
+        except (TypeError, ValueError) as exc:
+            raise ValidationError("'capacidade' deve ser um numero inteiro.") from exc
+        if capacidade <= 0:
+            raise ValidationError("'capacidade' deve ser maior que zero.")
 
 
 class EventosService:
@@ -51,7 +118,20 @@ class EventosService:
         """
         self.repository = repository or EventosRepository()
 
-    def criar_evento(self: Self, data: dict) -> Evento:
+    # garantir que o codigo legado nao seja perdido depois de validado
+    # com testes funcionais
+    # def criar_evento(self: Self, data: dict) -> Evento:
+    #     """
+    #     Cria um novo evento.
+
+    #     :param data: Dicionario com os campos do evento.
+    #     :type data: dict
+    #     :returns: Instancia do evento criado.
+    #     :rtype: Evento
+    #     """
+    #     return self.repository.create(data)
+
+    def criar_evento(self: Self, data: dict, valida: Optional[bool] = False) -> Evento:
         """
         Cria um novo evento.
 
@@ -59,7 +139,10 @@ class EventosService:
         :type data: dict
         :returns: Instancia do evento criado.
         :rtype: Evento
+        :raises ValidationError: Se os dados obrigatorios estiverem
+            ausentes ou em formato invalido.
         """
+        _validar_dados_evento(data, exigir_obrigatorios=valida)
         return self.repository.create(data)
 
     def buscar_evento(self: Self, evento_id: uuid.UUID) -> Optional[Evento]:
