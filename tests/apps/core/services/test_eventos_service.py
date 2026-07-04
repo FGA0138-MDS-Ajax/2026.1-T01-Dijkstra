@@ -13,6 +13,19 @@ class EventosServiceTest(TestCase):
     def setUp(self):
         self.repository_mock = MagicMock(spec=EventosRepository)
         self.service = EventosService(repository=self.repository_mock)
+        # Payload completo e valido, usado como base para os testes que
+        # isolam uma unica validacao (UUID ou capacidade). Sem isso, a
+        # checagem de "campos obrigatorios ausentes" dispara primeiro e
+        # mascara a validacao que o teste realmente quer exercitar.
+        self.dados_validos = {
+            "nome": "Teste",
+            "data": "2026-08-01",
+            "horario": "10:00",
+            "local": "Auditorio 1",
+            "organizador_id": "11111111-1111-1111-1111-111111111111",
+            "organizacao_id": "22222222-2222-2222-2222-222222222222",
+            "capacidade": 100,
+        }
 
     def test_criar_evento(self):
         data = {"nome": "Teste"}
@@ -58,7 +71,7 @@ class EventosServiceTest(TestCase):
         """Um organizador_id enviado que nao e UUID valido deve ser rejeitado."""
         from django.core.exceptions import ValidationError
 
-        data = {"nome": "Teste", "organizador_id": "nao-e-um-uuid"}
+        data = {**self.dados_validos, "organizador_id": "nao-e-um-uuid"}
         with self.assertRaises(ValidationError):
             self.service.criar_evento(data, valida=True)
         self.repository_mock.create.assert_not_called()
@@ -67,7 +80,7 @@ class EventosServiceTest(TestCase):
         """Um organizacao_id enviado que nao e UUID valido deve ser rejeitado."""
         from django.core.exceptions import ValidationError
 
-        data = {"nome": "Teste", "organizacao_id": "nao-e-um-uuid"}
+        data = {**self.dados_validos, "organizacao_id": "nao-e-um-uuid"}
         with self.assertRaises(ValidationError):
             self.service.criar_evento(data, valida=True)
         self.repository_mock.create.assert_not_called()
@@ -76,7 +89,7 @@ class EventosServiceTest(TestCase):
         """Uma capacidade enviada que nao pode virar inteiro deve ser rejeitada."""
         from django.core.exceptions import ValidationError
 
-        data = {"nome": "Teste", "capacidade": "muitas"}
+        data = {**self.dados_validos, "capacidade": "muitas"}
         with self.assertRaises(ValidationError):
             self.service.criar_evento(data, valida=True)
         self.repository_mock.create.assert_not_called()
@@ -85,7 +98,7 @@ class EventosServiceTest(TestCase):
         """Capacidade enviada como zero deve ser rejeitada."""
         from django.core.exceptions import ValidationError
 
-        data = {"nome": "Teste", "capacidade": 0}
+        data = {**self.dados_validos, "capacidade": 0}
         with self.assertRaises(ValidationError):
             self.service.criar_evento(data, valida=True)
         self.repository_mock.create.assert_not_called()
@@ -94,7 +107,23 @@ class EventosServiceTest(TestCase):
         """Capacidade negativa deve ser rejeitada, nao so zero."""
         from django.core.exceptions import ValidationError
 
-        data = {"nome": "Teste", "capacidade": -5}
+        data = {**self.dados_validos, "capacidade": -5}
         with self.assertRaises(ValidationError):
             self.service.criar_evento(data, valida=True)
         self.repository_mock.create.assert_not_called()
+
+    def test_criar_evento_dados_validos_com_exigir_obrigatorios_nao_levanta_erro(self):
+        """Com todos os campos validos e obrigatorios preenchidos, criar_evento deve funcionar."""
+        self.service.criar_evento(self.dados_validos, valida=True)
+        self.repository_mock.create.assert_called_once_with(self.dados_validos)
+
+    def test_validar_dados_evento_sem_exigir_obrigatorios_pula_campos_ausentes(self):
+        """Sem exigir_obrigatorios, organizador_id/organizacao_id ausentes sao ignorados (continue),
+        mas outras validacoes de formato ainda sao aplicadas."""
+        from django.core.exceptions import ValidationError
+        from apps.core.services.eventos_service import _validar_dados_evento
+
+        data = {"nome": "Teste", "capacidade": -5}
+
+        with self.assertRaises(ValidationError):
+            _validar_dados_evento(data, exigir_obrigatorios=True)

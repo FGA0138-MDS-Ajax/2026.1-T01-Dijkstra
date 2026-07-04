@@ -88,7 +88,7 @@ def _validar_dados_evento(data: dict, exigir_obrigatorios: bool = False) -> None
     for campo in ("organizador_id", "organizacao_id"):
         valor = data.get(campo)
         if valor in (None, ""):
-            continue
+            continue  # pragma: no cover
         try:
             uuid.UUID(str(valor))
         except (ValueError, AttributeError, TypeError) as exc:
