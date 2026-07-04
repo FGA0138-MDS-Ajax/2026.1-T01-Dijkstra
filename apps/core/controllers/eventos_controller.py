@@ -22,6 +22,7 @@ Notas
 - Revisado por `Saresu <https://github.com/Saresu>`_ em 30 maio 2026
 - Alterado por `DaviiGualbertoo <https://github.com/DaviiGualbertoo>`_ em 08 junho 2026
 - Lint por Saresu 02 julho 2026
+- Revisado por `Saresu <https://github.com/Saresu>`_ em 03 julho 2026
 """
 
 from __future__ import annotations
@@ -39,11 +40,20 @@ from django.views.decorators.csrf import csrf_exempt
 from apps.core.forms import DateFilterForm
 from apps.core.services.eventos_service import EventosService
 from apps.core.models.inscricao_models import Inscricao
+from apps.utils.logger import get_logger
 
-__version__ = "0.0.5"
+
+__version__ = "0.0.6"
 __license__ = "AGPL V3"
 
+logger = get_logger(__name__)
 
+
+# DT-006: csrf_exempt aplicado a toda a classe (GET e POST). Verificar se
+# apps.security autentica via sessao (cookie) ou token antes de remover.
+# Se for sessao, este decorator expoe o POST a ataques CSRF (ex.: form HTML
+# malicioso em outro dominio criando eventos em nome do usuario logado).
+# Revisar e remover se aplicavel. (DT-006)
 @method_decorator(csrf_exempt, name="dispatch")
 class EventosController(View):
     """Controller para gerenciar requisicoes de Eventos."""
@@ -90,7 +100,14 @@ class EventosController(View):
 
             return JsonResponse(self._serialize_evento(evento), status=201)
         except Exception as e:  # pylint: disable=broad-exception-caught
-            return JsonResponse({"error": str(e)}, status=400)
+            logger.exception("Falha ao criar evento: %s", e)
+            return JsonResponse(
+                {
+                    "error": "Não foi possível criar o evento. Verifique os dados enviados."
+                },
+                status=400,
+            )
+            # return JsonResponse({"error": str(e)}, status=400)
 
     def _serialize_evento(self: Self, evento) -> dict:
         """

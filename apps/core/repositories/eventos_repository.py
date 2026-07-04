@@ -16,18 +16,20 @@ Notas
 - Criado por `MontMarcos <https://github.com/MontMarcos>`_ em 26 maio 2026
 - Lint e testes por `Saresu <https://github.com/Saresu>`_ em 28 maio 2026
 - Lint por Saresu 02 julho 2026
+- Revisado por `Saresu <https://github.com/Saresu>`_ em 03 julho 2026
 """
 
 from __future__ import annotations
 
 import uuid
-from typing import List, Optional
+from typing import List, Optional, Self
 
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 from apps.core.models.eventos_models import Evento
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 __license__ = "AGPL V3"
 
 
@@ -35,10 +37,10 @@ class EventosRepository:
     """Repositorio para manipulacao de dados de Eventos."""
 
     # definindo o usuario.
-    def __init__(self):
+    def __init__(self: Self):
         self.usuario = None
 
-    def create(self, data: dict) -> Evento:
+    def create(self: Self, data: dict) -> Evento:
         """
         Cria um novo evento no banco de dados.
 
@@ -49,7 +51,7 @@ class EventosRepository:
         """
         return Evento.objects.create(**data)
 
-    def get_by_id(self, evento_id: uuid.UUID) -> Optional[Evento]:
+    def get_by_id(self: Self, evento_id: uuid.UUID) -> Optional[Evento]:
         """
         Busca um evento pelo seu ID.
 
@@ -72,16 +74,39 @@ class EventosRepository:
         """
         return list(Evento.objects.filter(status=Evento.Status.PUBLICADO))
 
-    def get_all(self) -> List[Evento]:
+    # def get_all(self) -> List[Evento]:
+    #     """
+    #     Retorna todos os eventos cadastrados.
+
+    #     :returns: Lista de instancias de Evento.
+    #     :rtype: list[Evento]
+    #     """
+    #     return list(Evento.objects.all())
+
+    def get_all(self, page: Optional[int] = None, page_size: int = 20) -> List[Evento]:
         """
         Retorna todos os eventos cadastrados.
 
+        Quando ``page`` nao e informado, mantem o comportamento historico
+        de retornar a lista completa (uso interno/scripts). Quando ``page``
+        e informado, retorna apenas a pagina solicitada, evitando carregar
+        toda a tabela em memoria de uma vez.
+
+        :param page: Numero da pagina (1-indexed). ``None`` retorna tudo.
+        :type page: int or None
+        :param page_size: Quantidade de itens por pagina.
+        :type page_size: int
         :returns: Lista de instancias de Evento.
         :rtype: list[Evento]
         """
-        return list(Evento.objects.all())
+        queryset = Evento.objects.all().order_by("-criado_em")
+        if page is None:
+            return list(queryset)
 
-    def update(self, evento_id: uuid.UUID, data: dict) -> Optional[Evento]:
+        paginator = Paginator(queryset, page_size)
+        return list(paginator.get_page(page).object_list)
+
+    def update(self: Self, evento_id: uuid.UUID, data: dict) -> Optional[Evento]:
         """
         Atualiza os campos de um evento existente.
 
@@ -100,7 +125,7 @@ class EventosRepository:
             return evento
         return None
 
-    def delete(self, evento_id: uuid.UUID) -> bool:
+    def delete(self: Self, evento_id: uuid.UUID) -> bool:
         """
         Deleta um evento pelo seu ID.
 
@@ -116,7 +141,7 @@ class EventosRepository:
         return False
 
     def filter_events(
-        self,
+        self: Self,
         queryset,
         query: Optional[str] = None,
         data_inicio: Optional[str] = None,
@@ -146,7 +171,7 @@ class EventosRepository:
         return queryset
 
     def filter_events_by_date(
-        self,
+        self: Self,
         queryset,
         data_inicio: Optional[str] = None,
         data_fim: Optional[str] = None,

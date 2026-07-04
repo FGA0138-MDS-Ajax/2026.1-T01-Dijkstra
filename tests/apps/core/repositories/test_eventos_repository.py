@@ -18,10 +18,13 @@ class TestEventosRepositoryFiltros(TestCase):
         Evento.objects.all().delete()
         self.repository = EventosRepository()
         self.organizador = get_user_model().objects.create_user(
-            username="rep_org", password="senha123", tipo="OR",
+            username="rep_org",
+            password="senha123",
+            tipo="OR",
         )
         self.organizacao = Organizacao.objects.create(
-            nome="Organização Repo", descricao="Org de teste.",
+            nome="Organização Repo",
+            descricao="Org de teste.",
         )
         self.evento_data = {
             "nome": "Evento Teste",
@@ -52,6 +55,17 @@ class TestEventosRepositoryFiltros(TestCase):
         self.repository.create({**self.evento_data, "nome": "Evento 2"})
         eventos = self.repository.get_all()
         self.assertEqual(len(eventos), 2)
+
+    def test_get_all_paginado(self):
+        """Com 'page' informado, get_all deve retornar apenas a pagina pedida."""
+        for i in range(3):
+            self.repository.create({**self.evento_data, "nome": f"Evento {i}"})
+
+        pagina_1 = self.repository.get_all(page=1, page_size=2)
+        pagina_2 = self.repository.get_all(page=2, page_size=2)
+
+        self.assertEqual(len(pagina_1), 2)
+        self.assertEqual(len(pagina_2), 1)
 
     def test_update_evento(self):
         """Testa a atualização de um evento."""
