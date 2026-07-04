@@ -49,6 +49,11 @@ __license__ = "AGPL V3"
 logger = get_logger(__name__)
 
 
+# DT-006: csrf_exempt aplicado a toda a classe (GET e POST). Verificar se
+# apps.security autentica via sessao (cookie) ou token antes de remover.
+# Se for sessao, este decorator expoe o POST a ataques CSRF (ex.: form HTML
+# malicioso em outro dominio criando eventos em nome do usuario logado).
+# Revisar e remover se aplicavel. (DT-006)
 @method_decorator(csrf_exempt, name="dispatch")
 class EventosController(View):
     """Controller para gerenciar requisicoes de Eventos."""
