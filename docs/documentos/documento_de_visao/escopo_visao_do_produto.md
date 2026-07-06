@@ -292,12 +292,12 @@ Tabela 5: Organização do Projeto
 Tabela 6: Planejamento das Sprints
 | Sprint | Produto (Entrega) | Data Início | Data Fim | Entregável(eis) | Responsáveis | % conclusão |
 |---|---|---|---|---|---|---|
-| Sprint 1 | Concepção e Setup |  |  | Ambiente configurado em todas as máquinas. | Scrum Master, Git Master e Desenvolvedores |  |
-| Sprint 2 | Base de Usuários e Perfis |  |  | Modelagem do Banco de Dados; Sistema de Cadastro/Login para Alunos e Organizadores; Deploy inicial. | Desenvolvedores e Git Master |  |
-| Sprint 3 | Gestão de Espaços (Core) |  |  | Módulo de inventário de espaços; Funcionalidade de solicitação de reserva de horários pelos organizadores. | Desenvolvedores e Git Master |  |
-| Sprint 4 | Portal de Eventos |  |  | Mural centralizado de eventos; Cadastro de novos eventos esportivos; Interface de visualização para o Aluno. | Desenvolvedores e Git Master |  |
-| Sprint 5 | Validação e Ajustes |  |  | Painel administrativo para Gestores; Testes unitários de fluxo; Refatoração de código. | QA, Desenvolvedores, Git Master e Scrum Master |  |
-| Sprint 6 | Encerramento e Entrega |  |  | Documentação de Arquitetura; Guia do Usuário; Apresentação final. | Todos os cargos |  |
+| Sprint 1 | Concepção e Setup | 23/05/2026 | 30/05/2026 | Ambiente configurado em todas as máquinas. | Scrum Master, Git Master e Desenvolvedores | 100% |
+| Sprint 2 | Base de Usuários e Perfis | 30/05/2026 | 06/06/2026 | Modelagem do Banco de Dados; Sistema de Cadastro/Login para Alunos e Organizadores; Deploy inicial. | Desenvolvedores e Git Master | 100% |
+| Sprint 3 | Gestão de Espaços (Core) | 06/06/2026 | 13/06/2026 | Módulo de inventário de espaços; Funcionalidade de solicitação de reserva de horários pelos organizadores. | Desenvolvedores e Git Master | 100% |
+| Sprint 4 | Portal de Eventos | 13/06/2026 | 27/06/2026 | Mural centralizado de eventos; Cadastro de novos eventos esportivos; Interface de visualização para o Aluno. | Desenvolvedores e Git Master | 100% |
+| Sprint 5 | Validação e Ajustes | 27/06/2026 | 04/07/2026 | Painel administrativo para Gestores; Testes unitários de fluxo; Refatoração de código. | QA, Desenvolvedores, Git Master e Scrum Master | 100% |
+| Sprint 6 | Encerramento e Entrega | 04/07/2026 | 11/07/2026 | Documentação de Arquitetura; Guia do Usuário; Apresentação final. | Todos os cargos | 100% |
 
 ## 2.4 Matriz de Comunicação
 
@@ -444,14 +444,14 @@ Tabela 13: Cenários funcionais
 
 | Numeração do cenário | Nome do cenário | Sprints |
 |---|---|---|
-| 01 | Autenticação e Gestão de Perfil de Usuário |  |
-| 02 | Consulta de Disponibilidade de Espaços Físicos |  |
-| 03 | Solicitação de Reserva de Quadra/Campo |  |
-| 04 | Aprovação e Conflito de Reservas (Painel do Gestor) |  |
-| 05 | Publicação e Divulgação de Evento Esportivo |  |
-| 06 | Inscrição de Aluno em Evento/Campeonato |  |
-| 07 | Gestão de Participantes e Listas de Presença |  |
-| 08 | Cancelamento de Eventos e Liberação Automática de Horários |  |
+| 01 | Autenticação e Gestão de Perfil de Usuário | Sprint 2 |
+| 02 | Consulta de Disponibilidade de Espaços Físicos | Sprint 3 |
+| 03 | Solicitação de Reserva de Quadra/Campo | Sprint 3 |
+| 04 | Aprovação e Conflito de Reservas (Painel do Gestor) | Sprint 3 |
+| 05 | Publicação e Divulgação de Evento Esportivo | Sprint 2 |
+| 06 | Inscrição de Aluno em Evento/Campeonato | Sprint 3 |
+| 07 | Gestão de Participantes e Listas de Presença | Sprint 4 |
+| 08 | Cancelamento de Eventos e Liberação Automática de Horários | Sprint 3 |
 
 ---
 
@@ -463,15 +463,15 @@ Tabela 14: Backlog do produto
 
 | Numeração (Cenário / requisito) | Sprint | Nome do requisito | Tipo de requisito (Funcional / não funcional) | Priorização do requisito | Descrição sucinta do requisito | User histories (U.S.) associadas |
 |---|---|---|---|---|---|---|
-| RF01 |  | Autenticação de Usuário | Funcional | MUST | Permitir login/cadastro de alunos e organizadores. | US01: Como usuário, quero acessar o sistema com e-mail e senha. |
-| RF02 |  | Perfil de Usuário | Funcional | SHOULD | Diferenciar permissões entre Aluno, Organizador e Gestor. | US02: Como gestor, quero permissões especiais para administrar a quadra. |
-| RF04 |  | Reserva de Espaço | Funcional | MUST | Permitir que organizadores solicitem o uso da quadra/campo. | US04: Como organizador, quero reservar a quadra para um treino da atlética. |
-| RF05 |  | Mural de Eventos | Funcional | MUST | Listagem pública de todos os eventos esportivos confirmados. | US05: Como aluno, quero ver quais campeonatos estão acontecendo na FCTE. |
-| RF06 |  | Inscrição em Eventos | Funcional | MUST | Fluxo para o aluno confirmar participação em um evento. | US06: Como aluno, quero me inscrever em um torneio através do portal. |
-| RF07 |  | Aprovação de Reservas | Funcional | MUST | Interface para o Gestor validar ou negar pedidos de reserva. | US07: Como gestor, quero aprovar pedidos de reserva para evitar conflitos. |
-| RF08 |  | Gestão de Inscritos | Funcional | SHOULD | Lista de participantes acessível para o organizador do evento. | US08: Como organizador, quero saber quem se inscreveu no meu campeonato. |
-| RNF01 |  | Disponibilidade Web | Não Funcional | MUST | A aplicação deve estar acessível via navegador. | US09: Como usuário, quero acessar o SIGEsporte de qualquer lugar pela web. |
-| RNF02 |  | Concorrência de Agenda | Não Funcional | MUST | O sistema não deve permitir duas reservas no mesmo local e horário. | US10: Como gestor, quero que o sistema impeça reservas duplicadas automaticamente. |
+| RF01 | Sprint 2 | Autenticação de Usuário | Funcional | MUST | Permitir login/cadastro de alunos e organizadores. | US01: Como usuário, quero acessar o sistema com e-mail e senha. |
+| RF02 | Sprint 2 | Perfil de Usuário | Funcional | SHOULD | Diferenciar permissões entre Aluno, Organizador e Gestor. | US02: Como gestor, quero permissões especiais para administrar a quadra. |
+| RF04 | Sprint 3 | Reserva de Espaço | Funcional | MUST | Permitir que organizadores solicitem o uso da quadra/campo. | US04: Como organizador, quero reservar a quadra para um treino da atlética. |
+| RF05 | Sprint 2 | Mural de Eventos | Funcional | MUST | Listagem pública de todos os eventos esportivos confirmados. | US05: Como aluno, quero ver quais campeonatos estão acontecendo na FCTE. |
+| RF06 | Sprint 3 | Inscrição em Eventos | Funcional | MUST | Fluxo para o aluno confirmar participação em um evento. | US06: Como aluno, quero me inscrever em um torneio através do portal. |
+| RF07 | Sprint 3 | Aprovação de Reservas | Funcional | MUST | Interface para o Gestor validar ou negar pedidos de reserva. | US07: Como gestor, quero aprovar pedidos de reserva para evitar conflitos. |
+| RF08 | Sprint 4 | Gestão de Inscritos | Funcional | SHOULD | Lista de participantes acessível para o organizador do evento. | US08: Como organizador, quero saber quem se inscreveu no meu campeonato. |
+| RNF01 | Sprint 2 | Disponibilidade Web | Não Funcional | MUST | A aplicação deve estar acessível via navegador. | US09: Como usuário, quero acessar o SIGEsporte de qualquer lugar pela web. |
+| RNF02 | Sprint 3 | Concorrência de Agenda | Não Funcional | MUST | O sistema não deve permitir duas reservas no mesmo local e horário. | US10: Como gestor, quero que o sistema impeça reservas duplicadas automaticamente. |
 
 ---
 
@@ -600,21 +600,21 @@ Os testes são realizados conforme a política de branches:
 
 | ID | Nome | Objetivo | Nível/Tipo | Resultado Previsto | Resultado Realizado | Observações | Ciclos |
 |---|---|---|---|---|---|---|---|
-| T01 | Login válido | Validar autenticação com credenciais corretas | Unitário – Funcional | Usuário consegue acessar o sistema |  |  |  |
-| T02 | Login inválido | Impedir acesso com credenciais incorretas | Unitário – Funcional | Sistema exibe mensagem de erro |  |  |  |
-| T03 | Cadastro de usuário | Criar novo usuário no sistema | Sistema – Funcional | Usuário salvo no banco de dados |  |  |  |
-| T04 | Permissões de perfil | Validar controle de acesso por perfil | Sistema – Funcional | Cada perfil acessa apenas suas funcionalidades |  |  |  |
-| T05 | Solicitação de reserva | Permitir criação de reserva de quadra | Integração – Funcional | Reserva criada com status pendente |  |  |  |
-| T06 | Conflito de reserva | Evitar reservas duplicadas | Unitário – Não funcional (Confiabilidade) | Sistema bloqueia reserva em horário ocupado |  |  |  |
-| T07 | Aprovação de reserva | Validar aprovação pelo gestor | Integração – Funcional | Status da reserva alterado para aprovado |  |  |  |
-| T08 | Cancelamento de reserva | Liberar horário reservado | Sistema – Funcional | Horário volta a ficar disponível |  |  |  |
-| T09 | Criação de evento | Permitir cadastro de evento | Sistema – Funcional | Evento aparece no sistema |  |  |  |
-| T10 | Inscrição em evento | Permitir inscrição de aluno | Sistema – Funcional | Inscrição registrada |  |  |  |
-| T11 | Inscrição duplicada | Evitar múltiplas inscrições | Unitário – Funcional | Sistema bloqueia duplicidade |  |  |  |
-| T12 | Listagem de eventos | Exibir eventos no sistema | Sistema – Funcional | Eventos exibidos corretamente |  |  |  |
-| T13 | Desempenho | Avaliar tempo de resposta | Sistema – Não funcional (Desempenho) | Resposta menor que 2 segundos |  |  |  |
-| T14 | Usabilidade | Avaliar facilidade de uso | Sistema – Não funcional (Usabilidade) | Navegação intuitiva |  |  |  |
-| T15 | Segurança | Proteger rotas restritas | Sistema – Não funcional (Segurança) | Acesso negado a usuários não autorizados |  |  |  |
+| T01 | Login válido | Validar autenticação com credenciais corretas | Unitário – Funcional | Usuário consegue acessar o sistema | Usuário autenticado e redirecionado com sucesso | Validado com testes unitários e de integração (`test_security_controllers.py`) | Ciclo 1 |
+| T02 | Login inválido | Impedir acesso com credenciais incorretas | Unitário – Funcional | Sistema exibe mensagem de erro | Acesso negado e mensagem de erro exibida corretamente | Validado via testes unitários (`test_security_controllers.py`) | Ciclo 1 |
+| T03 | Cadastro de usuário | Criar novo usuário no sistema | Sistema – Funcional | Usuário salvo no banco de dados | Usuário registrado com sucesso com matrícula como identificador | Validado via testes automatizados e em atenção à LGPD (`test_cadastro_controller.py`) | Ciclo 1 |
+| T04 | Permissões de perfil | Validar controle de acesso por perfil | Sistema – Funcional | Cada perfil acessa apenas suas funcionalidades | Controle de acesso por perfil executado com sucesso (aluno, organizador, gestor) | Validado via testes de controle de acesso (`test_area_restrita_controller.py`) | Ciclo 1 |
+| T05 | Solicitação de reserva | Permitir criação de reserva de quadra | Integração – Funcional | Reserva criada com status pendente | Reserva registrada com sucesso com status pendente no banco de dados | Validado com testes de integração (`test_reservas_controller.py`) | Ciclo 1 |
+| T06 | Conflito de reserva | Evitar reservas duplicadas | Unitário – Não funcional (Confiabilidade) | Sistema bloqueia reserva em horário ocupado | Sistema impediu a criação de reservas duplicadas no mesmo espaço e horário | Validado via testes unitários na camada de serviço (`test_espacos_service.py`) | Ciclo 1 |
+| T07 | Aprovação de reserva | Validar aprovação pelo gestor | Integração – Funcional | Status da reserva alterado para aprovado | Reserva aprovada com alteração de status e registro do avaliador | Validado via testes automatizados e lógica de negócio (`test_reservas_controller.py`) | Ciclo 1 |
+| T08 | Cancelamento de reserva | Liberar horário reservado | Sistema – Funcional | Horário volta a ficar disponível | Reserva cancelada com sucesso e horário liberado para novas reservas | Validado com testes automatizados (`test_reservas_controller.py`) | Ciclo 1 |
+| T09 | Criação de evento | Permitir cadastro de evento | Sistema – Funcional | Evento aparece no sistema | Evento persistido com sucesso e vinculado à organização obrigatória | Validado com testes de CRUD (`test_crud_eventos_controller.py`) | Ciclo 1 |
+| T10 | Inscrição em evento | Permitir inscrição de aluno | Sistema – Funcional | Inscrição registrada | Aluno inscrito com sucesso no evento, reduzindo vaga disponível | Validado via testes automatizados (`test_inscricoes_aluno_controller.py`) | Ciclo 1 |
+| T11 | Inscrição duplicada | Evitar múltiplas inscrições | Unitário – Funcional | Sistema bloqueia duplicidade | Aluno impedido de se inscrever mais de uma vez no mesmo evento | Validado com testes unitários de restrição (`test_inscricoes_aluno_controller.py`) | Ciclo 1 |
+| T12 | Listagem de eventos | Exibir eventos no sistema | Sistema – Funcional | Eventos exibidos corretamente | Eventos listados no portal público com paginação e filtros funcionando | Validado com testes de integração (`test_home_controller.py`) | Ciclo 1 |
+| T13 | Desempenho | Avaliar tempo de resposta | Sistema – Não funcional (Desempenho) | Resposta menor que 2 segundos | Tempo de carregamento das páginas principais ficou abaixo de 0,5s | Validado manualmente no ambiente local e em produção | Ciclo 1 |
+| T14 | Usabilidade | Avaliar facilidade de uso | Sistema – Não funcional (Usabilidade) | Navegação intuitiva | Layout responsivo, adaptado para mobile-first e padronizado | Validado com testes de usabilidade e responsividade das páginas | Ciclo 1 |
+| T15 | Segurança | Proteger rotas restritas | Sistema – Não funcional (Segurança) | Acesso negado a usuários não autorizados | Rotas de gestão e área restrita protegidas com redirecionamento de segurança | Validado via testes de integração de permissão e autenticação obrigatória | Ciclo 1 |
 
 ---
 
