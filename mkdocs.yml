@@ -21,6 +21,9 @@ nav:
     - "2. Bootstrap Inicial do Host": "roteiros/bootstrap.md"
     - "3. Segurança Básica do Host": "roteiros/seguranca.md"
     - "4. Virtualização com Incus": "roteiros/stack.md"
+    - "5. Deploy e Automação (CI/CD)": "roteiros/automacao.md"
+  - Testes:
+    - Roteiro de Testes Funcionais: "testes/roteiro_testes_funcionais.md"
 
 
 theme:
