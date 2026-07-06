@@ -12,9 +12,9 @@ Projeto desenvolvido pelo grupo **Dijkstra** na disciplina **Métodos de Desenvo
 
 | | |
 | :--- | :--- |
-| 🚀 **Sistema em produção** | [sigesporte.duat.site](https://sigesporte.duat.site/) |
-| 📦 **Repositório** | [github.com/FGA0138-MDS-Ajax/2026.1-T01-Dijkstra](https://github.com/FGA0138-MDS-Ajax/2026.1-T01-Dijkstra) |
-| 📚 **Documentação** | [fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra](https://fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra/) |
+|  **Sistema em produção** | [sigesporte.duat.site](https://sigesporte.duat.site/) |
+|  **Repositório** | [github.com/FGA0138-MDS-Ajax/2026.1-T01-Dijkstra](https://github.com/FGA0138-MDS-Ajax/2026.1-T01-Dijkstra) |
+|  **Documentação** | [fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra](https://fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra/) |
 
 ---
 
