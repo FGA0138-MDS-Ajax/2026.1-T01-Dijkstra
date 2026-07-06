@@ -1,7 +1,7 @@
 # Apresentação do Projeto
 
 <p align="center">
-  <img src="Imagens/diagramas/logo_sigesporte.png" alt="Logo SIGEsporte" width="220"/>
+  <img src="../Imagens/diagramas/logo_sigesporte.png" alt="Logo SIGEsporte" width="220"/>
 </p>
 
 **SIGEsporte — Sistema de Gerenciamento Esportivo**
