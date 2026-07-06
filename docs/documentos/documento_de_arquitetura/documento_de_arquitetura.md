@@ -12,7 +12,7 @@ Versão 1.0.3
 | 241010880  | Ana Paula Jardim Rezende Vilela     | Desenvolvedor              | 11.11%                               |
 | 241012409  | Welder Rodrigues de Medeiros        |Product Owner e Scrum Master| 11.11%                               |
 | 2110162938 | Gustavo Lima Menezes                | Desenvolvedor              | 11.11%                               |
-| 222006777  | Guilherme Oliveira Monteiro         | Garantia de Qualidade (QA) | 11.11%                               |
+| 222006777  | Guilherme Oliveira Monteiro         | Trancado| 11.11%                               |
 | 241012300  | Lucas Menezes Folha Brito           | Desenvolvedor              | 11.11%                               |
 
 **Histórico de Revisões**
