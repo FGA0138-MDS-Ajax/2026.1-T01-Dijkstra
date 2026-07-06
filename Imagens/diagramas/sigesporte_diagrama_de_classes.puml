@@ -1,0 +1,152 @@
+@startuml
+!define DARKBLUE #102e4a
+!define GREEN #1b7a43
+!define WHITE #FFFFFF
+
+skinparam class {
+    BackgroundColor DARKBLUE
+    ArrowColor GREEN
+    BorderColor GREEN
+    FontColor WHITE
+    AttributeFontColor WHITE
+    MethodFontColor WHITE
+    HeaderBackgroundColor GREEN
+    StereotypeFontColor WHITE
+}
+
+skinparam note {
+    BackgroundColor GREEN
+    BorderColor DARKBLUE
+    FontColor WHITE
+}
+
+skinparam backgroundcolor transparent
+
+' --- Enums (models.TextChoices) ---
+enum TipoPerfil {
+    ALUNO = 'AL'
+    ORGANIZADOR = 'OR'
+    GESTOR = 'GE'
+    ADMIN = 'AD'
+}
+
+enum StatusReserva {
+    PENDENTE = 'P'
+    APROVADA = 'A'
+    REPROVADA = 'R'
+}
+
+enum StatusInscricao {
+    PENDENTE = 'P'
+    APROVADA = 'A'
+    REPROVADA = 'R'
+}
+
+' --- Core User Model ---
+class Usuario <<AbstractUser>> {
+    + id: UUIDField [PK]
+    + email: EmailField [Unique]
+    + nome_completo: CharField
+    + matricula: CharField [Null=True]
+    + foto: ImageField [Null=True]
+    + tipo: CharField(Choices=TipoPerfil)
+    + is_active: BooleanField [Default=True]
+    -- Propriedades --
+    + is_aluno: Boolean
+    + is_organizador: Boolean
+    + is_gestor: Boolean
+}
+
+' --- Proxy Models (Encapsulamento de Lógica) ---
+class Aluno <<Proxy>> {
+    + realizar_inscricao(evento_id: UUID): Inscricao
+    + cancelar_inscricao(evento_id: UUID): Boolean
+}
+
+class Organizador <<Proxy>> {
+    + criar_evento(dados: Dict): Evento
+}
+
+class Gestor <<Proxy>> {
+    + cadastrar_espaco_fisico(dados: Dict): EspacoFisico
+}
+
+' --- Models de Negócio ---
+class Organizacao <<Model>> {
+    + id: UUIDField [PK]
+    + nome: CharField
+    + descricao: TextField
+    + foto: ImageField [Null=True]
+    -- Relacionamentos --
+    + membros: ManyToManyField(Usuario, related_name='organizacoes')
+}
+
+class EspacoFisico <<Model>> {
+    + id: UUIDField [PK]
+    + nome: CharField
+    + foto: ImageField [Null=True]
+    -- Métodos --
+    + check_disponibilidade(inicio: DateTime, fim: DateTime): Boolean
+}
+
+class ReservaEspaco <<Model>> {
+    + id: UUIDField [PK]
+    + status: CharField(Choices=StatusReserva) [Default='P']
+    + data_inicio: DateTimeField
+    + data_fim: DateTimeField
+    + motivo_reprovacao: TextField [Null=True]
+    + criado_em: DateTimeField [auto_now_add]
+    -- Chaves Estrangeiras (FK) --
+    + espaco: ForeignKey(EspacoFisico, on_delete=CASCADE)
+    + solicitante: ForeignKey(Usuario, related_name='reservas_solicitadas')
+    + avaliador: ForeignKey(Usuario, null=True, related_name='reservas_avaliadas')
+    -- Métodos de Alteração de Estado --
+    + aprovar(gestor: Usuario)
+    + reprovar(gestor: Usuario, motivo: String)
+}
+
+class Evento <<Model>> {
+    + id: UUIDField [PK]
+    + titulo: CharField
+    + descricao: TextField
+    + foto: ImageField [Null=True]
+    + data_realizacao: DateTimeField
+    + criado_em: DateTimeField [auto_now_add]
+    -- Chaves Estrangeiras (FK) --
+    + organizador: ForeignKey(Usuario, related_name='eventos_criados')
+    + organizacao: ForeignKey(Organizacao, on_delete=CASCADE)
+}
+
+class Inscricao <<Model>> {
+    + id: UUIDField [PK]
+    + criado_em: DateTimeField [auto_now_add]
+    + status: CharField(Choices=StatusInscricao) [Default='P']
+    -- Chaves Estrangeiras (FK) --
+    + participante: ForeignKey(Usuario, related_name='inscricoes')
+    + evento: ForeignKey(Evento, related_name='inscritos')
+    -- Métodos de Alteração de Estado --
+    + aprovar(organizador: Usuario)
+    + reprovar(organizador: Usuario, motivo: String)
+}
+
+' --- Relacionamentos Visuais (Herança Proxy) ---
+Usuario <|-- Aluno
+Usuario <|-- Organizador
+Usuario <|-- Gestor
+
+' --- Relacionamentos Visuais (Dependências) ---
+Inscricao .up.> StatusInscricao
+ReservaEspaco .up.> StatusReserva
+Usuario .up.> TipoPerfil
+
+' Linhas de Associação para reforçar as FKs definidas dentro das classes
+Usuario "0..*" -- "0..*" Organizacao : membros >
+EspacoFisico "1" -- "0..*" ReservaEspaco : FK espaco
+Usuario "1" -- "0..*" ReservaEspaco : FK solicitante/avaliador
+Usuario "1" -- "0..*" Evento : FK organizador
+Organizacao "1" -- "0..*" Evento : FK organizacao
+Evento "1" -- "0..*" ReservaEspaco : FK evento
+Usuario "1" -- "0..*" Inscricao : FK participante
+Evento "1" -- "0..*" Inscricao : FK evento
+
+@enduml

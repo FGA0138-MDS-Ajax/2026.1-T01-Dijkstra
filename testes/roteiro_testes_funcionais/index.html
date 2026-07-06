@@ -1,0 +1,4229 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra/testes/roteiro_testes_funcionais/">
+      
+      
+        <link rel="prev" href="../../roteiros/automacao/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../Imagens/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Roteiro de Testes Funcionais - Documentação - SIGEsporte</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#roteiro-de-testes-funcionais-sigesporte" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Documentação - SIGEsporte" class="md-header__button md-logo" aria-label="Documentação - SIGEsporte" data-md-component="logo">
+      
+  <img src="../../Imagens/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentação - SIGEsporte
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Roteiro de Testes Funcionais
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../apresentacao/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Apresentação do Projeto
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../atas_reuniao/ata_reuniao_20_04/" class="md-tabs__link">
+          
+  
+  
+  Atas de Reunião
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../documentos/documento_de_visao/escopo_visao_do_produto/" class="md-tabs__link">
+          
+  
+  
+  Documento de Visão
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../documentos/documento_de_arquitetura/documento_de_arquitetura/" class="md-tabs__link">
+          
+  
+  
+  Documento de Arquitetura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../prototipos/baixa_fidelidade/prototipo_baixa_fidelidade/" class="md-tabs__link">
+          
+  
+  
+  Protótipos
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../roteiros/main/" class="md-tabs__link">
+          
+  
+  
+  Roteiros de Implantação
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Testes
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentação - SIGEsporte" class="md-nav__button md-logo" aria-label="Documentação - SIGEsporte" data-md-component="logo">
+      
+  <img src="../../Imagens/logo.png" alt="logo">
+
+    </a>
+    Documentação - SIGEsporte
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../apresentacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apresentação do Projeto
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atas de Reunião
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Atas de Reunião
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atas_reuniao/ata_reuniao_20_04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ata 20/04 - Elaboração do Documento de Visão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atas_reuniao/ata_reuniao_06_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ata 06/05 - Elaboração do Documento de Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atas_reuniao/ata_reuniao_23_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ata 23/05 - Sprint 1 e padronização
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../atas_reuniao/ata_reuniao_30_05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ata 30/05 - Sprint 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Visão
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documento de Visão
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentos/documento_de_visao/escopo_visao_do_produto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Visão
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Documento de Arquitetura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentos/documento_de_arquitetura/documento_de_arquitetura/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documento de Arquitetura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protótipos
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Protótipos
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prototipos/baixa_fidelidade/prototipo_baixa_fidelidade/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protótipo de Baixa Fidelidade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prototipos/nao_funcional/prototipo_nao_funcional/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protótipo de Alta Fidelidade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roteiros de Implantação
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Roteiros de Implantação
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roteiros/main/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Visão Geral
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roteiros/provedor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. Escolha e Criação de VPS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roteiros/bootstrap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2. Bootstrap Inicial do Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roteiros/seguranca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3. Segurança Básica do Host
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roteiros/stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4. Virtualização com Incus
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../roteiros/automacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5. Deploy e Automação (CI/CD)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testes
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Testes
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roteiro de Testes Funcionais
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roteiro de Testes Funcionais
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introdução
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introdução">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-escopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Escopo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Referências
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ambiente-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ambiente de Teste
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Ambiente de Teste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-preparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Preparação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-massa-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Massa de Dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-criterios-de-entrada-e-saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Critérios de Entrada e Saída
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-convencoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Convenções
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Convenções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-identificacao-dos-casos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Identificação dos Casos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-prioridade-e-status-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Prioridade e Status de Execução
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-casos-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Casos de Teste
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Casos de Teste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-autenticacao-e-cadastro-aut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Autenticação e Cadastro (AUT)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-mural-de-eventos-mur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Mural de Eventos (MUR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-inscricoes-em-eventos-ins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Inscrições em Eventos (INS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-gestao-de-eventos-evt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Gestão de Eventos (EVT)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-gestao-de-inscritos-gin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Gestão de Inscritos (GIN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-espacos-fisicos-esp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Espaços Físicos (ESP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-reservas-de-espaco-res" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7 Reservas de Espaço (RES)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#48-organizacoes-org" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.8 Organizações (ORG)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#49-gestao-de-usuarios-usu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.9 Gestão de Usuários (USU)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#410-controle-de-acesso-ace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.10 Controle de Acesso (ACE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-matriz-de-rastreabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Matriz de Rastreabilidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-registro-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Registro de Execução
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-registro-de-defeitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Registro de Defeitos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-revisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Histórico de Revisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-introducao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Introdução
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Introdução">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-escopo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Escopo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Referências
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-ambiente-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Ambiente de Teste
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Ambiente de Teste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-preparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Preparação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-massa-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Massa de Dados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-criterios-de-entrada-e-saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Critérios de Entrada e Saída
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-convencoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Convenções
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Convenções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-identificacao-dos-casos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Identificação dos Casos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-prioridade-e-status-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Prioridade e Status de Execução
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-casos-de-teste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Casos de Teste
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Casos de Teste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-autenticacao-e-cadastro-aut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Autenticação e Cadastro (AUT)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-mural-de-eventos-mur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Mural de Eventos (MUR)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-inscricoes-em-eventos-ins" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Inscrições em Eventos (INS)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-gestao-de-eventos-evt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Gestão de Eventos (EVT)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-gestao-de-inscritos-gin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 Gestão de Inscritos (GIN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-espacos-fisicos-esp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.6 Espaços Físicos (ESP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47-reservas-de-espaco-res" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.7 Reservas de Espaço (RES)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#48-organizacoes-org" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.8 Organizações (ORG)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#49-gestao-de-usuarios-usu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.9 Gestão de Usuários (USU)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#410-controle-de-acesso-ace" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.10 Controle de Acesso (ACE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-matriz-de-rastreabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Matriz de Rastreabilidade
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-registro-de-execucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Registro de Execução
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-registro-de-defeitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Registro de Defeitos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="roteiro-de-testes-funcionais-sigesporte">Roteiro de Testes Funcionais — SIGEsporte</h1>
+<h2 id="historico-de-revisao">Histórico de Revisão</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Versão</th>
+<th>Descrição</th>
+<th>Autor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>06/07/2026</td>
+<td>1.0</td>
+<td>Criação do roteiro de testes funcionais</td>
+<td>Welder</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-introducao">1. Introdução</h2>
+<h3 id="11-objetivo">1.1 Objetivo</h3>
+<p>Este documento define o roteiro de testes funcionais do sistema <strong>SIGEsporte</strong>, descrevendo os casos de teste que verificam, sob a perspectiva do usuário final, o comportamento das funcionalidades implementadas. Os testes aqui descritos são <strong>manuais e caixa-preta</strong>, executados via interface web, e complementam os testes automatizados do projeto (executados com <code>make test</code> / <code>pytest</code>).</p>
+<h3 id="12-escopo">1.2 Escopo</h3>
+<p><strong>Incluído no escopo:</strong></p>
+<ul>
+<li>Autenticação e cadastro de usuários (login, logout, cadastro, recuperação de senha);</li>
+<li>Mural público de eventos, filtros e detalhamento de eventos;</li>
+<li>Inscrição de alunos em eventos e ciclo de aprovação de inscrições;</li>
+<li>Criação, edição, publicação e exclusão de eventos (organizador);</li>
+<li>Gestão de inscritos e exportação de lista em CSV;</li>
+<li>Cadastro e gestão de espaços físicos (gestor);</li>
+<li>Solicitação, aprovação, reprovação e cancelamento de reservas de espaço, incluindo detecção de conflito de agenda;</li>
+<li>Organizações esportivas e gestão de membros;</li>
+<li>Área restrita, gestão de usuários e controle de acesso por perfil.</li>
+</ul>
+<p><strong>Fora do escopo:</strong></p>
+<ul>
+<li>Testes de desempenho, carga e estresse;</li>
+<li>Testes automatizados de unidade e integração (cobertos pelo <code>pytest</code>);</li>
+<li>Testes de segurança ofensivos (pentest);</li>
+<li>Funcionalidades ainda não implementadas (ex.: notificações de novos eventos — RF04; dashboard de ocupação — RF12).</li>
+</ul>
+<h3 id="13-referencias">1.3 Referências</h3>
+<ul>
+<li><a href="../../documentos/documento_de_visao/escopo_visao_do_produto/">Documento de Visão</a> — requisitos funcionais (RF01–RF12) e não funcionais;</li>
+<li><a href="../../documentos/documento_de_arquitetura/documento_de_arquitetura/">Documento de Arquitetura</a>;</li>
+<li><a href="../../prototipos/nao_funcional/prototipo_nao_funcional/">Protótipo de Alta Fidelidade</a>;</li>
+<li>Roteiros de implantação — <a href="../../roteiros/main/">Visão Geral</a>.</li>
+</ul>
+<hr />
+<h2 id="2-ambiente-de-teste">2. Ambiente de Teste</h2>
+<h3 id="21-preparacao">2.1 Preparação</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aplicação</td>
+<td>Django (SIGEsporte), executada localmente ou em VPS</td>
+</tr>
+<tr>
+<td>Subida local</td>
+<td><code>docker compose up</code> ou <code>make install &amp;&amp; make migrate &amp;&amp; make run</code></td>
+</tr>
+<tr>
+<td>URL base</td>
+<td><code>http://localhost:8000</code></td>
+</tr>
+<tr>
+<td>Admin Django</td>
+<td><code>http://localhost:8000/admin/</code> (superusuário criado com <code>python manage.py createsuperuser</code>)</td>
+</tr>
+<tr>
+<td>Navegadores</td>
+<td>Google Chrome e Mozilla Firefox (versões atuais)</td>
+</tr>
+<tr>
+<td>Banco de dados</td>
+<td>SQLite (padrão do ambiente de desenvolvimento), com migrações aplicadas</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-massa-de-dados">2.2 Massa de Dados</h3>
+<p>Antes da execução, criar os usuários de teste abaixo. O cadastro público (<code>/security/cadastro/</code>) cria usuários com perfil <strong>Aluno</strong>; os demais perfis devem ser ajustados pelo Admin Django ou pela tela de gestão de usuários (perfil Gestor).</p>
+<table>
+<thead>
+<tr>
+<th>Usuário</th>
+<th>Matrícula (login)</th>
+<th>Perfil</th>
+<th>Uso nos testes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aluno de Teste</td>
+<td><code>190000001</code></td>
+<td>Aluno (AL)</td>
+<td>Inscrições, mural, área restrita</td>
+</tr>
+<tr>
+<td>Aluno Secundário</td>
+<td><code>190000002</code></td>
+<td>Aluno (AL)</td>
+<td>Concorrência de vagas, duplicidade</td>
+</tr>
+<tr>
+<td>Organizador de Teste</td>
+<td><code>190000003</code></td>
+<td>Organizador (OR)</td>
+<td>Eventos, inscritos, reservas, organizações</td>
+</tr>
+<tr>
+<td>Gestor de Teste</td>
+<td><code>190000004</code></td>
+<td>Gestor (GE)</td>
+<td>Espaços, aprovação de reservas, usuários</td>
+</tr>
+<tr>
+<td>Usuário Inativo</td>
+<td><code>190000005</code></td>
+<td>Aluno (AL), <code>is_active = False</code></td>
+<td>Bloqueio de login</td>
+</tr>
+</tbody>
+</table>
+<p>Dados de apoio mínimos:</p>
+<ul>
+<li>1 organização esportiva (ex.: "Atlética Dijkstra") com o Organizador de Teste como membro;</li>
+<li>2 espaços físicos (ex.: "Quadra Coberta" — Disponível; "Campo Sintético" — Em Manutenção);</li>
+<li>3 eventos: um <strong>Publicado</strong> com vagas, um <strong>Publicado</strong> com capacidade 1 (para teste de lotação) e um <strong>Rascunho</strong>.</li>
+</ul>
+<h3 id="23-criterios-de-entrada-e-saida">2.3 Critérios de Entrada e Saída</h3>
+<ul>
+<li><strong>Entrada:</strong> ambiente no ar, migrações aplicadas, massa de dados criada.</li>
+<li><strong>Saída:</strong> 100% dos casos executados; nenhum caso de prioridade <strong>Alta</strong> com falha aberta.</li>
+</ul>
+<hr />
+<h2 id="3-convencoes">3. Convenções</h2>
+<h3 id="31-identificacao-dos-casos">3.1 Identificação dos Casos</h3>
+<p>Os casos seguem o padrão <code>CT-&lt;módulo&gt;-&lt;sequencial&gt;</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Prefixo</th>
+<th>Módulo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AUT</td>
+<td>Autenticação e Cadastro</td>
+</tr>
+<tr>
+<td>MUR</td>
+<td>Mural de Eventos</td>
+</tr>
+<tr>
+<td>INS</td>
+<td>Inscrições em Eventos</td>
+</tr>
+<tr>
+<td>EVT</td>
+<td>Gestão de Eventos</td>
+</tr>
+<tr>
+<td>GIN</td>
+<td>Gestão de Inscritos</td>
+</tr>
+<tr>
+<td>ESP</td>
+<td>Espaços Físicos</td>
+</tr>
+<tr>
+<td>RES</td>
+<td>Reservas de Espaço</td>
+</tr>
+<tr>
+<td>ORG</td>
+<td>Organizações</td>
+</tr>
+<tr>
+<td>USU</td>
+<td>Gestão de Usuários</td>
+</tr>
+<tr>
+<td>ACE</td>
+<td>Controle de Acesso</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-prioridade-e-status-de-execucao">3.2 Prioridade e Status de Execução</h3>
+<ul>
+<li><strong>Prioridade:</strong> Alta (fluxo principal/MUST), Média (fluxo alternativo/SHOULD), Baixa (complementar/COULD).</li>
+<li><strong>Status de execução:</strong> Passou ✅ · Falhou ❌ · Bloqueado ⛔ · Não executado ⬜</li>
+</ul>
+<hr />
+<h2 id="4-casos-de-teste">4. Casos de Teste</h2>
+<h3 id="41-autenticacao-e-cadastro-aut">4.1 Autenticação e Cadastro (AUT)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-AUT-001 — Cadastro de usuário com sucesso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Autenticação de usuário (US01)</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Matrícula <code>190000001</code> ainda não cadastrada</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar <code>/security/cadastro/</code>; 2. Informar matrícula de 9 dígitos, senha e confirmação idênticas; 3. Submeter o formulário</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Usuário criado com perfil <strong>Aluno</strong>; sistema permite login com a matrícula informada</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-AUT-002 — Cadastro com matrícula fora do padrão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Autenticação de usuário (US01)</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Página de cadastro aberta</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Informar matrícula com menos de 9 dígitos ou com letras (ex.: <code>12345</code>, <code>ABC123456</code>); 2. Submeter</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Cadastro rejeitado com a mensagem "A matrícula deve conter exatamente 9 dígitos numéricos (padrão UnB)."</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-AUT-003 — Cadastro com matrícula já existente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Autenticação de usuário (US01)</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Matrícula <code>190000001</code> já cadastrada (CT-AUT-001)</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar o cadastro; 2. Informar a mesma matrícula; 3. Submeter</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Cadastro rejeitado com mensagem de matrícula já cadastrada; nenhum usuário duplicado é criado</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-AUT-004 — Cadastro com senhas divergentes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Autenticação de usuário (US01)</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Página de cadastro aberta</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Preencher senha e confirmação com valores diferentes; 2. Submeter</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Cadastro rejeitado com a mensagem "As senhas não coincidem."</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-AUT-005 — Login com credenciais válidas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Autenticação de usuário (US01)</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Usuário ativo cadastrado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar a tela de login; 2. Informar matrícula e senha corretas; 3. Submeter</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Login efetuado; usuário redirecionado e identificado no sistema</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-AUT-006 — Login com credenciais inválidas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Autenticação de usuário (US01)</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Usuário cadastrado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar a tela de login; 2. Informar senha incorreta; 3. Submeter</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Acesso negado com mensagem de erro; usuário permanece na tela de login</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-AUT-007 — Login com usuário inativo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Perfis e permissões (US02)</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Usuário <code>190000005</code> com <code>is_active = False</code></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Tentar login com matrícula e senha corretas do usuário inativo</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Acesso negado; usuário inativo não consegue autenticar</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-AUT-008 — Logout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Autenticação de usuário (US01)</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Usuário autenticado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acionar a opção "Sair"</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Sessão encerrada; usuário redirecionado para a página inicial (<code>home</code>); áreas restritas voltam a exigir login</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-AUT-009 — Recuperação de senha</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Autenticação de usuário (US01)</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Baixa</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Usuário cadastrado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar "Esqueceu a senha" na tela de login; 2. Seguir o fluxo informado</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Fluxo de recuperação exibido conforme protótipo, com orientações para redefinição</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-mural-de-eventos-mur">4.2 Mural de Eventos (MUR)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-MUR-001 — Visualizar mural público de eventos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF01 — Visualizar mural de eventos</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Ao menos um evento com status <strong>Publicado</strong>; usuário <strong>não</strong> autenticado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar <code>/eventos/</code> sem estar logado</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Mural exibido com os eventos publicados (nome, data, horário, local, imagem quando houver), sem exigir login</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-MUR-002 — Evento em rascunho não aparece no mural</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF01 / RF06</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Evento com status <strong>Rascunho</strong> cadastrado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar o mural de eventos; 2. Procurar pelo evento em rascunho</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>O evento em rascunho <strong>não</strong> é listado no mural público</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-MUR-003 — Filtrar eventos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF03 — Filtrar eventos por modalidade</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Eventos publicados com nomes/modalidades distintas</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar o mural; 2. Utilizar o filtro/busca (<code>/eventos-filtro/</code>) com um termo específico (ex.: "Futsal")</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Apenas os eventos compatíveis com o filtro são exibidos; limpar o filtro restaura a lista completa</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-MUR-004 — Visualizar detalhes de um evento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF01</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Evento publicado existente</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. No mural, clicar em um evento</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Página <code>/evento/&lt;id&gt;/</code> exibe nome, descrição, data, horário, local, capacidade e situação de vagas do evento</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-inscricoes-em-eventos-ins">4.3 Inscrições em Eventos (INS)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-INS-001 — Inscrever-se em evento com vagas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF02 — Realizar inscrição em evento</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Aluno autenticado; evento publicado com vagas disponíveis</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Abrir os detalhes do evento; 2. Acionar "Inscrever-se"</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Mensagem "Inscrição solicitada. Aguardando aprovação."; inscrição criada com status <strong>Pendente</strong></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-INS-002 — Impedir inscrição duplicada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Aluno já inscrito no evento (CT-INS-001)</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar novamente o evento; 2. Tentar inscrever-se de novo</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Aviso "Você já está inscrito neste evento."; nenhuma inscrição adicional é criada</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-INS-003 — Bloquear inscrição em evento lotado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Evento com capacidade 1 e vaga já ocupada por outro aluno</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Autenticar com o segundo aluno; 2. Tentar inscrever-se no evento</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Mensagem "Não há mais vagas disponíveis para este evento."; inscrição não é criada</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-INS-004 — Cancelar inscrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Aluno com inscrição ativa em um evento</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar o evento (ou "Eventos Inscritos" na área restrita); 2. Acionar "Cancelar inscrição"</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Mensagem "Inscrição cancelada com sucesso."; inscrição passa a <strong>Cancelada</strong> e a vaga é liberada</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-INS-005 — Consultar eventos inscritos na área restrita</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Aluno com ao menos uma inscrição</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Autenticar como aluno; 2. Acessar "Eventos Inscritos" na área restrita</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Lista exibe as inscrições do aluno com o status atual de cada uma (Pendente, Aprovada, Rejeitada ou Cancelada)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-INS-006 — Inscrição exige autenticação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF02 / US01</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Usuário não autenticado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar um evento publicado sem login; 2. Tentar inscrever-se</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Usuário é redirecionado para a tela de login; inscrição não é criada</td>
+</tr>
+</tbody>
+</table>
+<h3 id="44-gestao-de-eventos-evt">4.4 Gestão de Eventos (EVT)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-EVT-001 — Criar evento como rascunho</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF06 — Criar e editar evento</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Organizador autenticado, vinculado a uma organização</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar a gestão de eventos na área restrita; 2. Acionar "Novo evento"; 3. Preencher nome, data, horário, local, capacidade, organização e descrição; 4. Salvar com status <strong>Rascunho</strong></td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Evento criado e listado na gestão do organizador; não aparece no mural público</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-EVT-002 — Publicar evento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF06</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Evento em rascunho criado pelo organizador</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Editar o evento; 2. Alterar o status para <strong>Publicado</strong>; 3. Salvar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Evento passa a ser exibido no mural público e aceita inscrições</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-EVT-003 — Validar campos obrigatórios do evento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF06</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Formulário de novo evento aberto</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Submeter o formulário sem preencher campos obrigatórios (nome, data, horário, local, capacidade)</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Evento não é criado; mensagens de validação indicam os campos pendentes</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-EVT-004 — Editar evento existente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF06</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Evento criado pelo organizador</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Abrir o evento na gestão; 2. Alterar nome, capacidade ou descrição; 3. Salvar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Alterações persistidas e refletidas no detalhe e no mural (se publicado)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-EVT-005 — Excluir evento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF08 — Cancelar reserva ou evento</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Evento de teste criado pelo organizador</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Na gestão de eventos, acionar a exclusão do evento; 2. Confirmar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Evento removido da gestão e do mural público</td>
+</tr>
+</tbody>
+</table>
+<h3 id="45-gestao-de-inscritos-gin">4.5 Gestão de Inscritos (GIN)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-GIN-001 — Listar inscritos do evento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF07 — Gerenciar lista de inscritos</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Organizador autenticado; evento com inscrições pendentes</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar a gestão de inscrições do evento</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Lista exibe os alunos inscritos com nome, matrícula, data de solicitação e status</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-GIN-002 — Aprovar inscrição pendente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF07</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Inscrição com status <strong>Pendente</strong></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Na gestão de inscrições, acionar "Aprovar" para uma inscrição pendente</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Inscrição passa a <strong>Aprovada</strong>, com avaliador e data de avaliação registrados; vaga contabilizada</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-GIN-003 — Reprovar inscrição sem motivo é bloqueado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF07</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Inscrição com status <strong>Pendente</strong></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acionar "Reprovar" sem preencher o motivo</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Mensagem "Informe o motivo da reprovação."; status permanece <strong>Pendente</strong></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-GIN-004 — Reprovar inscrição com motivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF07</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Inscrição com status <strong>Pendente</strong></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acionar "Reprovar"; 2. Informar o motivo; 3. Confirmar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Inscrição passa a <strong>Rejeitada</strong> com o motivo registrado; aluno visualiza o status atualizado</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-GIN-005 — Aprovar apenas inscrições pendentes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF07</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Inscrição já <strong>Aprovada</strong> ou <strong>Rejeitada</strong></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Tentar aprovar novamente a mesma inscrição (reenvio da ação)</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Mensagem "Apenas inscrições pendentes podem ser aprovadas."; status não é alterado</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-GIN-006 — Aprovar todas as inscrições pendentes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF07</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Evento com duas ou mais inscrições pendentes</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acionar "Aprovar todos" na gestão de inscrições</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Mensagem "N inscrição(ões) aprovada(s) com sucesso."; todas as pendentes passam a <strong>Aprovada</strong>. Sem pendentes, exibe "Não há inscrições pendentes para aprovar."</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-GIN-007 — Exportar inscrições em CSV</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF09 — Gerar relatório de inscritos</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Baixa</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Evento com inscrições registradas</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Na gestão de inscrições, acionar "Exportar CSV"</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Arquivo CSV baixado contendo os dados dos inscritos e seus status</td>
+</tr>
+</tbody>
+</table>
+<h3 id="46-espacos-fisicos-esp">4.6 Espaços Físicos (ESP)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ESP-001 — Cadastrar espaço físico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF11 — Cadastrar e gerenciar espaços</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Gestor autenticado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar <code>/espacos/</code>; 2. Acionar "Novo espaço" (<code>/espacos/novo/</code>); 3. Preencher nome, localização e descrição; 4. Salvar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Espaço criado com status <strong>Disponível</strong> e listado na relação de espaços</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ESP-002 — Editar espaço físico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF11</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Espaço cadastrado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Abrir o espaço; 2. Alterar descrição e localização; 3. Salvar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Alterações persistidas e exibidas no detalhe do espaço</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ESP-003 — Alterar status do espaço</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF11</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Espaço com status <strong>Disponível</strong></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Editar o espaço; 2. Alterar o status para <strong>Em Manutenção</strong> (e depois <strong>Desativado</strong>); 3. Salvar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Status atualizado com o indicador visual correspondente em cada mudança</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ESP-004 — Excluir espaço físico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF11</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Espaço de teste sem reservas relevantes</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acionar a exclusão do espaço; 2. Confirmar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Espaço removido da listagem</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ESP-005 — Acesso a espaços restrito ao gestor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>US02 — Perfis e permissões</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Usuário autenticado com perfil <strong>Aluno</strong> ou <strong>Organizador</strong></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar diretamente <code>/espacos/</code> e <code>/espacos/novo/</code></td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Acesso negado (HTTP 403 ou redirecionamento); telas de gestão de espaços não são exibidas</td>
+</tr>
+</tbody>
+</table>
+<h3 id="47-reservas-de-espaco-res">4.7 Reservas de Espaço (RES)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-RES-001 — Solicitar reserva de espaço</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF05 — Solicitar reserva de espaço</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Organizador autenticado; evento próprio criado; espaço <strong>Disponível</strong></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar a solicitação de reserva; 2. Selecionar espaço e evento; 3. Informar data/hora de início e fim; 4. Submeter</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Reserva criada com status <strong>Pendente</strong> e visível em "Minhas Reservas"</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-RES-002 — Aprovar reserva (gestor)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF10 — Aprovar ou reprovar reservas</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Gestor autenticado; reserva <strong>Pendente</strong> sem conflito</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar a gestão de reservas; 2. Abrir a reserva pendente; 3. Acionar "Aprovar"</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Reserva passa a <strong>Aprovada</strong>, com avaliador registrado; solicitante visualiza o novo status</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-RES-003 — Reprovar reserva com motivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF10</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Reserva <strong>Pendente</strong></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Na gestão de reservas, acionar "Reprovar"; 2. Informar o motivo; 3. Confirmar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Reserva passa a <strong>Reprovada</strong> com o motivo registrado e visível ao solicitante</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-RES-004 — Bloquear solicitação com conflito de agenda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RNF02 — Concorrência de agenda</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Reserva <strong>Aprovada</strong> para a "Quadra Coberta" (ex.: 10h–12h)</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Como organizador, solicitar nova reserva para o <strong>mesmo espaço</strong> com período sobreposto (ex.: 11h–13h)</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Sistema impede/sinaliza o conflito; a reserva sobreposta não pode ser efetivada</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-RES-005 — Bloquear aprovação de reserva conflitante</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RNF02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Duas reservas <strong>Pendentes</strong> para o mesmo espaço com períodos sobrepostos; uma delas aprovada em seguida</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Aprovar a primeira reserva; 2. Tentar aprovar a segunda (sobreposta)</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Aprovação da segunda reserva é bloqueada com indicação de conflito; apenas uma reserva <strong>Aprovada</strong> por período/espaço</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-RES-006 — Reserva sem conflito em horário adjacente</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RNF02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Reserva <strong>Aprovada</strong> das 10h às 12h na "Quadra Coberta"</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Solicitar e aprovar reserva no mesmo espaço das 12h às 14h (períodos que apenas se tocam)</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Reserva adjacente é aceita e aprovada normalmente (sobreposição exige início &lt; fim do outro período e vice-versa)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-RES-007 — Cancelar reserva</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>RF08 — Cancelar reserva ou evento</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Reserva do organizador com status <strong>Pendente</strong> ou <strong>Aprovada</strong></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Em "Minhas Reservas", acionar "Cancelar" na reserva; 2. Confirmar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Reserva passa a <strong>Cancelada</strong> e o período volta a ficar livre para novas reservas</td>
+</tr>
+</tbody>
+</table>
+<h3 id="48-organizacoes-org">4.8 Organizações (ORG)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ORG-001 — Criar organização</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Gestão de organizações (Documento de Visão, seção de perfis)</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Usuário com permissão de criação autenticado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar <code>/organizacoes/</code>; 2. Acionar "Nova organização"; 3. Preencher nome e descrição; 4. Salvar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Organização criada e listada em <code>/organizacoes/</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ORG-002 — Editar organização</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Gestão de organizações</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Organização cadastrada</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Abrir a organização; 2. Alterar nome/descrição; 3. Salvar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Alterações persistidas e refletidas na listagem e no detalhe</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ORG-003 — Adicionar membro à organização</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Gestão de organizações</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Organização cadastrada; usuário-alvo existente</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Abrir os membros da organização; 2. Acionar "Adicionar membro"; 3. Selecionar o usuário; 4. Confirmar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Usuário passa a constar como membro; vínculo duplicado do mesmo usuário na mesma organização não é permitido</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ORG-004 — Remover membro da organização</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>Gestão de organizações</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Organização com membro vinculado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Na lista de membros, acionar "Remover" para um membro; 2. Confirmar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Vínculo removido; usuário deixa de aparecer entre os membros</td>
+</tr>
+</tbody>
+</table>
+<h3 id="49-gestao-de-usuarios-usu">4.9 Gestão de Usuários (USU)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-USU-001 — Visualizar e editar perfil próprio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>US02 — Perfil de usuário</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Usuário autenticado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar <code>/security/area-restrita/perfil/</code>; 2. Conferir os dados; 3. Alterar dados editáveis e salvar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Dados exibidos corretamente; alterações persistidas</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-USU-002 — Alterar tipo de perfil de um usuário</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>US02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Gestor autenticado; usuário-alvo com perfil <strong>Aluno</strong></td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar a gestão de usuários na área restrita; 2. Alterar o perfil do usuário-alvo para <strong>Organizador</strong>; 3. Salvar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Perfil atualizado; no próximo acesso o usuário passa a ter as permissões de organizador</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-USU-003 — Inativar usuário</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>US02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Gestor autenticado; usuário-alvo ativo</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Na gestão de usuários, acionar "Inativar" para o usuário-alvo</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Usuário marcado como inativo e impedido de autenticar (ver CT-AUT-007)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-USU-004 — Excluir usuário</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>US02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Média</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Gestor autenticado; usuário-alvo de teste sem vínculos que impeçam a exclusão</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Na gestão de usuários, acionar "Excluir"; 2. Confirmar</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Usuário removido da base e ausente da listagem</td>
+</tr>
+</tbody>
+</table>
+<h3 id="410-controle-de-acesso-ace">4.10 Controle de Acesso (ACE)</h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ACE-001 — Área restrita exige autenticação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>US01 / US02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Usuário não autenticado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar diretamente <code>/security/area-restrita/</code> e subpáginas</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Redirecionamento para a tela de login, preservando o destino original após autenticar</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ACE-002 — Aluno não acessa funções de organizador</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>US02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Aluno autenticado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar diretamente URLs de gestão de eventos, gestão de inscrições e solicitação de reserva</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Acesso negado (HTTP 403) ou redirecionamento; nenhuma ação de organizador é executada</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ACE-003 — Organizador não acessa funções de gestor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>US02</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Organizador autenticado</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Acessar diretamente a gestão de espaços, a aprovação de reservas e a gestão de usuários</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Acesso negado (HTTP 403) ou redirecionamento; ações de gestor indisponíveis</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>CT-ACE-004 — Ações de aprovação exigem o perfil correto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Requisito</strong></td>
+<td>US02 / RF10</td>
+</tr>
+<tr>
+<td><strong>Prioridade</strong></td>
+<td>Alta</td>
+</tr>
+<tr>
+<td><strong>Pré-condições</strong></td>
+<td>Aluno autenticado; IDs válidos de inscrição e reserva pendentes</td>
+</tr>
+<tr>
+<td><strong>Passos</strong></td>
+<td>1. Submeter diretamente as URLs de aprovação/reprovação de inscrição e de reserva com o perfil de aluno</td>
+</tr>
+<tr>
+<td><strong>Resultado esperado</strong></td>
+<td>Requisições rejeitadas; status das inscrições e reservas permanece inalterado</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-matriz-de-rastreabilidade">5. Matriz de Rastreabilidade</h2>
+<table>
+<thead>
+<tr>
+<th>Requisito</th>
+<th>Descrição</th>
+<th>Casos de teste</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>US01</td>
+<td>Autenticação (login/cadastro)</td>
+<td>CT-AUT-001 a CT-AUT-009, CT-INS-006, CT-ACE-001</td>
+</tr>
+<tr>
+<td>US02</td>
+<td>Perfis e permissões</td>
+<td>CT-AUT-007, CT-ESP-005, CT-USU-001 a CT-USU-004, CT-ACE-001 a CT-ACE-004</td>
+</tr>
+<tr>
+<td>RF01</td>
+<td>Visualizar mural de eventos</td>
+<td>CT-MUR-001, CT-MUR-002, CT-MUR-004</td>
+</tr>
+<tr>
+<td>RF02</td>
+<td>Realizar inscrição em evento</td>
+<td>CT-INS-001 a CT-INS-006</td>
+</tr>
+<tr>
+<td>RF03</td>
+<td>Filtrar eventos por modalidade</td>
+<td>CT-MUR-003</td>
+</tr>
+<tr>
+<td>RF05</td>
+<td>Solicitar reserva de espaço</td>
+<td>CT-RES-001</td>
+</tr>
+<tr>
+<td>RF06</td>
+<td>Criar e editar evento</td>
+<td>CT-EVT-001 a CT-EVT-004, CT-MUR-002</td>
+</tr>
+<tr>
+<td>RF07</td>
+<td>Gerenciar lista de inscritos</td>
+<td>CT-GIN-001 a CT-GIN-006</td>
+</tr>
+<tr>
+<td>RF08</td>
+<td>Cancelar reserva ou evento</td>
+<td>CT-EVT-005, CT-RES-007</td>
+</tr>
+<tr>
+<td>RF09</td>
+<td>Gerar relatório de inscritos (CSV)</td>
+<td>CT-GIN-007</td>
+</tr>
+<tr>
+<td>RF10</td>
+<td>Aprovar ou reprovar reservas</td>
+<td>CT-RES-002, CT-RES-003, CT-ACE-004</td>
+</tr>
+<tr>
+<td>RF11</td>
+<td>Cadastrar e gerenciar espaços</td>
+<td>CT-ESP-001 a CT-ESP-004</td>
+</tr>
+<tr>
+<td>RNF02</td>
+<td>Concorrência de agenda</td>
+<td>CT-RES-004, CT-RES-005, CT-RES-006</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>RF04 (notificações) e RF12 (dashboard de ocupação) não possuem casos de teste por ainda não terem sido implementados (prioridades COULD/SHOULD do backlog).</p>
+</blockquote>
+<hr />
+<h2 id="6-registro-de-execucao">6. Registro de Execução</h2>
+<p>Preencher a cada ciclo de teste (copiar a tabela para cada nova rodada):</p>
+<p><strong>Ciclo:</strong> <strong><em>_</em>_ · <strong>Data:</strong> </strong>_/<strong><em>/</em></strong><strong><em> · <strong>Testador:</strong> </em></strong><strong><em>_</em></strong><strong><em>_ · <strong>Build/commit:</strong> </em></strong><strong><em>_</em></strong>____</p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Status (✅/❌/⛔/⬜)</th>
+<th>Observações / Evidências</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CT-AUT-001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-AUT-002</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-AUT-003</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-AUT-004</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-AUT-005</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-AUT-006</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-AUT-007</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-AUT-008</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-AUT-009</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-MUR-001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-MUR-002</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-MUR-003</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-MUR-004</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-INS-001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-INS-002</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-INS-003</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-INS-004</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-INS-005</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-INS-006</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-EVT-001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-EVT-002</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-EVT-003</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-EVT-004</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-EVT-005</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-GIN-001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-GIN-002</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-GIN-003</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-GIN-004</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-GIN-005</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-GIN-006</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-GIN-007</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ESP-001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ESP-002</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ESP-003</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ESP-004</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ESP-005</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-RES-001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-RES-002</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-RES-003</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-RES-004</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-RES-005</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-RES-006</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-RES-007</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ORG-001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ORG-002</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ORG-003</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ORG-004</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-USU-001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-USU-002</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-USU-003</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-USU-004</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ACE-001</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ACE-002</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ACE-003</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>CT-ACE-004</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-registro-de-defeitos">7. Registro de Defeitos</h2>
+<p>Defeitos encontrados devem ser registrados como <strong>issues no GitHub</strong> do projeto, seguindo o template em <code>templates/template_issus.md</code>, contendo: caso de teste relacionado (ID), passos para reproduzir, resultado obtido × esperado, evidências (prints/logs) e ambiente (build/commit). Vincular a issue ao caso de teste na coluna "Observações" do registro de execução.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/FGA0138-MDS-Ajax/2026.1-T01-Dijkstra" target="_blank" rel="noopener" title="SIGEsporte no GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.top", "search.highlight", "search.suggest"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
