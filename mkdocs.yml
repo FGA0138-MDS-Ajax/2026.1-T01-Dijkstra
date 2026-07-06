@@ -3,6 +3,7 @@ site_url: https://fga0138-mds-ajax.github.io/2026.1-T01-Dijkstra/
 
 nav:
   - Início: "index.md"
+  - Apresentação do Projeto: "apresentacao.md"
   - Atas de Reunião:
     - Ata 20/04 - Elaboração do Documento de Visão: "atas_reuniao/ata_reuniao_20_04.md"
     - Ata 06/05 - Elaboração do Documento de Arquitetura: "atas_reuniao/ata_reuniao_06_05.md"
